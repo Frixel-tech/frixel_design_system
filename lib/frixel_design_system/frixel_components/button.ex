@@ -89,15 +89,18 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
 
   ## Example
 
-      <Button.close_button id="my-modal-id" />
+      <Button.close_button for="my-modal-id" />
   """
 
-  attr(:id, :string, required: true, doc: "The unique identifier for the modal")
+  attr(:for, :string,
+    required: true,
+    doc: "The unique identifier for the modal related to the button"
+  )
 
   def close_button(assigns) do
     ~H"""
     <label
-      for={@id}
+      for={@for}
       class="btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10"
     >
       <.icon name="hero-x-mark-solid" class="size-6" />
