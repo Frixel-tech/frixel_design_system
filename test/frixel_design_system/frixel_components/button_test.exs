@@ -44,4 +44,17 @@ defmodule FrixelDesignSystem.FrixelComponents.ButtonTest do
     assert html =~ "<span class=\"hero-arrow-right-solid"
     assert html =~ "type=\"button\""
   end
+
+  test "close_button" do
+    assigns = %{}
+
+    html =
+      rendered_to_string(~H"""
+      <Button.close_button id="close-button" />
+      """)
+
+    assert html =~ "<label"
+    assert html =~ "for=\"close-button\""
+    assert html =~ "<span class=\"hero-x-mark-solid"
+  end
 end
