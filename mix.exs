@@ -38,8 +38,6 @@ defmodule FrixelDesignSystem.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.0.13"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:esbuild, "~> 0.9", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.3"},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.2.0",
