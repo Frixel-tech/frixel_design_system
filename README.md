@@ -54,7 +54,7 @@ $ mix deps.get
 
 ```elixir
 ...
-<.close_button id={"button-id"} />
+<Button.close_button for={"modal-id"} />
 ...
 ```
 
