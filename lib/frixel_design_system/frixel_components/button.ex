@@ -8,7 +8,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
 
   ## Examples
 
-      <.primary_button text="Login" variant="primary" />
+      <.primary_button text="Login" variant="standard" />
       <.primary_button text="Login" variant="accent" />
   """
   attr(:text, :string, required: true)
