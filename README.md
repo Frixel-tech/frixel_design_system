@@ -1,12 +1,86 @@
-# FrixelDesignSystem
+# Frixel Design System
 
-To install the Frixel Design System library you should:
+**Frixel Design System** est une librairie Elixir/Phoenix qui fournit une collection de composants front-end réutilisables, conçue pour garantir une cohérence visuelle et une excellente expérience développeur.
 
-* Add `{:frixel_design_system, github: "Frixel-tech/frixel_design_system"}` to install then run `mix deps.get`,
-* Add the following line `@source "../../deps/frixel_design_system/**/*.ex*";` to your `assets/app.css` file,
-* Run `mix phx.server` to compile the library style into your application code.
+Elle est pensée pour s’intégrer facilement à vos projets Phoenix LiveView.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## ✨ Fonctionnalités
+
+- ✅ Composants prêts à l'emploi
+  - `dropdown_menu`
+  - `theme_switcher`
+  - `branding`
+  - `header`
+  - `footer`
+  - `scrollable_links`
+  - `primary_button`
+  - `secondary_button`
+  - `primary_button`
+  - `close_button`
+  - ...et bien d’autres !
+
+⚡️ Optimisé pour Phoenix LiveView
+
+## 🚀 Installation
+
+- Ajoutez la dépendance dans votre fichier `mix.exs` :
+
+```elixir
+def deps do
+  [
+    ...
+    {:frixel_design_system, github: "Frixel-tech/frixel_design_system"}
+  ]
+end
+```
+
+**NB**: Si vous souhaitez installer la librairie depuis une branche spécifique :
+
+```elixir
+def deps do
+  [
+    ...
+    {:frixel_design_system, github: "Frixel-tech/frixel_design_system", branch: "nom_de_la_branche"}
+  ]
+end
+```
+
+- Ensuite, il faudra mettre à jour vos dépendances :
+```shell
+$ mix deps.get
+```
+
+- Exemples d'utilisation :
+
+```elixir
+...
+<Button.close_button for={"modal-id"} />
+...
+```
+
+```elixir
+...
+    <.project_modal
+      id="modal-id"
+      img_src="image/src/path"
+      title="Titre de la modale"
+      long_description=""
+      tags={["tag-1", "tag-2", ...]}
+      participants={[%{name: "name", link: "https://linkedin.fr/toto", img: "url_of_image"}, ...]}
+      tools={[%{name: "name", website_link: "https://linkedin.fr/toto", logo_url: "url_of_image"}, ...]}
+      link="https://www.linktotheProject.fr"
+    />
+...
+```
+
+## 🧑‍💻 Auteur
+
+Développé et maintenu par l’équipe **Frixel**.
+
+
+## 🤝 Contribuer
+
+Les contributions sont les bienvenues ! N’hésitez pas à ouvrir une issue ou une pull request.
 
 ## Learn more
 
