@@ -8,8 +8,8 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
 
   ## Examples
 
-      <.primary_button text="Login" variant="standard" />
-      <.primary_button text="Login" variant="accent" />
+      <Button.primary_button text="Login" variant="standard" />
+      <Button.primary_button text="Login" variant="accent" />
   """
   attr(:text, :string, required: true)
 
@@ -56,7 +56,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
 
   ## Examples
 
-      <.secondary_button text="Take an appointment" />
+      <Button.secondary_button text="Take an appointment" />
   """
   attr(:text, :string, required: true)
   attr(:class, :string, default: nil)
@@ -83,6 +83,14 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
     </button>
     """
   end
+
+  @doc """
+  Renders a closing "x" button. Used for modals or popups
+
+  ## Example
+
+      <Button.close_button id="my-modal-id" />
+  """
 
   attr(:id, :string, required: true, doc: "The unique identifier for the modal")
 
