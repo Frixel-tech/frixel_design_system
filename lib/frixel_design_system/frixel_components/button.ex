@@ -21,8 +21,8 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
   attr(:class, :string, default: nil)
 
   attr(:variant, :string,
-    values: ~w(primary accent),
-    default: "primary",
+    values: ~w(standard accent),
+    default: "standard",
     doc: "The button style variant"
   )
 
@@ -34,7 +34,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
     <button
       class={[
         case @variant do
-          "primary" ->
+          "standard" ->
             "flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103"
 
           "accent" ->
