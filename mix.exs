@@ -19,8 +19,7 @@ defmodule FrixelDesignSystem.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {FrixelDesignSystem.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger]
     ]
   end
 
@@ -63,10 +62,8 @@ defmodule FrixelDesignSystem.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      setup: ["deps.get", "assets.setup", "assets.build"],
+      test: ["test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind frixel_design_system", "esbuild frixel_design_system"],
       "assets.deploy": [
