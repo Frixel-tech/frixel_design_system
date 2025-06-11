@@ -10,7 +10,16 @@ defmodule FrixelDesignSystem.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      listeners: [Phoenix.CodeReloader]
+      listeners: [Phoenix.CodeReloader],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        quality: :test,
+        wallaby: :test,
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -48,7 +57,14 @@ defmodule FrixelDesignSystem.MixProject do
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.26"},
-      {:jason, "~> 1.2"}
+      {:jason, "~> 1.2"},
+      {:credo, "~> 1.7"},
+      # For tests
+      {:mimic, "~> 1.7", only: :test},
+      # Security
+      {:content_security_policy, "~> 1.0"},
+      {:sobelow, "~> 0.12", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.18", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -68,6 +84,13 @@ defmodule FrixelDesignSystem.MixProject do
         "tailwind frixel_design_system --minify",
         "esbuild frixel_design_system --minify",
         "phx.digest"
+      ],
+      # Run to check the quality of your code
+      quality: [
+        "format --check-formatted",
+        "sobelow --config",
+        "coveralls",
+        "credo"
       ]
     ]
   end

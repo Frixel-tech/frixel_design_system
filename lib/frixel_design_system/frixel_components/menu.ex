@@ -1,6 +1,6 @@
 defmodule FrixelDesignSystem.FrixelComponents.Menu do
   use Phoenix.Component
-  use Gettext, backend: FrixelDesignSystem.Gettext
+  use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   import FrixelDesignSystemWeb.CoreComponents
 
