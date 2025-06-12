@@ -24,9 +24,7 @@ VALID_PR_TAGS = {
 def check_pr_title_tags(title: str) -> None:
     """Make sure PR title has valid tags."""
 
-    pr_title_tag_match = re.search(
-        r" (feat|fix|docs|ops|test|refacto|perf|style|scaffold)\(", title, re.IGNORECASE
-    )
+    pr_title_tag_match = re.search(r"(feat|fix|docs|ops|test|refacto|perf|style|scaffold)\(", title, re.IGNORECASE)
     if not pr_title_tag_match:
         print(
             f"🚫 Pull Request title contains no valid tag. Allowed tags are: {VALID_PR_TAGS}"
