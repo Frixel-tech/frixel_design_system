@@ -107,7 +107,13 @@ defmodule FrixelDesignSystem.FrixelComponents.Company do
     ~H"""
     <div class="card bg-base-200 max-w-74 lg:h-76 mx-4 shadow-sm mx-auto">
       <figure class="px-10 pt-10">
-        <img src={@logo} alt={"#{@name} illustration"} width="20" height="20" class="rounded-xl w-20 h-20" />
+        <img
+          src={@logo}
+          alt={"#{@name} illustration"}
+          width="20"
+          height="20"
+          class="rounded-xl w-20 h-20"
+        />
       </figure>
       <div class="card-body items-center">
         <Header.card_title class="text-center text-base!" title={@name} />
