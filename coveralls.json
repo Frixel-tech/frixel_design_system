@@ -1,0 +1,13 @@
+{
+  "skip_files": [
+    "test/support",
+    "lib/frixel_design_system_web/gettext.ex"
+  ],
+  "terminal_options": {
+    "file_column_width": 80
+  },
+  "coverage_options": {
+    "warning": "Une bonne couverture de code pour cet projet doit être à 85% minimum",
+    "minimum_coverage": 22
+  }
+}
