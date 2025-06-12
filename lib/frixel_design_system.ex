@@ -11,8 +11,9 @@ defmodule FrixelDesignSystem do
     quote do
       alias FrixelDesignSystem.FrixelComponents.{
         Button,
-        Menu,
-        Header
+        Company,
+        Header,
+        Menu
       }
 
       alias FrixelDesignSystem.FrixelSections.{}
