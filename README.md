@@ -50,6 +50,16 @@ end
 $ mix deps.get
 ```
 
+- Pour que le CSS soit correctement compilé, il faut ajouter la ligne suivante sous les imports du fichier `assets/css/app.css` :
+```CSS
+@source "../../deps/frixel_design_system/**/*.ex*";
+```
+
+- Enfin, pour que les hooks JavaScript fonctionnent, il faut ajouter la ligne suivante dans les imports du fichier `assets/js/app.js` :
+```JS
+import FrixelHooks from "../../deps/frixel_design_system/assets/js/hooks";
+```
+
 - Exemples d'utilisation :
 
 ```elixir

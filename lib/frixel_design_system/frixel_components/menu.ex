@@ -50,4 +50,96 @@ defmodule FrixelDesignSystem.FrixelComponents.Menu do
     </div>
     """
   end
+
+  @doc """
+  Renders a list of links.
+
+  ## Examples
+
+      <.links_list type="primary" links={[
+        %{path: "/link-path", name: "About", visibility: :visible},
+        %{path: "#home_anchor", name: "Contact", visibility: :hidden},
+        %{path: "https://www.external-domain.com", name: "Privacy Policy", visibility: :visible}
+      ]} />
+  """
+  attr(:links, :list, required: true)
+  attr(:type, :string, default: "secondary")
+
+  def links_list(assigns) do
+    ~H"""
+    <ul class="flex flex-col lg:flex-row items-center justify-end">
+      <li :for={link <- @links} class="transition-transform duration-300 hover:scale-120">
+        <.link
+          :if={link.visibility == :visible}
+          navigate={link.path}
+          class={"text-black rounded-full font-common font-normal p-4 whitespace-nowrap" <> if @type == "primary", do: "link link-primary-content", else: "link link-secondary-content"}
+        >
+          {link.name}
+        </.link>
+      </li>
+    </ul>
+    """
+  end
+
+  @doc """
+  Renders a list of social media logos with links.
+
+  ## Examples
+
+      <.socials_list class="size-4" socials={[
+        %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
+        %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
+      ]} />
+  """
+  attr(:socials, :list,
+    required: true,
+    doc: "A list of social media links, where each link is a map"
+  )
+
+  attr(:class, :string, default: "", doc: "CSS classes to customize the component.")
+
+  def socials_list(assigns) do
+    ~H"""
+    <ul class={"flex items-center gap-4 #{@class}"}>
+      <li :for={social <- @socials}>
+        <a href={social.social_media_url} target="_blank">
+          <img
+            src={social.icon_url}
+            alt={"Logo for #{social.social_media_url}"}
+            class="size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110"
+          />
+        </a>
+      </li>
+    </ul>
+    """
+  end
+
+  @doc """
+  Adds a light/dark mode selector.
+  """
+  def theme_switcher(assigns) do
+    ~H"""
+    <label
+      for="theme-toggle"
+      id="theme-selector"
+      class="swap swap-rotate"
+      phx-hook="GetAndStoreThemeHook"
+    >
+      <input
+        type="checkbox"
+        id="theme-toggle"
+        name="theme-toggle"
+        class="theme-controller"
+        phx-click={JS.dispatch("set-theme-locally")}
+        aria-label={gettext("Toggle theme")}
+      />
+      
+    <!-- sun icon -->
+      <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
+      
+    <!-- moon icon -->
+      <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
+    </label>
+    """
+  end
 end

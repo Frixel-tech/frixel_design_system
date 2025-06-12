@@ -10,7 +10,9 @@ defmodule FrixelDesignSystem do
   defmacro __using__(_) do
     quote do
       alias FrixelDesignSystem.FrixelComponents.{
-        Button
+        Button,
+        Menu,
+        Header
       }
 
       alias FrixelDesignSystem.FrixelSections.{}
