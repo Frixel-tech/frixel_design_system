@@ -1,0 +1,132 @@
+# Use to check code format
+
+name: Build & Tests
+
+# This workflow runs every push and on every PR
+on:
+  push:
+    branches: [ "main" ]
+  pull_request_review:
+    types: [ submitted ]
+
+env:
+  MIX_ENV: test
+  # NOTE: make sure these versions match in Containerfile and .tool-versions
+  ELIXIR_VERSION_SPEC: "1.18.3"
+  OTP_VERSION_SPEC: "27.3"
+
+jobs:
+  check-format:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
+          otp-version: ${{ env.OTP_VERSION_SPEC }}
+
+      - name: Installing deps
+        run: mix deps.get
+
+      - name: Checking Mix format
+        run: mix format --check-formatted
+
+  check-for-security-issues:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
+          otp-version: ${{ env.OTP_VERSION_SPEC }}
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Looking for security issues
+        run: mix sobelow --config
+
+  check-credo:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
+          otp-version: ${{ env.OTP_VERSION_SPEC }}
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Running credo ...
+        run: mix credo --all
+
+  all-modules-tests:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-22.04
+
+    env:
+      MIX_ENV: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
+          otp-version: ${{ env.OTP_VERSION_SPEC }}
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Compile deps
+        run: mix compile
+
+      - name: Run all design system tests
+        env:
+          MIX_ENV: test
+        run:
+          mix test
+
+  check-code-coverage:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-22.04
+
+    env:
+      MIX_ENV: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION_SPEC }}
+          otp-version: ${{ env.OTP_VERSION_SPEC }}
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Compile deps
+        run: mix compile
+
+      - name: Run tests coverage
+        env:
+          MIX_ENV: test
+        run:
+          mix coveralls
