@@ -32,7 +32,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   ## Example:
 
-      <.card_introduction
+      <.introduction_card
         title="Our awesome team"
         text="Some lines of global presentation of your company"
         img_src="path/to/your/team/or/organisation/photo.jpg" />
@@ -197,7 +197,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
       <.trombinoscope team={@team_members_list} />
   """
-  attr(:team, :list,
+  attr(:team_members, :list,
     required: true,
     doc: "A list of employees with their names and images"
   )
@@ -205,13 +205,13 @@ defmodule FrixelDesignSystem.Components.Company do
   def trombinoscope(assigns) do
     ~H"""
     <div class="flex flex-wrap justify-center gap-6">
-      <%= for team <- @teams do %>
+      <%= for team_member <- @team_members do %>
         <.team_member_card
-          img_src={team.avatar_url}
-          name={team.name}
-          position={team.job_title}
-          linkedin_url={team.linkedin_url}
-          github_url={team.github_url}
+          img_src={team_member.avatar_url}
+          name={team_member.name}
+          position={team_member.job_title}
+          linkedin_url={team_member.linkedin_url}
+          github_url={team_member.github_url}
         />
       <% end %>
     </div>
