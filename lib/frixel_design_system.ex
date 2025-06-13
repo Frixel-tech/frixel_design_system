@@ -12,6 +12,7 @@ defmodule FrixelDesignSystem do
       alias FrixelDesignSystem.FrixelComponents.{
         Button,
         Company,
+        Form,
         Header,
         Menu
       }
