@@ -1,5 +1,5 @@
-defmodule FrixelDesignSystem.FrixelComponents.HeaderTest do
-  alias FrixelDesignSystem.FrixelComponents.Header
+defmodule FrixelDesignSystem.Components.HeaderTest do
+  alias FrixelDesignSystem.Components.Header
   use ComponentCase
 
   test "section_title" do

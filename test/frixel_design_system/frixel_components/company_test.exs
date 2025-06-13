@@ -1,5 +1,5 @@
-defmodule FrixelDesignSystem.FrixelComponents.CompanyTest do
-  alias FrixelDesignSystem.FrixelComponents.Company
+defmodule FrixelDesignSystem.Components.CompanyTest do
+  alias FrixelDesignSystem.Components.Company
   use ComponentCase
 
   test "branding" do
@@ -121,12 +121,12 @@ defmodule FrixelDesignSystem.FrixelComponents.CompanyTest do
       }
     ]
 
-    assigns = %{teams: team_members_list}
+    assigns = %{team_members: team_members_list}
 
     # When
     html =
       "#{rendered_to_string(~H"""
-      <Company.trombinoscope teams={@teams} />
+      <Company.trombinoscope team_members={@team_members} />
       """)}"
 
     # Then
