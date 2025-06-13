@@ -1,5 +1,7 @@
 defmodule FrixelDesignSystem.FrixelComponents.Form do
   use Phoenix.Component
+  use Gettext, backend: FrixelDesignSystemWeb.Gettext
+  alias FrixelDesignSystem.FrixelComponents.{Button, Menu}
 
   @doc """
   Renders the form for client submissions.
@@ -124,16 +126,17 @@ defmodule FrixelDesignSystem.FrixelComponents.Form do
             required={false}
           />
         </div>
-        <.form_checkbox_list
+        <.form_checkbox_or_radio_group
           input_name="project_types[]"
-          services={@services}
+          options={@services}
           title={gettext("SERVICES (multiple selection)")}
         />
-        <.form_checkbox_list
+        <.form_checkbox_or_radio_group
           input_name="project_budget"
-          services={@budgets}
+          options={@budgets}
           title={gettext("PROJECT BUDGET")}
-          single_select={true}
+          group_type="radio"
+          other_input_type="number"
         />
         <Button.primary_button text={gettext("Send")} class="mt-4" type="submit" />
       </form>
@@ -252,7 +255,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Form do
           group_type="checkbox"
           other_input_type="text" />
 
-        <.form_checkbox_list
+        <.form_checkbox_or_radio_group
           input_name="input_name"
           options={@list_of_options}
           title="Input group title"
@@ -261,8 +264,8 @@ defmodule FrixelDesignSystem.FrixelComponents.Form do
   """
   attr :options, :list, required: true
   attr :title, :string, default: "Services"
-  attr :group_type, :string, value: ~w(radio checkbox), default: "checkbox"
-  attr :other_input_type, :string, value: ~w(text number), default: "text"
+  attr :group_type, :string, values: ~w(radio checkbox), default: "checkbox"
+  attr :other_input_type, :string, values: ~w(text number), default: "text"
   attr :input_name, :string, required: true
 
   def form_checkbox_or_radio_group(assigns) do
