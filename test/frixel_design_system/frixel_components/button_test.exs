@@ -85,4 +85,19 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
     assert html =~
              "<label for=\"close-button\" class=\"btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10\">\n  <span class=\"hero-x-mark-solid size-6\"></span>\n</label>"
   end
+
+  test "scroll_to_top_button" do
+    # Given
+    assigns = %{target_id: "container-where-srcoll"}
+
+    # When
+    html =
+      "#{rendered_to_string(~H"""
+      <Button.scroll_to_top_button target_id={@target_id} />
+      """)}"
+
+    # Then
+    assert html =~
+             "<a id=\"scroll-to-top\" href=\"#container-where-srcoll\" data-target-id=\"container-where-srcoll\" phx-hook=\"ScrollToTopHook\" class=\"fixed z-50 bottom-30 right-8 bg-accent text-white rounded-full shadow-lg p-4 hover:bg-primary transition-colors duration-200 flex items-center justify-center\" title=\"Go to landing section\" style=\"display:none;\">\n  <span class=\"hero-chevron-up h-7 w-7\"></span>\n</a>"
+  end
 end
