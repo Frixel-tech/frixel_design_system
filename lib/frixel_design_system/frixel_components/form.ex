@@ -208,7 +208,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Form do
             phx-hook="LeafletHook"
             data-lattitude={@company_lattitude}
             data-longitude={@company_longitude}
-            class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103"
+            class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
           />
         </div>
       </div>

@@ -1,8 +1,7 @@
 defmodule FrixelDesignSystem.FrixelComponents.Company do
   use Phoenix.Component
 
-  alias FrixelDesignSystem.FrixelComponents.Menu
-  alias FrixelDesignSystem.FrixelComponents.Header
+  alias FrixelDesignSystem.FrixelComponents.{Button, Header, Menu}
 
   @doc """
   Component to render your company logo and name as a h1 title
@@ -57,7 +56,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Company do
             height="80"
             width="200"
             class="w-200 ml-8 mr-6 mt-6 mb-6 rounded-lg shadow-xl"
-            alt="Team Photo"
+            alt="Introduction illtustration"
           />
         </div>
       </figure>
@@ -123,7 +122,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Company do
         </div>
       </div>
     </label>
-    <.service_modal id={@modal_id} logo={@logo} name={@name} description={@description} />
+    <.service_modal modal_id={@modal_id} logo={@logo} name={@name} description={@description} />
     """
   end
 
