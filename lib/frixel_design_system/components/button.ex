@@ -1,4 +1,4 @@
-defmodule FrixelDesignSystem.FrixelComponents.Button do
+defmodule FrixelDesignSystem.Components.Button do
   use Phoenix.Component
 
   import FrixelDesignSystemWeb.CoreComponents

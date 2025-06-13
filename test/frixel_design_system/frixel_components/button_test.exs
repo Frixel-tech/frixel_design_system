@@ -1,5 +1,5 @@
-defmodule FrixelDesignSystem.FrixelComponents.ButtonTest do
-  alias FrixelDesignSystem.FrixelComponents.Button
+defmodule FrixelDesignSystem.Components.ButtonTest do
+  alias FrixelDesignSystem.Components.Button
   use ComponentCase
 
   describe "primary_button" do

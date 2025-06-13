@@ -1,10 +1,10 @@
-defmodule FrixelDesignSystem.FrixelComponents.Menu do
+defmodule FrixelDesignSystem.Components.Menu do
   use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   import FrixelDesignSystemWeb.CoreComponents
 
-  alias FrixelDesignSystem.FrixelComponents.Button
+  alias FrixelDesignSystem.Components.Button
   alias Phoenix.LiveView.JS
 
   attr(:links, :list, required: true)
