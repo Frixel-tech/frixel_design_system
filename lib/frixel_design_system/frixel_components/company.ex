@@ -94,33 +94,72 @@ defmodule FrixelDesignSystem.FrixelComponents.Company do
   ## Example:
 
       <.service_card
+        modal_id="modal-id"
         logo="path/to/your/logo.png"
         name="Service name"
         description="Some lines of description to help your customer to understand what you can do for him."
       />
   """
-  attr(:logo, :string, required: true, doc: "The logo URL of the skill")
-  attr(:name, :string, required: true, doc: "The name of the skill")
-  attr(:description, :string, default: nil, doc: "The description of the skill")
+  attr :logo, :string, required: true, doc: "The logo URL of the service"
+  attr :name, :string, required: true, doc: "The name of the service"
+  attr :description, :string, default: nil, doc: "The description of the service"
+  attr :modal_id, :string, required: true, doc: "Unique identifier for the modal"
 
   def service_card(assigns) do
     ~H"""
-    <div class="card bg-base-200 max-w-74 lg:h-76 mx-4 shadow-sm mx-auto">
-      <figure class="px-10 pt-10">
-        <img
-          src={@logo}
-          alt={"#{@name} illustration"}
-          width="20"
-          height="20"
-          class="rounded-xl w-20 h-20"
-        />
-      </figure>
-      <div class="card-body items-center">
-        <Header.card_title class="text-center text-base!" title={@name} />
-        <p class="font-common text-base text-center">
-          {@description}
-        </p>
+    <label for={@modal_id} class="cursor-pointer block">
+      <div class="bg-base-200 border-base-300 border w-64 h-60 flex flex-col items-center justify-center rounded-xl transform duration-300 hover:shadow-xl hover:scale-110">
+        <div class="flex flex-col items-center justify-center flex-1 w-full">
+          <figure class="flex justify-center">
+            <img
+              src={@logo}
+              alt={"#{@name} illustration"}
+              width="20"
+              height="20"
+              class="rounded-xl size-20"
+            />
+          </figure>
+          <Header.card_title class="text-center text-base mt-6 px-4" title={@name} />
+        </div>
       </div>
+    </label>
+    <.service_modal id={@modal_id} logo={@logo} name={@name} description={@description} />
+    """
+  end
+
+  @doc """
+    Component to render your company services details inside a modal (cf. `FrixelDesignSystem.FrixelComponents.service_card/1`)
+
+  ## Example:
+
+      <.service_modal
+        modal_id="modal-id"
+        logo="path/to/your/logo.png"
+        name="Service name"
+        description="Some lines of description to help your customer to understand what you can do for him."
+      />
+
+  """
+  attr :modal_id, :string, required: true, doc: "Unique identifier for the modal"
+  attr :logo, :string, required: true, doc: "The logo URL of the service"
+  attr :name, :string, required: true, doc: "The name of the service"
+  attr :description, :string, default: nil, doc: "The description of the service"
+
+  def service_modal(assigns) do
+    ~H"""
+    <input type="checkbox" id={@modal_id} class="modal-toggle" />
+    <div class="modal z-1001" role="dialog">
+      <div class="modal-box w-full max-w-lg relative">
+        <Button.close_button for={@modal_id} />
+        <figure class="flex justify-center py-6">
+          <img src={@logo} alt={@name} class="rounded-xl size-24" />
+        </figure>
+        <Header.card_title class="text-center text-2xl" title={@name} />
+        <div class="text-base text-center py-4">
+          <p>{@description}</p>
+        </div>
+      </div>
+      <label class="modal-backdrop" for={@modal_id}>Close</label>
     </div>
     """
   end
