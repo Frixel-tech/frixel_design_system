@@ -1,4 +1,4 @@
-defmodule FrixelDesignSystem.FrixelComponents.Header do
+defmodule FrixelDesignSystem.Components.Header do
   use Phoenix.Component
 
   attr(:title, :string, required: true, doc: "The title to display")

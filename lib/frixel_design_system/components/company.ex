@@ -1,7 +1,7 @@
-defmodule FrixelDesignSystem.FrixelComponents.Company do
+defmodule FrixelDesignSystem.Components.Company do
   use Phoenix.Component
 
-  alias FrixelDesignSystem.FrixelComponents.{Button, Header, Menu}
+  alias FrixelDesignSystem.Components.{Button, Header, Menu}
 
   @doc """
   Component to render your company logo and name as a h1 title
@@ -127,7 +127,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Company do
   end
 
   @doc """
-    Component to render your company services details inside a modal (cf. `FrixelDesignSystem.FrixelComponents.service_card/1`)
+    Component to render your company services details inside a modal (cf. `FrixelDesignSystem.Components.service_card/1`)
 
   ## Example:
 
@@ -219,7 +219,7 @@ defmodule FrixelDesignSystem.FrixelComponents.Company do
   end
 
   @doc """
-  Component to render your employees profiles as cards inside a gallery (cf. `FrixelDesignSystem.FrixelComponents.trombinoscope/1`)
+  Component to render your employees profiles as cards inside a gallery (cf. `FrixelDesignSystem.Components.trombinoscope/1`)
 
   ## Example:
 

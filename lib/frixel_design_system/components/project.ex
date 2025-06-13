@@ -1,10 +1,10 @@
-defmodule FrixelDesignSystem.FrixelComponents.Project do
+defmodule FrixelDesignSystem.Components.Project do
   use Phoenix.Component
   use Gettext, backend: FrixelBaseWeb.Gettext
 
   import FrixelDesignSystemWeb.CoreComponents
 
-  alias FrixelDesignSystem.FrixelComponents.{Button, Header}
+  alias FrixelDesignSystem.Components.{Button, Header}
   alias FrixelDesignSystem.Helper
 
   @doc """
