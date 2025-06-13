@@ -55,6 +55,11 @@ $ mix deps.get
 @source "../../deps/frixel_design_system/**/*.ex*";
 ```
 
+- De même pour le CSS de la dépendance Leaflet, ajouter dans les imports du même fichier :
+```CSS
+@import "../../deps/frixel_design_system/assets/css/leaflet.css";
+```
+
 - Enfin, pour que les hooks JavaScript fonctionnent, il faut ajouter la ligne suivante dans les imports du fichier `assets/js/app.js` :
 ```JS
 import FrixelHooks from "../../deps/frixel_design_system/assets/js/hooks";

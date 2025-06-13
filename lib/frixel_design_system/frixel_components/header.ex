@@ -22,4 +22,14 @@ defmodule FrixelDesignSystem.FrixelComponents.Header do
     </h3>
     """
   end
+
+  attr :subtitle, :string, required: true, doc: "The subtitle to display"
+
+  def card_subtitle(assigns) do
+    ~H"""
+    <h4 class="font-title font-bold text-center xl:text-left pt-4 pb-8 tracking-wider">
+      {@subtitle}
+    </h4>
+    """
+  end
 end

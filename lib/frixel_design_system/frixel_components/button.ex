@@ -107,4 +107,29 @@ defmodule FrixelDesignSystem.FrixelComponents.Button do
     </label>
     """
   end
+
+  @doc """
+  Renders a button to go back to the top of the page.
+
+  ## Example:
+
+      <.scroll_to_top_button target_id="anchor-element-id" />
+  """
+  attr :target_id, :string, required: true, doc: "The ID of the target element to scroll to"
+
+  def scroll_to_top_button(assigns) do
+    ~H"""
+    <a
+      id="scroll-to-top"
+      href={"##{@target_id}"}
+      data-target-id={@target_id}
+      phx-hook="ScrollToTopHook"
+      class="fixed z-50 bottom-30 right-8 bg-accent text-white rounded-full shadow-lg p-4 hover:bg-primary transition-colors duration-200 flex items-center justify-center"
+      title="Go to landing section"
+      style="display:none;"
+    >
+      <.icon name="hero-chevron-up" class="h-7 w-7" />
+    </a>
+    """
+  end
 end

@@ -14,7 +14,8 @@ defmodule FrixelDesignSystem do
         Company,
         Form,
         Header,
-        Menu
+        Menu,
+        Project
       }
 
       alias FrixelDesignSystem.FrixelSections.{}
