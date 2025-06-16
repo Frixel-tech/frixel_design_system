@@ -80,7 +80,7 @@ defmodule FrixelDesignSystem.Components.Project do
     </label>
 
     <.project_modal
-      project_id={"modal_#{@project_id}"}
+      project_id={@project_id}
       image_sources_list={@image_sources_list}
       title={@title}
       long_description={Helper.format_text(@long_description)}
@@ -113,10 +113,10 @@ defmodule FrixelDesignSystem.Components.Project do
 
   def project_modal(assigns) do
     ~H"""
-    <input type="checkbox" id={@id} class="modal-toggle" />
+    <input type="checkbox" id={@project_id} class="modal-toggle" />
     <div class="modal z-5" role="dialog">
       <div class="modal-box w-full max-w-5xl relative">
-        <Button.close_button for={@id} />
+        <Button.close_button for={@project_id} />
         <figure>
           <.carrousel image_sources_list={@image_sources_list} project_id={@project_id} />
         </figure>
@@ -136,7 +136,7 @@ defmodule FrixelDesignSystem.Components.Project do
           <.tools_list class="space-x-2 my-2 gap-2" tools={@tools} />
         </div>
       </div>
-      <label class="modal-backdrop" for={@id}>Close</label>
+      <label class="modal-backdrop" for={@project_id}>Close</label>
     </div>
     """
   end
