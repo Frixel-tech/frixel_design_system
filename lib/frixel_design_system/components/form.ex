@@ -66,8 +66,8 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <.contact_form phx-submit="submit_contact_form" />
   """
-  attr :services, :list, required: true
-  attr :budgets, :list, required: true
+  attr :client_needs, :list, required: true
+  attr :client_budgets, :list, required: true
   attr :booking_appointment_url, :string, required: true
   attr :rest, :global
 
@@ -128,12 +128,12 @@ defmodule FrixelDesignSystem.Components.Form do
         </div>
         <.form_checkbox_or_radio_group
           input_name="project_types[]"
-          options={@services}
+          options={@client_needs}
           title={gettext("SERVICES (multiple selection)")}
         />
         <.form_checkbox_or_radio_group
           input_name="project_budget"
-          options={@budgets}
+          options={@client_budgets}
           title={gettext("PROJECT BUDGET")}
           group_type="radio"
           other_input_type="number"
