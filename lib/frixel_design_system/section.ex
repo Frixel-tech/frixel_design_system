@@ -5,8 +5,8 @@ defmodule FrixelDesignSystem.Section do
   alias FrixelDesignSystem.Components.{Button, Company, Form, Header, Menu, Project}
   alias FrixelDesignSystem.Helper
 
-  attr :services, :list, required: true
-  attr :budgets, :list, required: true
+  attr :client_needs, :list, required: true
+  attr :client_budgets, :list, required: true
   attr :company_description, :string, required: true
   attr :company_name, :string, required: true
   attr :company_postal_address, :string, required: true
@@ -35,8 +35,8 @@ defmodule FrixelDesignSystem.Section do
       />
 
       <Form.contact_form
-        services={@services}
-        budgets={@budgets}
+        client_needs={@client_needs}
+        client_budgets={@client_budgets}
         booking_appointment_url={@booking_appointment_url}
       />
     </section>
@@ -186,7 +186,7 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  attr :services_description, :list, required: true, doc: "A list of skills to display as cards"
+  attr :services, :list, required: true, doc: "A list of skills to display as cards"
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply"
 
   def services_section(assigns) do
@@ -194,12 +194,12 @@ defmodule FrixelDesignSystem.Section do
     <section id="services" class="px-12 pt-20">
       <Header.section_title title={gettext("Our services")} class="pb-12" />
       <div class="flex justify-center flex-wrap gap-16">
-        <%= for {service_description, idx} <- Enum.with_index(@services_description) do %>
+        <%= for service <- @services do %>
           <Company.service_card
-            modal_id={"service_modal_#{idx}"}
-            logo={service_description.logo}
-            name={service_description.name}
-            description={service_description.description}
+            modal_id={"service_modal_#{service.id}"}
+            logo={service.logo}
+            name={service.name}
+            description={service.description}
           />
         <% end %>
       </div>
@@ -251,7 +251,7 @@ defmodule FrixelDesignSystem.Section do
   attr :title, :string, required: true, doc: "The section title"
   attr :description, :string, required: true, doc: "The section description"
 
-  attr :team_members_list, :list,
+  attr :team_members, :list,
     required: true,
     doc: "A list of employees with their names and images"
 
@@ -269,7 +269,7 @@ defmodule FrixelDesignSystem.Section do
       </div>
 
       <div class="mt-26 flex flex-col xl:flex-row items-center justify-center mx-5">
-        <Company.trombinoscope team_members={@team_members_list} />
+        <Company.trombinoscope team_members={@team_members} />
       </div>
     </section>
     """
@@ -286,9 +286,9 @@ defmodule FrixelDesignSystem.Section do
       <Header.section_title title={gettext("Our projects")} />
 
       <div class="flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center">
-        <%= for {project, index} <- Enum.with_index(@projects) do %>
+        <%= for project <- @projects do %>
           <Project.project_card
-            project_id={index}
+            project_id={project.id}
             image_sources_list={project.illustration_urls}
             title={project.name}
             short_description={project.short_description}
