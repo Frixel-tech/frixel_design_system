@@ -288,7 +288,7 @@ defmodule FrixelDesignSystem.Section do
       <div class="flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center">
         <%= for project <- @projects do %>
           <Project.project_card
-            project_id={project.id}
+            project_id={"project-#{project.id}"}
             image_sources_list={project.illustration_urls}
             title={project.name}
             short_description={project.short_description}
