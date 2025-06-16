@@ -169,14 +169,14 @@ defmodule FrixelDesignSystem.Components.Project do
 
           <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
             <a
-              href={"#/project#{@project_id}/slide#{if index == 0, do: length(@img_src), else: index}"}
+              href={"#/project#{@project_id}/slide#{if index == 0, do: length(@image_sources_list), else: index}"}
               class="btn btn-circle"
             >
               ❮
             </a>
 
             <a
-              href={"#/project#{@project_id}/slide#{if index == length(@img_src) - 1, do: 1, else: index + 2}"}
+              href={"#/project#{@project_id}/slide#{if index == length(@image_sources_list) - 1, do: 1, else: index + 2}"}
               class="btn btn-circle"
             >
               ❯
