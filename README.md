@@ -51,40 +51,49 @@ $ mix deps.get
 ```
 
 - Pour que le CSS soit correctement compilé, il faut ajouter la ligne suivante sous les imports du fichier `assets/css/app.css` :
-```CSS
-@source "../../deps/frixel_design_system/**/*.ex*";
+```diff
+@source "../css";
+@source "../js";
+@source "../../lib/your_app_web";
++ @source "../../deps/frixel_design_system/**/*.ex*";
 ```
 
 - De même pour le CSS de la dépendance Leaflet, ajouter dans les imports du même fichier :
-```CSS
-@import "../../deps/frixel_design_system/assets/css/leaflet.css";
+```diff
++ @import "../../deps/frixel_design_system/assets/css/leaflet.css";
 ```
 
 - Enfin, pour que les hooks JavaScript fonctionnent, il faut ajouter la ligne suivante dans les imports du fichier `assets/js/app.js` :
-```JS
-import FrixelHooks from "../../deps/frixel_design_system/assets/js/hooks";
+```diff
+import hooks from "./hooks";
++ import FrixelHooks from "../../deps/frixel_design_system/assets/js/hooks";
+```
+Puis modifier l'attribut `hooks` dans les option de la LiveSocket générée par Phoenix:
+```diff
+- hooks: hooks,
++ hooks: Object.assign(hooks, FrixelHooks),
 ```
 
 - Exemples d'utilisation :
 
 ```elixir
 ...
-<Button.close_button for={"modal-id"} />
+  <Button.close_button for={"modal-id"} />
 ...
 ```
 
 ```elixir
 ...
-    <.project_modal
-      id="modal-id"
-      img_src="image/src/path"
-      title="Titre de la modale"
-      long_description=""
-      tags={["tag-1", "tag-2", ...]}
-      participants={[%{name: "name", link: "https://linkedin.fr/toto", img: "url_of_image"}, ...]}
-      tools={[%{name: "name", website_link: "https://linkedin.fr/toto", logo_url: "url_of_image"}, ...]}
-      link="https://www.linktotheProject.fr"
-    />
+  <Project.project_modal
+    id="modal-id"
+    img_src="image/src/path"
+    title="Titre de la modale"
+    long_description=""
+    tags={["tag-1", "tag-2", ...]}
+    participants={[%{name: "name", link: "https://linkedin.fr/toto", img: "url_of_image"}, ...]}
+    tools={[%{name: "name", website_link: "https://linkedin.fr/toto", logo_url: "url_of_image"}, ...]}
+    link="https://www.linktotheProject.fr"
+  />
 ...
 ```
 
