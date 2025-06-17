@@ -7,7 +7,7 @@
     "file_column_width": 80
   },
   "coverage_options": {
-    "warning": "Une bonne couverture de code pour cet projet doit être à 85% minimum",
-    "minimum_coverage": 22
+    "warning": "Une bonne couverture de code pour cet projet doit être à 73% minimum",
+    "minimum_coverage": 73
   }
 }

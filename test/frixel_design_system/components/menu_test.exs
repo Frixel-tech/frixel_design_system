@@ -1,7 +1,6 @@
 defmodule FrixelDesignSystem.Components.MenuTest do
   alias FrixelDesignSystem.Components.Menu
   use ComponentCase
-  use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   test "render a dropdown menu" do
     # Given
