@@ -19,7 +19,7 @@ defmodule FrixelDesignSystem.Components.FormTest do
 
   test "contact_form" do
     # Given
-    services = [
+    client_needs = [
       %{
         value: "A single service",
         label: "A single service",
@@ -27,7 +27,7 @@ defmodule FrixelDesignSystem.Components.FormTest do
       }
     ]
 
-    budgets = [
+    client_budgets = [
       %{value: "100K", label: "100K", shows_text_input_when_checked: false},
       %{value: "100K", label: "200K", shows_text_input_when_checked: false}
     ]
@@ -35,8 +35,8 @@ defmodule FrixelDesignSystem.Components.FormTest do
     booking_appointment_url = "https://www.booking-appointement-url.com"
 
     assigns = %{
-      services: services,
-      budgets: budgets,
+      client_needs: client_needs,
+      client_budgets: client_budgets,
       booking_appointment_url: booking_appointment_url,
       rest: %{class: "flew text-center"}
     }
@@ -45,8 +45,8 @@ defmodule FrixelDesignSystem.Components.FormTest do
     html =
       "#{rendered_to_string(~H"""
       <Form.contact_form
-        services={@services}
-        budgets={@budgets}
+        client_needs={@client_needs}
+        client_budgets={@client_budgets}
         booking_appointment_url={@booking_appointment_url}
         rest={@rest}
       />

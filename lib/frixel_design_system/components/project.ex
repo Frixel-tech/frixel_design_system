@@ -1,6 +1,6 @@
 defmodule FrixelDesignSystem.Components.Project do
   use Phoenix.Component
-  use Gettext, backend: FrixelBaseWeb.Gettext
+  use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   import FrixelDesignSystemWeb.CoreComponents
 
