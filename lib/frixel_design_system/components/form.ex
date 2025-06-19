@@ -227,7 +227,7 @@ defmodule FrixelDesignSystem.Components.Form do
     - `type`: The type of the input field (default: "text").
     - `required`: Whether the input field is required (default: true).
   """
-  attr :rest, :global, include: ~w"name type placeholder required disbaled label autocomplete field"
+  attr :rest, :global, include: ~w"name type placeholder required disbaled autocomplete"
 
   def form_input(assigns) do
     ~H"""
