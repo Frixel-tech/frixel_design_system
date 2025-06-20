@@ -226,8 +226,10 @@ defmodule FrixelDesignSystem.Components.Form do
     - `class`: Additional CSS classes to apply to the input field.
     - `type`: The type of the input field (default: "text").
     - `required`: Whether the input field is required (default: true).
+    - `disabled`: Whether the input field is disabled (default: false).
+    - `autocomplete`: The autocomplete attribute for the input field (default: "off").
   """
-  attr :rest, :global, include: ~w"name type placeholder required disbaled"
+  attr :rest, :global, include: ~w"name type placeholder required disbaled autocomplete"
 
   def form_input(assigns) do
     ~H"""

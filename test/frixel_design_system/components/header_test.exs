@@ -34,16 +34,16 @@ defmodule FrixelDesignSystem.Components.HeaderTest do
 
   test "card_subtitle" do
     # Given
-    assigns = %{subtitle: "subtitle here"}
+    assigns = %{class: "class-test", subtitle: "subtitle here"}
 
     # When
     html =
       "#{rendered_to_string(~H"""
-      <Header.card_subtitle subtitle={@subtitle} />
+      <Header.card_subtitle subtitle={@subtitle} class={@class} />
       """)}"
 
     # Then
     assert html =~
-             "<h4 class=\"font-title font-bold text-center xl:text-left pt-4 pb-8 tracking-wider\">\n  subtitle here\n</h4>"
+             "<h4 class=\"font-title font-bold text-center xl:text-left pt-4 pb-8 tracking-wider class-test\">\n  subtitle here\n</h4>"
   end
 end
