@@ -61,7 +61,6 @@ defmodule FrixelDesignSystem.CloudinaryApi do
   @spec list_cloud_stored_images(cloud_pid()) :: {:ok, [String.t()]} | {:error, any()}
   def list_cloud_stored_images(cloud_pid) do
     Agent.get(cloud_pid, fn connection ->
-      connection |> IO.inspect(label: "Connectoion state")
       HTTPoison.get(connection.base_url, connection.request_headers, [])
     end)
     |> handle_http_response(cloud_pid)
