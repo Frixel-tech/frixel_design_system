@@ -1,4 +1,4 @@
-defmodule FrixelDesignSystem.Cloudinary do
+defmodule FrixelDesignSystem.CloudinaryApi do
   @moduledoc """
   Small wrapper around the Cloudinary API to keep connection paramters inside state end to list all image urls stored in cloud.
 

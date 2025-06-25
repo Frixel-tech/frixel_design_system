@@ -19,7 +19,7 @@ defmodule FrixelDesignSystem do
       }
 
       alias FrixelDesignSystem.Section
-      alias FrixelDesignSystem.Cloudinary
+      alias FrixelDesignSystem.CloudinaryApi
     end
   end
 end
