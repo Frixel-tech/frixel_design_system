@@ -12,17 +12,12 @@ defmodule FrixelDesignSystem.CloudinaryApi do
       iex> list_cloud_stored_images(cloud_pid)
       {:error, reason}
   """
-  use Agent
-
   require Logger
-
-  @typedoc "A standard pid as returned by the module Agent.start_link/1"
-  @type cloud_pid() :: atom() | pid() | {atom(), any()} | {:via, atom(), any()}
 
   @doc """
   A setup function to set Cloudinary params inside module state
   """
-  @spec set_cloud_connection() :: {:error, any()} | {:ok, pid()}
+  @spec set_cloud_connection() :: {String.t(), [{String.t(), String.t()}]}
   def set_cloud_connection() do
     cloudinary_base_url = get_cloudinary_api_base_url()
     cloud_name = get_cloudinary_cloud_name()
@@ -33,12 +28,7 @@ defmodule FrixelDesignSystem.CloudinaryApi do
 
     request_headers = build_headers(cloudinary_key, cloudinary_secret)
 
-    Agent.start_link(fn ->
-      %{
-        base_url: base_url,
-        request_headers: request_headers
-      }
-    end)
+    {base_url, request_headers}
   end
 
   @doc """
@@ -57,23 +47,23 @@ defmodule FrixelDesignSystem.CloudinaryApi do
 
   # On récupère la liste complète de toutes les images présentes sur notre CDN cloudinary.
   # Peut être pas optimale. À améliorer et récupérer les images par répertoire/sous répertoire (Mais la pagination sera toujours présente).
-  @spec list_cloud_stored_images(cloud_pid()) :: {:ok, [String.t()]} | {:error, any()}
-  def list_cloud_stored_images(cloud_pid) do
-    Agent.get(cloud_pid, fn connection ->
-      HTTPoison.get(connection.base_url, connection.request_headers, [])
-    end)
-    |> handle_http_response(cloud_pid)
+  @spec list_cloud_stored_images() :: {:ok, [String.t()]} | {:error, any()}
+  def list_cloud_stored_images() do
+    {base_url, request_headers} = set_cloud_connection()
+
+    HTTPoison.get(base_url, request_headers, [])
+    |> handle_http_response()
   end
 
-  @spec list_cloud_stored_images(cloud_pid(), String.t() | integer()) ::
+  @spec list_cloud_stored_images(String.t() | integer()) ::
           {:ok, [String.t()]} | {:error, any()}
-  def list_cloud_stored_images(cloud_pid, next_cursor) do
-    Agent.get(cloud_pid, fn connection ->
-      current_page_url = "#{connection.base_url}&next_cursor=#{next_cursor}"
+  def list_cloud_stored_images(next_cursor) do
+    {base_url, request_headers} = set_cloud_connection()
 
-      HTTPoison.get(current_page_url, connection.request_headers, [])
-    end)
-    |> handle_http_response(cloud_pid)
+    current_page_url = "#{base_url}&next_cursor=#{next_cursor}"
+
+    HTTPoison.get(current_page_url, request_headers, [])
+    |> handle_http_response()
   end
 
   # On construit les headers nécessaires pour la requêtte vers l'api de cloudinary.
@@ -84,18 +74,15 @@ defmodule FrixelDesignSystem.CloudinaryApi do
     ]
   end
 
-  @spec handle_http_response(
-          {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()},
-          cloud_pid()
-        ) ::
+  @spec handle_http_response({:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}) ::
           {:ok, [String.t()]} | {:error, String.t()} | {:error, HTTPoison.Error.t()}
-  defp handle_http_response({:ok, %HTTPoison.Response{status_code: 200, body: body}}, cloud_pid) do
+  defp handle_http_response({:ok, %HTTPoison.Response{status_code: 200, body: body}}) do
     body
     |> Jason.decode!()
-    |> continues_fetching_or_returns(cloud_pid)
+    |> continues_fetching_or_returns()
   end
 
-  defp handle_http_response({:ok, %HTTPoison.Response{status_code: code}}, _cloud_pid) do
+  defp handle_http_response({:ok, %HTTPoison.Response{status_code: code}}) do
     Logger.error(
       "[cloudinary.ex] - Error whith code #{code} when fetching cloudinary stored images"
     )
@@ -103,7 +90,7 @@ defmodule FrixelDesignSystem.CloudinaryApi do
     {:error, "Cloudinary API returned status #{code}"}
   end
 
-  defp handle_http_response({:error, reason}, _cloud_pid) do
+  defp handle_http_response({:error, reason}) do
     Logger.error(
       "[cloudinary.ex] - Error when fetching cloudinary stored images #{inspect(reason)}"
     )
@@ -113,25 +100,19 @@ defmodule FrixelDesignSystem.CloudinaryApi do
 
   # On récupère les ressources des images et le curseur suivant, si ce dernier est nil
   # on relance l'Agent dans un reduce, sinon on retourne le résultat de la requête
-  @spec continues_fetching_or_returns(
-          %{
-            optional(String.t()) => String.t() | integer(),
-            resources: %{secure_url: String.t()}
-          },
-          cloud_pid()
-        ) :: {:ok, [String.t()]} | {:error, String.t() | {:error, HTTPoison.Error.t()}}
-  defp continues_fetching_or_returns(
-         %{
-           "next_cursor" => next_cursor,
-           "resources" => ressources_fetched
-         },
-         cloud_pid
-       ) do
+  @spec continues_fetching_or_returns(%{
+          optional(String.t()) => String.t() | integer(),
+          resources: %{secure_url: String.t()}
+        }) :: {:ok, [String.t()]} | {:error, String.t() | {:error, HTTPoison.Error.t()}}
+  defp continues_fetching_or_returns(%{
+         "next_cursor" => next_cursor,
+         "resources" => ressources_fetched
+       }) do
     # On construit une liste contenant les URL des ressources récupérées
     images_urls = Enum.map(ressources_fetched, & &1["secure_url"])
 
     # On n'est pas sur la dernière page, on continue le process de récupération des URL
-    case list_cloud_stored_images(cloud_pid, next_cursor) do
+    case list_cloud_stored_images(next_cursor) do
       {:ok, next_page_image_urls_list} ->
         new_image_urls_list =
           Enum.reduce(images_urls, next_page_image_urls_list, fn image, acc -> [image | acc] end)
@@ -143,10 +124,7 @@ defmodule FrixelDesignSystem.CloudinaryApi do
     end
   end
 
-  defp continues_fetching_or_returns(
-         %{"resources" => ressources_fetched},
-         _cloud_pid
-       ) do
+  defp continues_fetching_or_returns(%{"resources" => ressources_fetched}) do
     # On construit une liste contenant les URL des ressources récupérées
     image_urls_list = Enum.map(ressources_fetched, & &1["secure_url"])
 
