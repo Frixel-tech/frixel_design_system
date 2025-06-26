@@ -22,14 +22,13 @@ defmodule FrixelDesignSystem.CloudinaryApi do
   @doc """
   A setup function to set Cloudinary params inside module state
   """
-  @spec set_cloud_connection(String.t(), String.t(), String.t(), String.t()) ::
-          {:error, any()} | {:ok, pid()}
-  def set_cloud_connection(
-        cloudinary_base_url,
-        cloud_name,
-        cloudinary_key,
-        cloudinary_secret
-      ) do
+  @spec set_cloud_connection() :: {:error, any()} | {:ok, pid()}
+  def set_cloud_connection() do
+    cloudinary_base_url = get_cloudinary_api_base_url()
+    cloud_name = get_cloudinary_cloud_name()
+    cloudinary_key = get_cloudinary_api_key()
+    cloudinary_secret = get_cloudinary_api_secret()
+
     base_url = "#{cloudinary_base_url}/#{cloud_name}/resources/image?max_results=100"
 
     request_headers = build_headers(cloudinary_key, cloudinary_secret)
@@ -154,4 +153,16 @@ defmodule FrixelDesignSystem.CloudinaryApi do
         {:error, reason}
     end
   end
+
+  defp get_cloudinary_api_base_url(),
+    do: Application.get_env(:frixel_design_system, :cloudinary_api_base_url)
+
+  defp get_cloudinary_cloud_name(),
+    do: Application.get_env(:frixel_design_system, :cloudinary_cloud_name)
+
+  defp get_cloudinary_api_key(),
+    do: Application.get_env(:frixel_design_system, :cloudinary_api_key)
+
+  defp get_cloudinary_api_secret(),
+    do: Application.get_env(:frixel_design_system, :cloudinary_api_secret)
 end
