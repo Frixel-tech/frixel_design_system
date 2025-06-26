@@ -1,15 +1,14 @@
 defmodule FrixelDesignSystem.CloudinaryApi do
   @moduledoc """
-  Small wrapper around the Cloudinary API to keep connection paramters inside state end to list all image urls stored in cloud.
+  Small wrapper around the Cloudinary API to list all image urls stored in cloud.
 
   ## Example
 
-      iex> {:ok, cloud_pid} = set_cloud_connection(cloudinary_base_url, cloud_name, cloudinary_key, cloudinary_secret)
-      iex> list_cloud_stored_images(cloud_pid)
+      iex> list_cloud_stored_images()
       {:ok, ["http://...", ...]}
 
       # in case of failed request
-      iex> list_cloud_stored_images(cloud_pid)
+      iex> list_cloud_stored_images()
       {:error, reason}
   """
   require Logger
@@ -38,8 +37,8 @@ defmodule FrixelDesignSystem.CloudinaryApi do
 
       iex> list_cloud_stored_images(cloud_pid)
       {:ok, [
-        "https://res.cloudinary.com/dekpcimmm/image/upload/v1747661611/eye-slash-solid_ancwvw.svg",
-        "https://res.cloudinary.com/dekpcimmm/image/upload/v1747400879/LOGO_FRIXEL4_iavyp6.png",
+        "https://res.cloudinary.com/cloud_name/image/upload/v1747661611/eye-slash-solid_ancwvw.svg",
+        "https://res.cloudinary.com/cloud_name/image/upload/v1747400879/LOGO_FRIXEL4_iavyp6.png",
         ...
       ]}
 
