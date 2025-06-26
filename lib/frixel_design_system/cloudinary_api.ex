@@ -115,22 +115,11 @@ defmodule FrixelDesignSystem.CloudinaryApi do
   # on relance l'Agent dans un reduce, sinon on retourne le résultat de la requête
   @spec continues_fetching_or_returns(
           %{
-            next_cursor: nil | String.t() | integer(),
+            optional(String.t()) => String.t() | integer(),
             resources: %{secure_url: String.t()}
           },
           cloud_pid()
         ) :: {:ok, [String.t()]} | {:error, String.t() | {:error, HTTPoison.Error.t()}}
-  defp continues_fetching_or_returns(
-         %{"next_cursor" => nil, "resources" => ressources_fetched},
-         _cloud_pid
-       ) do
-    # On construit une liste contenant les URL des ressources récupérées
-    image_urls_list = Enum.map(ressources_fetched, & &1["secure_url"])
-
-    # On est sur la dernière page, on retourne le résultat
-    {:ok, image_urls_list}
-  end
-
   defp continues_fetching_or_returns(
          %{
            "next_cursor" => next_cursor,
@@ -152,6 +141,17 @@ defmodule FrixelDesignSystem.CloudinaryApi do
       {:error, reason} ->
         {:error, reason}
     end
+  end
+
+  defp continues_fetching_or_returns(
+         %{"resources" => ressources_fetched},
+         _cloud_pid
+       ) do
+    # On construit une liste contenant les URL des ressources récupérées
+    image_urls_list = Enum.map(ressources_fetched, & &1["secure_url"])
+
+    # On est sur la dernière page, on retourne le résultat
+    {:ok, image_urls_list}
   end
 
   defp get_cloudinary_api_base_url(),
