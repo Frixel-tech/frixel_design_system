@@ -312,7 +312,7 @@ defmodule FrixelDesignSystem.Components.Form do
   @doc """
   Renders a gallery of clickable images to be selected inside a Liveview.
   A phx-click attribute must be passed as global attribute so the
-  selected image url can be stored into the Liveview socket.
+  selected image url can be stored into the Liveview socket or to the changeset.
 
   ## Example:
 
