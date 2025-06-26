@@ -53,10 +53,10 @@ $ mix deps.get
 - Dans le fichier `config/runtime.exs`, la configuration suivante est nécessaire afin de pouvoir récupérer toutes les images stockées dans Cloudinary:
 ```elixir
 config :frixel_design_system,
-  cloudinary_cloud_name: "cloudinary_cloud_name",
-  cloudinary_api_key: "cloudinary_api_key",
-  cloudinary_api_secret: "cloudinary_api_secret",
-  cloudinary_api_base_url: "cloudinary_api_base_url"
+  cloudinary_api_base_url: System.get_env("CLOUDINARY_API_BASE_URL"),
+  cloudinary_cloud_name: System.get_env("CLOUDINARY_CLOUD_NAME"),
+  cloudinary_api_key: System.get_env("CLOUDINARY_API_KEY"),
+  cloudinary_api_secret: System.get_env("CLOUDINARY_API_SECRET")
 ```
 
 - Pour que le CSS soit correctement compilé, il faut ajouter la ligne suivante sous les imports du fichier `assets/css/app.css` :
