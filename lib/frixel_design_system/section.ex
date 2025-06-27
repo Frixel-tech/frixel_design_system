@@ -120,7 +120,7 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <header
       id="header"
-      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full"
+      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-2 justify-between py-4 w-full"
     >
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start">
