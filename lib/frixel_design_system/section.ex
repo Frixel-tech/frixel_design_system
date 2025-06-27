@@ -127,9 +127,12 @@ defmodule FrixelDesignSystem.Section do
           <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
         </div>
 
+        <div class="navbar-center hidden xl:flex">
+          <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
+        </div>
+
         <div class="navbar-end gap-4 w-full">
           <div class="hidden xl:flex">
-            <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
             <Menu.theme_switcher />
           </div>
 
