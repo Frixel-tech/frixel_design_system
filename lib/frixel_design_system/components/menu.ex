@@ -102,21 +102,32 @@ defmodule FrixelDesignSystem.Components.Menu do
       <ul class="menu menu-horizontal px-1">
         <li :for={link <- @links}>
           <%= if link[:dropdown] do %>
-            <details>
-              <summary>{link.name}</summary>
-              <ul class="p-2">
+            <div class="dropdown dropdown-hover">
+              <div
+                tabindex="0"
+                role="button"
+                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto"
+              >
+                <span class="font-common font-normal whitespace-nowrap">
+                  {link.name}
+                </span>
+              </div>
+              <ul
+                tabindex="0"
+                class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm"
+              >
                 <li :for={sublink <- link.dropdown}>
                   <.link
                     :if={sublink.visibility == :visible}
                     navigate={sublink.path}
                     class={"font-common font-normal whitespace-nowrap" <>
-                      if @type == "primary", do: " link-primary-content", else: "link-secondary-content"}
+                      if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
                   >
                     {sublink.name}
                   </.link>
                 </li>
               </ul>
-            </details>
+            </div>
           <% else %>
             <.link
               :if={link.visibility == :visible}
