@@ -128,11 +128,7 @@ defmodule FrixelDesignSystem.Section do
         </div>
 
         <div class="navbar-center hidden xl:flex absolute left-1/2 -translate-x-1/2">
-          <Menu.dropdown_list label="Menu" type="primary" links={@products_links}>
-            <:header>
-              <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
-            </:header>
-          </Menu.dropdown_list>
+          <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
         </div>
 
         <div class="navbar-end gap-4 w-full flex justify-end">
