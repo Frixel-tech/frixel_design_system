@@ -81,6 +81,17 @@ defmodule FrixelDesignSystem.Components.Menu do
     """
   end
 
+  @doc """
+  Renders a dropdown menu with a list of links.
+
+  ## Examples
+
+      <.dropdown_list label="Menu" type="primary" links={[
+        %{path: "/about", name: "About", visibility: :visible},
+        %{path: "/contact", name: "Contact", visibility: :visible}
+      ]} />
+
+  """
   attr(:links, :list, required: true)
   attr(:type, :string, default: "secondary")
   attr(:label, :string, default: "Menu")
@@ -119,87 +130,6 @@ defmodule FrixelDesignSystem.Components.Menu do
         </li>
       </ul>
     </div>
-    """
-  end
-
-  @doc """
-  Renders a dropdown menu with a list of links.
-
-  ## Examples
-
-      <.dropdown_list label="Menu" type="primary" links={[
-        %{path: "/about", name: "About", visibility: :visible},
-        %{path: "/contact", name: "Contact", visibility: :visible}
-      ]} />
-
-  """
-  attr(:links, :list, required: true)
-  attr(:type, :string, default: "secondary")
-  attr(:label, :string, default: "Menu")
-
-  def dropdown_list(assigns) do
-    ~H"""
-    <div class="dropdown dropdown-hover">
-      <div tabindex="0" role="button" class="btn m-1">
-        {@label}
-      </div>
-      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-        <li :for={link <- @links}>
-          <.link
-            :if={link.visibility == :visible}
-            navigate={link.path}
-            class={"text-black font-common font-normal whitespace-nowrap" <>
-              if @type == "primary", do: " link link-primary-content", else: " link link-secondary-content"}
-          >
-            {link.name}
-          </.link>
-        </li>
-      </ul>
-    </div>
-    """
-  end
-
-  @doc """
-  Renders a list of links, each with its own DaisyUI dropdown menu.
-
-  ## Examples
-
-      <.dropdown_list links={[
-        %{path: "/about", name: "About", visibility: :visible, dropdown: [%{path: "/about/team", name: "Team"}]},
-        %{path: "/contact", name: "Contact", visibility: :visible, dropdown: [%{path: "/contact/support", name: "Support"}]}
-      ]} />
-
-  Each link can have a `:dropdown` key with a list of sublinks.
-  """
-  attr(:links, :list, required: true)
-  attr(:type, :string, default: "secondary")
-
-  def dropdown_list(assigns) do
-    ~H"""
-    <ul class="flex flex-col lg:flex-row items-center justify-end gap-2">
-      <li :for={link <- @links} class="dropdown dropdown-hover">
-        <div :if={link.visibility == :visible} tabindex="0" role="button" class="btn m-1">
-          <.link
-            navigate={link.path}
-            class={"text-black font-common font-normal whitespace-nowrap" <>
-              if @type == "primary", do: " link link-primary-content", else: " link link-secondary-content"}
-          >
-            {link.name}
-          </.link>
-        </div>
-        <ul
-          :if={link[:dropdown]}
-          tabindex="0"
-          class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-        >
-          <li :for={sublink <- link.dropdown}>
-            <.link navigate={sublink.path} class="whitespace-nowrap">
-              {sublink.name}
-            </.link>
-          </li>
-        </ul>
-      </li>
-    </ul>
     """
   end
 
