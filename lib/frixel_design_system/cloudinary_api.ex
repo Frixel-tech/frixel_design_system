@@ -16,16 +16,12 @@ defmodule FrixelDesignSystem.CloudinaryApi do
   @doc """
   A setup function to set Cloudinary params inside module state
   """
-  @spec set_cloud_connection() :: {String.t(), [{String.t(), String.t()}]}
-  def set_cloud_connection() do
-    cloudinary_base_url = get_cloudinary_api_base_url()
-    cloud_name = get_cloudinary_cloud_name()
-    cloudinary_key = get_cloudinary_api_key()
-    cloudinary_secret = get_cloudinary_api_secret()
+  @spec get_cloud_params() :: {String.t(), [{String.t(), String.t()}]}
+  def get_cloud_params() do
+    config = Application.get_env(:frixel_design_system, :cloudinary)
+    base_url = "#{config[:api_base_url]}/#{config[:cloud_name]}/resources/image?max_results=100"
 
-    base_url = "#{cloudinary_base_url}/#{cloud_name}/resources/image?max_results=100"
-
-    request_headers = build_headers(cloudinary_key, cloudinary_secret)
+    request_headers = build_headers(config[:api_key], config[:api_secret])
 
     {base_url, request_headers}
   end
@@ -46,20 +42,24 @@ defmodule FrixelDesignSystem.CloudinaryApi do
 
   # On récupère la liste complète de toutes les images présentes sur notre CDN cloudinary.
   # Peut être pas optimale. À améliorer et récupérer les images par répertoire/sous répertoire (Mais la pagination sera toujours présente).
-  @spec list_cloud_stored_images() :: {:ok, [String.t()]} | {:error, any()}
+  @spec list_cloud_stored_images() ::
+          {:ok, [String.t()]} | {:error, String.t()} | {:error, HTTPoison.Error.t()}
   def list_cloud_stored_images() do
-    {base_url, request_headers} = set_cloud_connection()
+    {base_url, request_headers} = get_cloud_params()
+    Logger.info("GET request initiated for #{base_url}")
 
     HTTPoison.get(base_url, request_headers, [])
     |> handle_http_response()
   end
 
   @spec list_cloud_stored_images(String.t() | integer()) ::
-          {:ok, [String.t()]} | {:error, any()}
+          {:ok, [String.t()]} | {:error, String.t()} | {:error, HTTPoison.Error.t()}
   def list_cloud_stored_images(next_cursor) do
-    {base_url, request_headers} = set_cloud_connection()
+    {base_url, request_headers} = get_cloud_params()
 
     current_page_url = "#{base_url}&next_cursor=#{next_cursor}"
+
+    Logger.info("GET request initiated for #{current_page_url}")
 
     HTTPoison.get(current_page_url, request_headers, [])
     |> handle_http_response()
@@ -130,16 +130,4 @@ defmodule FrixelDesignSystem.CloudinaryApi do
     # On est sur la dernière page, on retourne le résultat
     {:ok, image_urls_list}
   end
-
-  defp get_cloudinary_api_base_url(),
-    do: Application.get_env(:frixel_design_system, :cloudinary_api_base_url)
-
-  defp get_cloudinary_cloud_name(),
-    do: Application.get_env(:frixel_design_system, :cloudinary_cloud_name)
-
-  defp get_cloudinary_api_key(),
-    do: Application.get_env(:frixel_design_system, :cloudinary_api_key)
-
-  defp get_cloudinary_api_secret(),
-    do: Application.get_env(:frixel_design_system, :cloudinary_api_secret)
 end
