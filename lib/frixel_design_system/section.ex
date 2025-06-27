@@ -109,6 +109,51 @@ defmodule FrixelDesignSystem.Section do
   end
 
   attr :branding_name, :string
+  attr :branding_logo_url, :string
+  attr :header_links, :list
+  attr :language_links, :list
+  attr :call_to_action_name, :string
+  attr :call_to_action_path, :string
+  attr :products_links, :list, required: true
+
+  def base_header_commerce(assigns) do
+    ~H"""
+    <header
+      id="header"
+      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full"
+    >
+      <nav class="navbar max-w-450 m-auto">
+        <div class="navbar-start">
+          <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
+        </div>
+
+        <div class="navbar-end gap-4 w-full">
+          <div class="hidden xl:flex">
+            <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
+            <Menu.theme_switcher />
+          </div>
+
+          <div class="hidden xl:flex">
+            <.link navigate={@call_to_action_path}>
+              <Button.primary_button
+                text={@call_to_action_name}
+                class="flex items-center gap-2"
+                icon_button="hero-arrow-right-solid"
+              />
+            </.link>
+          </div>
+
+          <div class="flex xl:hidden">
+            <Menu.theme_switcher />
+            <Menu.dropdown links={@header_links} />
+          </div>
+        </div>
+      </nav>
+    </header>
+    """
+  end
+
+  attr :branding_name, :string
   attr :footer_links, :list
   attr :social_medias, :list
 
