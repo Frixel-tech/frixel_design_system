@@ -62,6 +62,8 @@ defmodule FrixelDesignSystem.MixProject do
       {:credo, "~> 1.7"},
       # For tests
       {:mimic, "~> 1.7", only: :test},
+      {:bypass, "~> 2.1", only: :test},
+
       # Security
       {:content_security_policy, "~> 1.0"},
       {:sobelow, "~> 0.12", only: [:dev, :test], runtime: false},
