@@ -168,4 +168,41 @@ defmodule FrixelDesignSystem.Components.FormTest do
     assert html =~
              "<div>\n  <h3 class=\"block text-base font-common font-normal my-4 tracking-widest\">\n    title\n  </h3>\n  <div class=\"flex flex-col lg:flex-row flex-wrap gap-y-4 gap-x-3\">\n    <div class=\"flex items-center gap-2\">\n      <label class=\"label peer flex items-center gap-2 text-sm font-common text-base-content\">\n        <input type=\"checkbox\" name=\"input_name\" value=\"A single service\" class=\"checkbox checkbox-secondary checkbox-md\">\n        A single service\n      </label>\n\n      <input class=\"input input-secondary hidden peer-has-checked:flex w-full\" name=\"input_name\" placeholder=\"Specify\" type=\"text other\" name=\"input_name\" type=\"text other\" class=\"hidden peer-has-checked:flex w-full\" placeholder=\"Specify\">\n    </div>\n  </div>\n</div>"
   end
+
+  test "image_gallery_input" do
+    assigns = %{
+      img_urls_list: ["http://frixel.fr"],
+      selected_img_url: ""
+    }
+
+    html =
+      "#{rendered_to_string(~H"""
+      <Form.image_gallery_input
+        img_urls_list={@img_urls_list}
+        selected_img_url={@selected_img_url}
+        phx-click="handle-test"
+      />
+      """)}"
+
+    assert html =~
+             "<div class=\"cursor-pointer transition-transform duration-300 hover:scale-103 hover:border-[#6B4BA1] active:border-[#6B4BA1] p-1 border-4 rounded-sm border-base-200\" phx-value-url=\"http://frixel.fr\" phx-click=\"handle-test\">"
+
+    # We update the assigns
+    assigns = %{
+      img_urls_list: ["http://frixel.fr"],
+      selected_img_url: "http://frixel.fr"
+    }
+
+    html =
+      "#{rendered_to_string(~H"""
+      <Form.image_gallery_input
+        img_urls_list={@img_urls_list}
+        selected_img_url={@selected_img_url}
+        phx-click="handle-test"
+      />
+      """)}"
+
+    assert html =~
+             "<div class=\"cursor-pointer transition-transform duration-300 hover:scale-103 hover:border-[#6B4BA1] active:border-[#6B4BA1] p-1 border-4 rounded-sm border-[#6B4BA1]\" phx-value-url=\"http://frixel.fr\" phx-click=\"handle-test\">"
+  end
 end

@@ -308,4 +308,40 @@ defmodule FrixelDesignSystem.Components.Form do
     </div>
     """
   end
+
+  @doc """
+  Renders a gallery of clickable images to be selected inside a Liveview.
+  A phx-click attribute must be passed as global attribute so the
+  selected image url can be stored into the Liveview socket before being
+  merge into the form params map.
+
+  ## Example:
+
+      <.image_gallery_input
+        img_urls_list=["http://...", ...]
+        selected_img_url={@selected_image}
+        phx-click="handle-image-selection" />
+  """
+  attr :img_urls_list, :list, required: true, doc: "The list of image urls."
+  attr :selected_img_url, :string, default: "", doc: "The url of the icon selected by the user."
+  attr :rest, :global
+
+  def image_gallery_input(assigns) do
+    ~H"""
+    <span class="fieldset-label mb-1 text-sm">Choose an icon for this social media </span>
+    <div class="grid grid-cols-4 mb-5 rounded-sm overflow-auto gap-4 w-full h-[50vh] p-4 border-1 border-black">
+      <%= for image_url <- @img_urls_list || [] do %>
+        <div
+          class={
+            ~s"cursor-pointer transition-transform duration-300 hover:scale-103 hover:border-[#6B4BA1] active:border-[#6B4BA1] p-1 border-4 rounded-sm #{(@selected_img_url == image_url && "border-[#6B4BA1]") || "border-base-200"}"
+          }
+          phx-value-url={image_url}
+          {@rest}
+        >
+          <img id={"social-media-icon-url-#{image_url}"} src={image_url} height="200" width="200" />
+        </div>
+      <% end %>
+    </div>
+    """
+  end
 end
