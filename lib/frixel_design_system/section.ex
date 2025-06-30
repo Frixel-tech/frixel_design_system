@@ -120,29 +120,8 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <header
       id="header"
-      class="fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
+      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full"
     >
-      <nav class="absolute top-4 right-4 flex items-center gap-4">
-        <div class="hidden xl:flex">
-          <Menu.theme_switcher />
-        </div>
-
-        <div class="hidden xl:flex">
-          <.link navigate={@call_to_action_path}>
-            <Button.icon_button
-              icon="hero-user"
-              variant="accent"
-              class="flex items-center gap-2"
-            />
-          </.link>
-        </div>
-
-        <div class="flex xl:hidden">
-          <Menu.theme_switcher />
-          <Menu.dropdown links={@header_links} />
-        </div>
-      </nav>
-
       <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
         <Company.branding
           brand_name={@branding_name}
@@ -151,6 +130,30 @@ defmodule FrixelDesignSystem.Section do
         />
         <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
       </div>
+
+      <nav class="flex items-center justify-between w-full relative">
+
+        <div class="navbar-end gap-4 flex justify-end">
+          <div class="hidden xl:flex">
+            <Menu.theme_switcher />
+          </div>
+
+          <div class="hidden xl:flex">
+            <.link navigate={@call_to_action_path}>
+              <Button.icon_button
+                icon="hero-user"
+                variant="accent"
+                class="flex items-center gap-2 mr-8"
+              />
+            </.link>
+          </div>
+
+          <div class="flex xl:hidden">
+            <Menu.theme_switcher />
+            <Menu.dropdown links={@header_links} />
+          </div>
+        </div>
+      </nav>
     </header>
     """
   end
