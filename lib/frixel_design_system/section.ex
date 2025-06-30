@@ -120,14 +120,18 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <header
       id="header"
-      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full"
+      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full"
     >
-      <nav class="flex items-center justify-between w-full relative">
-        <div class="navbar-start">
-          <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
-        </div>
+      <div class="w-full flex justify-center mb-4">
+        <Company.branding
+          brand_name={@branding_name}
+          brand_img={@branding_logo_url}
+          class="text-2xl font-bold scale-125"
+        />
+      </div>
 
-        <div class="navbar-center hidden xl:flex absolute left-1/2 -translate-x-1/2">
+      <nav class="flex items-center justify-between w-full relative">
+        <div class="navbar-center hidden xl:flex">
           <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
         </div>
 
