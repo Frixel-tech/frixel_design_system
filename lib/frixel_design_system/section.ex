@@ -132,10 +132,6 @@ defmodule FrixelDesignSystem.Section do
       </div>
 
       <nav class="flex items-center justify-between w-full relative">
-        <div class="flex-1 hidden xl:flex justify-center">
-          <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
-        </div>
-
         <div class="navbar-end gap-4 flex justify-end">
           <div class="hidden xl:flex">
             <Menu.theme_switcher />
