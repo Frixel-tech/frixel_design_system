@@ -141,7 +141,7 @@ defmodule FrixelDesignSystem.Section do
               <Button.primary_button
                 text={@call_to_action_name}
                 class="flex items-center gap-2"
-                icon_button="hero-arrow-right-solid"
+                icon_button="hero-user-solid"
               />
             </.link>
           </div>
