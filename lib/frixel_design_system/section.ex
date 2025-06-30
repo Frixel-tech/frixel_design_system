@@ -130,7 +130,7 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <header
       id="header"
-      class="sticky fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
+      class="sticky fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center w-full relative m-0"
     >
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
