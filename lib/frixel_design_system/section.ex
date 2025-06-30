@@ -141,7 +141,7 @@ defmodule FrixelDesignSystem.Section do
               <Button.icon_button
                 icon="hero-user"
                 variant="accent"
-                class="flex items-center gap-2"
+                class="flex items-center gap-2 mr-4"
               />
             </.link>
           </div>
