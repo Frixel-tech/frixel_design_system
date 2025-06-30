@@ -122,7 +122,7 @@ defmodule FrixelDesignSystem.Section do
       id="header"
       class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full"
     >
-      <div class="w-full flex justify-center mb-4">
+      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
         <Company.branding
           brand_name={@branding_name}
           brand_img={@branding_logo_url}
