@@ -128,6 +128,7 @@ defmodule FrixelDesignSystem.Section do
           brand_img={@branding_logo_url}
           class="text-2xl font-bold scale-125"
         />
+        <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
       </div>
 
       <nav class="flex items-center justify-between w-full relative">
