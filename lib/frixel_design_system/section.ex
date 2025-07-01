@@ -118,6 +118,18 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  # Example usage:
+  #
+  # <.base_header_commerce
+  #   branding_name="Frixel"
+  #   branding_logo_url="/images/logo.png"
+  #   header_links={@header_links}
+  #   call_to_action_name="Sign in"
+  #   call_to_action_path="/login"
+  #   products_links={@products_links}
+  #   class="fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
+  # />
+
   attr :branding_name, :string
   attr :branding_logo_url, :string
   attr :header_links, :list
@@ -125,12 +137,13 @@ defmodule FrixelDesignSystem.Section do
   attr :call_to_action_name, :string
   attr :call_to_action_path, :string
   attr :products_links, :list, required: true
+  attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
 
   def base_header_commerce(assigns) do
     ~H"""
     <header
       id="header"
-      class="bg-primary"
+      class={@class}
     >
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
