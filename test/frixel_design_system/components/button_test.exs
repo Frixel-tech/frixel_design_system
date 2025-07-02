@@ -100,4 +100,48 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
     assert html =~
              "<a id=\"scroll-to-top\" href=\"#container-where-srcoll\" data-target-id=\"container-where-srcoll\" phx-hook=\"ScrollToTopHook\" class=\"fixed z-50 bottom-30 right-8 bg-accent text-white rounded-full shadow-lg p-4 hover:bg-primary transition-colors duration-200 flex items-center justify-center\" title=\"Go to landing section\" style=\"display:none;\">\n  <span class=\"hero-chevron-up h-7 w-7\"></span>\n</a>"
   end
+
+  describe "icon_button" do
+    test "renders with standard variant" do
+      assigns = %{
+        icon: "hero-arrow-right-solid",
+        variant: "standard",
+        class: "extra-class"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Button.icon_button icon={@icon} variant={@variant} class={@class}>
+          Inner Content
+        </Button.icon_button>
+        """)}"
+
+      assert html =~
+               "<button class=\"flex btn btn-secondary mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center extra-class\">"
+
+      assert html =~ "<span class=\"hero-arrow-right-solid w-5 h-5\"></span>"
+      assert html =~ "Inner Content"
+    end
+
+    test "renders with accent variant" do
+      assigns = %{
+        icon: "hero-arrow-right-solid",
+        variant: "accent",
+        class: "extra-class"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Button.icon_button icon={@icon} variant={@variant} class={@class}>
+          Accent Content
+        </Button.icon_button>
+        """)}"
+
+      assert html =~
+               "<button class=\"flex btn btn-accent mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center extra-class\">"
+
+      assert html =~ "<span class=\"hero-arrow-right-solid w-5 h-5\"></span>"
+      assert html =~ "Accent Content"
+    end
+  end
 end
