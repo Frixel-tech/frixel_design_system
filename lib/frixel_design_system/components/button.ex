@@ -132,4 +132,45 @@ defmodule FrixelDesignSystem.Components.Button do
     </a>
     """
   end
+
+  @doc """
+  Renders an icon-only button.
+
+  ## Examples
+
+      <Button.icon_button icon="hero-plus" variant="standard" />
+      <Button.icon_button icon="hero-heart" variant="accent" />
+  """
+  attr(:icon, :string, required: true, doc: "The name of the icon to display")
+  attr(:class, :string, default: nil)
+
+  attr(:variant, :string,
+    values: ~w(standard accent),
+    default: "standard",
+    doc: "The button style variant"
+  )
+
+  attr(:rest, :global)
+  slot(:inner_block, required: false)
+
+  def icon_button(assigns) do
+    ~H"""
+    <button
+      class={[
+        case @variant do
+          "standard" ->
+            "flex btn btn-secondary mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
+
+          "accent" ->
+            "flex btn btn-accent mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
+        end,
+        @class
+      ]}
+      {@rest}
+    >
+      <.icon name={@icon} class="w-5 h-5" />
+      {render_slot(@inner_block)}
+    </button>
+    """
+  end
 end

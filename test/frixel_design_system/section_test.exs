@@ -146,8 +146,101 @@ defmodule FrixelDesignSystem.SectionTest do
       """)}"
 
     # Then
-    assert html =~
-             "<header id=\"header\" class=\"fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full\">\n  <nav class=\"navbar max-w-450 m-auto\">\n    <div class=\"navbar-start\">\n      <a href=\"/\" class=\"flex items-center\">\n  <img src=\"https://www.booking-appointement-url.com\" alt=\"Branding name logo\" class=\"size-12 mx-auto px-1\">\n  <h1 class=\"btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-xl sm:text-3xl xl:text-5xl font-title font-normal\" style=\"font-size: 20px;\">\n    Branding name\n  </h1>\n</a>\n    </div>\n\n    <div class=\"navbar-end gap-4 w-full\">\n      <div class=\"hidden xl:flex\">\n        <ul class=\"flex flex-col lg:flex-row items-center justify-end\">\n  <li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"/#services\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      Services\n    </a>\n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    \n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"/#projects\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      Projets\n    </a>\n  </li>\n</ul>\n        \n        \n        <label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>\n      </div>\n\n      <div class=\"hidden xl:flex\">\n        <a href=\"https://www.call-to-action-path.com\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n          <button class=\"flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 flex items-center gap-2\">\n  call to action\n  <span class=\"hero-arrow-right-solid w-5 h-5\"></span>\n  \n</button>\n        </a>\n      </div>\n\n      <div class=\"flex xl:hidden\">\n        \n        \n        <label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>\n        <div id=\"dropdown-menu\" class=\"dropdown dropdown-bottom dropdown-end block xl:hidden\" phx-click=\"[[&quot;toggle_class&quot;,{&quot;names&quot;:[&quot;swap-active&quot;],&quot;to&quot;:&quot;#dropdown-button&quot;}]]\" phx-click-away=\"[[&quot;remove_class&quot;,{&quot;names&quot;:[&quot;swap-active&quot;],&quot;to&quot;:&quot;#dropdown-button&quot;}]]\">\n  <div id=\"dropdown-button\" tabindex=\"0\" role=\"button\" aria-label=\"Open main menu\" class=\"swap swap-flip btn btn-ghost btn-circle\">\n    <span class=\"hero-bars-3 swap-off size-5\" id=\"icon-open\"></span>\n    <span class=\"hero-x-mark swap-on size-5\" id=\"icon-close\"></span>\n  </div>\n\n  <ul tabindex=\"0\" class=\"menu menu-sm dropdown-content bg-primary w-screen h-fit mt-4 shadow -right-2\">\n    <li>\n      <a href=\"/#services\" class=\"text-xl text-base-100\">\n        Services\n      </a>\n    </li><li>\n      \n    </li><li>\n      <a href=\"/#projects\" class=\"text-xl text-base-100\">\n        Projets\n      </a>\n    </li>\n    <div class=\"flex justify-center my-4\">\n      <a href=\"/#contact-us\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n        <button class=\"flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 flex items-center gap-2\">\n  Contact us\n  <span class=\"hero-arrow-right-solid w-5 h-5\"></span>\n  \n</button>\n      </a>\n    </div>\n  </ul>\n</div>\n      </div>\n    </div>\n  </nav>\n</header>"
+    assert html =~ "Services"
+    assert html =~ "/#services"
+    assert html =~ "Projets"
+    assert html =~ "/#projects"
+    refute html =~ "Trash"
+    refute html =~ "/#trash"
+    assert html =~ "Branding name"
+    assert html =~ "https://www.booking-appointement-url.com"
+    assert html =~ "call to action"
+    assert html =~ "https://www.call-to-action-path.com"
+  end
+
+  test "base_header_commerce" do
+    # Given
+    branding_name = "Frixel"
+    call_to_action_path = "/log-in"
+    branding_logo_url = "/images/logo.svg"
+
+    header_links = [
+      %{
+        name: "Pret-à-porter",
+        path: "/pret-a-porter",
+        dropdown: [
+          %{path: "/about/team", name: "T-Shirt", visibility: :visible},
+          %{path: "/about/company", name: "Pants", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "High-Tech",
+        path: "/high-tech",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "Joaillerie",
+        path: "/joaillerie",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "Accessoires",
+        path: "/accessoires",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "Cadeaux",
+        path: "/cadeaux",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      }
+    ]
+
+    assigns = %{
+      branding_name: branding_name,
+      branding_logo_url: branding_logo_url,
+      call_to_action_path: call_to_action_path,
+      header_links: header_links
+    }
+
+    # When
+    html =
+      "#{rendered_to_string(~H"""
+      <FrixelDesignSystem.Section.base_header_commerce
+        branding_name={@branding_name}
+        branding_logo_url={@branding_logo_url}
+        header_links={@header_links}
+        call_to_action_path={@call_to_action_path}
+      />
+      """)}"
+
+    # Then
+    assert html =~ "Pret-à-porter"
+    assert html =~ "/pret-a-porter"
+    assert html =~ "T-Shirt"
+    assert html =~ "/about/team"
+    assert html =~ "High-Tech"
+    assert html =~ "/high-tech"
+    assert html =~ "PC"
+    assert html =~ "/contact/email"
+    assert html =~ "Phone"
+    assert html =~ "/contact/phone"
   end
 
   test "base_footer" do

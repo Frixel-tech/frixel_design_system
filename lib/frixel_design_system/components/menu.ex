@@ -82,6 +82,68 @@ defmodule FrixelDesignSystem.Components.Menu do
   end
 
   @doc """
+  Renders a dropdown menu with a list of links.
+
+  ## Examples
+
+      <.dropdown_list label="Menu" type="primary" links={[
+        %{path: "/about", name: "About", visibility: :visible},
+        %{path: "/contact", name: "Contact", visibility: :visible}
+      ]} />
+
+  """
+  attr(:links, :list, required: true)
+  attr(:type, :string, default: "secondary", values: ~w"primary secondary")
+
+  def dropdown_list(assigns) do
+    ~H"""
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li :for={link <- @links}>
+          <%= if link[:dropdown] do %>
+            <div class="dropdown dropdown-hover">
+              <div
+                tabindex="0"
+                role="button"
+                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto"
+              >
+                <span class="font-common font-normal whitespace-nowrap">
+                  {link.name}
+                </span>
+              </div>
+              <ul
+                tabindex="0"
+                class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm"
+              >
+                <li :for={sublink <- link.dropdown}>
+                  <.link
+                    :if={sublink.visibility == :visible}
+                    navigate={sublink.path}
+                    class={"font-common font-normal whitespace-nowrap" <>
+                      if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
+                  >
+                    {sublink.name}
+                  </.link>
+                </li>
+              </ul>
+            </div>
+          <% else %>
+            <.link
+              :if={link.visibility == :visible}
+              navigate={link.path}
+              class={"font-common font-normal whitespace-nowrap" <>
+                if @type == "primary", do: " link link-primary-content", else: " link link-secondary-content"}
+            >
+              {link.name}
+            </.link>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    """
+  end
+
+  @doc """
   Renders a list of social media logos with links.
 
   ## Examples

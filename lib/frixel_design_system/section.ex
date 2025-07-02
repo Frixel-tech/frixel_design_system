@@ -108,6 +108,61 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  @doc """
+  Renders the main header for commerce pages.
+
+  ## Example
+
+      <.base_header_commerce
+        branding_name="Frixel"
+        branding_logo_url="/images/logo.png"
+        header_links={@header_links}
+        call_to_action_name="Sign in"
+        call_to_action_path="/login"
+        class="fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
+      />
+
+  - `branding_name`: The name of the brand to display
+  - `branding_logo_url`: The logo image URL
+  - `header_links`: List of header links
+  - `call_to_action_name`: Text for the call-to-action button
+  - `call_to_action_path`: Path for the call-to-action button
+  - `class`: Additional CSS classes for the header (required for layout)
+  """
+  attr :branding_name, :string
+  attr :branding_logo_url, :string
+  attr :header_links, :list, required: true
+  attr :call_to_action_path, :string
+  attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
+
+  def base_header_commerce(assigns) do
+    ~H"""
+    <header id="header" class={@class}>
+      <nav class="absolute top-4 right-4 flex items-center gap-4">
+        <div class="hidden xl:flex">
+          <Menu.theme_switcher />
+        </div>
+
+        <div class="hidden xl:flex">
+          <.link navigate={@call_to_action_path}>
+            <Button.icon_button icon="hero-user" variant="accent" class="flex items-center gap-2" />
+          </.link>
+        </div>
+
+        <div class="flex xl:hidden">
+          <Menu.theme_switcher />
+          <Menu.dropdown links={@header_links} />
+        </div>
+      </nav>
+
+      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
+        <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
+        <Menu.dropdown_list type="primary" links={@header_links} />
+      </div>
+    </header>
+    """
+  end
+
   attr :branding_name, :string
   attr :footer_links, :list
   attr :social_medias, :list

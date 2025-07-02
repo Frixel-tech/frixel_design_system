@@ -106,4 +106,43 @@ defmodule FrixelDesignSystem.Components.MenuTest do
     assert html =~
              "<label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>"
   end
+
+  describe "dropdown_list" do
+    test "renders dropdown_list with visible links and dropdown sublinks" do
+      # Given
+      links = [
+        %{name: "About", path: "/about", visibility: :visible},
+        %{
+          name: "More",
+          visibility: :visible,
+          dropdown: [
+            %{name: "Team", path: "/team", visibility: :visible},
+            %{name: "Careers", path: "/careers", visibility: :hidden},
+            %{name: "Blog", path: "/blog", visibility: :visible}
+          ]
+        },
+        %{name: "Contact", path: "/contact", visibility: :visible}
+      ]
+
+      assigns = %{links: links, type: "primary"}
+
+      # When
+      html =
+        "#{rendered_to_string(~H"""
+        <Menu.dropdown_list links={@links} type={@type} />
+        """)}"
+
+      # Then
+      assert html =~ "<div class=\"navbar-center hidden lg:flex\">"
+      assert html =~ "<ul class=\"menu menu-horizontal px-1\">"
+      assert html =~ "About"
+      assert html =~ "Contact"
+      assert html =~ "More"
+      assert html =~ "Team"
+      # hidden sublink should not be rendered
+      refute html =~ "Careers"
+      assert html =~ "Blog"
+      assert html =~ "link-primary-content"
+    end
+  end
 end
