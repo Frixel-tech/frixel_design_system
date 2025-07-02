@@ -161,56 +161,56 @@ defmodule FrixelDesignSystem.SectionTest do
   test "base_header_commerce" do
     # Given
     branding_name = "Frixel"
+    call_to_action_path = "/log-in"
     branding_logo_url = "/images/logo.svg"
 
-    header_links =
-      {[
-         %{
-           name: "Pret-à-porter",
-           path: "/pret-a-porter",
-           dropdown: [
-             %{path: "/about/team", name: "T-Shirt", visibility: :visible},
-             %{path: "/about/company", name: "Pants", visibility: :visible}
-           ],
-           visibility: :visible
-         },
-         %{
-           name: "High-Tech",
-           path: "/high-tech",
-           dropdown: [
-             %{path: "/contact/email", name: "PC", visibility: :visible},
-             %{path: "/contact/phone", name: "Phone", visibility: :visible}
-           ],
-           visibility: :visible
-         },
-         %{
-           name: "Joaillerie",
-           path: "/joaillerie",
-           dropdown: [
-             %{path: "/contact/email", name: "PC", visibility: :visible},
-             %{path: "/contact/phone", name: "Phone", visibility: :visible}
-           ],
-           visibility: :visible
-         },
-         %{
-           name: "Accessoires",
-           path: "/accessoires",
-           dropdown: [
-             %{path: "/contact/email", name: "PC", visibility: :visible},
-             %{path: "/contact/phone", name: "Phone", visibility: :visible}
-           ],
-           visibility: :visible
-         },
-         %{
-           name: "Cadeaux",
-           path: "/cadeaux",
-           dropdown: [
-             %{path: "/contact/email", name: "PC", visibility: :visible},
-             %{path: "/contact/phone", name: "Phone", visibility: :visible}
-           ],
-           visibility: :visible
-         }
-       ]}
+    header_links = [
+      %{
+        name: "Pret-à-porter",
+        path: "/pret-a-porter",
+        dropdown: [
+          %{path: "/about/team", name: "T-Shirt", visibility: :visible},
+          %{path: "/about/company", name: "Pants", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "High-Tech",
+        path: "/high-tech",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "Joaillerie",
+        path: "/joaillerie",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "Accessoires",
+        path: "/accessoires",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      },
+      %{
+        name: "Cadeaux",
+        path: "/cadeaux",
+        dropdown: [
+          %{path: "/contact/email", name: "PC", visibility: :visible},
+          %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        visibility: :visible
+      }
+    ]
 
     call_to_action_name = "Sign Up -  Login"
     call_to_action_path = "/log-in"
@@ -218,7 +218,6 @@ defmodule FrixelDesignSystem.SectionTest do
     assigns = %{
       branding_name: branding_name,
       branding_logo_url: branding_logo_url,
-      call_to_action_name: call_to_action_name,
       call_to_action_path: call_to_action_path,
       header_links: header_links
     }
@@ -227,57 +226,10 @@ defmodule FrixelDesignSystem.SectionTest do
     html =
       "#{rendered_to_string(~H"""
       <FrixelDesignSystem.Section.base_header_commerce
-        branding_name="Frixel"
-        branding_logo_url="/images/logo.svg"
-        header_links={[
-          %{
-            name: "Pret-à-porter",
-            path: "/pret-a-porter",
-            dropdown: [
-              %{path: "/about/team", name: "T-Shirt", visibility: :visible},
-              %{path: "/about/company", name: "Pants", visibility: :visible}
-            ],
-            visibility: :visible
-          },
-          %{
-            name: "High-Tech",
-            path: "/high-tech",
-            dropdown: [
-              %{path: "/contact/email", name: "PC", visibility: :visible},
-              %{path: "/contact/phone", name: "Phone", visibility: :visible}
-            ],
-            visibility: :visible
-          },
-          %{
-            name: "Joaillerie",
-            path: "/joaillerie",
-            dropdown: [
-              %{path: "/contact/email", name: "PC", visibility: :visible},
-              %{path: "/contact/phone", name: "Phone", visibility: :visible}
-            ],
-            visibility: :visible
-          },
-          %{
-            name: "Accessoires",
-            path: "/accessoires",
-            dropdown: [
-              %{path: "/contact/email", name: "PC", visibility: :visible},
-              %{path: "/contact/phone", name: "Phone", visibility: :visible}
-            ],
-            visibility: :visible
-          },
-          %{
-            name: "Cadeaux",
-            path: "/cadeaux",
-            dropdown: [
-              %{path: "/contact/email", name: "PC", visibility: :visible},
-              %{path: "/contact/phone", name: "Phone", visibility: :visible}
-            ],
-            visibility: :visible
-          }
-        ]}
-        call_to_action_name="Sign Up -  Login"
-        call_to_action_path="/log-in"
+        branding_name={@branding_name}
+        branding_logo_url={@branding_logo_url}
+        header_links={@header_links}
+        call_to_action_path={@call_to_action_path}
       />
       """)}"
 
