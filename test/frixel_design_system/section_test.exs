@@ -212,9 +212,6 @@ defmodule FrixelDesignSystem.SectionTest do
       }
     ]
 
-    call_to_action_name = "Sign Up -  Login"
-    call_to_action_path = "/log-in"
-
     assigns = %{
       branding_name: branding_name,
       branding_logo_url: branding_logo_url,
