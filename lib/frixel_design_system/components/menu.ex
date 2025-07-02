@@ -93,7 +93,7 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   """
   attr(:links, :list, required: true)
-  attr(:type, :string, default: "secondary")
+  attr(:type, :string, default: "secondary", values: ~w"primary secondary")
   attr(:label, :string, default: "Menu")
 
   def dropdown_list(assigns) do
