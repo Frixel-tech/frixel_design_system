@@ -80,11 +80,7 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="hidden xl:flex">
           <.link navigate={@call_to_action_path}>
-            <Button.icon_button
-              icon="hero-user"
-              variant="accent"
-              class="flex items-center gap-2"
-            />
+            <Button.icon_button icon="hero-user" variant="accent" class="flex items-center gap-2" />
           </.link>
         </div>
 
@@ -149,10 +145,7 @@ defmodule FrixelDesignSystem.Section do
 
   def base_header_commerce(assigns) do
     ~H"""
-    <header
-      id="header"
-      class={@class}
-    >
+    <header id="header" class={@class}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
           <Menu.theme_switcher />
@@ -160,11 +153,7 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="hidden xl:flex">
           <.link navigate={@call_to_action_path}>
-            <Button.icon_button
-              icon="hero-user"
-              variant="accent"
-              class="flex items-center gap-2"
-            />
+            <Button.icon_button icon="hero-user" variant="accent" class="flex items-center gap-2" />
           </.link>
         </div>
 
@@ -175,11 +164,7 @@ defmodule FrixelDesignSystem.Section do
       </nav>
 
       <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
-        <Company.branding
-          brand_name={@branding_name}
-          brand_img={@branding_logo_url}
-          class="text-2xl font-bold scale-125"
-        />
+        <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
         <Menu.dropdown_list label="Menu" type="primary" links={@header_links} />
       </div>
     </header>

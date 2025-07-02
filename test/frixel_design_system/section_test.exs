@@ -150,6 +150,134 @@ defmodule FrixelDesignSystem.SectionTest do
              "<header id=\"header\" class=\"fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full\">\n  <nav class=\"navbar max-w-450 m-auto\">\n    <div class=\"navbar-start\">\n      <a href=\"/\" class=\"flex items-center\">\n  <img src=\"https://www.booking-appointement-url.com\" alt=\"Branding name logo\" class=\"size-12 mx-auto px-1\">\n  <h1 class=\"btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-xl sm:text-3xl xl:text-5xl font-title font-normal\" style=\"font-size: 20px;\">\n    Branding name\n  </h1>\n</a>\n    </div>\n\n    <div class=\"navbar-end gap-4 w-full\">\n      <div class=\"hidden xl:flex\">\n        <ul class=\"flex flex-col lg:flex-row items-center justify-end\">\n  <li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"/#services\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      Services\n    </a>\n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    \n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"/#projects\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      Projets\n    </a>\n  </li>\n</ul>\n        \n        \n        <label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>\n      </div>\n\n      <div class=\"hidden xl:flex\">\n        <a href=\"https://www.call-to-action-path.com\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n          <button class=\"flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 flex items-center gap-2\">\n  call to action\n  <span class=\"hero-arrow-right-solid w-5 h-5\"></span>\n  \n</button>\n        </a>\n      </div>\n\n      <div class=\"flex xl:hidden\">\n        \n        \n        <label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>\n        <div id=\"dropdown-menu\" class=\"dropdown dropdown-bottom dropdown-end block xl:hidden\" phx-click=\"[[&quot;toggle_class&quot;,{&quot;names&quot;:[&quot;swap-active&quot;],&quot;to&quot;:&quot;#dropdown-button&quot;}]]\" phx-click-away=\"[[&quot;remove_class&quot;,{&quot;names&quot;:[&quot;swap-active&quot;],&quot;to&quot;:&quot;#dropdown-button&quot;}]]\">\n  <div id=\"dropdown-button\" tabindex=\"0\" role=\"button\" aria-label=\"Open main menu\" class=\"swap swap-flip btn btn-ghost btn-circle\">\n    <span class=\"hero-bars-3 swap-off size-5\" id=\"icon-open\"></span>\n    <span class=\"hero-x-mark swap-on size-5\" id=\"icon-close\"></span>\n  </div>\n\n  <ul tabindex=\"0\" class=\"menu menu-sm dropdown-content bg-primary w-screen h-fit mt-4 shadow -right-2\">\n    <li>\n      <a href=\"/#services\" class=\"text-xl text-base-100\">\n        Services\n      </a>\n    </li><li>\n      \n    </li><li>\n      <a href=\"/#projects\" class=\"text-xl text-base-100\">\n        Projets\n      </a>\n    </li>\n    <div class=\"flex justify-center my-4\">\n      <a href=\"/#contact-us\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n        <button class=\"flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 flex items-center gap-2\">\n  Contact us\n  <span class=\"hero-arrow-right-solid w-5 h-5\"></span>\n  \n</button>\n      </a>\n    </div>\n  </ul>\n</div>\n      </div>\n    </div>\n  </nav>\n</header>"
   end
 
+  test "base_header_commerce" do
+    # Given
+    branding_name = "Frixel"
+    branding_logo_url = "/images/logo.svg"
+
+    header_links =
+      {[
+         %{
+           name: "Pret-à-porter",
+           path: "/pret-a-porter",
+           dropdown: [
+             %{path: "/about/team", name: "T-Shirt", visibility: :visible},
+             %{path: "/about/company", name: "Pants", visibility: :visible}
+           ],
+           visibility: :visible
+         },
+         %{
+           name: "High-Tech",
+           path: "/high-tech",
+           dropdown: [
+             %{path: "/contact/email", name: "PC", visibility: :visible},
+             %{path: "/contact/phone", name: "Phone", visibility: :visible}
+           ],
+           visibility: :visible
+         },
+         %{
+           name: "Joaillerie",
+           path: "/joaillerie",
+           dropdown: [
+             %{path: "/contact/email", name: "PC", visibility: :visible},
+             %{path: "/contact/phone", name: "Phone", visibility: :visible}
+           ],
+           visibility: :visible
+         },
+         %{
+           name: "Accessoires",
+           path: "/accessoires",
+           dropdown: [
+             %{path: "/contact/email", name: "PC", visibility: :visible},
+             %{path: "/contact/phone", name: "Phone", visibility: :visible}
+           ],
+           visibility: :visible
+         },
+         %{
+           name: "Cadeaux",
+           path: "/cadeaux",
+           dropdown: [
+             %{path: "/contact/email", name: "PC", visibility: :visible},
+             %{path: "/contact/phone", name: "Phone", visibility: :visible}
+           ],
+           visibility: :visible
+         }
+       ]}
+
+    call_to_action_name = "Sign Up -  Login"
+    call_to_action_path = "/log-in"
+
+    assigns = %{
+      branding_name: branding_name,
+      branding_logo_url: branding_logo_url,
+      call_to_action_name: call_to_action_name,
+      call_to_action_path: call_to_action_path,
+      header_links: header_links
+    }
+
+    # When
+    html =
+      "#{rendered_to_string(~H"""
+      <FrixelDesignSystem.Section.base_header_commerce
+        branding_name="Frixel"
+        branding_logo_url="/images/logo.svg"
+        header_links={[
+          %{
+            name: "Pret-à-porter",
+            path: "/pret-a-porter",
+            dropdown: [
+              %{path: "/about/team", name: "T-Shirt", visibility: :visible},
+              %{path: "/about/company", name: "Pants", visibility: :visible}
+            ],
+            visibility: :visible
+          },
+          %{
+            name: "High-Tech",
+            path: "/high-tech",
+            dropdown: [
+              %{path: "/contact/email", name: "PC", visibility: :visible},
+              %{path: "/contact/phone", name: "Phone", visibility: :visible}
+            ],
+            visibility: :visible
+          },
+          %{
+            name: "Joaillerie",
+            path: "/joaillerie",
+            dropdown: [
+              %{path: "/contact/email", name: "PC", visibility: :visible},
+              %{path: "/contact/phone", name: "Phone", visibility: :visible}
+            ],
+            visibility: :visible
+          },
+          %{
+            name: "Accessoires",
+            path: "/accessoires",
+            dropdown: [
+              %{path: "/contact/email", name: "PC", visibility: :visible},
+              %{path: "/contact/phone", name: "Phone", visibility: :visible}
+            ],
+            visibility: :visible
+          },
+          %{
+            name: "Cadeaux",
+            path: "/cadeaux",
+            dropdown: [
+              %{path: "/contact/email", name: "PC", visibility: :visible},
+              %{path: "/contact/phone", name: "Phone", visibility: :visible}
+            ],
+            visibility: :visible
+          }
+        ]}
+        call_to_action_name="Sign Up -  Login"
+        call_to_action_path="/log-in"
+      />
+      """)}"
+
+    # Then
+    assert html =~
+             "<header id=\"header\" class=\"\">\n  <nav class=\"absolute top-4 right-4 flex items-center gap-4\">\n    <div class=\"hidden xl:flex\">\n      <label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>\n    </div>\n\n    <div class=\"hidden xl:flex\">\n      <a href=\"/log-in\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n        <button class=\"flex btn btn-accent mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center flex items-center gap-2\">\n  <span class=\"hero-user w-5 h-5\"></span>\n  \n</button>\n      </a>\n    </div>\n\n    <div class=\"flex xl:hidden\">\n      <label for=\"theme-toggle\" id=\"theme-selector\" class=\"swap swap-rotate\" phx-hook=\"GetAndStoreThemeHook\">\n  <input type=\"checkbox\" id=\"theme-toggle\" name=\"theme-toggle\" class=\"theme-controller\" phx-click=\"[[&quot;dispatch&quot;,{&quot;event&quot;:&quot;set-theme-locally&quot;}]]\" aria-label=\"Toggle theme\">\n  \n<!-- sun icon -->\n  <span class=\"hero-sun-solid size-6 text-amber-200\" id=\"sun-icon\"></span>\n  \n<!-- moon icon -->\n  <span class=\"hero-moon-solid size-6 text-indigo-900\" id=\"moon-icon\"></span>\n</label>\n      <div id=\"dropdown-menu\" class=\"dropdown dropdown-bottom dropdown-end block xl:hidden\" phx-click=\"[[&quot;toggle_class&quot;,{&quot;names&quot;:[&quot;swap-active&quot;],&quot;to&quot;:&quot;#dropdown-button&quot;}]]\" phx-click-away=\"[[&quot;remove_class&quot;,{&quot;names&quot;:[&quot;swap-active&quot;],&quot;to&quot;:&quot;#dropdown-button&quot;}]]\">\n  <div id=\"dropdown-button\" tabindex=\"0\" role=\"button\" aria-label=\"Open main menu\" class=\"swap swap-flip btn btn-ghost btn-circle\">\n    <span class=\"hero-bars-3 swap-off size-5\" id=\"icon-open\"></span>\n    <span class=\"hero-x-mark swap-on size-5\" id=\"icon-close\"></span>\n  </div>\n\n  <ul tabindex=\"0\" class=\"menu menu-sm dropdown-content bg-primary w-screen h-fit mt-4 shadow -right-2\">\n    <li>\n      <a href=\"/pret-a-porter\" class=\"text-xl text-base-100\">\n        Pret-à-porter\n      </a>\n    </li><li>\n      <a href=\"/high-tech\" class=\"text-xl text-base-100\">\n        High-Tech\n      </a>\n    </li><li>\n      <a href=\"/joaillerie\" class=\"text-xl text-base-100\">\n        Joaillerie\n      </a>\n    </li><li>\n      <a href=\"/accessoires\" class=\"text-xl text-base-100\">\n        Accessoires\n      </a>\n    </li><li>\n      <a href=\"/cadeaux\" class=\"text-xl text-base-100\">\n        Cadeaux\n      </a>\n    </li>\n    <div class=\"flex justify-center my-4\">\n      <a href=\"/#contact-us\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n        <button class=\"flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 flex items-center gap-2\">\n  Contact us\n  <span class=\"hero-arrow-right-solid w-5 h-5\"></span>\n  \n</button>\n      </a>\n    </div>\n  </ul>\n</div>\n    </div>\n  </nav>\n\n  <div class=\"w-full flex flex-col items-center justify-center mb-4 gap-2\">\n    <a href=\"/\" class=\"flex items-center\">\n  <img src=\"/images/logo.svg\" alt=\"Frixel logo\" class=\"size-12 mx-auto px-1\">\n  <h1 class=\"btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-xl sm:text-3xl xl:text-5xl font-title font-normal\" style=\"font-size: 20px;\">\n    Frixel\n  </h1>\n</a>\n    <div class=\"navbar-center hidden lg:flex\">\n  <ul class=\"menu menu-horizontal px-1\">\n    <li>\n      \n        <div class=\"dropdown dropdown-hover\">\n          <div tabindex=\"0\" role=\"button\" class=\"btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto\">\n            <span class=\"font-common font-normal whitespace-nowrap\">\n              Pret-à-porter\n            </span>\n          </div>\n          <ul tabindex=\"0\" class=\"dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm\">\n            <li>\n              <a href=\"/about/team\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                T-Shirt\n              </a>\n            </li><li>\n              <a href=\"/about/company\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                Pants\n              </a>\n            </li>\n          </ul>\n        </div>\n      \n    </li><li>\n      \n        <div class=\"dropdown dropdown-hover\">\n          <div tabindex=\"0\" role=\"button\" class=\"btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto\">\n            <span class=\"font-common font-normal whitespace-nowrap\">\n              High-Tech\n            </span>\n          </div>\n          <ul tabindex=\"0\" class=\"dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm\">\n            <li>\n              <a href=\"/contact/email\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                PC\n              </a>\n            </li><li>\n              <a href=\"/contact/phone\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                Phone\n              </a>\n            </li>\n          </ul>\n        </div>\n      \n    </li><li>\n      \n        <div class=\"dropdown dropdown-hover\">\n          <div tabindex=\"0\" role=\"button\" class=\"btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto\">\n            <span class=\"font-common font-normal whitespace-nowrap\">\n              Joaillerie\n            </span>\n          </div>\n          <ul tabindex=\"0\" class=\"dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm\">\n            <li>\n              <a href=\"/contact/email\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                PC\n              </a>\n            </li><li>\n              <a href=\"/contact/phone\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                Phone\n              </a>\n            </li>\n          </ul>\n        </div>\n      \n    </li><li>\n      \n        <div class=\"dropdown dropdown-hover\">\n          <div tabindex=\"0\" role=\"button\" class=\"btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto\">\n            <span class=\"font-common font-normal whitespace-nowrap\">\n              Accessoires\n            </span>\n          </div>\n          <ul tabindex=\"0\" class=\"dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm\">\n            <li>\n              <a href=\"/contact/email\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                PC\n              </a>\n            </li><li>\n              <a href=\"/contact/phone\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                Phone\n              </a>\n            </li>\n          </ul>\n        </div>\n      \n    </li><li>\n      \n        <div class=\"dropdown dropdown-hover\">\n          <div tabindex=\"0\" role=\"button\" class=\"btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto\">\n            <span class=\"font-common font-normal whitespace-nowrap\">\n              Cadeaux\n            </span>\n          </div>\n          <ul tabindex=\"0\" class=\"dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm\">\n            <li>\n              <a href=\"/contact/email\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                PC\n              </a>\n            </li><li>\n              <a href=\"/contact/phone\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"font-common font-normal whitespace-nowrap link-primary-content\">\n                Phone\n              </a>\n            </li>\n          </ul>\n        </div>\n      \n    </li>\n  </ul>\n</div>\n  </div>\n</header>"
+  end
+
   test "base_footer" do
     # Given
     branding_name = "Branding name"
