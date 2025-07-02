@@ -132,8 +132,6 @@ defmodule FrixelDesignSystem.Section do
   attr :branding_name, :string
   attr :branding_logo_url, :string
   attr :header_links, :list, required: true
-  attr :language_links, :list
-  attr :call_to_action_name, :string
   attr :call_to_action_path, :string
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
 

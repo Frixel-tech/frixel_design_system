@@ -152,6 +152,10 @@ defmodule FrixelDesignSystem.SectionTest do
     assert html =~ "/#projects"
     refute html =~ "Trash"
     refute html =~ "/#trash"
+    assert html =~ "Branding name"
+    assert html =~ "https://www.booking-appointement-url.com"
+    assert html =~ "call to action"
+    assert html =~ "https://www.call-to-action-path.com"
   end
 
   test "base_header_commerce" do
