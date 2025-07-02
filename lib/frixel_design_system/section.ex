@@ -129,7 +129,6 @@ defmodule FrixelDesignSystem.Section do
         header_links={@header_links}
         call_to_action_name="Sign in"
         call_to_action_path="/login"
-        products_links={@products_links}
         class="fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
       />
 
@@ -138,16 +137,14 @@ defmodule FrixelDesignSystem.Section do
   - `header_links`: List of header links
   - `call_to_action_name`: Text for the call-to-action button
   - `call_to_action_path`: Path for the call-to-action button
-  - `products_links`: List of product links for the dropdown
   - `class`: Additional CSS classes for the header (required for layout)
   """
   attr :branding_name, :string
   attr :branding_logo_url, :string
-  attr :header_links, :list
+  attr :header_links, :list, required: true
   attr :language_links, :list
   attr :call_to_action_name, :string
   attr :call_to_action_path, :string
-  attr :products_links, :list, required: true
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
 
   def base_header_commerce(assigns) do
@@ -183,7 +180,7 @@ defmodule FrixelDesignSystem.Section do
           brand_img={@branding_logo_url}
           class="text-2xl font-bold scale-125"
         />
-        <Menu.dropdown_list label="Menu" type="primary" links={@products_links} />
+        <Menu.dropdown_list label="Menu" type="primary" links={@header_links} />
       </div>
     </header>
     """
