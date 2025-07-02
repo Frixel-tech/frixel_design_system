@@ -118,18 +118,29 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  # Example usage:
-  #
-  # <.base_header_commerce
-  #   branding_name="Frixel"
-  #   branding_logo_url="/images/logo.png"
-  #   header_links={@header_links}
-  #   call_to_action_name="Sign in"
-  #   call_to_action_path="/login"
-  #   products_links={@products_links}
-  #   class="fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
-  # />
+  @doc """
+  Renders the main header for commerce pages.
 
+  ## Example
+
+      <.base_header_commerce
+        branding_name="Frixel"
+        branding_logo_url="/images/logo.png"
+        header_links={@header_links}
+        call_to_action_name="Sign in"
+        call_to_action_path="/login"
+        products_links={@products_links}
+        class="fixed top-0 left-0 right-0 bg-primary text-primary-content shadow-sm z-1 flex flex-col items-center py-4 w-full relative m-0"
+      />
+
+  - `branding_name`: The name of the brand to display
+  - `branding_logo_url`: The logo image URL
+  - `header_links`: List of header links
+  - `call_to_action_name`: Text for the call-to-action button
+  - `call_to_action_path`: Path for the call-to-action button
+  - `products_links`: List of product links for the dropdown
+  - `class`: Additional CSS classes for the header (required for layout)
+  """
   attr :branding_name, :string
   attr :branding_logo_url, :string
   attr :header_links, :list
