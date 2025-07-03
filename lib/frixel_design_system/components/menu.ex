@@ -171,10 +171,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                   {link.name}
                 </span>
               </div>
-              <ul
-                tabindex="0"
-                class="dropdown-content menu bg-base-100 menu menu-xl dropdown-content w-screen h-fit"
-              >
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 menu menu-xl dropdown-content">
                 <li :for={sublink <- link.dropdown}>
                   <.link
                     :if={sublink.visibility == :visible}
