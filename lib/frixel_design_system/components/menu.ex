@@ -173,7 +173,7 @@ defmodule FrixelDesignSystem.Components.Menu do
               </div>
               <ul
                 tabindex="0"
-                class="dropdown-content menu bg-base-100 rounded-box z-10 w-150 p-2 shadow-sm"
+                class="dropdown-content menu bg-base-100 rounded-box z-10 w-130 p-2 shadow-sm"
               >
                 <li :for={sublink <- link.dropdown}>
                   <.link
