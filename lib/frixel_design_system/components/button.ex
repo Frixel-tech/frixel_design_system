@@ -168,7 +168,7 @@ defmodule FrixelDesignSystem.Components.Button do
       ]}
       {@rest}
     >
-      <.icon name={@icon} class="w-5 h-5" />
+      <.icon name={@icon} class="w-5 h-5 dark:text-white" />
       {render_slot(@inner_block)}
     </button>
     """
