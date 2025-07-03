@@ -159,16 +159,16 @@ defmodule FrixelDesignSystem.Components.Button do
       class={[
         case @variant do
           "standard" ->
-            "flex btn btn-secondary mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
+            "flex btn mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
 
           "accent" ->
-            "flex btn btn-accent mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
+            "flex btnd mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
         end,
         @class
       ]}
       {@rest}
     >
-      <.icon name={@icon} class="w-5 h-5 dark:text-white" />
+      <.icon name={@icon} class="w-5 h-5" />
       {render_slot(@inner_block)}
     </button>
     """
