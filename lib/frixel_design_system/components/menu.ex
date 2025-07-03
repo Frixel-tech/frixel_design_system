@@ -28,12 +28,9 @@ defmodule FrixelDesignSystem.Components.Menu do
         <.icon name="hero-x-mark" id="icon-close" class="swap-on size-5" />
       </div>
 
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content bg-primary w-screen h-fit mt-4 shadow -right-2"
-      >
+      <ul tabindex="0" class="menu menu-sm dropdown-content w-screen h-fit mt-4 shadow -right-2">
         <li :for={link <- @links}>
-          <a :if={link.visibility == :visible} href={link.path} class="text-xl text-base-100">
+          <a :if={link.visibility == :visible} href={link.path} class="text-xl">
             {link.name}
           </a>
         </li>
