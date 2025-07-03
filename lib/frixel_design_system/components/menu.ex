@@ -51,6 +51,42 @@ defmodule FrixelDesignSystem.Components.Menu do
     """
   end
 
+  def drawer_dropdown(assigns) do
+    ~H"""
+    <div class="drawer block xl:hidden">
+      <input id="main-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        <label
+          for="main-drawer"
+          class="btn btn-ghost btn-circle drawer-button"
+          aria-label={gettext("Open main menu")}
+        >
+          <.icon name="hero-bars-3" class="size-5" />
+        </label>
+      </div>
+      <div class="drawer-side z-50">
+        <label for="main-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <ul class="menu bg-base-100 text-base-content min-h-full w-80 p-4">
+          <li :for={link <- @links}>
+            <a :if={link.visibility == :visible} href={link.path} class="text-xl">
+              {link.name}
+            </a>
+          </li>
+          <div class="flex justify-center my-4">
+            <.link navigate="/#contact-us">
+              <Button.primary_button
+                text={gettext("Contact us")}
+                class="flex items-center gap-2"
+                icon_button="hero-arrow-right-solid"
+              />
+            </.link>
+          </div>
+        </ul>
+      </div>
+    </div>
+    """
+  end
+
   @doc """
   Renders a list of links.
 

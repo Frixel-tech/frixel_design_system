@@ -151,7 +151,7 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="flex xl:hidden">
           <Menu.theme_switcher />
-          <Menu.dropdown links={@header_links} />
+          <Menu.drawer_dropdown links={@header_links} />
         </div>
       </nav>
 
