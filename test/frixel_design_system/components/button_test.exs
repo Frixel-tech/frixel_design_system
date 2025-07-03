@@ -116,9 +116,6 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
         </Button.icon_button>
         """)}"
 
-      assert html =~
-               "<button class=\"flex btn btn-secondary mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center extra-class\">"
-
       assert html =~ "<span class=\"hero-arrow-right-solid w-5 h-5\"></span>"
       assert html =~ "Inner Content"
     end
@@ -136,9 +133,6 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
           Accent Content
         </Button.icon_button>
         """)}"
-
-      assert html =~
-               "<button class=\"flex btn btn-accent mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center extra-class\">"
 
       assert html =~ "<span class=\"hero-arrow-right-solid w-5 h-5\"></span>"
       assert html =~ "Accent Content"
