@@ -9,6 +9,18 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   attr(:links, :list, required: true)
 
+  @doc """
+  Renders a mobile navigation menu using DaisyUI's dropdown pattern.
+
+  ## Examples
+
+      <.dropdown links={[
+        %{path: "/about", name: "About", visibility: :visible},
+        %{path: "/contact", name: "Contact", visibility: :visible}
+      ]} />
+
+  - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`.
+  """
   def dropdown(assigns) do
     ~H"""
     <div
@@ -51,6 +63,18 @@ defmodule FrixelDesignSystem.Components.Menu do
     """
   end
 
+  @doc """
+  Renders a mobile navigation menu using DaisyUI's drawer component.
+
+  ## Examples
+
+      <.drawer_dropdown links={[
+        %{path: "/about", name: "About", visibility: :visible},
+        %{path: "/contact", name: "Contact", visibility: :visible}
+      ]} />
+
+  - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`.
+  """
   def drawer_dropdown(assigns) do
     ~H"""
     <div class="drawer block xl:hidden">
