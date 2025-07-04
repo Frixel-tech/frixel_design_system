@@ -191,7 +191,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           class="object-cover w-full h-full"
                         />
                       </div>
-                      <span class="text-black text-xs px-1 font-common font-normal">
+                      <span class="text-base-300 text-xs px-1 font-common font-normal">
                         {sublink.name}
                       </span>
                     </.link>
