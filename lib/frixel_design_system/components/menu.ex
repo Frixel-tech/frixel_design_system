@@ -63,6 +63,8 @@ defmodule FrixelDesignSystem.Components.Menu do
     """
   end
 
+  slot(:bottom_content, required: false)
+
   @doc """
   Renders a mobile navigation menu using DaisyUI's drawer component.
 
@@ -97,13 +99,7 @@ defmodule FrixelDesignSystem.Components.Menu do
             </a>
           </li>
           <div class="flex justify-center my-4">
-            <.link navigate="/#contact-us">
-              <Button.primary_button
-                text={gettext("Contact us")}
-                class="flex items-center gap-2"
-                icon_button="hero-arrow-right-solid"
-              />
-            </.link>
+            {render_slot(@bottom_content)}
           </div>
         </ul>
       </div>
