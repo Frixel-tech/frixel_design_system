@@ -65,6 +65,11 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   slot(:bottom_content, required: false)
 
+  attr(:links, :list,
+    required: true,
+    doc: "A list of maps with keys `:path`, `:name`, and `:visibility`"
+  )
+
   @doc """
   Renders a mobile navigation menu using DaisyUI's drawer component.
 
