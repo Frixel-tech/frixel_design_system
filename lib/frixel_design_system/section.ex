@@ -137,7 +137,7 @@ defmodule FrixelDesignSystem.Section do
 
   def base_header_commerce(assigns) do
     ~H"""
-    <header id="header" class={"w-screen " <> to_string(@class)}>
+    <header id="header" class={@class}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
           <Menu.theme_switcher />
@@ -155,7 +155,7 @@ defmodule FrixelDesignSystem.Section do
         </div>
       </nav>
 
-      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
+      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2 static">
         <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
         <Menu.dropdown_list type="primary" links={@header_links} />
       </div>
