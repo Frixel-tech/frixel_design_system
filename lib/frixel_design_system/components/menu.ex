@@ -183,12 +183,12 @@ defmodule FrixelDesignSystem.Components.Menu do
                         :if={sublink[:image_url]}
                         src={sublink.image_url}
                         alt={"Icon for #{sublink.name}"}
-                        class="w-30 h-14 rounded-xl object-cover mb-1 shadow"
+                        class="w-30 h-14 object-cover mb-1 shadow"
                       />
                       <.link
                         :if={sublink.visibility == :visible}
                         navigate={sublink.path}
-                        class={"font-common font-normal whitespace-nowrap text-sm mt-1" <>
+                        class={"font-common font-normal whitespace-nowrap text-xs mt-1" <>
                           if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
                       >
                         {sublink.name}
