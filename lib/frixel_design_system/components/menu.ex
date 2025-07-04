@@ -176,14 +176,14 @@ defmodule FrixelDesignSystem.Components.Menu do
                 tabindex="0"
                 class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg"
               >
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-2">
                   <li :for={sublink <- link.dropdown} class="!p-0 !m-0 list-none">
-                    <div class="flex flex-col items-center gap-2 px-4 py-4 rounded-lg hover:bg-base-200 transition-colors duration-200">
+                    <div class="flex flex-col items-center gap-1 px-2 py-2 rounded-lg hover:bg-base-200 transition-colors duration-200">
                       <img
                         :if={sublink[:image_url]}
                         src={sublink.image_url}
                         alt={"Icon for #{sublink.name}"}
-                        class="w-16 h-16 rounded-xl object-cover mb-2 shadow"
+                        class="w-14 h-14 rounded-xl object-cover mb-1 shadow"
                       />
                       <.link
                         :if={sublink.visibility == :visible}
