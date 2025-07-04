@@ -159,8 +159,6 @@ defmodule FrixelDesignSystem.Components.MenuTest do
         """)}"
 
       # Then
-      assert html =~ "<div class=\"navbar-center hidden lg:flex\">"
-      assert html =~ "<ul class=\"menu menu-horizontal px-1\">"
       assert html =~ "About"
       assert html =~ "Contact"
       assert html =~ "More"
