@@ -19,7 +19,7 @@ defmodule FrixelDesignSystem.Components.Company do
     <a href="/" class="flex items-center">
       <img src={@brand_img} alt={"#{@brand_name} logo"} class="size-12 mx-auto px-1" />
       <h1 class={[
-        "btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-xl sm:text-3xl xl:text-5xl font-title font-normal",
+        "btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-lg sm:text-3xl xl:text-5xl font-title font-normal",
         @class
       ]}>
         {@brand_name}
