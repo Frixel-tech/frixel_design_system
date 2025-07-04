@@ -111,7 +111,7 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
 
       html =
         "#{rendered_to_string(~H"""
-        <Button.icon_button icon={@icon} variant={@variant} class={@class}>
+        <Button.icon_button icon={@icon} class={@class}>
           Inner Content
         </Button.icon_button>
         """)}"
@@ -129,7 +129,7 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
 
       html =
         "#{rendered_to_string(~H"""
-        <Button.icon_button icon={@icon} variant={@variant} class={@class}>
+        <Button.icon_button icon={@icon} class={@class}>
           Accent Content
         </Button.icon_button>
         """)}"
