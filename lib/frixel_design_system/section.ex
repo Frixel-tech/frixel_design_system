@@ -143,13 +143,13 @@ defmodule FrixelDesignSystem.Section do
           <Menu.theme_switcher />
         </div>
 
-        <div class="hidden 2xl:flex">
+        <div class="hidden xl:flex">
           <.link navigate={@call_to_action_path}>
             <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
           </.link>
         </div>
 
-        <div class="flex 2xl:hidden">
+        <div class="flex xl:hidden">
           <Menu.theme_switcher />
           <Menu.drawer_dropdown links={@header_links} />
         </div>
