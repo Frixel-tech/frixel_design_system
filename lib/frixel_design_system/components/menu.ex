@@ -176,24 +176,26 @@ defmodule FrixelDesignSystem.Components.Menu do
                 tabindex="0"
                 class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg"
               >
-                <div class="grid grid-cols-2 gap-2">
-                  <li :for={sublink <- link.dropdown} class="!p-0 !m-0 list-none">
-                    <.link :if={sublink.visibility == :visible} navigate={sublink.path} class="block">
-                      <div class="flex flex-col items-start w-full">
-                        <div class="w-150 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200 mb-2">
-                          <img
-                            :if={sublink[:image_url]}
-                            src={sublink.image_url}
-                            alt={"Icon for #{sublink.name}"}
-                            class="object-cover w-full h-full"
-                          />
-                        </div>
-                        <span class="text-gray text-sm px-1 font-common font-normal">
-                          {sublink.name}
-                        </span>
+                <div class="grid grid-cols-4 gap-2">
+                  <div :for={sublink <- link.dropdown} class="flex flex-col items-start w-full">
+                    <.link
+                      :if={sublink.visibility == :visible}
+                      navigate={sublink.path}
+                      class="block w-full"
+                    >
+                      <div class="w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200 mb-2">
+                        <img
+                          :if={sublink[:image_url]}
+                          src={sublink.image_url}
+                          alt={"Icon for #{sublink.name}"}
+                          class="object-cover w-full h-full"
+                        />
                       </div>
+                      <span class="text-black text-sm px-1 font-common font-normal">
+                        {sublink.name}
+                      </span>
                     </.link>
-                  </li>
+                  </div>
                 </div>
               </ul>
             </div>
