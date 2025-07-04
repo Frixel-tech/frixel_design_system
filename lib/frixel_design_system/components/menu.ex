@@ -196,7 +196,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                   </div>
                   <!-- Right: Collections Images Grid -->
                   <div class="w-3/4">
-                    <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
+                    <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                       Collections
                     </div>
                     <div class="grid grid-cols-2 gap-2">
