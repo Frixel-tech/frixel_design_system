@@ -176,25 +176,26 @@ defmodule FrixelDesignSystem.Components.Menu do
                 tabindex="0"
                 class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg"
               >
-                <div class="grid grid-cols-2 gap-2">
-                  <li :for={sublink <- link.dropdown} class="!p-0 !m-0 list-none">
-                    <div class="flex flex-col items-center gap-1 px-2 py-2 rounded-lg hover:bg-base-200 transition-colors duration-200">
+                <div class="flex flex-wrap">
+                  <div :for={sublink <- link.dropdown} class="menu-content-item w-1/2 p-2">
+                    <.link
+                      :if={sublink.visibility == :visible}
+                      navigate={sublink.path}
+                      class="block group"
+                    >
                       <img
                         :if={sublink[:image_url]}
                         src={sublink.image_url}
                         alt={"Icon for #{sublink.name}"}
-                        class="w-30 h-14 object-cover mb-1 shadow"
+                        class="w-full max-w-full pb-2"
                       />
-                      <.link
-                        :if={sublink.visibility == :visible}
-                        navigate={sublink.path}
-                        class={"font-common font-normal whitespace-nowrap text-xs mt-1" <>
-                          if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
-                      >
-                        {sublink.name}
-                      </.link>
-                    </div>
-                  </li>
+                      <div class="flex items-center mt-2 mb-4">
+                        <p class="m-0 pt-0 text-center w-full font-common font-normal text-base group-hover:underline">
+                          {sublink.name}
+                        </p>
+                      </div>
+                    </.link>
+                  </div>
                 </div>
               </ul>
             </div>
