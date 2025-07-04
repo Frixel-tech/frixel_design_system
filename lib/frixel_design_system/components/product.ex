@@ -53,7 +53,10 @@ defmodule FrixelDesignSystem.Components.Product do
     required: true,
     doc: "The subcategories static path, ex: '/subcategory"
 
-  attr :subcategories, :list, default: []
+  attr :subcategories, :list,
+    default: [],
+    doc:
+      "A list of maps representing subcategories. It should at least have `name` and `illustration_url` keys ; ex: [%{name: 'watches', illustration_url: 'http://url.to/img'}, ...]"
 
   def subcategory_carousel(assigns) do
     ~H"""
@@ -68,7 +71,10 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
-  attr :subcategory, :map, required: true
+  attr :subcategory, :map,
+    required: true,
+    doc:
+      "A map representing a subcategory. It should at least have `name` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'watches', illustration_url: 'http://url.to/img', description: 'Description for watches subcategory.'}"
 
   attr :return_to, :string,
     required: true,
@@ -92,7 +98,10 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
-  attr :product, :map, required: true
+  attr :product, :map,
+    required: true,
+    doc:
+      "A map representing a product. It should at least have `name`, `price` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'Awesome golden watch', price: '1000.00', illustration_url: 'http://url.to/img', description: 'Description for this awesome golden watch.'}"
 
   def product_card(assigns) do
     ~H"""
@@ -111,7 +120,10 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
-  attr :product, :map, required: true
+  attr :product, :map,
+    required: true,
+    doc:
+      "A map representing a product. It should at least have `name`, `price` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'Awesome golden watch', price: '1000.00', illustration_url: 'http://url.to/img', description: 'Description for this awesome golden watch.'}"
 
   def product_details(assigns) do
     ~H"""
