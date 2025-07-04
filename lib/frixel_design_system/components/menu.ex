@@ -183,7 +183,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       navigate={sublink.path}
                       class="block w-full"
                     >
-                      <div class="w-78 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200 mb-2">
+                      <div class="w-55 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200 mb-2">
                         <img
                           :if={sublink[:image_url]}
                           src={sublink.image_url}
