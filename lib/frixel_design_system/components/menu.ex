@@ -9,6 +9,18 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   attr(:links, :list, required: true)
 
+  @doc """
+  Renders a mobile navigation menu using DaisyUI's dropdown pattern.
+
+  ## Examples
+
+      <.dropdown links={[
+        %{path: "/about", name: "About", visibility: :visible},
+        %{path: "/contact", name: "Contact", visibility: :visible}
+      ]} />
+
+  - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`.
+  """
   def dropdown(assigns) do
     ~H"""
     <div
@@ -30,10 +42,10 @@ defmodule FrixelDesignSystem.Components.Menu do
 
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-primary w-screen h-fit mt-4 shadow -right-2"
+        class="menu menu-sm dropdown-content bg-base-100 w-screen h-fit mt-4 shadow -right-2"
       >
         <li :for={link <- @links}>
-          <a :if={link.visibility == :visible} href={link.path} class="text-xl text-base-100">
+          <a :if={link.visibility == :visible} href={link.path} class="text-xl">
             {link.name}
           </a>
         </li>
@@ -47,6 +59,55 @@ defmodule FrixelDesignSystem.Components.Menu do
           </.link>
         </div>
       </ul>
+    </div>
+    """
+  end
+
+  slot(:bottom_content, required: false)
+
+  attr(:links, :list,
+    required: true,
+    doc: "A list of maps with keys `:path`, `:name`, and `:visibility`"
+  )
+
+  @doc """
+  Renders a mobile navigation menu using DaisyUI's drawer component.
+
+  ## Examples
+
+      <.drawer_dropdown links={[
+        %{path: "/about", name: "About", visibility: :visible},
+        %{path: "/contact", name: "Contact", visibility: :visible}
+      ]} />
+
+  - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`.
+  """
+  def drawer_dropdown(assigns) do
+    ~H"""
+    <div class="drawer block xl:hidden">
+      <input id="main-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        <label
+          for="main-drawer"
+          class="btn btn-ghost btn-circle drawer-button"
+          aria-label={gettext("Open main menu")}
+        >
+          <.icon name="hero-bars-3" class="size-5" />
+        </label>
+      </div>
+      <div class="drawer-side z-50">
+        <label for="main-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <ul class="menu bg-base-100 text-base-content min-h-full w-80 p-4">
+          <li :for={link <- @links}>
+            <a :if={link.visibility == :visible} href={link.path} class="text-xl">
+              {link.name}
+            </a>
+          </li>
+          <div class="flex justify-center my-4">
+            {render_slot(@bottom_content)}
+          </div>
+        </ul>
+      </div>
     </div>
     """
   end
@@ -97,11 +158,11 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   def dropdown_list(assigns) do
     ~H"""
-    <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1">
-        <li :for={link <- @links}>
+    <div class="navbar-center hidden lg:flex static">
+      <ul class="menu menu-horizontal px-1 static">
+        <li :for={link <- @links} class="static">
           <%= if link[:dropdown] do %>
-            <div class="dropdown dropdown-hover">
+            <div class="dropdown dropdown-hover dropdown-end block static">
               <div
                 tabindex="0"
                 role="button"
@@ -111,10 +172,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                   {link.name}
                 </span>
               </div>
-              <ul
-                tabindex="0"
-                class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-sm"
-              >
+              <ul tabindex="0" class="dropdown-content bg-base-100 absolute w-screen left-0 right-0">
                 <li :for={sublink <- link.dropdown}>
                   <.link
                     :if={sublink.visibility == :visible}

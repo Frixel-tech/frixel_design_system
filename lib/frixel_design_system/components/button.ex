@@ -143,13 +143,6 @@ defmodule FrixelDesignSystem.Components.Button do
   """
   attr(:icon, :string, required: true, doc: "The name of the icon to display")
   attr(:class, :string, default: nil)
-
-  attr(:variant, :string,
-    values: ~w(standard accent),
-    default: "standard",
-    doc: "The button style variant"
-  )
-
   attr(:rest, :global)
   slot(:inner_block, required: false)
 
@@ -157,13 +150,7 @@ defmodule FrixelDesignSystem.Components.Button do
     ~H"""
     <button
       class={[
-        case @variant do
-          "standard" ->
-            "flex btn btn-secondary mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
-
-          "accent" ->
-            "flex btn btn-accent mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center"
-        end,
+        "flex btn mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center",
         @class
       ]}
       {@rest}

@@ -145,17 +145,17 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="hidden xl:flex">
           <.link navigate={@call_to_action_path}>
-            <Button.icon_button icon="hero-user" variant="accent" class="flex items-center gap-2" />
+            <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
           </.link>
         </div>
 
         <div class="flex xl:hidden">
           <Menu.theme_switcher />
-          <Menu.dropdown links={@header_links} />
+          <Menu.drawer_dropdown links={@header_links} />
         </div>
       </nav>
 
-      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
+      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2 static">
         <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
         <Menu.dropdown_list type="primary" links={@header_links} />
       </div>
