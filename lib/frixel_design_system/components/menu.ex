@@ -204,7 +204,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           class="block"
                         >
                           <div>
-                            <div class="w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                            <div class="w-full h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
                               <img
                                 :if={sublink[:image_url]}
                                 src={sublink.image_url}
@@ -212,7 +212,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                                 class="object-cover w-full h-full"
                               />
                             </div>
-                            <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left">
+                            <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left text-xs">
                               {sublink.name}
                             </span>
                           </div>
