@@ -199,7 +199,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       Collections
                     </div>
                     <div class="grid grid-cols-2 gap-0">
-                      <div :for={collection <- link.collections} class="w-60 h-32">
+                      <div :for={collection <- link.collections} class="w-60">
                         <div class="w-60 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
                           <img
                             :if={collection[:image_url]}
