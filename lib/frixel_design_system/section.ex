@@ -155,7 +155,7 @@ defmodule FrixelDesignSystem.Section do
         </div>
       </nav>
 
-      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2">
+      <div class="w-full flex flex-col items-center justify-center mb-4 gap-2 static">
         <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
         <Menu.dropdown_list type="primary" links={@header_links} />
       </div>
