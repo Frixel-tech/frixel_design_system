@@ -178,22 +178,19 @@ defmodule FrixelDesignSystem.Components.Menu do
               >
                 <div class="grid grid-cols-2 gap-2">
                   <li :for={sublink <- link.dropdown} class="!p-0 !m-0 list-none">
-                    <div class="flex flex-col items-center gap-1 px-2 py-2 rounded-lg hover:bg-base-200 transition-colors duration-200">
-                      <img
-                        :if={sublink[:image_url]}
-                        src={sublink.image_url}
-                        alt={"Icon for #{sublink.name}"}
-                        class="w-70 h-33 object-cover mb-1 shadow"
-                      />
-                      <.link
-                        :if={sublink.visibility == :visible}
-                        navigate={sublink.path}
-                        class={"font-common font-normal whitespace-nowrap text-xs mt-1" <>
-                          if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
-                      >
-                        {sublink.name}
-                      </.link>
-                    </div>
+                    <.link :if={sublink.visibility == :visible} navigate={sublink.path} class="block">
+                      <div class="relative w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                        <img
+                          :if={sublink[:image_url]}
+                          src={sublink.image_url}
+                          alt={"Icon for #{sublink.name}"}
+                          class="object-cover w-full h-full"
+                        />
+                        <span class="absolute bottom-0 left-0 bg-black/60 text-white text-sm px-3 py-2 rounded-tr-lg font-common font-normal">
+                          {sublink.name}
+                        </span>
+                      </div>
+                    </.link>
                   </li>
                 </div>
               </ul>
