@@ -117,6 +117,10 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
         """)}"
 
       assert html =~ "<span class=\"hero-arrow-right-solid w-5 h-5\"></span>"
+
+      assert html =~
+               "<button class=\"flex btn mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center extra-class\">"
+
       assert html =~ "Inner Content"
     end
 
