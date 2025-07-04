@@ -183,7 +183,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                         :if={sublink[:image_url]}
                         src={sublink.image_url}
                         alt={"Icon for #{sublink.name}"}
-                        class="w-80 h-33 object-cover mb-1 shadow"
+                        class="w-70 h-33 object-cover mb-1 shadow"
                       />
                       <.link
                         :if={sublink.visibility == :visible}
