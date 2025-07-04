@@ -207,7 +207,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           class="block"
                         >
                           <div>
-                            <div class="w-full h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                            <div class="w-100 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
                               <img
                                 :if={collection[:image_url]}
                                 src={collection.image_url}
