@@ -194,26 +194,26 @@ defmodule FrixelDesignSystem.Components.Menu do
                       </li>
                     </ul>
                   </div>
-                  <!-- Right: Images Grid -->
+                  <!-- Right: Collections Images Grid -->
                   <div class="w-3/4">
                     <div class="grid grid-cols-4 gap-2">
-                      <div :for={sublink <- link.dropdown}>
+                      <div :for={collection <- link.collections}>
                         <.link
-                          :if={sublink.visibility == :visible}
-                          navigate={sublink.path}
+                          :if={collection.visibility == :visible}
+                          navigate={collection.path}
                           class="block"
                         >
                           <div>
-                            <div class="w-full h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                            <div class="w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200">
                               <img
-                                :if={sublink[:image_url]}
-                                src={sublink.image_url}
-                                alt={"Icon for #{sublink.name}"}
+                                :if={collection[:image_url]}
+                                src={collection.image_url}
+                                alt={"Icon for #{collection.name}"}
                                 class="object-cover w-full h-full"
                               />
                             </div>
-                            <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left text-xs">
-                              {sublink.name}
+                            <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left">
+                              {collection.name}
                             </span>
                           </div>
                         </.link>
