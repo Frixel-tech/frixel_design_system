@@ -176,25 +176,47 @@ defmodule FrixelDesignSystem.Components.Menu do
                 tabindex="0"
                 class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg"
               >
-                <div class="grid grid-cols-4 gap-2">
-                  <div :for={sublink <- link.dropdown} class="flex flex-col items-start w-full">
-                    <.link
-                      :if={sublink.visibility == :visible}
-                      navigate={sublink.path}
-                      class="block w-full"
-                    >
-                      <div class="w-55 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200 mb-2">
-                        <img
-                          :if={sublink[:image_url]}
-                          src={sublink.image_url}
-                          alt={"Icon for #{sublink.name}"}
-                          class="object-cover w-full h-full"
-                        />
+                <div class="flex w-full gap-8">
+                  <!-- Left: Categories List -->
+                  <div class="w-1/4">
+                    <div class="text-gray-400 uppercase text-xs font-semibold mb-2 px-2">
+                      Catégories
+                    </div>
+                    <ul class="flex flex-col gap-1">
+                      <li :for={sublink <- link.dropdown}>
+                        <.link
+                          :if={sublink.visibility == :visible}
+                          navigate={sublink.path}
+                          class="block text-black font-common font-normal px-2 py-1 rounded hover:bg-base-200 transition"
+                        >
+                          {sublink.name}
+                        </.link>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Right: Images Grid -->
+                  <div class="w-3/4">
+                    <div class="grid grid-cols-4 gap-2">
+                      <div :for={sublink <- link.dropdown}>
+                        <.link
+                          :if={sublink.visibility == :visible}
+                          navigate={sublink.path}
+                          class="block"
+                        >
+                          <div class="relative w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                            <img
+                              :if={sublink[:image_url]}
+                              src={sublink.image_url}
+                              alt={"Icon for #{sublink.name}"}
+                              class="object-cover w-full h-full"
+                            />
+                            <span class="absolute bottom-0 left-0 bg-black/60 text-white text-xs px-2 py-1 rounded-tr-lg font-common font-normal">
+                              {sublink.name}
+                            </span>
+                          </div>
+                        </.link>
                       </div>
-                      <span class="text-gray-600 text-xs px-1 font-common font-normal">
-                        {sublink.name}
-                      </span>
-                    </.link>
+                    </div>
                   </div>
                 </div>
               </ul>
