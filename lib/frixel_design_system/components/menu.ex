@@ -206,7 +206,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                               :if={collection[:image_url]}
                               src={collection.image_url}
                               alt={"Icon for #{collection.name}"}
-                              class="object-cover w-60 h-32"
+                              class="object-cover w-full h-32"
                             />
                           </div>
                           <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left">
