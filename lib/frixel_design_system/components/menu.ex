@@ -196,7 +196,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                   </div>
                   <div class="w-3/4">
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2">
-                      Collections
+                      Nos collections
                     </div>
                     <div class="grid grid-cols-2 gap-0">
                       <div :for={collection <- link.collections}>
