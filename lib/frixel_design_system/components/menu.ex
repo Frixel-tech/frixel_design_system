@@ -166,7 +166,7 @@ defmodule FrixelDesignSystem.Components.Menu do
               <div
                 tabindex="0"
                 role="button"
-                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto"
+                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto border-b-2 border-transparent hover:border-b-primary"
               >
                 <span class="font-common font-normal whitespace-nowrap">
                   {link.name}
