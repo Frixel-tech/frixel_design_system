@@ -209,7 +209,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                               class="object-cover w-full h-32"
                             />
                           </div>
-                          <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left">
+                          <span class="block text-base-100 text-xs px-2 py-1 font-common font-normal text-left">
                             {collection.name}
                           </span>
                         </.link>
