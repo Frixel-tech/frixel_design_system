@@ -166,7 +166,7 @@ defmodule FrixelDesignSystem.Components.Menu do
               <div
                 tabindex="0"
                 role="button"
-                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto border-b-2 border-transparent hover:border-b-primary"
+                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto"
               >
                 <span class="font-common font-normal whitespace-nowrap">
                   {link.name}
@@ -174,17 +174,25 @@ defmodule FrixelDesignSystem.Components.Menu do
               </div>
               <ul
                 tabindex="0"
-                class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0"
+                class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg space-y-2"
               >
-                <li :for={sublink <- link.dropdown}>
-                  <.link
-                    :if={sublink.visibility == :visible}
-                    navigate={sublink.path}
-                    class={"font-common font-normal whitespace-nowrap" <>
-                      if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
-                  >
-                    {sublink.name}
-                  </.link>
+                <li :for={sublink <- link.dropdown} class="!p-0 !m-0">
+                  <div class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-base-200 transition-colors duration-200">
+                    <img
+                      :if={sublink[:image_url]}
+                      src={sublink.image_url}
+                      alt={"Icon for #{sublink.name}"}
+                      class="w-6 h-6 rounded-full object-cover"
+                    />
+                    <.link
+                      :if={sublink.visibility == :visible}
+                      navigate={sublink.path}
+                      class={"font-common font-normal whitespace-nowrap" <>
+                        if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
+                    >
+                      {sublink.name}
+                    </.link>
+                  </div>
                 </li>
               </ul>
             </div>
