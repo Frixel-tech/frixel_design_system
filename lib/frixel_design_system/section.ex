@@ -137,7 +137,7 @@ defmodule FrixelDesignSystem.Section do
 
   def base_header_commerce(assigns) do
     ~H"""
-    <header id="header" class={"absolute " <> to_string(@class)}>
+    <header id="header" class={"relative " <> to_string(@class)}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
           <Menu.theme_switcher />
