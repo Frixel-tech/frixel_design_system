@@ -145,7 +145,7 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="hidden xl:flex">
           <.link navigate={@call_to_action_path}>
-            <Button.icon_button icon="hero-user" variant="accent" class="flex items-center gap-2" />
+            <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
           </.link>
         </div>
 
