@@ -177,17 +177,17 @@ defmodule FrixelDesignSystem.Components.Menu do
                 class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg space-y-2"
               >
                 <li :for={sublink <- link.dropdown} class="!p-0 !m-0">
-                  <div class="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-base-200 transition-colors duration-200">
+                  <div class="flex flex-col items-center gap-2 px-4 py-4 rounded-lg hover:bg-base-200 transition-colors duration-200">
                     <img
                       :if={sublink[:image_url]}
                       src={sublink.image_url}
                       alt={"Icon for #{sublink.name}"}
-                      class="w-6 h-6 rounded-full object-cover"
+                      class="w-16 h-16 rounded-xl object-cover mb-2 shadow"
                     />
                     <.link
                       :if={sublink.visibility == :visible}
                       navigate={sublink.path}
-                      class={"font-common font-normal whitespace-nowrap" <>
+                      class={"font-common font-normal whitespace-nowrap text-lg mt-1" <>
                         if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
                     >
                       {sublink.name}
