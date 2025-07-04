@@ -15,6 +15,7 @@ defmodule FrixelDesignSystem do
         Form,
         Header,
         Menu,
+        Product,
         Project
       }
 
