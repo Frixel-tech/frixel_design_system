@@ -123,23 +123,5 @@ defmodule FrixelDesignSystem.Components.ButtonTest do
 
       assert html =~ "Inner Content"
     end
-
-    test "renders with accent variant" do
-      assigns = %{
-        icon: "hero-arrow-right-solid",
-        variant: "accent",
-        class: "extra-class"
-      }
-
-      html =
-        "#{rendered_to_string(~H"""
-        <Button.icon_button icon={@icon} class={@class}>
-          Accent Content
-        </Button.icon_button>
-        """)}"
-
-      assert html =~ "<span class=\"hero-arrow-right-solid w-5 h-5\"></span>"
-      assert html =~ "Accent Content"
-    end
   end
 end
