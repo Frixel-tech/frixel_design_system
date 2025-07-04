@@ -194,7 +194,6 @@ defmodule FrixelDesignSystem.Components.Menu do
                       </li>
                     </ul>
                   </div>
-                  <!-- Right: Collections Images Grid -->
                   <div class="w-3/4">
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                       Collections
@@ -206,7 +205,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           navigate={collection.path}
                           class="block"
                         >
-                          <div>
+                          <div class="w-60 h-32">
                             <div class="w-60 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
                               <img
                                 :if={collection[:image_url]}
