@@ -161,7 +161,7 @@ defmodule FrixelDesignSystem.Components.Menu do
       <ul class="menu menu-horizontal px-1 relative">
         <li :for={link <- @links} class="relative">
           <%= if link[:dropdown] do %>
-            <div class="dropdown dropdown-hover dropdown-end block absolute">
+            <div class="dropdown dropdown-hover dropdown-end block relative">
               <div
                 tabindex="0"
                 role="button"
