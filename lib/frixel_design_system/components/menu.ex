@@ -196,7 +196,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                   </div>
                   <!-- Right: Collections Images Grid -->
                   <div class="w-3/4">
-                    <div class="grid grid-cols-4 gap-2">
+                    <div class="grid grid-cols-2 gap-2">
                       <div :for={collection <- link.collections}>
                         <.link
                           :if={collection.visibility == :visible}
