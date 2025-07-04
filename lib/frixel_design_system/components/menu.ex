@@ -187,7 +187,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                         <.link
                           :if={sublink.visibility == :visible}
                           navigate={sublink.path}
-                          class="block text-black font-common font-normal px-2 py-1 rounded hover:bg-base-200 transition"
+                          class="block font-common font-normal px-2 py-1 rounded hover:bg-base-200 transition"
                         >
                           {sublink.name}
                         </.link>
@@ -209,7 +209,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                               class="object-cover w-full h-32"
                             />
                           </div>
-                          <span class="block text-base-100 text-xs px-2 py-1 font-common font-normal text-left">
+                          <span class="block text-xs px-2 py-1 font-common font-normal text-left">
                             {collection.name}
                           </span>
                         </.link>
