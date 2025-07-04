@@ -201,7 +201,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     <div class="grid grid-cols-2 gap-0">
                       <div :for={collection <- link.collections}>
                         <.link :if={collection.visibility == :visible} navigate={collection.path}>
-                          <div class="w-60 h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                          <div class="w-full h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
                             <img
                               :if={collection[:image_url]}
                               src={collection.image_url}
