@@ -203,14 +203,16 @@ defmodule FrixelDesignSystem.Components.Menu do
                           navigate={sublink.path}
                           class="block"
                         >
-                          <div class="relative w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200">
-                            <img
-                              :if={sublink[:image_url]}
-                              src={sublink.image_url}
-                              alt={"Icon for #{sublink.name}"}
-                              class="object-cover w-full h-full"
-                            />
-                            <span class="absolute bottom-0 left-0 bg-black/60 text-white text-xs px-2 py-1 rounded-tr-lg font-common font-normal">
+                          <div>
+                            <div class="w-full h-32 rounded-lg overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                              <img
+                                :if={sublink[:image_url]}
+                                src={sublink.image_url}
+                                alt={"Icon for #{sublink.name}"}
+                                class="object-cover w-full h-full"
+                              />
+                            </div>
+                            <span class="block text-black text-xs px-2 py-1 font-common font-normal text-left">
                               {sublink.name}
                             </span>
                           </div>
