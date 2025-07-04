@@ -5,6 +5,11 @@ defmodule FrixelDesignSystem.Section do
   alias FrixelDesignSystem.Components.{Button, Company, Form, Header, Menu, Project}
   alias FrixelDesignSystem.Helper
 
+  # Add the following aliases for Scope, Customer, and Admin structs
+  alias FrixelDesignSystem.Scope
+  alias FrixelDesignSystem.Customer
+  alias FrixelDesignSystem.Admin
+
   attr :client_needs, :list, required: true
   attr :client_budgets, :list, required: true
   attr :company_description, :string, required: true
@@ -134,6 +139,7 @@ defmodule FrixelDesignSystem.Section do
   attr :header_links, :list, required: true
   attr :call_to_action_path, :string
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
+  attr :current_scope, :any, doc: "Current user scope for conditional rendering (optional)"
 
   def base_header_commerce(assigns) do
     ~H"""
@@ -144,9 +150,20 @@ defmodule FrixelDesignSystem.Section do
         </div>
 
         <div class="hidden xl:flex">
-          <.link navigate={@call_to_action_path}>
-            <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
-          </.link>
+          <%= case @current_scope do %>
+            <% %Scope{customer: %Customer{}} -> %>
+              <.link href={~p"/log-out"} method="delete" title="Log out">
+                <Button.icon_button icon="hero-x-mark" class="flex items-center gap-2" />
+              </.link>
+            <% %Scope{admin: %Admin{}} -> %>
+              <.link href={~p"/admin/log-out"} method="delete" title="Log out">
+                <Button.icon_button icon="hero-x-mark" class="flex items-center gap-2" />
+              </.link>
+            <% _ -> %>
+              <.link navigate={@call_to_action_path}>
+                <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
+              </.link>
+          <% end %>
         </div>
 
         <div class="flex xl:hidden">
