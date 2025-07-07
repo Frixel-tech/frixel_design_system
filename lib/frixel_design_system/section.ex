@@ -192,6 +192,10 @@ defmodule FrixelDesignSystem.Section do
               <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
             </.link>
           <% end %>
+
+          <.link navigate={find_action_path(@call_to_actions, :cart)}>
+            <Button.icon_button icon="hero-shopping-bag" class="flex items-center gap-2" />
+          </.link>
         </div>
 
         <div class="flex xl:hidden">
