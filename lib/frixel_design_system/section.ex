@@ -139,13 +139,20 @@ defmodule FrixelDesignSystem.Section do
   attr :is_admin, :boolean, default: false, doc: "Indicates if the user is an admin"
   attr :user_email, :string, default: nil, doc: "The email of the connected user"
 
+  defp find_action_path(call_to_actions, type) do
+    Enum.find_value(call_to_actions, fn action ->
+      if action.type == type, do: action.path
+    end)
+  end
+
   def base_header_commerce(assigns) do
-    # Helper function to find path by type
-    get_path = fn type ->
-      Enum.find_value(assigns.call_to_actions, fn action ->
-        if action.type == type, do: action.path
-      end)
-    end
+    assigns =
+      assigns
+      |> assign(:admin_settings_path, find_action_path(assigns.call_to_actions, :admin_settings))
+      |> assign(:admin_logout_path, find_action_path(assigns.call_to_actions, :admin_logout))
+      |> assign(:settings_path, find_action_path(assigns.call_to_actions, :settings))
+      |> assign(:logout_path, find_action_path(assigns.call_to_actions, :logout))
+      |> assign(:login_path, find_action_path(assigns.call_to_actions, :login))
 
     ~H"""
     <header id="header" class={@class}>
@@ -160,20 +167,20 @@ defmodule FrixelDesignSystem.Section do
         <div class="hidden xl:flex">
           <%= if @is_connected do %>
             <%= if @is_admin do %>
-              <.link navigate={get_path.(:admin_settings)}>
+              <.link navigate={@admin_settings_path}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link href={get_path.(:admin_logout)} method="delete">
+              <.link href={@admin_logout_path} method="delete">
                 <Button.icon_button
                   icon="hero-arrow-left-start-on-rectangle"
                   class="flex items-center gap-2"
                 />
               </.link>
             <% else %>
-              <.link navigate={get_path.(:settings)}>
+              <.link navigate={@settings_path}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link href={get_path.(:logout)} method="delete">
+              <.link href={@logout_path} method="delete">
                 <Button.icon_button
                   icon="hero-arrow-left-start-on-rectangle"
                   class="flex items-center gap-2"
@@ -181,7 +188,7 @@ defmodule FrixelDesignSystem.Section do
               </.link>
             <% end %>
           <% else %>
-            <.link navigate={get_path.(:login)}>
+            <.link navigate={@login_path}>
               <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
             </.link>
           <% end %>
