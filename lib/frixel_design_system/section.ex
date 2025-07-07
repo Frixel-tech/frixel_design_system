@@ -140,6 +140,13 @@ defmodule FrixelDesignSystem.Section do
   attr :user_email, :string, default: nil, doc: "The email of the connected user"
 
   def base_header_commerce(assigns) do
+    # Helper function to find path by type
+    get_path = fn type ->
+      Enum.find_value(assigns.call_to_actions, fn action ->
+        if action.type == type, do: action.path
+      end)
+    end
+
     ~H"""
     <header id="header" class={@class}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
@@ -153,20 +160,20 @@ defmodule FrixelDesignSystem.Section do
         <div class="hidden xl:flex">
           <%= if @is_connected do %>
             <%= if @is_admin do %>
-              <.link navigate={@call_to_actions.admin_settings}>
+              <.link navigate={get_path.(:admin_settings)}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link navigate={@call_to_actions.admin_logout}>
+              <.link navigate={get_path.(:admin_logout)}>
                 <Button.icon_button
                   icon="hero-arrow-left-start-on-rectangle"
                   class="flex items-center gap-2"
                 />
               </.link>
             <% else %>
-              <.link navigate={@call_to_actions.settings}>
+              <.link navigate={get_path.(:settings)}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link navigate={@call_to_actions.logout}>
+              <.link navigate={get_path.(:logout)}>
                 <Button.icon_button
                   icon="hero-arrow-left-start-on-rectangle"
                   class="flex items-center gap-2"
@@ -174,7 +181,7 @@ defmodule FrixelDesignSystem.Section do
               </.link>
             <% end %>
           <% else %>
-            <.link navigate={@call_to_actions.login}>
+            <.link navigate={get_path.(:login)}>
               <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
             </.link>
           <% end %>
