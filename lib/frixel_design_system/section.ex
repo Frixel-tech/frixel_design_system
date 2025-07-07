@@ -134,6 +134,8 @@ defmodule FrixelDesignSystem.Section do
   attr :header_links, :list, required: true
   attr :call_to_action_path, :string
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
+  attr :is_connected, :boolean, default: false, doc: "Indicates if the user is connected"
+  attr :is_admin, :boolean, default: false, doc: "Indicates if the user is an admin"
 
   def base_header_commerce(assigns) do
     ~H"""
@@ -144,9 +146,18 @@ defmodule FrixelDesignSystem.Section do
         </div>
 
         <div class="hidden xl:flex">
-          <.link navigate={@call_to_action_path}>
-            <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
-          </.link>
+          <%= if @is_connected do %>
+            <.link navigate={@call_to_action_path}>
+              <Button.icon_button
+                icon="hero-arrow-left-start-on-rectangle"
+                class="flex items-center gap-2"
+              />
+            </.link>
+          <% else %>
+            <.link navigate={@call_to_action_path}>
+              <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
+            </.link>
+          <% end %>
         </div>
 
         <div class="flex xl:hidden">
