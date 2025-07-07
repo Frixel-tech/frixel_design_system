@@ -132,6 +132,7 @@ defmodule FrixelDesignSystem.Section do
   attr :branding_name, :string
   attr :branding_logo_url, :string
   attr :header_links, :list, required: true
+  attr :call_to_actions, :list, required: true, doc: "List of call to action links"
   attr :call_to_action_path, :string
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
   attr :is_connected, :boolean, default: false, doc: "Indicates if the user is connected"
@@ -151,17 +152,29 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="hidden xl:flex">
           <%= if @is_connected do %>
-            <.link navigate="/admin/settings">
-              <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
-            </.link>
-            <.link navigate={@call_to_action_path}>
-              <Button.icon_button
-                icon="hero-arrow-left-start-on-rectangle"
-                class="flex items-center gap-2"
-              />
-            </.link>
+            <%= if @is_admin do %>
+              <.link navigate={@call_to_actions.admin_settings}>
+                <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
+              </.link>
+              <.link navigate={@call_to_actions.admin_logout}>
+                <Button.icon_button
+                  icon="hero-arrow-left-start-on-rectangle"
+                  class="flex items-center gap-2"
+                />
+              </.link>
+            <% else %>
+              <.link navigate={@call_to_actions.settings}>
+                <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
+              </.link>
+              <.link navigate={@call_to_actions.logout}>
+                <Button.icon_button
+                  icon="hero-arrow-left-start-on-rectangle"
+                  class="flex items-center gap-2"
+                />
+              </.link>
+            <% end %>
           <% else %>
-            <.link navigate={@call_to_action_path}>
+            <.link navigate={@call_to_actions.login}>
               <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
             </.link>
           <% end %>
