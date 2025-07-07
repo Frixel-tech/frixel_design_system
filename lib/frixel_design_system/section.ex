@@ -129,6 +129,12 @@ defmodule FrixelDesignSystem.Section do
   - `call_to_action_path`: Path for the call-to-action button
   - `class`: Additional CSS classes for the header (required for layout)
   """
+  defp find_action_path(call_to_actions, type) do
+    Enum.find_value(call_to_actions, fn action ->
+      if action.type == type, do: action.path
+    end)
+  end
+
   attr :branding_name, :string
   attr :branding_logo_url, :string
   attr :header_links, :list, required: true
@@ -138,12 +144,6 @@ defmodule FrixelDesignSystem.Section do
   attr :is_connected, :boolean, default: false, doc: "Indicates if the user is connected"
   attr :is_admin, :boolean, default: false, doc: "Indicates if the user is an admin"
   attr :user_email, :string, default: nil, doc: "The email of the connected user"
-
-  defp find_action_path(call_to_actions, type) do
-    Enum.find_value(call_to_actions, fn action ->
-      if action.type == type, do: action.path
-    end)
-  end
 
   def base_header_commerce(assigns) do
     assigns =
