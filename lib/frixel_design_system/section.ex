@@ -166,12 +166,7 @@ defmodule FrixelDesignSystem.Section do
               <.link navigate={@call_to_actions.settings}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link navigate="teest" method="delete">
-                <Button.icon_button
-                  icon="hero-arrow-left-start-on-rectangle"
-                  class="flex items-center gap-2"
-                />
-              </.link>
+              <.link href={~p"/log-out"} method="delete">Log out</.link>
             <% end %>
           <% else %>
             <.link navigate={@call_to_actions.login}>
