@@ -136,12 +136,16 @@ defmodule FrixelDesignSystem.Section do
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
   attr :is_connected, :boolean, default: false, doc: "Indicates if the user is connected"
   attr :is_admin, :boolean, default: false, doc: "Indicates if the user is an admin"
+  attr :user_email, :string, default: nil, doc: "The email of the connected user"
 
   def base_header_commerce(assigns) do
     ~H"""
     <header id="header" class={@class}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
+          <%= if @is_connected and @user_email do %>
+            <span class="text-sm font-medium px-2 py-1">{@user_email}</span>
+          <% end %>
           <Menu.theme_switcher />
         </div>
 
