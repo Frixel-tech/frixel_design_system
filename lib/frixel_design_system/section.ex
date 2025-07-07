@@ -147,6 +147,11 @@ defmodule FrixelDesignSystem.Section do
 
         <div class="hidden xl:flex">
           <%= if @is_connected do %>
+            <%= if @is_admin do %>
+              <.link navigate="/admin/settings">
+                <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
+              </.link>
+            <% end %>
             <.link navigate={@call_to_action_path}>
               <Button.icon_button
                 icon="hero-arrow-left-start-on-rectangle"
