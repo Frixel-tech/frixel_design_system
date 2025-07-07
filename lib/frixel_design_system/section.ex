@@ -156,7 +156,7 @@ defmodule FrixelDesignSystem.Section do
               <.link navigate={@call_to_actions.admin_settings}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link navigate={@call_to_actions.admin_logout}>
+              <.link navigate={@call_to_actions.admin_logout} method="delete">
                 <Button.icon_button
                   icon="hero-arrow-left-start-on-rectangle"
                   class="flex items-center gap-2"
@@ -166,7 +166,7 @@ defmodule FrixelDesignSystem.Section do
               <.link navigate={@call_to_actions.settings}>
                 <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
               </.link>
-              <.link navigate={@call_to_actions.logout}>
+              <.link navigate={@call_to_actions.logout} method="delete">
                 <Button.icon_button
                   icon="hero-arrow-left-start-on-rectangle"
                   class="flex items-center gap-2"
