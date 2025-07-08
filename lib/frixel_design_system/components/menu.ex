@@ -198,13 +198,13 @@ defmodule FrixelDesignSystem.Components.Menu do
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                       Nos collections
                     </div>
-                    <div class="grid grid-cols-2 gap-0">
+                    <div class="flex flex-wrap justify-start gap-4">
                       <div
                         :for={{collection, index} <- Enum.with_index(link.collections)}
                         class={
                           if rem(length(link.collections), 2) == 1 and
                                index == length(link.collections) - 1,
-                             do: "col-span-2 flex justify-center",
+                             do: "w-full flex justify-center",
                              else: ""
                         }
                       >
@@ -213,7 +213,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           navigate={collection.path}
                           class="block group"
                         >
-                          <div class="p-4 overflow-hidden transition-colors duration-200">
+                          <div class="overflow-hidden transition-colors duration-200">
                             <img
                               :if={collection[:image_url]}
                               src={collection.image_url}
