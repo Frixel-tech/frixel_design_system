@@ -199,15 +199,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       Nos collections
                     </div>
                     <div class="flex flex-wrap justify-start gap-4">
-                      <div
-                        :for={{collection, index} <- Enum.with_index(link.collections)}
-                        class={
-                          if rem(length(link.collections), 2) == 1 and
-                               index == length(link.collections) - 1,
-                             do: "w-full",
-                             else: ""
-                        }
-                      >
+                      <div :for={collection <- link.collections} class="w-full">
                         <.link
                           :if={collection.visibility == :visible}
                           navigate={collection.path}
