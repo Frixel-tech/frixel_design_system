@@ -204,7 +204,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                         class={
                           if rem(length(link.collections), 2) == 1 and
                                index == length(link.collections) - 1,
-                             do: "w-full h-32 col-span-2 flex justify-center",
+                             do: "col-span-2 flex justify-center",
                              else: ""
                         }
                       >
@@ -213,7 +213,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           navigate={collection.path}
                           class="block group"
                         >
-                          <div class="w-full h-32 p-4 overflow-hidden transition-colors duration-200">
+                          <div class="p-4 overflow-hidden transition-colors duration-200">
                             <img
                               :if={collection[:image_url]}
                               src={collection.image_url}
