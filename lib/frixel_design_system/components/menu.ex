@@ -187,7 +187,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                         <.link
                           :if={sublink.visibility == :visible}
                           navigate={sublink.path}
-                          class="block font-common font-normal px-2 py-1 rounded hover:bg-base-200 transition hover:underline"
+                          class="block font-common font-normal px-2 py-1 rounded transition hover:underline"
                         >
                           {sublink.name}
                         </.link>
