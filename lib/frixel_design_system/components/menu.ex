@@ -198,7 +198,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                       Nos collections
                     </div>
-                    <div class="flex flex-col flex-wrap justify-start gap-4 h-64">
+                    <div class="flex flex-wrap justify-start gap-4">
                       <div :for={collection <- link.collections} class="w-55">
                         <.link
                           :if={collection.visibility == :visible}
