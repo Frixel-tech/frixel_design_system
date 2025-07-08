@@ -205,7 +205,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                           navigate={collection.path}
                           class="block group"
                         >
-                          <div class="w-full h-32 overflow-hidden hover:bg-base-200 transition-colors duration-200">
+                          <div class="w-full h-32 p-4 overflow-hidden hover:bg-base-200 transition-colors duration-200">
                             <img
                               :if={collection[:image_url]}
                               src={collection.image_url}
