@@ -199,7 +199,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       Nos collections
                     </div>
                     <div class="flex flex-wrap justify-start gap-4">
-                      <div :for={collection <- link.collections} class="w-[calc(50%-0.5rem)]">
+                      <div :for={collection <- link.collections} class="w-55">
                         <.link
                           :if={collection.visibility == :visible}
                           navigate={collection.path}
