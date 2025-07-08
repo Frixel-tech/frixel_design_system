@@ -199,10 +199,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       Nos collections
                     </div>
                     <div class="flex flex-wrap justify-start gap-4">
-                      <div
-                        :for={{collection, index} <- Enum.with_index(link.collections)}
-                        class="w-[calc(50%-0.5rem)]"
-                      >
+                      <div :for={collection <- link.collections} class="w-[calc(50%-0.5rem)]">
                         <.link
                           :if={collection.visibility == :visible}
                           navigate={collection.path}
@@ -213,7 +210,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                               :if={collection[:image_url]}
                               src={collection.image_url}
                               alt={"Icon for #{collection.name}"}
-                              class="object-cover w-55 h-30"
+                              class="object-cover w-full h-30"
                             />
                           </div>
                           <span class="block text-xs px-2 py-1 font-common font-normal text-left group-hover:underline">
