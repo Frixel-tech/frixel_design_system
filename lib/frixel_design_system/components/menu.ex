@@ -204,7 +204,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                         class={
                           if rem(length(link.collections), 2) == 1 and
                                index == length(link.collections) - 1,
-                             do: "col-span-2 flex justify-center",
+                             do: "w-full h-32 col-span-2 flex justify-center",
                              else: ""
                         }
                       >
