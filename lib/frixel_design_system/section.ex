@@ -157,7 +157,7 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <header id="header" class={@class}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
-        <div class="hidden xl:flex">
+        <div class="hidden xl:flex mr-2">
           <%= if @is_connected and @user_email do %>
             <span class="text-sm font-medium px-2 py-1">{@user_email}</span>
           <% end %>
