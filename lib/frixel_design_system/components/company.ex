@@ -12,15 +12,16 @@ defmodule FrixelDesignSystem.Components.Company do
   """
   attr(:brand_name, :string, required: true)
   attr(:brand_img, :string, required: true)
+  attr(:class, :string, default: nil, doc: "Optional additional classes for the h1 element")
 
   def branding(assigns) do
     ~H"""
     <a href="/" class="flex items-center">
       <img src={@brand_img} alt={"#{@brand_name} logo"} class="size-12 mx-auto px-1" />
-      <h1
-        class="btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-xl sm:text-3xl xl:text-5xl font-title font-normal"
-        style="font-size: 20px;"
-      >
+      <h1 class={[
+        "btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-lg sm:text-3xl xl:text-5xl font-title font-normal",
+        @class
+      ]}>
         {@brand_name}
       </h1>
     </a>

@@ -129,23 +129,72 @@ defmodule FrixelDesignSystem.Section do
   - `call_to_action_path`: Path for the call-to-action button
   - `class`: Additional CSS classes for the header (required for layout)
   """
+  defp find_action_path(call_to_actions, type) do
+    Enum.find_value(call_to_actions, fn action ->
+      if action.type == type, do: action.path
+    end)
+  end
+
   attr :branding_name, :string
   attr :branding_logo_url, :string
   attr :header_links, :list, required: true
+  attr :call_to_actions, :list, required: true, doc: "List of call to action links"
   attr :call_to_action_path, :string
   attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the header"
+  attr :is_connected, :boolean, default: false, doc: "Indicates if the user is connected"
+  attr :is_admin, :boolean, default: false, doc: "Indicates if the user is an admin"
+  attr :user_email, :string, default: nil, doc: "The email of the connected user"
 
   def base_header_commerce(assigns) do
+    assigns =
+      assigns
+      |> assign(:admin_settings_path, find_action_path(assigns.call_to_actions, :admin_settings))
+      |> assign(:admin_logout_path, find_action_path(assigns.call_to_actions, :admin_logout))
+      |> assign(:settings_path, find_action_path(assigns.call_to_actions, :settings))
+      |> assign(:logout_path, find_action_path(assigns.call_to_actions, :logout))
+      |> assign(:login_path, find_action_path(assigns.call_to_actions, :login))
+
     ~H"""
     <header id="header" class={@class}>
       <nav class="absolute top-4 right-4 flex items-center gap-4">
         <div class="hidden xl:flex">
+          <%= if @is_connected and @user_email do %>
+            <span class="text-sm font-medium px-2 py-1 mr-4">{@user_email}</span>
+          <% end %>
           <Menu.theme_switcher />
         </div>
 
         <div class="hidden xl:flex">
-          <.link navigate={@call_to_action_path}>
-            <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
+          <%= if @is_connected do %>
+            <%= if @is_admin do %>
+              <.link navigate={@admin_settings_path}>
+                <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
+              </.link>
+              <.link href={@admin_logout_path} method="delete">
+                <Button.icon_button
+                  icon="hero-arrow-left-start-on-rectangle"
+                  class="flex items-center gap-2"
+                />
+              </.link>
+            <% else %>
+              <.link navigate={@settings_path}>
+                <Button.icon_button icon="hero-cog-6-tooth" class="flex items-center gap-2" />
+              </.link>
+              <.link href={@logout_path} method="delete">
+                <Button.icon_button
+                  icon="hero-arrow-left-start-on-rectangle"
+                  class="flex items-center gap-2"
+                />
+              </.link>
+            <% end %>
+          <% else %>
+            <.link navigate={@login_path}>
+              <Button.icon_button icon="hero-user" class="flex items-center gap-2" />
+            </.link>
+          <% end %>
+
+          <.link navigate={find_action_path(@call_to_actions, :cart)}>
+            <Button.icon_button icon="hero-shopping-bag" class="flex items-center gap-2" />
           </.link>
         </div>
 

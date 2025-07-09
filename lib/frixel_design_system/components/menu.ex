@@ -143,63 +143,110 @@ defmodule FrixelDesignSystem.Components.Menu do
   end
 
   @doc """
-  Renders a dropdown menu with a list of links.
+  Renders a dropdown menu with a list of links that can include both simple links and dropdown sections with categories and collections.
 
   ## Examples
 
-      <.dropdown_list label="Menu" type="primary" links={[
+      <.dropdown_list type="primary" links={[
         %{path: "/about", name: "About", visibility: :visible},
-        %{path: "/contact", name: "Contact", visibility: :visible}
+        %{
+          name: "Products",
+          dropdown: [
+            %{path: "/category1", name: "Category 1", visibility: :visible},
+            %{path: "/category2", name: "Category 2", visibility: :visible}
+          ],
+          collections: [
+            %{path: "/collection1", name: "Collection 1", visibility: :visible, image_url: "/images/collection1.jpg"},
+            %{path: "/collection2", name: "Collection 2", visibility: :visible, image_url: "/images/collection2.jpg"}
+          ]
+        }
       ]} />
 
+  ## Attributes
+
+  - `links`: A list of maps that can contain:
+    - Simple links: `%{path: "/path", name: "Name", visibility: :visible}`
+    - Dropdown links: `%{name: "Name", dropdown: [...], collections: [...]}`
+      - `dropdown`: List of category links with `:path`, `:name`, and `:visibility`
+      - `collections`: List of collection items with `:path`, `:name`, `:visibility`, and optional `:image_url`
+  - `type`: The link styling type, either "primary" or "secondary"
   """
   attr(:links, :list, required: true)
   attr(:type, :string, default: "secondary", values: ~w"primary secondary")
 
   def dropdown_list(assigns) do
     ~H"""
-    <div class="navbar-center hidden lg:flex static">
-      <ul class="menu menu-horizontal px-1 static">
-        <li :for={link <- @links} class="static">
-          <%= if link[:dropdown] do %>
-            <div class="dropdown dropdown-hover dropdown-end block static">
-              <div
-                tabindex="0"
-                role="button"
-                class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto"
-              >
-                <span class="font-common font-normal whitespace-nowrap">
-                  {link.name}
-                </span>
-              </div>
-              <ul
-                tabindex="0"
-                class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0"
-              >
-                <li :for={sublink <- link.dropdown}>
+    <div class="navbar-center menu menu-horizontal px-1 hidden lg:flex static">
+      <li :for={link <- @links} class="static">
+        <%= if link[:dropdown] do %>
+          <div class="dropdown dropdown-hover dropdown-end block static">
+            <div
+              tabindex="0"
+              role="button"
+              class="btn m-1 bg-transparent border-none shadow-none p-0 min-h-0 h-auto"
+            >
+              <span class="font-common font-normal whitespace-nowrap">
+                {link.name}
+              </span>
+            </div>
+            <ul
+              tabindex="0"
+              class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-8 shadow-lg rounded-lg justify-center flex w-full gap-8"
+            >
+              <div class="w-1/4 py-8">
+                <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
+                  Catégories
+                </div>
+                <div class="flex flex-col gap-1">
                   <.link
+                    :for={sublink <- link.dropdown}
                     :if={sublink.visibility == :visible}
                     navigate={sublink.path}
-                    class={"font-common font-normal whitespace-nowrap" <>
-                      if @type == "primary", do: " link-primary-content", else: " link-secondary-content"}
+                    class="block font-common font-normal px-2 py-1 rounded transition hover:underline"
                   >
                     {sublink.name}
                   </.link>
-                </li>
-              </ul>
-            </div>
-          <% else %>
-            <.link
-              :if={link.visibility == :visible}
-              navigate={link.path}
-              class={"font-common font-normal whitespace-nowrap" <>
+                </div>
+              </div>
+              <div class="w-lg py-8">
+                <div class="text-gray-400 uppercase text-xs font-normal mb-2">
+                  Nos collections
+                </div>
+                <div class="flex flex-wrap justify-start gap-4">
+                  <div :for={collection <- link.collections} class="w-55">
+                    <.link
+                      :if={collection.visibility == :visible}
+                      navigate={collection.path}
+                      class="block group"
+                    >
+                      <div class="overflow-hidden transition-colors duration-200">
+                        <img
+                          :if={collection[:image_url]}
+                          src={collection.image_url}
+                          alt={"Icon for #{collection.name}"}
+                          class="object-cover w-55 h-30"
+                        />
+                      </div>
+                      <span class="block text-xs px-2 py-1 font-common font-normal text-left group-hover:underline">
+                        {collection.name}
+                      </span>
+                    </.link>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+        <% else %>
+          <.link
+            :if={link.visibility == :visible}
+            navigate={link.path}
+            class={"font-common font-normal whitespace-nowrap" <>
                 if @type == "primary", do: " link link-primary-content", else: " link link-secondary-content"}
-            >
-              {link.name}
-            </.link>
-          <% end %>
-        </li>
-      </ul>
+          >
+            {link.name}
+          </.link>
+        <% end %>
+      </li>
     </div>
     """
   end
