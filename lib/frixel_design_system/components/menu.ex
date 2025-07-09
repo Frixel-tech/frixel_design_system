@@ -181,17 +181,16 @@ defmodule FrixelDesignSystem.Components.Menu do
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
                       Catégories
                     </div>
-                    <ul class="flex flex-col gap-1">
-                      <li :for={sublink <- link.dropdown}>
-                        <.link
-                          :if={sublink.visibility == :visible}
-                          navigate={sublink.path}
-                          class="block font-common font-normal px-2 py-1 rounded transition hover:underline"
-                        >
-                          {sublink.name}
-                        </.link>
-                      </li>
-                    </ul>
+                    <div class="flex flex-col gap-1">
+                      <.link
+                        :for={sublink <- link.dropdown}
+                        :if={sublink.visibility == :visible}
+                        navigate={sublink.path}
+                        class="block font-common font-normal px-2 py-1 rounded transition hover:underline"
+                      >
+                        {sublink.name}
+                      </.link>
+                    </div>
                   </div>
                   <div class="w-lg">
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2">
