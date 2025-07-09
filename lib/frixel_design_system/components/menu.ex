@@ -143,15 +143,33 @@ defmodule FrixelDesignSystem.Components.Menu do
   end
 
   @doc """
-  Renders a dropdown menu with a list of links.
+  Renders a dropdown menu with a list of links that can include both simple links and dropdown sections with categories and collections.
 
   ## Examples
 
-      <.dropdown_list label="Menu" type="primary" links={[
+      <.dropdown_list type="primary" links={[
         %{path: "/about", name: "About", visibility: :visible},
-        %{path: "/contact", name: "Contact", visibility: :visible}
+        %{
+          name: "Products",
+          dropdown: [
+            %{path: "/category1", name: "Category 1", visibility: :visible},
+            %{path: "/category2", name: "Category 2", visibility: :visible}
+          ],
+          collections: [
+            %{path: "/collection1", name: "Collection 1", visibility: :visible, image_url: "/images/collection1.jpg"},
+            %{path: "/collection2", name: "Collection 2", visibility: :visible, image_url: "/images/collection2.jpg"}
+          ]
+        }
       ]} />
 
+  ## Attributes
+
+  - `links`: A list of maps that can contain:
+    - Simple links: `%{path: "/path", name: "Name", visibility: :visible}`
+    - Dropdown links: `%{name: "Name", dropdown: [...], collections: [...]}`
+      - `dropdown`: List of category links with `:path`, `:name`, and `:visibility`
+      - `collections`: List of collection items with `:path`, `:name`, `:visibility`, and optional `:image_url`
+  - `type`: The link styling type, either "primary" or "secondary"
   """
   attr(:links, :list, required: true)
   attr(:type, :string, default: "secondary", values: ~w"primary secondary")
