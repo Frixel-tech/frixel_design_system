@@ -237,6 +237,56 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  attr :branding_name, :string
+  attr :footer_links, :list
+  attr :social_medias, :list
+
+  def base_footer_commerce(assigns) do
+    ~H"""
+    <footer class="bg-primary text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
+      <nav class="navbar max-w-450 m-auto">
+        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
+          <div class="flex flex-col lg:flex-row">
+            <Menu.links_list links={@footer_links} type="primary" />
+            <p class="p-4 text-black">
+              Copyright © {@branding_name} {Date.utc_today().year}
+            </p>
+          </div>
+        </div>
+
+        <div class="navbar-center lg:navbar-end flex items-center gap-4 pr-4">
+          <Menu.socials_list socials={@social_medias} />
+        </div>
+      </nav>
+    </footer>
+    """
+  end
+
+  attr :branding_name, :string
+  attr :footer_links, :list
+  attr :social_medias, :list
+
+  def base_commerce(assigns) do
+    ~H"""
+    <footer class="bg-primary text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
+      <nav class="navbar max-w-450 m-auto">
+        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
+          <div class="flex flex-col lg:flex-row">
+            <Menu.links_list links={@footer_links} type="primary" />
+            <p class="p-4 text-black">
+              Copyright © {@branding_name} {Date.utc_today().year}
+            </p>
+          </div>
+        </div>
+
+        <div class="navbar-center lg:navbar-end flex items-center gap-4 pr-4">
+          <Menu.socials_list socials={@social_medias} />
+        </div>
+      </nav>
+    </footer>
+    """
+  end
+
   attr :title, :string, required: true, doc: "The title to display in the landing section"
   attr :text, :string, required: true, doc: "The main text to display in the landing section"
   attr :subtext, :string, required: true, doc: "The subtext to display in the landing section"
