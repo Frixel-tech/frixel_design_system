@@ -194,11 +194,11 @@ defmodule FrixelDesignSystem.Components.Menu do
                       </li>
                     </ul>
                   </div>
-                  <div class="w-2/4">
+                  <div class="w-sm">
                     <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                       Nos collections
                     </div>
-                    <div class="flex flex-wrap justify-start">
+                    <div class="flex flex-wrap justify-start gap-4">
                       <div :for={collection <- link.collections} class="w-55">
                         <.link
                           :if={collection.visibility == :visible}
