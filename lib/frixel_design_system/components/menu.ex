@@ -177,7 +177,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   def dropdown_list(assigns) do
     ~H"""
     <div class="navbar-center menu menu-horizontal px-1 hidden lg:flex static">
-      <li :for={link <- @links} class="static">
+      <div :for={link <- @links} class="static">
         <%= if link[:dropdown] do %>
           <div class="dropdown dropdown-hover dropdown-end block static">
             <div
@@ -189,7 +189,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                 {link.name}
               </span>
             </div>
-            <ul
+            <div
               tabindex="0"
               class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-8 shadow-lg rounded-lg justify-center flex w-full gap-8"
             >
@@ -234,7 +234,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                   </div>
                 </div>
               </div>
-            </ul>
+            </div>
           </div>
         <% else %>
           <.link
@@ -246,7 +246,7 @@ defmodule FrixelDesignSystem.Components.Menu do
             {link.name}
           </.link>
         <% end %>
-      </li>
+      </div>
     </div>
     """
   end
