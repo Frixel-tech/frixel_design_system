@@ -176,7 +176,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                 tabindex="0"
                 class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-8 shadow-lg rounded-lg justify-center flex w-full gap-8"
               >
-                <div class="w-1/4 py-4">
+                <div class="w-1/4 py-8">
                   <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
                     Catégories
                   </div>
@@ -191,7 +191,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     </.link>
                   </div>
                 </div>
-                <div class="w-lg py-4">
+                <div class="w-lg py-8">
                   <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                     Nos collections
                   </div>
