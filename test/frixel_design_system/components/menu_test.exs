@@ -145,6 +145,26 @@ defmodule FrixelDesignSystem.Components.MenuTest do
             %{name: "Team", path: "/team", visibility: :visible},
             %{name: "Careers", path: "/careers", visibility: :hidden},
             %{name: "Blog", path: "/blog", visibility: :visible}
+          ],
+          collections: [
+            %{
+              path: "/pret-a-porter/été",
+              name: "Eté",
+              visibility: :visible,
+              image_url: "/images/placeholder.png"
+            },
+            %{
+              path: "/pret-a-porter/printemps",
+              name: "Printemps",
+              visibility: :visible,
+              image_url: "/images/placeholder.png"
+            },
+            %{
+              path: "/pret-a-porter/autumn",
+              name: "Autumn",
+              visibility: :visible,
+              image_url: "/images/placeholder.png"
+            }
           ]
         },
         %{name: "Contact", path: "/contact", visibility: :visible}

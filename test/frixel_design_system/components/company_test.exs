@@ -14,7 +14,7 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
 
     # Then
     assert html =~
-             "<a href=\"/\" class=\"flex items-center\">\n  <img src=\"/path/to/image.png\" alt=\"brand_name logo\" class=\"size-12 mx-auto px-1\">\n  <h1 class=\"btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-xl sm:text-3xl xl:text-5xl font-title font-normal\" style=\"font-size: 20px;\">\n    brand_name\n  </h1>\n</a>"
+             "<a href=\"/\" class=\"flex items-center\">\n  <img src=\"/path/to/image.png\" alt=\"brand_name logo\" class=\"size-12 mx-auto px-1\">\n  <h1 class=\"btn btn-ghost hover:bg-transparent hover:border-none hover:shadow-none transition-[color] text-lg sm:text-3xl xl:text-5xl font-title font-normal \">\n    brand_name\n  </h1>\n</a>"
   end
 
   test "introduction_card" do

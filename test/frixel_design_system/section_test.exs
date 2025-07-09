@@ -161,8 +161,19 @@ defmodule FrixelDesignSystem.SectionTest do
   test "base_header_commerce" do
     # Given
     branding_name = "Frixel"
-    call_to_action_path = "/log-in"
     branding_logo_url = "/images/logo.svg"
+    is_connected = false
+    is_admin = false
+    user_email = nil
+
+    call_to_actions = [
+      %{type: :login, path: "/log-in"},
+      %{type: :logout, path: "/log-out"},
+      %{type: :settings, path: "/settings"},
+      %{type: :admin_logout, path: "/admin/log-out"},
+      %{type: :admin_settings, path: "/admin/settings"},
+      %{type: :cart, path: "/cart"}
+    ]
 
     header_links = [
       %{
@@ -171,6 +182,26 @@ defmodule FrixelDesignSystem.SectionTest do
         dropdown: [
           %{path: "/about/team", name: "T-Shirt", visibility: :visible},
           %{path: "/about/company", name: "Pants", visibility: :visible}
+        ],
+        collections: [
+          %{
+            path: "/pret-a-porter/été",
+            name: "Eté",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/printemps",
+            name: "Printemps",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/autumn",
+            name: "Autumn",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          }
         ],
         visibility: :visible
       },
@@ -181,6 +212,26 @@ defmodule FrixelDesignSystem.SectionTest do
           %{path: "/contact/email", name: "PC", visibility: :visible},
           %{path: "/contact/phone", name: "Phone", visibility: :visible}
         ],
+        collections: [
+          %{
+            path: "/pret-a-porter/été",
+            name: "Eté",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/printemps",
+            name: "Printemps",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/autumn",
+            name: "Autumn",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          }
+        ],
         visibility: :visible
       },
       %{
@@ -189,6 +240,26 @@ defmodule FrixelDesignSystem.SectionTest do
         dropdown: [
           %{path: "/contact/email", name: "PC", visibility: :visible},
           %{path: "/contact/phone", name: "Phone", visibility: :visible}
+        ],
+        collections: [
+          %{
+            path: "/pret-a-porter/été",
+            name: "Eté",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/printemps",
+            name: "Printemps",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/autumn",
+            name: "Autumn",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          }
         ],
         visibility: :visible
       },
@@ -199,6 +270,26 @@ defmodule FrixelDesignSystem.SectionTest do
           %{path: "/contact/email", name: "PC", visibility: :visible},
           %{path: "/contact/phone", name: "Phone", visibility: :visible}
         ],
+        collections: [
+          %{
+            path: "/pret-a-porter/été",
+            name: "Eté",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/printemps",
+            name: "Printemps",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/autumn",
+            name: "Autumn",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          }
+        ],
         visibility: :visible
       },
       %{
@@ -208,6 +299,26 @@ defmodule FrixelDesignSystem.SectionTest do
           %{path: "/contact/email", name: "PC", visibility: :visible},
           %{path: "/contact/phone", name: "Phone", visibility: :visible}
         ],
+        collections: [
+          %{
+            path: "/pret-a-porter/été",
+            name: "Eté",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/printemps",
+            name: "Printemps",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          },
+          %{
+            path: "/pret-a-porter/autumn",
+            name: "Autumn",
+            visibility: :visible,
+            image_url: "/images/placeholder.png"
+          }
+        ],
         visibility: :visible
       }
     ]
@@ -215,7 +326,10 @@ defmodule FrixelDesignSystem.SectionTest do
     assigns = %{
       branding_name: branding_name,
       branding_logo_url: branding_logo_url,
-      call_to_action_path: call_to_action_path,
+      is_connected: is_connected,
+      is_admin: is_admin,
+      user_email: user_email,
+      call_to_actions: call_to_actions,
       header_links: header_links
     }
 
@@ -225,8 +339,11 @@ defmodule FrixelDesignSystem.SectionTest do
       <FrixelDesignSystem.Section.base_header_commerce
         branding_name={@branding_name}
         branding_logo_url={@branding_logo_url}
+        is_connected={@is_connected}
+        is_admin={@is_admin}
+        user_email={@user_email}
+        call_to_actions={@call_to_actions}
         header_links={@header_links}
-        call_to_action_path={@call_to_action_path}
       />
       """)}"
 
