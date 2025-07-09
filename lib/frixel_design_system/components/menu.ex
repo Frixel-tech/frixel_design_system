@@ -174,7 +174,7 @@ defmodule FrixelDesignSystem.Components.Menu do
               </div>
               <ul
                 tabindex="0"
-                class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-4 shadow-lg rounded-lg justify-center flex w-full gap-8"
+                class="dropdown-content bg-base-100 absolute w-screen left-[-27px] right-0 p-8 shadow-lg rounded-lg justify-center flex w-full gap-8"
               >
                 <div class="w-1/4">
                   <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
