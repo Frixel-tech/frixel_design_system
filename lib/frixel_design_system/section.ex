@@ -212,6 +212,29 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  @doc """
+  Renders the standard footer for general pages.
+
+  ## Example
+
+      <.base_footer
+        branding_name="Frixel"
+        footer_links={[
+          %{path: "/about", name: "About", visibility: :visible},
+          %{path: "/contact", name: "Contact", visibility: :visible}
+        ]}
+        social_medias={[
+          %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
+          %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
+        ]}
+      />
+
+  ## Attributes
+
+  - `branding_name`: The name of the brand for copyright notice
+  - `footer_links`: List of footer navigation links with `:path`, `:name`, and `:visibility`
+  - `social_medias`: List of social media links with `:social_media_url` and `:icon_url`
+  """
   attr :branding_name, :string
   attr :footer_links, :list
   attr :social_medias, :list
@@ -236,6 +259,31 @@ defmodule FrixelDesignSystem.Section do
     </footer>
     """
   end
+
+  @doc """
+  Renders the footer specifically designed for commerce pages.
+
+  ## Example
+
+      <.base_footer_commerce
+        branding_name="Frixel"
+        footer_links={[
+          %{path: "/shipping", name: "Shipping", visibility: :visible},
+          %{path: "/returns", name: "Returns", visibility: :visible},
+          %{path: "/privacy", name: "Privacy Policy", visibility: :visible}
+        ]}
+        social_medias={[
+          %{social_media_url: "https://instagram.com", icon_url: "/images/instagram_logo.png"},
+          %{social_media_url: "https://facebook.com", icon_url: "/images/facebook_logo.png"}
+        ]}
+      />
+
+  ## Attributes
+
+  - `branding_name`: The name of the brand for copyright notice
+  - `footer_links`: List of footer navigation links with `:path`, `:name`, and `:visibility`
+  - `social_medias`: List of social media links with `:social_media_url` and `:icon_url`
+  """
 
   attr :branding_name, :string
   attr :footer_links, :list
