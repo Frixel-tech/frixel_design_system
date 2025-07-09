@@ -191,7 +191,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     </.link>
                   </div>
                 </div>
-                <div class="w-lg">
+                <div class="w-lg py-4">
                   <div class="text-gray-400 uppercase text-xs font-normal mb-2">
                     Nos collections
                   </div>
