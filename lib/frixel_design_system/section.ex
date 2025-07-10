@@ -303,7 +303,7 @@ defmodule FrixelDesignSystem.Section do
           </div>
         </div>
 
-        <div class="navbar-center lg:navbar-end flex items-center gap-4 pr-4">
+        <div class="navbar-end lg:navbar-end flex items-center gap-4 pr-4">
           <div class="flex gap-4">
             <%= for social <- @social_medias do %>
               <a
