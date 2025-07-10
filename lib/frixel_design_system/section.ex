@@ -293,7 +293,7 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <footer class="text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
       <nav class="navbar max-w-450 m-auto">
-        <div class="w-full border-t border-gray-300 absolute top-0 left-0"></div>
+        <div class="w-full border-t border-gray-100 py-12 absolute top-0 left-0"></div>
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
           <div class="flex flex-col lg:flex-row">
             <p class="p-4 text-black">
