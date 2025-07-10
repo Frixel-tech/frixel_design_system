@@ -295,7 +295,7 @@ defmodule FrixelDesignSystem.Section do
       <nav class="navbar max-w-450 m-auto">
         <div class="w-3/4 border-t border-gray-300 absolute top-0 left-1/2 transform -translate-x-1/2">
         </div>
-        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-3/4 no-whitespace mx-auto">
+        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace mx-auto">
           <div class="flex flex-col lg:flex-row">
             <p class="p-4 text-black">
               Copyright © {@branding_name} {Date.utc_today().year}
@@ -303,7 +303,7 @@ defmodule FrixelDesignSystem.Section do
           </div>
         </div>
 
-        <div class="navbar-end lg:navbar-end flex items-center gap-4 w-3/4 justify-end mx-auto">
+        <div class="navbar-end lg:navbar-end flex items-center gap-4 justify-end mx-auto">
           <div class="flex gap-4">
             <%= for social <- @social_medias do %>
               <a
