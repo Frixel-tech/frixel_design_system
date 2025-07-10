@@ -292,29 +292,27 @@ defmodule FrixelDesignSystem.Section do
   def base_footer_commerce(assigns) do
     ~H"""
     <footer class="text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
-      <nav class="navbar max-w-450 m-auto">
+      <nav class="navbar w-3/4 border-t border-gray-300 absolute top-0 left-1/2 transform -translate-x-1/2">
         <div class="w-3/4 border-t border-gray-300 absolute top-0 left-1/2 transform -translate-x-1/2">
         </div>
-        <div class="w-3/4 absolute top-0 left-1/2 transform -translate-x-1/2">
-          <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace mx-auto">
-            <div class="flex flex-col lg:flex-row">
-              <p class="p-4 text-black">
-                Copyright © {@branding_name} {Date.utc_today().year}
-              </p>
-            </div>
+        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace mx-auto">
+          <div class="flex flex-col lg:flex-row">
+            <p class="p-4 text-black">
+              Copyright © {@branding_name} {Date.utc_today().year}
+            </p>
           </div>
+        </div>
 
-          <div class="navbar-end lg:navbar-end flex items-center gap-4 justify-end mx-auto">
-            <div class="flex gap-4">
-              <%= for social <- @social_medias do %>
-                <a
-                  href={social.social_media_url}
-                  class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
-                >
-                  {social.name}
-                </a>
-              <% end %>
-            </div>
+        <div class="navbar-end lg:navbar-end flex items-center gap-4 justify-end mx-auto">
+          <div class="flex gap-4">
+            <%= for social <- @social_medias do %>
+              <a
+                href={social.social_media_url}
+                class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
+              >
+                {social.name}
+              </a>
+            <% end %>
           </div>
         </div>
       </nav>
