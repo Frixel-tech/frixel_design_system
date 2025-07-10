@@ -291,7 +291,7 @@ defmodule FrixelDesignSystem.Section do
 
   def base_footer_commerce(assigns) do
     ~H"""
-    <footer class="bg-primary text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
+    <footer class="text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
           <div class="flex flex-col lg:flex-row">
