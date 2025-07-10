@@ -295,7 +295,6 @@ defmodule FrixelDesignSystem.Section do
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
           <div class="flex flex-col lg:flex-row">
-            <Menu.links_list links={@footer_links} type="primary" />
             <p class="p-4 text-black">
               Copyright © {@branding_name} {Date.utc_today().year}
             </p>
