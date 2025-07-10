@@ -295,8 +295,8 @@ defmodule FrixelDesignSystem.Section do
       <nav class="navbar w-3/4 border-t border-gray-300 absolute top-0 left-1/2 transform -translate-x-1/2 py-8">
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace px-auto">
           <div class="flex flex-col lg:flex-row">
-            <p class="p-4">
-              Copyright © {@branding_name} {Date.utc_today().year}
+            <p class="p-4 text-xs">
+              © {@branding_name} {Date.utc_today().year}
             </p>
           </div>
         </div>
