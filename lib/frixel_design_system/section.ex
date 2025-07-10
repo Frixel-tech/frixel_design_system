@@ -303,7 +303,13 @@ defmodule FrixelDesignSystem.Section do
         </div>
 
         <div class="navbar-center lg:navbar-end flex items-center gap-4 pr-4">
-          <Menu.socials_list socials={@social_medias} />
+          <div class="flex gap-4">
+            <%= for social <- @social_medias do %>
+              <a href={social.social_media_url} class="text-black hover:text-accent">
+                {social.name}
+              </a>
+            <% end %>
+          </div>
         </div>
       </nav>
     </footer>
