@@ -307,7 +307,7 @@ defmodule FrixelDesignSystem.Section do
             <%= for social <- @social_medias do %>
               <a
                 href={social.social_media_url}
-                class="block font-common font-normal px-2 py-1 rounded transition hover:underline"
+                class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
               >
                 {social.name}
               </a>
