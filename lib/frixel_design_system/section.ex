@@ -328,6 +328,74 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  @doc """
+  Renders the footer specifically designed for commerce pages on mobile devices.
+
+  ## Example
+
+      <.base_footer_commerce_mobile
+        branding_name="Frixel"
+        footer_links={[
+          %{path: "/shipping", name: "Shipping", visibility: :visible},
+          %{path: "/returns", name: "Returns", visibility: :visible},
+          %{path: "/privacy", name: "Privacy Policy", visibility: :visible}
+        ]}
+        social_medias={[
+          %{social_media_url: "https://instagram.com", name: "Instagram"},
+          %{social_media_url: "https://facebook.com", name: "Facebook"}
+        ]}
+      />
+
+  ## Attributes
+
+  - `branding_name`: The name of the brand for copyright notice
+  - `footer_links`: List of footer navigation links with `:path`, `:name`, and `:visibility`
+  - `social_medias`: List of social media links with `:social_media_url` and `:name`
+  """
+
+  attr :branding_name, :string
+  attr :footer_links, :list
+  attr :social_medias, :list
+
+  attr :branding_logo_url, :string,
+    default: nil,
+    doc: "The URL of the branding logo image (optional, can be used for commerce pages)"
+
+  def base_footer_commerce_mobile(assigns) do
+    ~H"""
+    <footer class="relative flex flex-col items-center justify-center py-4 w-full">
+      <div class="w-3/4 border-t border-gray-300 mb-8"></div>
+
+      <nav class="flex flex-col items-center gap-6 w-3/4">
+        <div class="flex flex-col items-center gap-4">
+          <%= if @branding_logo_url do %>
+            <img src={@branding_logo_url} alt={@branding_name} class="h-8 w-auto" />
+          <% end %>
+        </div>
+
+        <div class="flex flex-col items-center gap-4">
+          <p class="text-xs text-center">
+            © {@branding_name} {Date.utc_today().year}
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center gap-4">
+          <div class="flex flex-wrap justify-center gap-4">
+            <%= for social <- @social_medias do %>
+              <a
+                href={social.social_media_url}
+                class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
+              >
+                {social.name}
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </footer>
+    """
+  end
+
   attr :branding_name, :string
   attr :footer_links, :list
   attr :social_medias, :list
