@@ -252,6 +252,50 @@ defmodule FrixelDesignSystem.Components.Menu do
   end
 
   @doc """
+  Renders a footer links list with a title and vertical link layout.
+
+  ## Examples
+
+      <.links_list_footer
+        title="QUESTIONS LÉGALES"
+        links={[
+          %{path: "/privacy", name: "Politique de confidentialité", visibility: :visible},
+          %{path: "/terms", name: "Conditions d'utilisation", visibility: :visible},
+          %{path: "/sales", name: "Conditions générales de vente", visibility: :visible},
+          %{path: "/equality", name: "Index de l'égalité femmes-hommes", visibility: :visible}
+        ]}
+      />
+
+  ## Attributes
+
+  - `title`: The section title to display above the links
+  - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`
+  """
+  attr(:title, :string, required: true)
+  attr(:links, :list, required: true)
+
+  def links_list_footer(assigns) do
+    ~H"""
+    <div class="flex flex-col gap-2">
+      <h3 class="text-gray-400 uppercase text-xs font-normal mb-2">
+        {@title}
+      </h3>
+      <ul class="flex flex-col gap-1">
+        <li :for={link <- @links}>
+          <.link
+            :if={link.visibility == :visible}
+            navigate={link.path}
+            class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
+          >
+            {link.name}
+          </.link>
+        </li>
+      </ul>
+    </div>
+    """
+  end
+
+  @doc """
   Renders a list of social media logos with links.
 
   ## Examples
