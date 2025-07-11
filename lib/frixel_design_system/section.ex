@@ -312,16 +312,14 @@ defmodule FrixelDesignSystem.Section do
         </div>
 
         <div class="navbar-end lg:navbar-end flex items-center gap-4 justify-end px-auto">
-          <div class="flex gap-4">
-            <%= for social <- @social_medias do %>
-              <a
-                href={social.social_media_url}
-                class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
-              >
-                {social.name}
-              </a>
-            <% end %>
-          </div>
+          <%= for social <- @social_medias do %>
+            <a
+              href={social.social_media_url}
+              class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
+            >
+              {social.name}
+            </a>
+          <% end %>
         </div>
       </nav>
     </footer>
