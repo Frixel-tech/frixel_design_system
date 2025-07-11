@@ -364,7 +364,7 @@ defmodule FrixelDesignSystem.Section do
   def base_footer_commerce_mobile(assigns) do
     ~H"""
     <footer class="relative flex flex-col items-center justify-center py-4 w-full">
-      <div class="flex flex-col items-center gap-4">
+      <div class="flex flex-col items-center py-8 gap-4">
         <%= if @branding_logo_url do %>
           <img src={@branding_logo_url} alt={@branding_name} class="h-8 w-auto" />
         <% end %>
