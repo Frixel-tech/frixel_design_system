@@ -150,12 +150,12 @@ defmodule FrixelDesignSystem.Components.Button do
     ~H"""
     <button
       class={[
-        "flex mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 items-center justify-center",
+        "flex mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm transition-transform duration-300 hover:scale-103 items-center justify-center group",
         @class
       ]}
       {@rest}
     >
-      <.icon name={@icon} class="w-5 h-5" />
+      <.icon name={@icon} class="w-5 h-5 transition-colors duration-300 group-hover:text-blue-500" />
       {render_slot(@inner_block)}
     </button>
     """
