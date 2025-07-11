@@ -370,11 +370,9 @@ defmodule FrixelDesignSystem.Section do
       <div class="w-3/4 border-t border-gray-300 mb-8"></div>
 
       <nav class="flex py-2 flex-col gap-6 w-3/4">
-        <div class="flex flex-col gap-4">
-          <p class="text-xs">
-            © {@branding_name} {Date.utc_today().year}
-          </p>
-        </div>
+        <p class="text-xs">
+          © {@branding_name} {Date.utc_today().year}
+        </p>
       </nav>
     </footer>
     """
