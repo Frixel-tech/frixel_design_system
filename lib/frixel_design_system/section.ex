@@ -364,32 +364,18 @@ defmodule FrixelDesignSystem.Section do
   def base_footer_commerce_mobile(assigns) do
     ~H"""
     <footer class="relative flex flex-col items-center justify-center py-4 w-full">
+      <div class="flex flex-col items-center gap-4">
+        <%= if @branding_logo_url do %>
+          <img src={@branding_logo_url} alt={@branding_name} class="h-8 w-auto" />
+        <% end %>
+      </div>
       <div class="w-3/4 border-t border-gray-300 mb-8"></div>
 
       <nav class="flex flex-col items-center gap-6 w-3/4">
         <div class="flex flex-col items-center gap-4">
-          <%= if @branding_logo_url do %>
-            <img src={@branding_logo_url} alt={@branding_name} class="h-8 w-auto" />
-          <% end %>
-        </div>
-
-        <div class="flex flex-col items-center gap-4">
           <p class="text-xs text-center">
             © {@branding_name} {Date.utc_today().year}
           </p>
-        </div>
-
-        <div class="flex flex-col items-center gap-4">
-          <div class="flex flex-wrap justify-center gap-4">
-            <%= for social <- @social_medias do %>
-              <a
-                href={social.social_media_url}
-                class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
-              >
-                {social.name}
-              </a>
-            <% end %>
-          </div>
         </div>
       </nav>
     </footer>
