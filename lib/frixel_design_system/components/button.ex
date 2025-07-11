@@ -150,7 +150,7 @@ defmodule FrixelDesignSystem.Components.Button do
     ~H"""
     <button
       class={[
-        "flex mx-2 p-4 rounded-sm text-base-content font-common font-normal text-sm transition-transform duration-300 hover:scale-103 items-center justify-center group",
+        "flex mx-2 rounded-sm text-base-content font-common font-normal text-sm transition-transform duration-300 hover:scale-103 items-center justify-center group",
         @class
       ]}
       {@rest}
