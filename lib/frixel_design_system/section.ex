@@ -373,7 +373,7 @@ defmodule FrixelDesignSystem.Section do
 
       <nav class="flex flex-col items-center gap-6 w-3/4">
         <div class="flex flex-col items-center gap-4">
-          <p class="text-xs text-center">
+          <p class="text-xs">
             © {@branding_name} {Date.utc_today().year}
           </p>
         </div>
