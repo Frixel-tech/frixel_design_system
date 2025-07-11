@@ -285,7 +285,7 @@ defmodule FrixelDesignSystem.Components.Menu do
           <.link
             :if={link.visibility == :visible}
             navigate={link.path}
-            class="block font-common font-normal px-2 py-1 rounded transition hover:underline text-xs"
+            class="block font-common font-light px-2 py-1 rounded transition hover:underline text-xs"
           >
             {link.name}
           </.link>
