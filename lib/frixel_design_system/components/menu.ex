@@ -277,7 +277,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   def links_list_footer(assigns) do
     ~H"""
     <div class="flex flex-col gap-2">
-      <h3 class="text-gray-400 uppercase text-xs font-semibold px-2 mb-2">
+      <h3 class="uppercase text-xs font-bold px-2 mb-2">
         {@title}
       </h3>
       <ul class="flex flex-col gap-1">
