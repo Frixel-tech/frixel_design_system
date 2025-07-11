@@ -295,7 +295,7 @@ defmodule FrixelDesignSystem.Section do
 
   def base_footer_commerce(assigns) do
     ~H"""
-    <div class="w-full flex flex-col gap-4 mb-8">
+    <div class="w-3/4 flex flex-col gap-4 mb-8">
       <Menu.links_list_footer title="QUESTIONS LÉGALES" links={@footer_links} />
     </div>
     <footer class="relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
