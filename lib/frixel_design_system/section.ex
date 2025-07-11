@@ -289,6 +289,10 @@ defmodule FrixelDesignSystem.Section do
   attr :footer_links, :list
   attr :social_medias, :list
 
+  attr :branding_logo_url, :string,
+    default: nil,
+    doc: "The URL of the branding logo image (optional, can be used for commerce pages)"
+
   def base_footer_commerce(assigns) do
     ~H"""
     <footer class="relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
@@ -299,6 +303,12 @@ defmodule FrixelDesignSystem.Section do
               © {@branding_name} {Date.utc_today().year}
             </p>
           </div>
+        </div>
+
+        <div class="navbar-center flex items-center justify-center">
+          <%= if @branding_logo_url do %>
+            <img src={@branding_logo_url} alt={@branding_name} class="h-8 w-auto" />
+          <% end %>
         </div>
 
         <div class="navbar-end lg:navbar-end flex items-center gap-4 justify-end px-auto">
