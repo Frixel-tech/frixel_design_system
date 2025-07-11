@@ -296,22 +296,22 @@ defmodule FrixelDesignSystem.Section do
   def base_footer_commerce(assigns) do
     ~H"""
     <footer class="relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
-      <nav class="navbar w-3/4 border-t border-gray-300 absolute top-0 left-1/2 transform -translate-x-1/2 py-8 flex-col lg:flex-row">
-        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace px-auto w-full lg:w-auto">
+      <nav class="navbar w-3/4 border-t border-gray-300 absolute top-0 left-1/2 transform -translate-x-1/2 py-8">
+        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace px-auto">
           <div class="flex flex-col lg:flex-row">
-            <p class="p-4 text-xs text-center lg:text-left">
+            <p class="p-4 text-xs">
               © {@branding_name} {Date.utc_today().year}
             </p>
           </div>
         </div>
 
-        <div class="navbar-center flex items-center justify-center w-full lg:w-auto">
+        <div class="navbar-center flex items-center justify-center">
           <%= if @branding_logo_url do %>
             <img src={@branding_logo_url} alt={@branding_name} class="h-8 w-auto" />
           <% end %>
         </div>
 
-        <div class="navbar-end flex items-center gap-4 justify-center lg:justify-end px-auto w-full lg:w-auto">
+        <div class="navbar-end lg:navbar-end flex items-center gap-4 justify-end px-auto">
           <div class="flex gap-4">
             <%= for social <- @social_medias do %>
               <a
