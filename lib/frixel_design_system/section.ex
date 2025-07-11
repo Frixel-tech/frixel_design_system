@@ -301,7 +301,7 @@ defmodule FrixelDesignSystem.Section do
           <Menu.links_list_footer title={footer_section.title} links={footer_section.links} />
         <% end %>
       </div>
-      <nav class="navbar w-3/4 border-t border-gray-300 absolute top-20 left-1/2 transform -translate-x-1/2 py-8">
+      <nav class="navbar w-3/4 border-t border-gray-300 absolute top-20 left-1/2 transform -translate-x-1/2 py-8 mt-24">
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 no-whitespace px-auto">
           <div class="flex flex-col lg:flex-row">
             <p class="p-4 text-xs">
