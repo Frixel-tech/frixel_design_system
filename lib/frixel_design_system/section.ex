@@ -296,7 +296,7 @@ defmodule FrixelDesignSystem.Section do
   def base_footer_commerce(assigns) do
     ~H"""
     <footer class="relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
-      <div class="w-3/4 flex flex-row justify-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+      <div class="w-3/4 flex flex-row justify-center gap-12 absolute left-1/2 transform -translate-x-1/2">
         <%= for footer_section <- @footer_links do %>
           <Menu.links_list_footer title={footer_section.title} links={footer_section.links} />
         <% end %>
