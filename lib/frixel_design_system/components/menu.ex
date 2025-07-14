@@ -96,7 +96,7 @@ defmodule FrixelDesignSystem.Components.Menu do
         </label>
       </div>
       <div class="drawer-side z-50">
-        <ul class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]">
+        <ul class="menu bg-base-100 text-base-content w-full mt-18 h-[calc(100vh-4rem)]">
           <li :for={link <- @links}>
             <%= if link[:dropdown] do %>
               <div class="drawer">
