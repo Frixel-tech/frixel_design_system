@@ -129,7 +129,9 @@ defmodule FrixelDesignSystem.Components.Menu do
                       href={sublink.path}
                       class="text-xl my-2 flex justify-between items-center"
                     >
-                      <span>{sublink.name}</span>
+                      <span class="text-xl my-2 flex justify-between items-center">
+                        {sublink.name}
+                      </span>
                       <.icon name="hero-chevron-right" class="size-5" />
                     </a>
                   </div>
