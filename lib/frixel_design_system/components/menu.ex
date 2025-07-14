@@ -116,7 +116,6 @@ defmodule FrixelDesignSystem.Components.Menu do
                 </div>
                 <div class="drawer-side z-60">
                   <div class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)]">
-                    <!-- Back button -->
                     <label
                       for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
                       class="text-xl my-2 flex justify-between items-center cursor-pointer"
@@ -128,7 +127,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       :for={sublink <- link.dropdown}
                       :if={sublink.visibility == :visible}
                       href={sublink.path}
-                      class="text-xl my-2 flex justify-between items-center"
+                      class="text-xl my-2 flex justify-between items-center cursor-pointer w-full"
                     >
                       <span>{sublink.name}</span>
                       <.icon name="hero-chevron-right" class="size-5" />
