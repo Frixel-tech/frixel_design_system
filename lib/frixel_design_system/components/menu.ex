@@ -95,14 +95,8 @@ defmodule FrixelDesignSystem.Components.Menu do
           <.icon name="hero-bars-3" class="size-5" />
         </label>
       </div>
-      <div
-        class="drawer-side z-50"
-        phx-click={JS.set_attribute({"checked", "false"}, to: "#main-drawer")}
-      >
-        <ul
-          class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]"
-          phx-click="stop_propagation"
-        >
+      <div class="drawer-side z-50">
+        <ul class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]">
           <li :for={link <- @links}>
             <a
               :if={link.visibility == :visible}
