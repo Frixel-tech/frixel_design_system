@@ -123,15 +123,15 @@ defmodule FrixelDesignSystem.Components.Menu do
                       <span>← {link.name}</span>
                     </label>
 
-                    <label
+                    <a
                       :for={sublink <- link.dropdown}
                       :if={sublink.visibility == :visible}
                       href={sublink.path}
-                      class="text-xl my-2 flex justify-between items-center cursor-pointer w-full"
+                      class="text-xl my-2 flex justify-between items-center"
                     >
                       <span>{sublink.name}</span>
                       <.icon name="hero-chevron-right" class="size-5" />
-                    </label>
+                    </a>
                   </div>
                 </div>
               </div>
