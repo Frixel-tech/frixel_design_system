@@ -97,7 +97,7 @@ defmodule FrixelDesignSystem.Components.Menu do
       </div>
       <div class="drawer-side z-50">
         <label for="main-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-        <ul class="menu bg-base-100 text-base-content w-80 p-4 mt-16 h-[calc(100vh-4rem)]">
+        <ul class="menu bg-base-100 text-base-content w-80 p-4 mt-18 h-[calc(100vh-4rem)]">
           <li :for={link <- @links}>
             <a
               :if={link.visibility == :visible}
