@@ -98,14 +98,106 @@ defmodule FrixelDesignSystem.Components.Menu do
       <div class="drawer-side z-50">
         <ul class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]">
           <li :for={link <- @links}>
-            <a
-              :if={link.visibility == :visible}
-              href={link.path}
-              class="text-xl my-2 flex justify-between items-center"
-            >
-              <span>{link.name}</span>
-              <.icon name="hero-chevron-right" class="size-5" />
-            </a>
+            <%= if link[:dropdown] || link[:collections] do %>
+              <div class="drawer">
+                <input
+                  id={"sub-drawer-#{String.replace(link.name, " ", "-")}"}
+                  type="checkbox"
+                  class="drawer-toggle"
+                />
+                <div class="drawer-content">
+                  <label
+                    for={"sub-drawer-#{String.replace(link.name, " ", "-")}"}
+                    class="text-xl my-2 flex justify-between items-center cursor-pointer"
+                  >
+                    <span>{link.name}</span>
+                    <.icon name="hero-chevron-right" class="size-5" />
+                  </label>
+                </div>
+                <div class="drawer-side z-60">
+                  <label
+                    for={"sub-drawer-#{String.replace(link.name, " ", "-")}"}
+                    aria-label="close sidebar"
+                    class="drawer-overlay"
+                  >
+                  </label>
+                  <div class="bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)] overflow-y-auto">
+                    <!-- Back button -->
+                    <div class="flex items-center mb-4">
+                      <label
+                        for={"sub-drawer-#{String.replace(link.name, " ", "-")}"}
+                        class="btn btn-ghost btn-sm"
+                      >
+                        <.icon name="hero-chevron-left" class="size-5" />
+                        <span>Retour</span>
+                      </label>
+                    </div>
+                    
+    <!-- Main category link -->
+                    <div class="mb-6">
+                      <a href={link.path} class="text-xl font-semibold block p-2">
+                        Voir tout {link.name}
+                      </a>
+                    </div>
+                    
+    <!-- Categories section -->
+                    <div :if={link[:dropdown]} class="mb-6">
+                      <h3 class="text-gray-400 uppercase text-xs font-normal mb-3 px-2">
+                        Catégories
+                      </h3>
+                      <ul class="space-y-1">
+                        <li :for={sublink <- link.dropdown}>
+                          <a
+                            :if={sublink.visibility == :visible}
+                            href={sublink.path}
+                            class="block text-lg p-2 hover:bg-base-200 rounded"
+                          >
+                            {sublink.name}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    
+    <!-- Collections section -->
+                    <div :if={link[:collections]} class="mb-6">
+                      <h3 class="text-gray-400 uppercase text-xs font-normal mb-3 px-2">
+                        Collections
+                      </h3>
+                      <div class="grid grid-cols-2 gap-4">
+                        <div :for={collection <- link.collections} class="group">
+                          <a
+                            :if={collection.visibility == :visible}
+                            href={collection.path}
+                            class="block"
+                          >
+                            <div class="overflow-hidden rounded-lg mb-2">
+                              <img
+                                :if={collection[:image_url]}
+                                src={collection.image_url}
+                                alt={"Collection #{collection.name}"}
+                                class="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-200"
+                              />
+                            </div>
+                            <span class="text-sm font-medium group-hover:underline">
+                              {collection.name}
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <a
+                :if={link.visibility == :visible}
+                href={link.path}
+                class="text-xl my-2 flex justify-between items-center"
+              >
+                <span>{link.name}</span>
+                <.icon name="hero-chevron-right" class="size-5" />
+              </a>
+            <% end %>
           </li>
           <div class="flex justify-center my-4">
             {render_slot(@bottom_content)}
