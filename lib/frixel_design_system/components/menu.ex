@@ -99,8 +99,13 @@ defmodule FrixelDesignSystem.Components.Menu do
         <label for="main-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
         <ul class="menu bg-base-100 text-base-content min-h-full w-80 p-4">
           <li :for={link <- @links}>
-            <a :if={link.visibility == :visible} href={link.path} class="text-xl my-4">
-              {link.name}
+            <a
+              :if={link.visibility == :visible}
+              href={link.path}
+              class="text-xl my-2 flex justify-between items-center"
+            >
+              <span>{link.name}</span>
+              <.icon name="hero-chevron-right" class="size-5" />
             </a>
           </li>
           <div class="flex justify-center my-4">
