@@ -114,7 +114,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     <.icon name="hero-chevron-right" class="size-5" />
                   </label>
                 </div>
-                <div class="drawer-side z-60">
+                <div class="drawer-side z-50">
                   <ul class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]">
                     <!-- Back button -->
                     <li>
@@ -125,8 +125,6 @@ defmodule FrixelDesignSystem.Components.Menu do
                         <span>← {link.name}</span>
                       </label>
                     </li>
-                    
-    <!-- Dropdown links -->
                     <li :for={sublink <- link.dropdown}>
                       <a
                         :if={sublink.visibility == :visible}
