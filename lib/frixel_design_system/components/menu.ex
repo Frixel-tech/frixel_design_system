@@ -114,28 +114,26 @@ defmodule FrixelDesignSystem.Components.Menu do
                     <.icon name="hero-chevron-right" class="size-5" />
                   </label>
                 </div>
-                <div class="drawer-side z-50">
-                  <ul class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)]">
+                <div class="drawer-side z-60">
+                  <div class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)]">
                     <!-- Back button -->
-                    <li>
-                      <label
-                        for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
-                        class="text-xl my-2 flex justify-between items-center cursor-pointer"
-                      >
-                        <span>← {link.name}</span>
-                      </label>
-                    </li>
-                    <li :for={sublink <- link.dropdown}>
-                      <a
-                        :if={sublink.visibility == :visible}
-                        href={sublink.path}
-                        class="text-xl my-2 flex justify-between items-center"
-                      >
-                        <span>{sublink.name}</span>
-                        <.icon name="hero-chevron-right" class="size-5" />
-                      </a>
-                    </li>
-                  </ul>
+                    <label
+                      for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
+                      class="text-xl my-2 flex justify-between items-center cursor-pointer"
+                    >
+                      <span>← {link.name}</span>
+                    </label>
+
+                    <a
+                      :for={sublink <- link.dropdown}
+                      :if={sublink.visibility == :visible}
+                      href={sublink.path}
+                      class="text-xl my-2 flex justify-between items-center"
+                    >
+                      <span>{sublink.name}</span>
+                      <.icon name="hero-chevron-right" class="size-5" />
+                    </a>
+                  </div>
                 </div>
               </div>
             <% else %>
