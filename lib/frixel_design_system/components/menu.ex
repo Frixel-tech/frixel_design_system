@@ -98,14 +98,58 @@ defmodule FrixelDesignSystem.Components.Menu do
       <div class="drawer-side z-50">
         <ul class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]">
           <li :for={link <- @links}>
-            <a
-              :if={link.visibility == :visible}
-              href={link.path}
-              class="text-xl my-2 flex justify-between items-center"
-            >
-              <span>{link.name}</span>
-              <.icon name="hero-chevron-right" class="size-5" />
-            </a>
+            <%= if link[:dropdown] do %>
+              <div class="drawer">
+                <input
+                  id={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
+                  type="checkbox"
+                  class="drawer-toggle"
+                />
+                <div class="drawer-content">
+                  <label
+                    for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
+                    class="text-xl my-2 flex justify-between items-center cursor-pointer w-full"
+                  >
+                    <span>{link.name}</span>
+                    <.icon name="hero-chevron-right" class="size-5" />
+                  </label>
+                </div>
+                <div class="drawer-side z-60">
+                  <ul class="menu bg-base-100 text-base-content w-full p-4 mt-18 h-[calc(100vh-4rem)]">
+                    <!-- Back button -->
+                    <li>
+                      <label
+                        for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
+                        class="text-xl my-2 flex justify-between items-center cursor-pointer"
+                      >
+                        <span>← {link.name}</span>
+                      </label>
+                    </li>
+                    
+    <!-- Dropdown links -->
+                    <li :for={sublink <- link.dropdown}>
+                      <a
+                        :if={sublink.visibility == :visible}
+                        href={sublink.path}
+                        class="text-xl my-2 flex justify-between items-center"
+                      >
+                        <span>{sublink.name}</span>
+                        <.icon name="hero-chevron-right" class="size-5" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            <% else %>
+              <a
+                :if={link.visibility == :visible}
+                href={link.path}
+                class="text-xl my-2 flex justify-between items-center"
+              >
+                <span>{link.name}</span>
+                <.icon name="hero-chevron-right" class="size-5" />
+              </a>
+            <% end %>
           </li>
           <div class="flex justify-center my-4">
             {render_slot(@bottom_content)}
