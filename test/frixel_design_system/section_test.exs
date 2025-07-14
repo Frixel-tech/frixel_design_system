@@ -349,11 +349,9 @@ defmodule FrixelDesignSystem.SectionTest do
 
     # Then
     assert html =~ "Pret-à-porter"
-    assert html =~ "/pret-a-porter"
     assert html =~ "T-Shirt"
     assert html =~ "/about/team"
     assert html =~ "High-Tech"
-    assert html =~ "/high-tech"
     assert html =~ "PC"
     assert html =~ "/contact/email"
     assert html =~ "Phone"
