@@ -130,8 +130,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       <span>← {link.name}</span>
                     </label>
 
-                    <div class="flex flex-col gap-6">
-                      <!-- Categories Section -->
+                    <div class="flex flex-col">
                       <div class="w-full">
                         <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
                           Catégories
@@ -150,8 +149,6 @@ defmodule FrixelDesignSystem.Components.Menu do
                           </a>
                         </div>
                       </div>
-                      
-    <!-- Collections Section -->
                       <%= if link[:collections] do %>
                         <div class="w-full">
                           <div class="text-gray-400 uppercase text-xs font-normal mb-2">
