@@ -122,7 +122,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     class="drawer-overlay"
                   >
                   </label>
-                  <div class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
+                  <div class="bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
                     <label
                       for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
                       class="text-xl my-2 flex justify-between items-center cursor-pointer"
@@ -132,9 +132,6 @@ defmodule FrixelDesignSystem.Components.Menu do
 
                     <div class="flex flex-col gap-6">
                       <div class="w-full">
-                        <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
-                          Catégories
-                        </div>
                         <div class="flex flex-col">
                           <a
                             :for={sublink <- link.dropdown}
