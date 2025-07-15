@@ -122,7 +122,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     class="drawer-overlay"
                   >
                   </label>
-                  <div class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
+                  <div class="menu bg-base-100 text-base-content flex flex-col w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
                     <label
                       for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
                       class="text-xl my-2 flex justify-between items-center cursor-pointer"
