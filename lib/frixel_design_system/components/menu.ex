@@ -130,7 +130,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                       <span>← {link.name}</span>
                     </label>
 
-                    <div class="flex flex-col">
+                    <div class="flex flex-col gap-6">
                       <div class="w-full">
                         <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
                           Catégories
