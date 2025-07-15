@@ -122,7 +122,7 @@ defmodule FrixelDesignSystem.Components.Menu do
                     class="drawer-overlay"
                   >
                   </label>
-                  <div class="menu bg-base-100 text-base-content flex flex-col w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
+                  <div class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
                     <label
                       for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
                       class="text-xl my-2 flex justify-between items-center cursor-pointer"
@@ -144,37 +144,36 @@ defmodule FrixelDesignSystem.Components.Menu do
                       </span>
                       <.icon name="hero-chevron-right" class="size-5" />
                     </a>
-
-                    <%= if link[:collections] do %>
-                      <div class="w-full py-8">
-                        <div class="text-gray-400 uppercase text-xs font-normal mb-2">
-                          Nos collections
-                        </div>
-                        <div class="flex flex-wrap justify-start gap-4">
-                          <div :for={collection <- link.collections} class="w-55">
-                            <.link
-                              :if={collection.visibility == :visible}
-                              navigate={collection.path}
-                              class="block group"
-                            >
-                              <div class="overflow-hidden transition-colors duration-200">
-                                <img
-                                  :if={collection[:image_url]}
-                                  src={collection.image_url}
-                                  alt={"Icon for #{collection.name}"}
-                                  class="object-cover w-55 h-30"
-                                />
-                              </div>
-                              <span class="block text-xs px-2 py-1 font-common font-normal text-left group-hover:underline">
-                                {collection.name}
-                              </span>
-                            </.link>
-                          </div>
-                        </div>
-                      </div>
-                    <% end %>
                   </div>
                 </div>
+                <%= if link[:collections] do %>
+                  <div class="w-full py-8">
+                    <div class="text-gray-400 uppercase text-xs font-normal mb-2">
+                      Nos collections
+                    </div>
+                    <div class="flex flex-wrap justify-start gap-4">
+                      <div :for={collection <- link.collections} class="w-55">
+                        <.link
+                          :if={collection.visibility == :visible}
+                          navigate={collection.path}
+                          class="block group"
+                        >
+                          <div class="overflow-hidden transition-colors duration-200">
+                            <img
+                              :if={collection[:image_url]}
+                              src={collection.image_url}
+                              alt={"Icon for #{collection.name}"}
+                              class="object-cover w-55 h-30"
+                            />
+                          </div>
+                          <span class="block text-xs px-2 py-1 font-common font-normal text-left group-hover:underline">
+                            {collection.name}
+                          </span>
+                        </.link>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
               </div>
             <% else %>
               <a
