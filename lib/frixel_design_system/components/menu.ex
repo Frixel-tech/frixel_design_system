@@ -130,48 +130,59 @@ defmodule FrixelDesignSystem.Components.Menu do
                       <span>← {link.name}</span>
                     </label>
 
-                    <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
-                      Catégories
-                    </div>
-                    <a
-                      :for={sublink <- link.dropdown}
-                      :if={sublink.visibility == :visible}
-                      href={sublink.path}
-                      class="text-xl my-2 flex justify-between items-center"
-                    >
-                      <span class="text-xl my-2 flex justify-between items-center">
-                        {sublink.name}
-                      </span>
-                      <.icon name="hero-chevron-right" class="size-5" />
-                    </a>
-                    <%= if link[:collections] do %>
-                      <div class="w-full py-8">
-                        <div class="text-gray-400 uppercase text-xs font-normal mb-2">
-                          Nos collections
+                    <div class="flex flex-col gap-6">
+                      <!-- Categories Section -->
+                      <div class="w-full">
+                        <div class="text-gray-400 uppercase text-xs font-normal mb-2 px-2">
+                          Catégories
                         </div>
-                        <div class="flex flex-wrap justify-start gap-4">
-                          <div :for={collection <- link.collections} class="w-55">
-                            <.link
-                              :if={collection.visibility == :visible}
-                              navigate={collection.path}
-                              class="block group"
-                            >
-                              <div class="overflow-hidden transition-colors duration-200">
-                                <img
-                                  :if={collection[:image_url]}
-                                  src={collection.image_url}
-                                  alt={"Icon for #{collection.name}"}
-                                  class="object-cover w-55 h-30"
-                                />
-                              </div>
-                              <span class="block text-xs px-2 py-1 font-common font-normal text-left group-hover:underline">
-                                {collection.name}
-                              </span>
-                            </.link>
-                          </div>
+                        <div class="flex flex-col">
+                          <a
+                            :for={sublink <- link.dropdown}
+                            :if={sublink.visibility == :visible}
+                            href={sublink.path}
+                            class="text-xl my-2 flex justify-between items-center"
+                          >
+                            <span class="text-xl my-2 flex justify-between items-center">
+                              {sublink.name}
+                            </span>
+                            <.icon name="hero-chevron-right" class="size-5" />
+                          </a>
                         </div>
                       </div>
-                    <% end %>
+                      
+    <!-- Collections Section -->
+                      <%= if link[:collections] do %>
+                        <div class="w-full">
+                          <div class="text-gray-400 uppercase text-xs font-normal mb-2">
+                            Nos collections
+                          </div>
+                          <div class="flex flex-col gap-4">
+                            <div :for={collection <- link.collections} class="w-full">
+                              <.link
+                                :if={collection.visibility == :visible}
+                                navigate={collection.path}
+                                class="block group"
+                              >
+                                <div class="flex items-center gap-4">
+                                  <div class="overflow-hidden transition-colors duration-200">
+                                    <img
+                                      :if={collection[:image_url]}
+                                      src={collection.image_url}
+                                      alt={"Icon for #{collection.name}"}
+                                      class="object-cover w-16 h-16 rounded"
+                                    />
+                                  </div>
+                                  <span class="block text-lg font-common font-normal text-left group-hover:underline">
+                                    {collection.name}
+                                  </span>
+                                </div>
+                              </.link>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
