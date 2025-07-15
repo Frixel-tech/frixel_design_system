@@ -96,6 +96,7 @@ defmodule FrixelDesignSystem.Components.Menu do
         </label>
       </div>
       <div class="drawer-side z-50">
+        <label for="main-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
         <ul class="menu bg-base-100 text-base-content w-full mt-18 h-[calc(100vh-4rem)]">
           <li :for={link <- @links}>
             <%= if link[:dropdown] do %>
@@ -115,6 +116,12 @@ defmodule FrixelDesignSystem.Components.Menu do
                   </label>
                 </div>
                 <div class="drawer-side z-60">
+                  <label
+                    for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
+                    aria-label="close sidebar"
+                    class="drawer-overlay"
+                  >
+                  </label>
                   <div class="menu bg-base-100 text-base-content w-full p-4 h-[calc(100vh-4rem)]">
                     <label
                       for={"sub-drawer-#{String.replace(link.name, ~r/[^a-zA-Z0-9]/, "-")}"}
