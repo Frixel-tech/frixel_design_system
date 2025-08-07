@@ -66,7 +66,7 @@ defmodule FrixelDesignSystem.Section do
   attr :language_links, :list, default: nil
   attr :call_to_action_name, :string, default: ""
   attr :call_to_action_path, :string, default: nil
-  attr :enable_dark_mode?, :boolean, default: true
+  attr :enable_theme_switcher?, :boolean, default: true
 
   def base_header(assigns) do
     ~H"""
@@ -86,7 +86,7 @@ defmodule FrixelDesignSystem.Section do
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
             <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
 
-            <Menu.theme_switcher :if={@enable_dark_mode?} />
+            <Menu.theme_switcher :if={@enable_theme_switcher?} />
           </div>
 
           <div :if={@call_to_action_path} class="hidden xl:flex">
@@ -103,7 +103,7 @@ defmodule FrixelDesignSystem.Section do
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
             <%!-- <.scrollable_links :if={@language_links}  type="primary" links={@language_links} /> --%>
 
-            <Menu.theme_switcher :if={@enable_dark_mode?} />
+            <Menu.theme_switcher :if={@enable_theme_switcher?} />
 
             <Menu.dropdown links={@header_links} />
           </div>
