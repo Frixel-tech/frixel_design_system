@@ -189,4 +189,63 @@ defmodule FrixelDesignSystem.Components.MenuTest do
       assert html =~ "link-primary-content"
     end
   end
+
+  describe "auth_menu" do
+    test "renders settings and log-out paths when user is connected" do
+      assigns = %{
+        current_scope: %{},
+        current_user_identifier: "test@test.com",
+        current_path: "/dashboard",
+        log_in_path: "/log-in",
+        log_out_path: "/log-out",
+        settings_path: "/settings"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Menu.auth_menu
+          current_scope={@current_scope}
+          current_user_identifier={@current_user_identifier}
+          current_path={@current_path}
+          log_in_path={@log_in_path}
+          log_out_path={@log_out_path}
+          settings_path={@settings_path}
+        />
+        """)}"
+
+      assert html =~ "test@test.com"
+      assert html =~ "href=\"/settings\""
+      assert html =~ "href=\"/log-out\""
+      refute html =~ "menu-active"
+    end
+
+    test "renders log-in with menu-active class path when user is not connected and is on log-in page" do
+      assigns = %{
+        current_scope: nil,
+        current_user_identifier: "test@test.com",
+        current_path: "/log-in",
+        log_in_path: "/log-in",
+        log_out_path: "/log-out",
+        settings_path: "/settings",
+        registration_path: "/register"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Menu.auth_menu
+          current_scope={@current_scope}
+          current_user_identifier={@current_user_identifier}
+          current_path={@current_path}
+          log_in_path={@log_in_path}
+          log_out_path={@log_out_path}
+          settings_path={@settings_path}
+          registration_path={@registration_path}
+        />
+        """)}"
+
+      refute html =~ "test@test.com"
+      assert html =~ "href=\"/log-in\" class=\"menu-active\""
+      assert html =~ "href=\"/register\""
+    end
+  end
 end

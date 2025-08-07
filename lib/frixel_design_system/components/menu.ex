@@ -312,4 +312,75 @@ defmodule FrixelDesignSystem.Components.Menu do
     </label>
     """
   end
+
+  @doc """
+  Authentication menu for User or Admin connection
+
+  ## Example:
+
+    <.auth_menu
+      current_scope={@current_scope}
+      current_user_identifier={@current_admin.email}
+      current_path={@current_path}
+      log_in_path={~p"/backoffice/log-in"}
+      log_out_path={~p"/backoffice/log-out"}
+      settings_path={~p"/backoffice/settings"}
+    />
+  """
+  attr :current_scope, Scope,
+    doc: "the session current scope as defined by the router plugs",
+    required: true
+
+  attr :current_user_identifier, :string,
+    doc: "The user's name or email to display",
+    required: true
+
+  attr :current_path, :string,
+    doc: "the LiveView current path as defined by the router",
+    required: true
+
+  attr :log_in_path, :string, doc: "The route path for log in", required: true
+  attr :log_out_path, :string, doc: "The route path for log out", required: true
+
+  attr :settings_path, :string,
+    doc: "The route path for user settings",
+    default: nil
+
+  attr :registration_path, :string,
+    doc: "The route path for user registration",
+    default: nil
+
+  def auth_menu(assigns) do
+    ~H"""
+    <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end text-secondary-content font-bold">
+      <%= if @current_scope do %>
+        <li>
+          {@current_user_identifier}
+        </li>
+        <li :if={@settings_path}>
+          <.link class={@current_path == @settings_path && "menu-active"} href={@settings_path}>
+            {gettext("Settings")}
+          </.link>
+        </li>
+        <li>
+          <.link href={@log_out_path} method="delete">Log out</.link>
+        </li>
+      <% else %>
+        <li :if={@registration_path}>
+          <.link
+            class={@current_path == @registration_path && "menu-active"}
+            href={@registration_path}
+          >
+            {gettext("Register")}
+          </.link>
+        </li>
+        <li>
+          <.link class={@current_path == @log_in_path && "menu-active"} href={@log_in_path}>
+            {gettext("Log in")}
+          </.link>
+        </li>
+      <% end %>
+    </ul>
+    """
+  end
 end
