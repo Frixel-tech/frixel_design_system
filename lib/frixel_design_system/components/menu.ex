@@ -314,11 +314,31 @@ defmodule FrixelDesignSystem.Components.Menu do
   end
 
   @doc """
-  Authentication menu for USer or Admin connection
+  Authentication menu for User or Admin connection
+
+  ## Example:
+
+    <.auth_menu
+      current_scope={@current_scope}
+      current_user_identifier={@current_admin.email}
+      current_path={@current_path}
+      log_in_path={~p"/backoffice/log-in"}
+      log_out_path={~p"/backoffice/log-out"}
+      settings_path={~p"/backoffice/settings"}
+    />
   """
-  attr :current_scope, Scope, doc: "the session current scope as defined by the router plugs"
-  attr :current_user_identifier, :string, doc: "The user's name or email to display"
-  attr :current_path, :string, doc: "the LiveView current path as defined by the router"
+  attr :current_scope, Scope,
+    doc: "the session current scope as defined by the router plugs",
+    required: true
+
+  attr :current_user_identifier, :string,
+    doc: "The user's name or email to display",
+    required: true
+
+  attr :current_path, :string,
+    doc: "the LiveView current path as defined by the router",
+    required: true
+
   attr :log_in_path, :string, doc: "The route path for log in", required: true
   attr :log_out_path, :string, doc: "The route path for log out", required: true
 
