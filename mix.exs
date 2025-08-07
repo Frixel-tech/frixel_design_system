@@ -41,11 +41,11 @@ defmodule FrixelDesignSystem.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.8.0-rc.3", override: true},
+      {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.5"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.0.13"},
+      {:phoenix_live_view, "~> 1.1"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:heroicons,
        github: "tailwindlabs/heroicons",
@@ -63,6 +63,7 @@ defmodule FrixelDesignSystem.MixProject do
       # For tests
       {:mimic, "~> 1.7", only: :test},
       {:bypass, "~> 2.1", only: :test},
+      {:lazy_html, ">= 0.0.0", only: :test},
 
       # Security
       {:content_security_policy, "~> 1.0"},
