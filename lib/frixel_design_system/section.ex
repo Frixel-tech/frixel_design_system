@@ -60,12 +60,12 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  attr :branding_name, :string
-  attr :branding_logo_url, :string
-  attr :header_links, :list
-  attr :language_links, :list
-  attr :call_to_action_name, :string
-  attr :call_to_action_path, :string
+  attr :branding_name, :string, default: ""
+  attr :branding_logo_url, :string, default: ""
+  attr :header_links, :list, default: []
+  attr :language_links, :list, default: nil
+  attr :call_to_action_name, :string, default: ""
+  attr :call_to_action_path, :string, default: nil
 
   def base_header(assigns) do
     ~H"""
@@ -81,12 +81,14 @@ defmodule FrixelDesignSystem.Section do
         <div class="navbar-end gap-4 w-full">
           <div class="hidden xl:flex">
             <Menu.links_list type="primary" links={@header_links} />
+
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
-            <%!-- <.scrollable_links type="primary" links={@language_links} /> --%>
+            <.scrollable_links  :if={@language_links} type="primary" links={@language_links} />
+
             <Menu.theme_switcher />
           </div>
 
-          <div class="hidden xl:flex">
+          <div :if={@call_to_action_path} class="hidden xl:flex">
             <.link navigate={@call_to_action_path}>
               <Button.primary_button
                 text={@call_to_action_name}
@@ -98,8 +100,10 @@ defmodule FrixelDesignSystem.Section do
 
           <div class="flex xl:hidden">
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
-            <%!-- <.scrollable_links type="primary" links={@language_links} /> --%>
+            <.scrollable_links :if={@language_links}  type="primary" links={@language_links} />
+
             <Menu.theme_switcher />
+
             <Menu.dropdown links={@header_links} />
           </div>
         </div>
