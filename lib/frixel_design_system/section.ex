@@ -108,6 +108,12 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  defp find_action_path(call_to_actions, type) do
+    Enum.find_value(call_to_actions, fn action ->
+      if action.type == type, do: action.path
+    end)
+  end
+
   @doc """
   Renders the main header for commerce pages.
 
@@ -129,11 +135,6 @@ defmodule FrixelDesignSystem.Section do
   - `call_to_action_path`: Path for the call-to-action button
   - `class`: Additional CSS classes for the header (required for layout)
   """
-  defp find_action_path(call_to_actions, type) do
-    Enum.find_value(call_to_actions, fn action ->
-      if action.type == type, do: action.path
-    end)
-  end
 
   attr :branding_name, :string
   attr :branding_logo_url, :string
