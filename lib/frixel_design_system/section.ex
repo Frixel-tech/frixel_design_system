@@ -83,7 +83,7 @@ defmodule FrixelDesignSystem.Section do
             <Menu.links_list type="primary" links={@header_links} />
 
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
-            <.scrollable_links  :if={@language_links} type="primary" links={@language_links} />
+            <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
 
             <Menu.theme_switcher />
           </div>
@@ -100,7 +100,7 @@ defmodule FrixelDesignSystem.Section do
 
           <div class="flex xl:hidden">
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
-            <.scrollable_links :if={@language_links}  type="primary" links={@language_links} />
+            <%!-- <.scrollable_links :if={@language_links}  type="primary" links={@language_links} /> --%>
 
             <Menu.theme_switcher />
 
