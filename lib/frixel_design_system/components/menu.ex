@@ -303,10 +303,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
@@ -318,14 +318,14 @@ defmodule FrixelDesignSystem.Components.Menu do
   """
   attr :current_scope, Scope, doc: "the session current scope as defined by the router plugs"
   attr :current_path, :string, doc: "the LiveView current path as defined by the router"
-  attr :log_in_path, Phoenix.VerifiedRoutes, doc: "The route path for log in", required: true
-  attr :log_out_path, Phoenix.VerifiedRoutes, doc: "The route path for log out", required: true
+  attr :log_in_path, :string, doc: "The route path for log in", required: true
+  attr :log_out_path, :string, doc: "The route path for log out", required: true
 
-  attr :settings_path, Phoenix.VerifiedRoutes,
+  attr :settings_path, :string,
     doc: "The route path for user settings",
     required: false
 
-  attr :registration_path, Phoenix.VerifiedRoutes,
+  attr :registration_path, :string,
     doc: "The route path for user registration",
     required: false
 
