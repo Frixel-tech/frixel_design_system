@@ -317,6 +317,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   Authentication menu for USer or Admin connection
   """
   attr :current_scope, Scope, doc: "the session current scope as defined by the router plugs"
+  attr :current_user_identifier, :string, doc: "The user's name or email to display"
   attr :current_path, :string, doc: "the LiveView current path as defined by the router"
   attr :log_in_path, :string, doc: "The route path for log in", required: true
   attr :log_out_path, :string, doc: "The route path for log out", required: true
@@ -334,7 +335,7 @@ defmodule FrixelDesignSystem.Components.Menu do
     <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end text-secondary-content font-bold">
       <%= if @current_scope do %>
         <li>
-          {@current_scope.user.email}
+          {@current_user_identifier}
         </li>
         <li :if={@settings_path}>
           <.link class={@current_path == @settings_path && "menu-active"} href={@settings_path}>
