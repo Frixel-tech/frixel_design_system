@@ -10,6 +10,7 @@ defmodule FrixelDesignSystem.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
+      compilers: [:phoenix_live_view] ++ Mix.compilers(),
       listeners: [Phoenix.CodeReloader],
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
