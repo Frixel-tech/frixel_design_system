@@ -41,12 +41,12 @@ defmodule FrixelDesignSystem.Components.Menu do
   def navbar(assigns) do
     ~H"""
     <div class="hidden xl:flex">
-      <Menu.links_list links={@links} />
+      <.links_list links={@links} />
 
       <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
       <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
 
-      <Menu.theme_switcher :if={@enable_theme_switcher?} />
+      <.theme_switcher :if={@enable_theme_switcher?} />
     </div>
 
     <div :if={@call_to_action_path} class="hidden xl:flex">
@@ -63,9 +63,9 @@ defmodule FrixelDesignSystem.Components.Menu do
       <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
       <%!-- <.scrollable_links :if={@language_links}  type="primary" links={@language_links} /> --%>
 
-      <Menu.theme_switcher :if={@enable_theme_switcher?} />
+      <.theme_switcher :if={@enable_theme_switcher?} />
 
-      <Menu.dropdown
+      <.dropdown
         links={@links}
         call_to_action_name={@call_to_action_name}
         call_to_action_path={@call_to_action_path}
