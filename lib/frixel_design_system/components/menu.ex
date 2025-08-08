@@ -213,7 +213,7 @@ defmodule FrixelDesignSystem.Components.Menu do
         <.link
           :if={link.visibility == :visible}
           navigate={link.path}
-          class={"link #{@link_style} font-common font-normal p-4 whitespace-nowrap"}
+          class={"link link-hover #{@link_style} font-common font-normal p-4 whitespace-nowrap"}
         >
           {link.name}
         </.link>
