@@ -60,16 +60,28 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  @doc """
+  A header section to handle branding and navigation
+
+  ## Example:
+
+      <.base_header class="bg-white text-marine-blue border-b border-brick-orange">
+        <:branding>
+          <Company.branding
+            brand_name="My Business"
+            brand_img="/path/to/my/logo.png"
+          />
+        </:branding>
+
+        <:navbar>
+          <Menu.navbar links={@links_list} enable_theme_switcher?={true} />
+        </:navbar>
+      </.base_header>
+  """
+
   attr :class, :string, default: ""
-  attr :branding_name, :string, default: ""
-  attr :branding_logo_url, :string, default: ""
-  attr :header_links, :list, default: []
-  attr :language_links, :list, default: nil
-  attr :call_to_action_name, :string, default: ""
-  attr :call_to_action_path, :string, default: nil
-  attr :enable_theme_switcher?, :boolean, default: true
   slot :branding
-  slot :links
+  slot :navbar
 
   def base_header(assigns) do
     ~H"""
@@ -83,37 +95,7 @@ defmodule FrixelDesignSystem.Section do
         </div>
 
         <div class="navbar-end gap-4 w-full">
-          <div class="hidden xl:flex">
-            {render_slot(@links)}
-
-            <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
-            <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
-
-            <Menu.theme_switcher :if={@enable_theme_switcher?} />
-          </div>
-
-          <div :if={@call_to_action_path} class="hidden xl:flex">
-            <.link navigate={@call_to_action_path}>
-              <Button.primary_button
-                text={@call_to_action_name}
-                class="flex items-center gap-2"
-                icon_button="hero-arrow-right-solid"
-              />
-            </.link>
-          </div>
-
-          <div class="flex xl:hidden">
-            <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
-            <%!-- <.scrollable_links :if={@language_links}  type="primary" links={@language_links} /> --%>
-
-            <Menu.theme_switcher :if={@enable_theme_switcher?} />
-
-            <Menu.dropdown
-              links={@header_links}
-              call_to_action_name={@call_to_action_name}
-              call_to_action_path={@call_to_action_path}
-            />
-          </div>
+          {render_slot(@navbar)}
         </div>
       </nav>
     </header>

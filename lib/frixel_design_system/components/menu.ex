@@ -8,6 +8,73 @@ defmodule FrixelDesignSystem.Components.Menu do
   alias Phoenix.LiveView.JS
 
   @doc """
+    A navbar component to be used inside a header (such as base_header)
+
+    ## Examples:
+
+         <Menu.navbar
+          links={@header.links}
+          enable_theme_switcher?={false}
+          scrollable_links={@languages_list}
+          call_to_action_name="Contact us
+          call_to_action_path="/#contact-us"
+        />
+  """
+  attr :links, :list, default: [], doc: "The list of links displayed in the navbar"
+
+  attr :language_links, :list,
+    default: nil,
+    doc: "The list of languages available in a multilang application"
+
+  attr :enable_theme_switcher?, :boolean,
+    default: true,
+    doc: "Condition to use or not a dark/light theme switcher"
+
+  attr :call_to_action_path, :string,
+    default: nil,
+    doc: "the path of the call to action button if you want to display one."
+
+  attr :call_to_action_name, :string,
+    default: "",
+    doc: "the name displayed inside the call to action button"
+
+  def navbar(assigns) do
+    ~H"""
+    <div class="hidden xl:flex">
+      <Menu.links_list links={@links} />
+
+      <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
+      <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
+
+      <Menu.theme_switcher :if={@enable_theme_switcher?} />
+    </div>
+
+    <div :if={@call_to_action_path} class="hidden xl:flex">
+      <.link navigate={@call_to_action_path}>
+        <Button.primary_button
+          text={@call_to_action_name}
+          class="flex items-center gap-2"
+          icon_button="hero-arrow-right-solid"
+        />
+      </.link>
+    </div>
+
+    <div class="flex xl:hidden">
+      <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
+      <%!-- <.scrollable_links :if={@language_links}  type="primary" links={@language_links} /> --%>
+
+      <Menu.theme_switcher :if={@enable_theme_switcher?} />
+
+      <Menu.dropdown
+        links={@links}
+        call_to_action_name={@call_to_action_name}
+        call_to_action_path={@call_to_action_path}
+      />
+    </div>
+    """
+  end
+
+  @doc """
   Renders a mobile navigation menu using DaisyUI's dropdown pattern.
 
   ## Examples
@@ -307,10 +374,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
