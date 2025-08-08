@@ -327,7 +327,7 @@ defmodule FrixelDesignSystem.Components.Menu do
       settings_path={~p"/backoffice/settings"}
     />
   """
-  attr :current_scope, %{},
+  attr :current_scope, :map,
     doc: "the session current scope as defined by the router plugs",
     required: true
 
