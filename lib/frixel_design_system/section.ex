@@ -68,6 +68,8 @@ defmodule FrixelDesignSystem.Section do
   attr :call_to_action_name, :string, default: ""
   attr :call_to_action_path, :string, default: nil
   attr :enable_theme_switcher?, :boolean, default: true
+  slot :branding
+  slot :links
 
   def base_header(assigns) do
     ~H"""
@@ -77,12 +79,12 @@ defmodule FrixelDesignSystem.Section do
     >
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start">
-          <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
+          {render_slot(@branding)}
         </div>
 
         <div class="navbar-end gap-4 w-full">
           <div class="hidden xl:flex">
-            <Menu.links_list type="primary" links={@header_links} />
+            {render_slot(@links)}
 
             <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
             <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
@@ -106,7 +108,11 @@ defmodule FrixelDesignSystem.Section do
 
             <Menu.theme_switcher :if={@enable_theme_switcher?} />
 
-            <Menu.dropdown links={@header_links} />
+            <Menu.dropdown
+              links={@header_links}
+              call_to_action_name={@call_to_action_name}
+              call_to_action_path={@call_to_action_path}
+            />
           </div>
         </div>
       </nav>
