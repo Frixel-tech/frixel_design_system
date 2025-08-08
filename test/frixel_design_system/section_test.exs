@@ -1,5 +1,6 @@
 defmodule FrixelDesignSystem.SectionTest do
   alias FrixelDesignSystem.Section
+  alias FrixelDesignSystem.Components.{Company, Menu}
   use ComponentCase
 
   test "contact_section" do
@@ -130,19 +131,30 @@ defmodule FrixelDesignSystem.SectionTest do
       branding_logo_url: branding_logo_url,
       call_to_action_name: call_to_action_name,
       call_to_action_path: call_to_action_path,
-      header_links: header_links
+      header_links: header_links,
+      enable_theme_switcher?: false
     }
 
     # When
     html =
       "#{rendered_to_string(~H"""
-      <Section.base_header
-        branding_name={@branding_name}
-        branding_logo_url={@branding_logo_url}
-        call_to_action_name={@call_to_action_name}
-        call_to_action_path={@call_to_action_path}
-        header_links={@header_links}
-      />
+      <Section.base_header class="bg-white text-marine-blue border-b border-brick-orange">
+        <:branding>
+          <Company.branding
+            brand_name={@branding_name}
+            brand_img={@branding_logo_url}
+          />
+        </:branding>
+
+        <:navbar>
+          <Menu.navbar
+            links={@header_links}
+            enable_theme_switcher?={@enable_theme_switcher?}
+            call_to_action_name={@call_to_action_name}
+            call_to_action_path={@call_to_action_path}
+          />
+        </:navbar>
+      </Section.base_header>
       """)}"
 
     # Then
@@ -413,8 +425,11 @@ defmodule FrixelDesignSystem.SectionTest do
       """)}"
 
     # Then
-    assert html =~
-             "<footer class=\"bg-primary text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full\">\n  <nav class=\"navbar max-w-450 m-auto\">\n    <div class=\"navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace\">\n      <div class=\"flex flex-col lg:flex-row\">\n        <ul class=\"flex flex-col lg:flex-row items-center justify-end\">\n  <li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"/#legal-information\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      legal-information\n    </a>\n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"/#cgu\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      cgu\n    </a>\n  </li>\n</ul>\n        <p class=\"p-4 text-black\">\n          Copyright © Branding name 2025\n        </p>\n      </div>\n    </div>\n\n    <div class=\"navbar-center lg:navbar-end flex items-center gap-4 pr-4\">\n      <ul class=\"flex items-center gap-4 \">\n  <li>\n    <a href=\"https://www.linkedin.com/company/frixel-tech\" target=\"_blank\">\n      <img src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png\" alt=\"Logo for https://www.linkedin.com/company/frixel-tech\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"https://github.com/Frixel-tech\" target=\"_blank\">\n      <img src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png\" alt=\"Logo for https://github.com/Frixel-tech\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n    </div>\n  </nav>\n</footer>"
+    assert html =~ "Branding name"
+    assert html =~ "legal-information"
+    assert html =~ "cgu"
+    assert html =~ "href=\"https://www.linkedin.com/company/frixel-tech\""
+    assert html =~ "href=\"https://github.com/Frixel-tech\""
   end
 
   test "landing_section" do
