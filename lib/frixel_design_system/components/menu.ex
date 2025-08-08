@@ -39,13 +39,14 @@ defmodule FrixelDesignSystem.Components.Menu do
     doc: "the name displayed inside the call to action button"
 
   attr :link_style, :string,
+    default: "link-neutral",
     doc:
       "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
   def navbar(assigns) do
     ~H"""
     <div class="hidden xl:flex">
-      <.links_list links={@links} {@link_style && link_style={@link_style}} />
+      <.links_list links={@links} link_style={@link_style} />
 
       <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
       <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
@@ -382,10 +383,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-
+      
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-
+      
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
