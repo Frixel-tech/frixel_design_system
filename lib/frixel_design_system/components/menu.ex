@@ -38,10 +38,15 @@ defmodule FrixelDesignSystem.Components.Menu do
     default: "",
     doc: "the name displayed inside the call to action button"
 
+  attr :link_style, :string,
+    default: nil,
+    doc:
+      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
+
   def navbar(assigns) do
     ~H"""
     <div class="hidden xl:flex">
-      <.links_list links={@links} />
+      <.links_list links={@links} link_style={@link_style} />
 
       <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
       <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
@@ -194,8 +199,12 @@ defmodule FrixelDesignSystem.Components.Menu do
         %{path: "https://www.external-domain.com", name: "Privacy Policy", visibility: :visible}
       ]} />
   """
-  attr(:links, :list, required: true)
-  attr(:type, :string, default: "secondary")
+  attr :links, :list, required: true
+
+  attr :link_style, :string,
+    default: "link-neutral",
+    doc:
+      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
   def links_list(assigns) do
     ~H"""
@@ -204,7 +213,7 @@ defmodule FrixelDesignSystem.Components.Menu do
         <.link
           :if={link.visibility == :visible}
           navigate={link.path}
-          class={"text-black rounded-full font-common font-normal p-4 whitespace-nowrap" <> if @type == "primary", do: "link link-primary-content", else: "link link-secondary-content"}
+          class={"link #{@link_style} font-common font-normal p-4 whitespace-nowrap"}
         >
           {link.name}
         </.link>
