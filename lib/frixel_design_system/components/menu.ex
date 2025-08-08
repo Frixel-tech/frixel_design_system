@@ -39,14 +39,13 @@ defmodule FrixelDesignSystem.Components.Menu do
     doc: "the name displayed inside the call to action button"
 
   attr :link_style, :string,
-    default: nil,
     doc:
       "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
   def navbar(assigns) do
     ~H"""
     <div class="hidden xl:flex">
-      <.links_list links={@links} link_style={@link_style} />
+      <.links_list links={@links} {@link_style && link_style={@link_style}} />
 
       <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
       <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
