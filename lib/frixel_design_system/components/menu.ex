@@ -7,8 +7,6 @@ defmodule FrixelDesignSystem.Components.Menu do
   alias FrixelDesignSystem.Components.Button
   alias Phoenix.LiveView.JS
 
-  attr(:links, :list, required: true)
-
   @doc """
   Renders a mobile navigation menu using DaisyUI's dropdown pattern.
 
@@ -21,6 +19,11 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`.
   """
+
+  attr :links, :list, default: []
+  attr :call_to_action_name, :string, default: ""
+  attr :call_to_action_path, :string, default: nil
+
   def dropdown(assigns) do
     ~H"""
     <div
@@ -49,10 +52,11 @@ defmodule FrixelDesignSystem.Components.Menu do
             {link.name}
           </a>
         </li>
-        <div class="flex justify-center my-4">
-          <.link navigate="/#contact-us">
+
+        <div :if={@call_to_action_path} class="flex justify-center my-4">
+          <.link navigate={@call_to_action_path}>
             <Button.primary_button
-              text={gettext("Contact us")}
+              text={@call_to_action_name}
               class="flex items-center gap-2"
               icon_button="hero-arrow-right-solid"
             />
@@ -303,10 +307,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-
+      
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-
+      
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
