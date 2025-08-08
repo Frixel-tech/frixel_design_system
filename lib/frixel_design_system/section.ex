@@ -60,6 +60,7 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  attr :class, :string, default: ""
   attr :branding_name, :string, default: ""
   attr :branding_logo_url, :string, default: ""
   attr :header_links, :list, default: []
@@ -72,7 +73,7 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <header
       id="header"
-      class="fixed top-0 left-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full"
+      class={"fixed top-0 left-0 shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full #{@class}"}
     >
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start">
