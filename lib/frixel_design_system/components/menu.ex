@@ -303,10 +303,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
@@ -327,7 +327,7 @@ defmodule FrixelDesignSystem.Components.Menu do
       settings_path={~p"/backoffice/settings"}
     />
   """
-  attr :current_scope, Scope,
+  attr :current_scope, %{},
     doc: "the session current scope as defined by the router plugs",
     required: true
 
