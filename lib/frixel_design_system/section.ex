@@ -60,48 +60,42 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  attr :branding_name, :string
-  attr :branding_logo_url, :string
-  attr :header_links, :list
-  attr :language_links, :list
-  attr :call_to_action_name, :string
-  attr :call_to_action_path, :string
+  @doc """
+  A header section to handle branding and navigation
+
+  ## Example:
+
+      <.base_header class="bg-white text-marine-blue border-b border-brick-orange">
+        <:branding>
+          <Company.branding
+            brand_name="My Business"
+            brand_img="/path/to/my/logo.png"
+          />
+        </:branding>
+
+        <:navbar>
+          <Menu.navbar links={@links_list} enable_theme_switcher?={true} />
+        </:navbar>
+      </.base_header>
+  """
+
+  attr :class, :string, default: ""
+  slot :branding
+  slot :navbar
 
   def base_header(assigns) do
     ~H"""
     <header
       id="header"
-      class="fixed top-0 bg-primary text-primary-content shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full"
+      class={"fixed top-0 left-0 shadow-sm z-1 flex items-center gap-4 justify-between py-4 w-full #{@class}"}
     >
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start">
-          <Company.branding brand_name={@branding_name} brand_img={@branding_logo_url} />
+          {render_slot(@branding)}
         </div>
 
         <div class="navbar-end gap-4 w-full">
-          <div class="hidden xl:flex">
-            <Menu.links_list type="primary" links={@header_links} />
-            <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
-            <%!-- <.scrollable_links type="primary" links={@language_links} /> --%>
-            <Menu.theme_switcher />
-          </div>
-
-          <div class="hidden xl:flex">
-            <.link navigate={@call_to_action_path}>
-              <Button.primary_button
-                text={@call_to_action_name}
-                class="flex items-center gap-2"
-                icon_button="hero-arrow-right-solid"
-              />
-            </.link>
-          </div>
-
-          <div class="flex xl:hidden">
-            <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
-            <%!-- <.scrollable_links type="primary" links={@language_links} /> --%>
-            <Menu.theme_switcher />
-            <Menu.dropdown links={@header_links} />
-          </div>
+          {render_slot(@navbar)}
         </div>
       </nav>
     </header>
@@ -223,7 +217,7 @@ defmodule FrixelDesignSystem.Section do
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
           <div class="flex flex-col lg:flex-row">
-            <Menu.links_list links={@footer_links} type="primary" />
+            <Menu.links_list links={@footer_links} />
             <p class="p-4 text-black">
               Copyright © {@branding_name} {Date.utc_today().year}
             </p>

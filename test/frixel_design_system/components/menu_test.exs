@@ -55,7 +55,7 @@ defmodule FrixelDesignSystem.Components.MenuTest do
   end
 
   describe "links_list" do
-    test "when type is primary" do
+    test "renders a set of `:visible` styled links for navigation" do
       # Given
       links_list = [
         %{name: "Link #1", visibility: :visible, path: "www.first_path_to_link.fr"},
@@ -63,38 +63,19 @@ defmodule FrixelDesignSystem.Components.MenuTest do
         %{name: "Link #4", visibility: :visible, path: "www.fourth_path_to_link.fr"}
       ]
 
-      assigns = %{links: links_list, type: "primary"}
+      assigns = %{links: links_list, link_style: "link-primary"}
 
       # When
       html =
         "#{rendered_to_string(~H"""
-        <Menu.links_list id="dropdown-menu" type={@type} links={@links} />
+        <Menu.links_list link_style={@link_style} links={@links} />
         """)}"
 
       # Then
-      assert html =~
-               "<ul class=\"flex flex-col lg:flex-row items-center justify-end\">\n  <li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"www.first_path_to_link.fr\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      Link #1\n    </a>\n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    \n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"www.fourth_path_to_link.fr\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-primary-content\">\n      Link #4\n    </a>\n  </li>\n</ul>"
-    end
-
-    test "when type is secondary" do
-      # Given
-      links_list = [
-        %{name: "Link #1", visibility: :visible, path: "www.first_path_to_link.fr"},
-        %{name: "Link #3", visibility: :hidden, path: "www.third_path_to_link.fr"},
-        %{name: "Link #4", visibility: :visible, path: "www.fourth_path_to_link.fr"}
-      ]
-
-      assigns = %{links: links_list, type: "secondary"}
-
-      # When
-      html =
-        "#{rendered_to_string(~H"""
-        <Menu.links_list id="dropdown-menu" type={@type} links={@links} />
-        """)}"
-
-      # Then
-      assert html =~
-               "<ul class=\"flex flex-col lg:flex-row items-center justify-end\">\n  <li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"www.first_path_to_link.fr\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-secondary-content\">\n      Link #1\n    </a>\n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    \n  </li><li class=\"transition-transform duration-300 hover:scale-120\">\n    <a href=\"www.fourth_path_to_link.fr\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"text-black rounded-full font-common font-normal p-4 whitespace-nowraplink link-secondary-content\">\n      Link #4\n    </a>\n  </li>\n</ul>"
+      assert html =~ "Link #1"
+      refute html =~ "Link #3"
+      assert html =~ "Link #4"
+      assert html =~ "link-primary"
     end
   end
 
@@ -246,6 +227,35 @@ defmodule FrixelDesignSystem.Components.MenuTest do
       refute html =~ "test@test.com"
       assert html =~ "href=\"/log-in\" class=\"menu-active\""
       assert html =~ "href=\"/register\""
+    end
+  end
+
+  describe "navbar" do
+    test "renders the right part of the header containing the navigation, a theme switcher, a language switcher and a call to action" do
+      assigns = %{
+        links: [
+          %{path: "/link-path", name: "About", visibility: :visible},
+          %{path: "#home_anchor", name: "Not Showing", visibility: :hidden}
+        ],
+        enable_theme_switcher?: true,
+        call_to_action_name: "Contact",
+        call_to_action_path: "/#contact-us"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Menu.navbar
+          links={@links}
+          enable_theme_switcher?={@enable_theme_switcher?}
+          call_to_action_name={@call_to_action_name}
+          call_to_action_path={@call_to_action_path}
+        />
+        """)}"
+
+      assert html =~ "About"
+      refute html =~ "Not Showing"
+      assert html =~ "class=\"theme-controller\""
+      assert html =~ "Contact"
     end
   end
 end

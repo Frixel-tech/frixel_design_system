@@ -7,7 +7,77 @@ defmodule FrixelDesignSystem.Components.Menu do
   alias FrixelDesignSystem.Components.Button
   alias Phoenix.LiveView.JS
 
-  attr(:links, :list, required: true)
+  @doc """
+    A navbar component to be used inside a header (such as base_header)
+
+    ## Examples:
+
+         <Menu.navbar
+          links={@header.links}
+          enable_theme_switcher?={false}
+          scrollable_links={@languages_list}
+          call_to_action_name="Contact us
+          call_to_action_path="/#contact-us"
+        />
+  """
+  attr :links, :list, default: [], doc: "The list of links displayed in the navbar"
+
+  attr :language_links, :list,
+    default: nil,
+    doc: "The list of languages available in a multilang application"
+
+  attr :enable_theme_switcher?, :boolean,
+    default: true,
+    doc: "Condition to use or not a dark/light theme switcher"
+
+  attr :call_to_action_path, :string,
+    default: nil,
+    doc: "the path of the call to action button if you want to display one."
+
+  attr :call_to_action_name, :string,
+    default: "",
+    doc: "the name displayed inside the call to action button"
+
+  attr :link_style, :string,
+    default: "link-neutral",
+    doc:
+      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
+
+  def navbar(assigns) do
+    ~H"""
+    <div class="hidden xl:flex">
+      <.links_list links={@links} link_style={@link_style} />
+
+      <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer de la traduction ! --%>
+      <%!-- <.scrollable_links  :if={@language_links} type="primary" links={@language_links} /> --%>
+
+      <.theme_switcher :if={@enable_theme_switcher?} />
+    </div>
+
+    <div :if={@call_to_action_path} class="hidden xl:flex">
+      <.link navigate={@call_to_action_path}>
+        <Button.primary_button
+          text={@call_to_action_name}
+          class="flex items-center gap-2"
+          icon_button="hero-arrow-right-solid"
+        />
+      </.link>
+    </div>
+
+    <div class="flex xl:hidden">
+      <%!-- Pour le moment la traduction des éléments en base ne se fait pas de façon dynamique. Donc pas besoin d'appliquer dela traduction ! --%>
+      <%!-- <.scrollable_links :if={@language_links}  type="primary" links={@language_links} /> --%>
+
+      <.theme_switcher :if={@enable_theme_switcher?} />
+
+      <.dropdown
+        links={@links}
+        call_to_action_name={@call_to_action_name}
+        call_to_action_path={@call_to_action_path}
+      />
+    </div>
+    """
+  end
 
   @doc """
   Renders a mobile navigation menu using DaisyUI's dropdown pattern.
@@ -21,6 +91,11 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   - `links`: A list of maps with keys `:path`, `:name`, and `:visibility`.
   """
+
+  attr :links, :list, default: []
+  attr :call_to_action_name, :string, default: ""
+  attr :call_to_action_path, :string, default: nil
+
   def dropdown(assigns) do
     ~H"""
     <div
@@ -49,10 +124,11 @@ defmodule FrixelDesignSystem.Components.Menu do
             {link.name}
           </a>
         </li>
-        <div class="flex justify-center my-4">
-          <.link navigate="/#contact-us">
+
+        <div :if={@call_to_action_path} class="flex justify-center my-4">
+          <.link navigate={@call_to_action_path}>
             <Button.primary_button
-              text={gettext("Contact us")}
+              text={@call_to_action_name}
               class="flex items-center gap-2"
               icon_button="hero-arrow-right-solid"
             />
@@ -123,8 +199,12 @@ defmodule FrixelDesignSystem.Components.Menu do
         %{path: "https://www.external-domain.com", name: "Privacy Policy", visibility: :visible}
       ]} />
   """
-  attr(:links, :list, required: true)
-  attr(:type, :string, default: "secondary")
+  attr :links, :list, required: true
+
+  attr :link_style, :string,
+    default: "link-neutral",
+    doc:
+      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
   def links_list(assigns) do
     ~H"""
@@ -133,7 +213,7 @@ defmodule FrixelDesignSystem.Components.Menu do
         <.link
           :if={link.visibility == :visible}
           navigate={link.path}
-          class={"text-black rounded-full font-common font-normal p-4 whitespace-nowrap" <> if @type == "primary", do: "link link-primary-content", else: "link link-secondary-content"}
+          class={"link link-hover #{@link_style} font-common font-normal p-4 whitespace-nowrap"}
         >
           {link.name}
         </.link>
