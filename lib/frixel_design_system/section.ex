@@ -263,7 +263,7 @@ defmodule FrixelDesignSystem.Section do
         <Menu.links_list links={@footer_links} />
 
         <p class="p-4 text-black">
-          Copyright © {@branding_name} {Date.utc_today().year}
+          Copyright © {@brand_name} {Date.utc_today().year}
           <span :if={@show_made_by?}>
             Made by <a href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
           </span>
