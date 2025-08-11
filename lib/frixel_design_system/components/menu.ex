@@ -107,7 +107,7 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   def legal_and_copyright(assigns) do
     ~H"""
-    <Menu.links_list links={@links} link_style={@link_style} />
+    <.links_list links={@links} link_style={@link_style} />
 
     <p class="text-black">
       Copyright © {@brand_name} {Date.utc_today().year}

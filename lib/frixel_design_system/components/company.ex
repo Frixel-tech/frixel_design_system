@@ -33,7 +33,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   ## Example:
 
-      <.contact_infos_mini
+      <Company.contact_infos_mini
         brand_name="My company"
         brand_img="/path/to/my/company.logo"
         company_postal_address="1 industry street, 1234 Companyland"
