@@ -224,34 +224,34 @@ defmodule FrixelDesignSystem.Section do
       id="footer"
       class={"footer footer-horizontal footer-center py-4 #{@class}"}
     >
-      <aside>
+      <aside class="flex justify-center">
         <img src={@brand_img} alt={"#{@brand_name} logo"} class="width-12 mx-auto px-1" />
-          <ul class="text-base">
-            <li :if={@company_email_address}>
+
+        <ul class="text-base">
+          <li :if={@company_email_address}>
+          <a
+              class="link link-hover"
+              aria-label="Write us"
+              href={"mailto:#{@company_email_address}"}
+              target="_blank"
+            >
+            {@company_email_address}
+            </a>
+          </li>
+
+          <li :if={@company_phone_number}>
             <a
-                class="link link-neutral hover:font-bold transition-[font-weight] "
-                aria-label="Write us"
-                href={"mailto:#{@company_email_address}"}
-                target="_blank"
-              >
-              {@company_email_address}
-              </a>
-            </li>
+              class="link link-hover"
+              aria-label="Call us"
+              href={"tel:#{@company_phone_number}"}
+              target="_blank"
+            >
+              {@company_phone_number}
+            </a>
+          </li>
 
-            <li :if={@company_phone_number}>
-              <a
-                class="link link-neutral hover:font-bold transition-[font-weight] "
-                aria-label="Call us"
-                href={"tel:#{@company_phone_number}"}
-                target="_blank"
-              >
-                {@company_phone_number}
-              </a>
-            </li>
-
-            <li :if={@company_postal_address}>{@company_postal_address}</li>
-          </ul>
-
+          <li :if={@company_postal_address}>{@company_postal_address}</li>
+        </ul>
       </aside>
 
       <nav>

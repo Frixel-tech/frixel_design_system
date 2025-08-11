@@ -202,7 +202,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   attr :links, :list, required: true
 
   attr :link_style, :string,
-    default: "link-neutral",
+    default: "",
     doc:
       "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
@@ -383,10 +383,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
