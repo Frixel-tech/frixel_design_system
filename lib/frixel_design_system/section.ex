@@ -208,30 +208,66 @@ defmodule FrixelDesignSystem.Section do
   end
 
   attr :class, :string, default: ""
-  attr :branding_name, :string
-  attr :footer_links, :list
+  attr :brand_name, :string, default: ""
+  attr :brand_img, :string, default: ""
+  attr :company_email_address, :string, default: nil
+  attr :company_email_address, :string, default: nil
+  attr :company_phone_number, :string, default: nil
+  attr :socials_title, :string, default: nil
   attr :social_medias, :list
+  attr :footer_links, :list
+  attr :show_made_by?, :boolean, default: true
 
   def base_footer(assigns) do
     ~H"""
     <footer
       id="footer"
-      class={"shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 #{@class}"}
+      class={"footer footer-horizontal footer-center py-4 #{@class}"}
     >
-      <nav class="navbar max-w-450 m-auto">
-        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
-          <div class="flex flex-col lg:flex-row">
-            <Menu.links_list links={@footer_links} />
+      <aside>
+        <img src={@brand_img} alt={"#{@brand_name} logo"} class="width-12 mx-auto px-1" />
+          <ul class="text-base">
+            <li :if={@company_email_address}>
+            <a
+                class="link link-neutral hover:font-bold transition-[font-weight] "
+                aria-label="Write us"
+                href={"mailto:#{@company_email_address}"}
+                target="_blank"
+              >
+              {@company_email_address}
+              </a>
+            </li>
 
-            <p class="p-4 text-black">
-              Copyright © {@branding_name} {Date.utc_today().year}
-            </p>
-          </div>
-        </div>
+            <li :if={@company_phone_number}>
+              <a
+                class="link link-neutral hover:font-bold transition-[font-weight] "
+                aria-label="Call us"
+                href={"tel:#{@company_phone_number}"}
+                target="_blank"
+              >
+                {@company_phone_number}
+              </a>
+            </li>
 
-        <div class="navbar-center lg:navbar-end flex items-center gap-4 pr-4">
-          <Menu.socials_list socials={@social_medias} />
-        </div>
+            <li :if={@company_postal_address}>{@company_postal_address}</li>
+          </ul>
+
+      </aside>
+
+      <nav>
+        <h6 :if={@socials_title} class="footer-title">{@socials_title}</h6>
+        <Menu.socials_list socials={@social_medias} />
+      </nav>
+
+      <nav class="flex justify-center">
+        <Menu.links_list links={@footer_links} />
+
+        <p class="p-4 text-black">
+          Copyright © {@branding_name} {Date.utc_today().year}
+          <span :if={@show_made_by?}>
+            Made by <a href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
+          </span>
+        </p>
       </nav>
     </footer>
     """
