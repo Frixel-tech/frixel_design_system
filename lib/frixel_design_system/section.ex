@@ -224,10 +224,10 @@ defmodule FrixelDesignSystem.Section do
       id="footer"
       class={"footer footer-horizontal footer-center py-4 #{@class}"}
     >
-      <aside class="flex justify-center">
+      <aside class="flex justify-center flex-wrap gap-8">
         <img src={@brand_img} alt={"#{@brand_name} logo"} class="w-48 mx-auto px-1" />
 
-        <ul class="text-base">
+        <ul class="text-base px-4">
           <li :if={@company_email_address}>
           <a
               class="link link-hover"
