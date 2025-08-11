@@ -266,7 +266,7 @@ defmodule FrixelDesignSystem.Section do
         <p class="text-black">
           Copyright © {@brand_name} {Date.utc_today().year}
           <span :if={@show_made_by?}>
-            - Made by <a href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
+            - Made by <a class="link link-hover" href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
           </span>
         </p>
       </nav>
