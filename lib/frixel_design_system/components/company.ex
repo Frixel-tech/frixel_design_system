@@ -78,6 +78,7 @@ defmodule FrixelDesignSystem.Components.Company do
         {render_slot(@socials)}
 
         {render_slot(@map)}
+      </div>
     </div>
     """
   end
@@ -96,7 +97,6 @@ defmodule FrixelDesignSystem.Components.Company do
       data-longitude={@company_longitude}
       class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
     />
-    </div>
     """
   end
 
