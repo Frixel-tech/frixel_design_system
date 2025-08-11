@@ -168,6 +168,11 @@ defmodule FrixelDesignSystem.Components.Form do
   attr :company_email_address, :string, required: true
   attr :company_phone_number, :string, required: true
   attr :company_social_media_links, :list, required: true
+
+  attr :marker_icon_url, :string,
+    default:
+      "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
+
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
 
@@ -208,6 +213,7 @@ defmodule FrixelDesignSystem.Components.Form do
           <div
             id="leaflet-map"
             phx-hook="LeafletHook"
+            data-marker-icon-url={@marker_icon_url}
             data-lattitude={@company_lattitude}
             data-longitude={@company_longitude}
             class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"

@@ -13,6 +13,7 @@ defmodule FrixelDesignSystem.Section do
   attr :company_email_address, :string, default: ""
   attr :company_phone_number, :string, default: ""
   attr :company_social_media_links, :list, default: []
+  attr :marker_icon_url, :string, default: nil
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
   attr :booking_appointment_url, :string, default: nil
@@ -30,6 +31,7 @@ defmodule FrixelDesignSystem.Section do
         company_email_address={@company_email_address}
         company_phone_number={@company_phone_number}
         company_social_media_links={@company_social_media_links}
+        marker_icon_url={@marker_icon_url}
         company_lattitude={@company_lattitude}
         company_longitude={@company_longitude}
       />
