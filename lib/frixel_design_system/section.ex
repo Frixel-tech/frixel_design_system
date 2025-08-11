@@ -225,7 +225,7 @@ defmodule FrixelDesignSystem.Section do
       class={"footer footer-horizontal footer-center py-4 #{@class}"}
     >
       <aside class="flex justify-center">
-        <img src={@brand_img} alt={"#{@brand_name} logo"} class="width-6 mx-auto px-1" />
+        <img src={@brand_img} alt={"#{@brand_name} logo"} class="w-6 mx-auto px-1" />
 
         <ul class="text-base">
           <li :if={@company_email_address}>
