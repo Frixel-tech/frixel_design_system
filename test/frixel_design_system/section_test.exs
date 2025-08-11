@@ -375,6 +375,10 @@ defmodule FrixelDesignSystem.SectionTest do
   test "base_footer" do
     # Given
     branding_name = "Branding name"
+    branding_logo_url = "/path/to/branding/logo.png"
+    company_postal_address = "1 test street, 1234 Testville"
+    company_email_address = "test@test.com"
+    company_phone_number = "+1234567890"
 
     footer_links = [
       %{
@@ -410,6 +414,10 @@ defmodule FrixelDesignSystem.SectionTest do
 
     assigns = %{
       branding_name: branding_name,
+      branding_logo_url: branding_logo_url,
+      company_postal_address: company_postal_address,
+      company_email_address: company_email_address,
+      company_phone_number: company_phone_number,
       social_medias: social_medias,
       footer_links: footer_links
     }
@@ -418,14 +426,37 @@ defmodule FrixelDesignSystem.SectionTest do
     html =
       "#{rendered_to_string(~H"""
       <Section.base_footer
-        branding_name={@branding_name}
-        social_medias={@social_medias}
-        footer_links={@footer_links}
-      />
+        class="bg-sky-blue"
+        socials_title="Retrouvez-nous-sur les réseaux:"
+      >
+        <:contact>
+          <Company.contact_infos_mini
+            brand_name={@branding_name}
+            brand_img={@branding_logo_url}
+            company_postal_address={@company_postal_address}
+            company_email_address={@company_email_address}
+            company_phone_number={@company_phone_number}
+          />
+        </:contact>
+
+        <:socials>
+          <Menu.socials_list socials={@social_medias} is_icon_rounded?={true} />
+        </:socials>
+
+        <:legal>
+          <Menu.legal_and_copyright
+            links={@footer_links}
+            brand_name={@branding_name}
+            show_made_by?={true}
+          />
+        </:legal>
+      </Section.base_footer>
       """)}"
 
     # Then
     assert html =~ "Branding name"
+    assert html =~ "bg-sky-blue"
+    assert html =~ "Retrouvez-nous-sur les réseaux:"
     assert html =~ "legal-information"
     assert html =~ "cgu"
     assert html =~ "href=\"https://www.linkedin.com/company/frixel-tech\""

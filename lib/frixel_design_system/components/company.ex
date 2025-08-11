@@ -29,6 +29,66 @@ defmodule FrixelDesignSystem.Components.Company do
   end
 
   @doc """
+  A small contact information component used to be displayed  inside a small section (i.e.: a footer for example).
+
+  ## Example:
+
+      <Company.contact_infos_mini
+        brand_name="My company"
+        brand_img="/path/to/my/company.logo"
+        company_postal_address="1 industry street, 1234 Companyland"
+        company_email_address="company@email.address"
+        company_phone_number="+123456789"
+      />
+  """
+  attr :brand_img, :string, default: nil, doc: "The company logo to be displayed"
+  attr :brand_name, :string, default: "", doc: "The company name"
+
+  attr :company_email_address, :string,
+    default: nil,
+    doc: "the company contact email address to be displayed inside a mailto link."
+
+  attr :company_phone_number, :string,
+    default: nil,
+    doc: "the company telephone number to be displayed inside a tel link."
+
+  attr :company_postal_address, :string,
+    default: nil,
+    doc: "the company physical address to be shown."
+
+  def contact_infos_mini(assigns) do
+    ~H"""
+    <img :if={@brand_img} src={@brand_img} alt={"#{@brand_name} logo"} class="w-48 mx-auto px-1" />
+
+    <ul class="text-base px-4">
+      <li :if={@company_email_address}>
+        <a
+          class="link link-hover"
+          aria-label="Write us"
+          href={"mailto:#{@company_email_address}"}
+          target="_blank"
+        >
+          {@company_email_address}
+        </a>
+      </li>
+
+      <li :if={@company_phone_number}>
+        <a
+          class="link link-hover"
+          aria-label="Call us"
+          href={"tel:#{@company_phone_number}"}
+          target="_blank"
+        >
+          {@company_phone_number}
+        </a>
+      </li>
+
+      <li :if={@company_postal_address}>{@company_postal_address}</li>
+    </ul>
+    """
+  end
+
+  @doc """
   Component to render an introductory card of your company inside a presentation section (cf. `FrixelDesignSystem.FrixelSections.introduction_section/1`)
 
   ## Example:

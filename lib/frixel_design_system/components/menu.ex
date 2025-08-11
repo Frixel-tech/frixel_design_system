@@ -22,6 +22,11 @@ defmodule FrixelDesignSystem.Components.Menu do
   """
   attr :links, :list, default: [], doc: "The list of links displayed in the navbar"
 
+  attr :link_style, :string,
+    default: "",
+    doc:
+      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
+
   attr :language_links, :list,
     default: nil,
     doc: "The list of languages available in a multilang application"
@@ -37,11 +42,6 @@ defmodule FrixelDesignSystem.Components.Menu do
   attr :call_to_action_name, :string,
     default: "",
     doc: "the name displayed inside the call to action button"
-
-  attr :link_style, :string,
-    default: "link-neutral",
-    doc:
-      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
   def navbar(assigns) do
     ~H"""
@@ -76,6 +76,45 @@ defmodule FrixelDesignSystem.Components.Menu do
         call_to_action_path={@call_to_action_path}
       />
     </div>
+    """
+  end
+
+  @doc """
+  A component to render the legal pages and the website copyright mention.
+
+  ## Example:
+
+    <Menu.legal_and_copyright
+      links={@footer.links}
+      brand_name="My Company"
+      show_made_by?={true}
+    />
+  """
+  attr :links, :list, default: [], doc: "The list of links displayed in the navbar"
+
+  attr :link_style, :string,
+    default: "",
+    doc:
+      "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
+
+  attr :brand_name, :string,
+    default: "",
+    doc: "the company name to be displayed inside the copyright part"
+
+  attr :show_made_by?, :boolean,
+    default: true,
+    doc: "A attribut to render or not the Frixel corporate webite link beside the copyright"
+
+  def legal_and_copyright(assigns) do
+    ~H"""
+    <.links_list links={@links} link_style={@link_style} />
+
+    <p class="text-black">
+      Copyright © {@brand_name} {Date.utc_today().year}
+      <span :if={@show_made_by?}>
+        - Made by <a class="link" href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
+      </span>
+    </p>
     """
   end
 
@@ -202,7 +241,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   attr :links, :list, required: true
 
   attr :link_style, :string,
-    default: "link-neutral",
+    default: "",
     doc:
       "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
@@ -336,17 +375,17 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   ## Examples
 
-      <.socials_list class="size-4" socials={[
+      <.socials_list class="size-4" is_icon_rounded?={true} socials={[
         %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
         %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
       ]} />
   """
-  attr(:socials, :list,
+  attr :socials, :list,
     required: true,
     doc: "A list of social media links, where each link is a map"
-  )
 
-  attr(:class, :string, default: "", doc: "CSS classes to customize the component.")
+  attr :class, :string, default: "", doc: "CSS classes to customize the component."
+  attr :is_icon_rounded?, :boolean, default: true
 
   def socials_list(assigns) do
     ~H"""
@@ -356,7 +395,7 @@ defmodule FrixelDesignSystem.Components.Menu do
           <img
             src={social.icon_url}
             alt={"Logo for #{social.social_media_url}"}
-            class="size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110"
+            class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
           />
         </a>
       </li>

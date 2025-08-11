@@ -207,26 +207,29 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  attr :branding_name, :string
-  attr :footer_links, :list
-  attr :social_medias, :list
+  attr :class, :string, default: ""
+  attr :socials_title, :string, default: nil
+  slot :contact
+  slot :socials
+  slot :legal
 
   def base_footer(assigns) do
     ~H"""
-    <footer class="bg-primary text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
-      <nav class="navbar max-w-450 m-auto">
-        <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
-          <div class="flex flex-col lg:flex-row">
-            <Menu.links_list links={@footer_links} />
-            <p class="p-4 text-black">
-              Copyright © {@branding_name} {Date.utc_today().year}
-            </p>
-          </div>
-        </div>
+    <footer
+      id="footer"
+      class={"footer footer-horizontal footer-center py-4 #{@class}"}
+    >
+      <aside class="flex justify-center flex-wrap gap-8">
+        {render_slot(@contact)}
+      </aside>
 
-        <div class="navbar-center lg:navbar-end flex items-center gap-4 pr-4">
-          <Menu.socials_list socials={@social_medias} />
-        </div>
+      <nav>
+        <h6 :if={@socials_title} class="footer-title">{@socials_title}</h6>
+        {render_slot(@socials)}
+      </nav>
+
+      <nav class="flex justify-center flex-wrap px-4">
+        {render_slot(@legal)}
       </nav>
     </footer>
     """
