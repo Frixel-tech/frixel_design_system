@@ -24,7 +24,7 @@ defmodule FrixelDesignSystem.Section do
       id="contact-us"
       class="flex flex-col md:flex-row justify-evenly gap-x-4 lg:gap-x-8 xl:gap-x-16 pt-20"
     >
-      <Form.contact_informations
+      <Company.contact_informations
         company_description={Helper.format_text(@company_description)}
         company_name={@company_name}
         company_postal_address={@company_postal_address}

@@ -29,6 +29,91 @@ defmodule FrixelDesignSystem.Components.Company do
   end
 
   @doc """
+  Renders contact details to be used inside a contact section alonside the contact form
+
+  ## Example:
+
+      <.contact_informations
+        company_description="Some company description paragraph"
+        company_name="Your company name"
+        company_postal_address="Postal code"
+        company_email_address="contact@company.com"
+        company_phone_number="+1 234 567 890"
+        company_social_media_links={@company_social_media_links_map_list} // cf. `Menu.socials_list/1`
+        company_lattitude="2.3723602"
+        company_longitude="48.8329333"
+      />
+  """
+  attr :company_description, :string, required: true
+  attr :company_name, :string, required: true
+  attr :company_postal_address, :string, required: true
+  attr :company_email_address, :string, required: true
+  attr :company_phone_number, :string, required: true
+  attr :company_social_media_links, :list, required: true
+
+  attr :marker_icon_url, :string,
+    default:
+      "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
+
+  attr :company_lattitude, :string, required: true
+  attr :company_longitude, :string, required: true
+
+  def contact_informations(assigns) do
+    ~H"""
+    <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-base-content text-base xl:text-xl font-bold font-slogan tracking-widest uppercase">
+          {gettext("Find us")}
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <p class="text-base">{@company_description}</p>
+
+        <div>
+          <ul class="text-base">
+            <li>{@company_postal_address}</li>
+
+            <li>
+              <a
+                class="link link-hover"
+                aria-label="Write us"
+                href={"mailto:#{@company_email_address}"}
+                target="_blank"
+              >
+                {@company_email_address}
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="link link-accent hover:font-bold transition-[font-weight] "
+                aria-label="Call us"
+                href={"tel:#{@company_phone_number}"}
+                target="_blank"
+              >
+                {@company_phone_number}
+              </a>
+            </li>
+          </ul>
+
+          <Menu.socials_list class="py-4" socials={@company_social_media_links} />
+
+          <div
+            id="leaflet-map"
+            phx-hook="LeafletHook"
+            data-marker-icon-url={@marker_icon_url}
+            data-lattitude={@company_lattitude}
+            data-longitude={@company_longitude}
+            class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
+          />
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
   A small contact information component used to be displayed  inside a small section (i.e.: a footer for example).
 
   ## Example:
