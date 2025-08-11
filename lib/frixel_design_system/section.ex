@@ -225,7 +225,7 @@ defmodule FrixelDesignSystem.Section do
       class={"footer footer-horizontal footer-center py-4 #{@class}"}
     >
       <aside class="flex justify-center">
-        <img src={@brand_img} alt={"#{@brand_name} logo"} class="width-12 mx-auto px-1" />
+        <img src={@brand_img} alt={"#{@brand_name} logo"} class="width-6 mx-auto px-1" />
 
         <ul class="text-base">
           <li :if={@company_email_address}>
@@ -265,7 +265,7 @@ defmodule FrixelDesignSystem.Section do
         <p class="p-4 text-black">
           Copyright © {@brand_name} {Date.utc_today().year}
           <span :if={@show_made_by?}>
-            Made by <a href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
+            - Made by <a href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
           </span>
         </p>
       </nav>
