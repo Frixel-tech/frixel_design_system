@@ -39,7 +39,7 @@ defmodule FrixelDesignSystem.Components.Menu do
     doc: "the name displayed inside the call to action button"
 
   attr :link_style, :string,
-    default: "link-neutral",
+    default: "",
     doc:
       "The theme class to be used for the links color, can be a DaisyUI class or a custom theme color variable (cf: https://daisyui.com/components/link/)"
 
@@ -336,17 +336,17 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   ## Examples
 
-      <.socials_list class="size-4" socials={[
+      <.socials_list class="size-4" is_icon_rounded?={true} socials={[
         %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
         %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
       ]} />
   """
-  attr(:socials, :list,
+  attr :socials, :list,
     required: true,
     doc: "A list of social media links, where each link is a map"
-  )
 
-  attr(:class, :string, default: "", doc: "CSS classes to customize the component.")
+  attr :class, :string, default: "", doc: "CSS classes to customize the component."
+  attr :is_icon_rounded?, :boolean, default: true
 
   def socials_list(assigns) do
     ~H"""
@@ -356,7 +356,7 @@ defmodule FrixelDesignSystem.Components.Menu do
           <img
             src={social.icon_url}
             alt={"Logo for #{social.social_media_url}"}
-            class="size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110"
+            class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
           />
         </a>
       </li>
