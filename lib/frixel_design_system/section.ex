@@ -207,17 +207,22 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
+  attr :class, :string, default: ""
   attr :branding_name, :string
   attr :footer_links, :list
   attr :social_medias, :list
 
   def base_footer(assigns) do
     ~H"""
-    <footer class="bg-primary text-base-content shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 w-full">
+    <footer
+      id="footer"
+      class={"shadow-sm relative flex flex-col lg:flex-row items-center justify-between py-4 #{@class}"}
+    >
       <nav class="navbar max-w-450 m-auto">
         <div class="navbar-start flex flex-col lg:flex-row items-center gap-4 w-full no-whitespace">
           <div class="flex flex-col lg:flex-row">
             <Menu.links_list links={@footer_links} />
+
             <p class="p-4 text-black">
               Copyright © {@branding_name} {Date.utc_today().year}
             </p>
