@@ -1,7 +1,7 @@
 defmodule FrixelDesignSystem.Components.Form do
   use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
-  alias FrixelDesignSystem.Components.{Button, Menu}
+  alias FrixelDesignSystem.Components.Button
 
   @doc """
   Renders the form for client submissions.
