@@ -208,16 +208,10 @@ defmodule FrixelDesignSystem.Section do
   end
 
   attr :class, :string, default: ""
-  attr :brand_name, :string, default: ""
-  attr :brand_img, :string, default: ""
-  attr :company_postal_address, :string, default: nil
-  attr :company_email_address, :string, default: nil
-  attr :company_phone_number, :string, default: nil
   attr :socials_title, :string, default: nil
-  attr :footer_links, :list
-  attr :link_style, :string, default: ""
-  attr :show_made_by?, :boolean, default: true
+  slot :contact
   slot :socials
+  slot :legal
 
   def base_footer(assigns) do
     ~H"""
@@ -226,33 +220,7 @@ defmodule FrixelDesignSystem.Section do
       class={"footer footer-horizontal footer-center py-4 #{@class}"}
     >
       <aside class="flex justify-center flex-wrap gap-8">
-        <img src={@brand_img} alt={"#{@brand_name} logo"} class="w-48 mx-auto px-1" />
-
-        <ul class="text-base px-4">
-          <li :if={@company_email_address}>
-          <a
-              class="link link-hover"
-              aria-label="Write us"
-              href={"mailto:#{@company_email_address}"}
-              target="_blank"
-            >
-            {@company_email_address}
-            </a>
-          </li>
-
-          <li :if={@company_phone_number}>
-            <a
-              class="link link-hover"
-              aria-label="Call us"
-              href={"tel:#{@company_phone_number}"}
-              target="_blank"
-            >
-              {@company_phone_number}
-            </a>
-          </li>
-
-          <li :if={@company_postal_address}>{@company_postal_address}</li>
-        </ul>
+        {render_slot(@contact)}
       </aside>
 
       <nav>
@@ -261,14 +229,7 @@ defmodule FrixelDesignSystem.Section do
       </nav>
 
       <nav class="flex justify-center flex-wrap px-4">
-        <Menu.links_list links={@footer_links} link_style={@link_style} />
-
-        <p class="text-black">
-          Copyright © {@brand_name} {Date.utc_today().year}
-          <span :if={@show_made_by?}>
-            - Made by <a class="link link-hover" href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
-          </span>
-        </p>
+        {render_slot(@legal)}
       </nav>
     </footer>
     """
