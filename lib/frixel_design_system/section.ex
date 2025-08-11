@@ -259,10 +259,10 @@ defmodule FrixelDesignSystem.Section do
         <Menu.socials_list socials={@social_medias} />
       </nav>
 
-      <nav class="flex justify-center">
+      <nav class="flex justify-center flex-wrap px-4">
         <Menu.links_list links={@footer_links} />
 
-        <p class="p-4 text-black">
+        <p class="text-black">
           Copyright © {@brand_name} {Date.utc_today().year}
           <span :if={@show_made_by?}>
             - Made by <a href="https://www.frixel.fr/" target="_blank">FRIXEL</a>
