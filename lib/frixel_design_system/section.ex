@@ -210,7 +210,7 @@ defmodule FrixelDesignSystem.Section do
   attr :class, :string, default: ""
   attr :brand_name, :string, default: ""
   attr :brand_img, :string, default: ""
-  attr :company_email_address, :string, default: nil
+  attr :company_postal_address, :string, default: nil
   attr :company_email_address, :string, default: nil
   attr :company_phone_number, :string, default: nil
   attr :socials_title, :string, default: nil
