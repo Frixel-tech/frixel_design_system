@@ -214,9 +214,10 @@ defmodule FrixelDesignSystem.Section do
   attr :company_email_address, :string, default: nil
   attr :company_phone_number, :string, default: nil
   attr :socials_title, :string, default: nil
-  attr :social_medias, :list
   attr :footer_links, :list
+  attr :link_style, :string, default: ""
   attr :show_made_by?, :boolean, default: true
+  slot :socials
 
   def base_footer(assigns) do
     ~H"""
@@ -256,11 +257,11 @@ defmodule FrixelDesignSystem.Section do
 
       <nav>
         <h6 :if={@socials_title} class="footer-title">{@socials_title}</h6>
-        <Menu.socials_list socials={@social_medias} />
+        {render_slot(@socials)}
       </nav>
 
       <nav class="flex justify-center flex-wrap px-4">
-        <Menu.links_list links={@footer_links} />
+        <Menu.links_list links={@footer_links} link_style={@link_style} />
 
         <p class="text-black">
           Copyright © {@brand_name} {Date.utc_today().year}
