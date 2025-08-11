@@ -66,9 +66,9 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <.contact_form phx-submit="submit_contact_form" />
   """
-  attr :client_needs, :list, required: true
-  attr :client_budgets, :list, required: true
-  attr :booking_appointment_url, :string, required: true
+  attr :client_needs, :list, default: nil
+  attr :client_budgets, :list, default: nil
+  attr :booking_appointment_url, :string, default: nil
   attr :rest, :global
 
   def contact_form(assigns) do
@@ -80,7 +80,7 @@ defmodule FrixelDesignSystem.Components.Form do
         </h2>
 
         <div class="flex gap-4">
-          <.link href={@booking_appointment_url} target="_blank">
+          <.link :if={@booking_appointment_url} href={@booking_appointment_url} target="_blank">
             <Button.secondary_button text={gettext("Book a call")} />
           </.link>
         </div>
@@ -127,11 +127,13 @@ defmodule FrixelDesignSystem.Components.Form do
           />
         </div>
         <.form_checkbox_or_radio_group
+          :if={@client_needs}
           input_name="project_types[]"
           options={@client_needs}
           title={gettext("SERVICES (multiple selection)")}
         />
         <.form_checkbox_or_radio_group
+          :if={@client_budgets}
           input_name="project_budget"
           options={@client_budgets}
           title={gettext("PROJECT BUDGET")}

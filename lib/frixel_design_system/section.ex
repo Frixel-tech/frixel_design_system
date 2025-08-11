@@ -5,17 +5,17 @@ defmodule FrixelDesignSystem.Section do
   alias FrixelDesignSystem.Components.{Button, Company, Form, Header, Menu, Project}
   alias FrixelDesignSystem.Helper
 
-  attr :client_needs, :list, required: true
-  attr :client_budgets, :list, required: true
-  attr :company_description, :string, required: true
-  attr :company_name, :string, required: true
-  attr :company_postal_address, :string, required: true
-  attr :company_email_address, :string, required: true
-  attr :company_phone_number, :string, required: true
-  attr :company_social_media_links, :list, required: true
+  attr :client_needs, :list, default: nil
+  attr :client_budgets, :list, default: nil
+  attr :company_description, :string, default: ""
+  attr :company_name, :string, default: ""
+  attr :company_postal_address, :string, default: ""
+  attr :company_email_address, :string, default: ""
+  attr :company_phone_number, :string, default: ""
+  attr :company_social_media_links, :list, default: []
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
-  attr :booking_appointment_url, :string, required: true
+  attr :booking_appointment_url, :string, default: nil
 
   def contact_section(assigns) do
     ~H"""
