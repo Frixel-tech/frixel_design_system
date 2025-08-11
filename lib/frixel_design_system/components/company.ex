@@ -62,13 +62,13 @@ defmodule FrixelDesignSystem.Components.Company do
 
     <ul class="text-base px-4">
       <li :if={@company_email_address}>
-      <a
+        <a
           class="link link-hover"
           aria-label="Write us"
           href={"mailto:#{@company_email_address}"}
           target="_blank"
         >
-        {@company_email_address}
+          {@company_email_address}
         </a>
       </li>
 
