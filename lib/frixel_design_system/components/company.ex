@@ -1,6 +1,6 @@
 defmodule FrixelDesignSystem.Components.Company do
   use Phoenix.Component
-
+  use Gettext, backend: FrixelDesignSystemWeb.Gettext
   alias FrixelDesignSystem.Components.{Button, Header, Menu}
 
   @doc """
