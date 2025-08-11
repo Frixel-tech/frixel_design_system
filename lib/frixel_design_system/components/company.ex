@@ -50,11 +50,7 @@ defmodule FrixelDesignSystem.Components.Company do
   attr :company_email_address, :string, required: true
   attr :company_phone_number, :string, required: true
   attr :company_social_media_links, :list, required: true
-
-  attr :marker_icon_url, :string,
-    default:
-      "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
-
+  attr :marker_icon_url, :string, required: true
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
 
