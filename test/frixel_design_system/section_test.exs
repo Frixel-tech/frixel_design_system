@@ -430,7 +430,7 @@ defmodule FrixelDesignSystem.SectionTest do
         socials_title="Retrouvez-nous-sur les réseaux:"
       >
         <:contact>
-          <Company.contact_infos_mini
+          <Company.contact_details
             brand_name={@branding_name}
             brand_img={@branding_logo_url}
             company_postal_address={@company_postal_address}

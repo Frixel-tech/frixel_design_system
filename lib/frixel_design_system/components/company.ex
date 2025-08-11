@@ -33,78 +33,69 @@ defmodule FrixelDesignSystem.Components.Company do
 
   ## Example:
 
-      <.contact_informations
-        company_description="Some company description paragraph"
-        company_name="Your company name"
-        company_postal_address="Postal code"
-        company_email_address="contact@company.com"
-        company_phone_number="+1 234 567 890"
-        company_social_media_links={@company_social_media_links_map_list} // cf. `Menu.socials_list/1`
-        company_lattitude="2.3723602"
-        company_longitude="48.8329333"
-      />
+      <.contact_informations title="Find us" />
+        <:contact_details>
+          <Company.contact_details
+            company_name="My Company"
+            company_description="We are awesome"
+            company_postal_address="1 Industry street, Business City"
+            company_email_address="contact@company.com"
+            company_phone_number="+1234567890"
+          />
+        </:contact_details>
+
+        <:socials>
+          <Menu.socials_list socials={@social_links_list} is_icon_rounded?={false} class="py-4" />
+        </:socials>
+
+        <:map>
+          <Company.find_us_map
+            company_lattitude="2.2345"
+            company_longitude="4.12345678
+            marker_icon_url="/path/to/my/company/icon.mini"
+          />
+        </:map>
+      </.contact_informations>
   """
-  attr :company_description, :string, required: true
-  attr :company_name, :string, required: true
-  attr :company_postal_address, :string, required: true
-  attr :company_email_address, :string, required: true
-  attr :company_phone_number, :string, required: true
-  attr :company_social_media_links, :list, required: true
-  attr :marker_icon_url, :string, required: true
-  attr :company_lattitude, :string, required: true
-  attr :company_longitude, :string, required: true
+
+  attr :title, :string, default: "Find us"
+  slot :contact_details
+  slot :socials
+  slot :map
 
   def contact_informations(assigns) do
     ~H"""
     <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-base-content text-base xl:text-xl font-bold font-slogan tracking-widest uppercase">
-          {gettext("Find us")}
+          {@title}
         </h2>
       </div>
 
       <div class="flex flex-col gap-4">
-        <p class="text-base">{@company_description}</p>
+        {render_slot(@contact_details)}
 
-        <div>
-          <ul class="text-base">
-            <li>{@company_postal_address}</li>
+        {render_slot(@socials)}
 
-            <li>
-              <a
-                class="link link-hover"
-                aria-label="Write us"
-                href={"mailto:#{@company_email_address}"}
-                target="_blank"
-              >
-                {@company_email_address}
-              </a>
-            </li>
+        {render_slot(@map)}
+    </div>
+    """
+  end
 
-            <li>
-              <a
-                class="link link-accent hover:font-bold transition-[font-weight] "
-                aria-label="Call us"
-                href={"tel:#{@company_phone_number}"}
-                target="_blank"
-              >
-                {@company_phone_number}
-              </a>
-            </li>
-          </ul>
+  attr :marker_icon_url, :string, required: true
+  attr :company_lattitude, :string, required: true
+  attr :company_longitude, :string, required: true
 
-          <Menu.socials_list class="py-4" socials={@company_social_media_links} />
-
-          <div
-            id="leaflet-map"
-            phx-hook="LeafletHook"
-            data-marker-icon-url={@marker_icon_url}
-            data-lattitude={@company_lattitude}
-            data-longitude={@company_longitude}
-            class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
-          />
-        </div>
-      </div>
+  def find_us_map(assigns) do
+    ~H"""
+    <div
+      id="leaflet-map"
+      phx-hook="LeafletHook"
+      data-marker-icon-url={@marker_icon_url}
+      data-lattitude={@company_lattitude}
+      data-longitude={@company_longitude}
+      class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
+    />
     </div>
     """
   end
@@ -114,16 +105,19 @@ defmodule FrixelDesignSystem.Components.Company do
 
   ## Example:
 
-      <Company.contact_infos_mini
-        brand_name="My company"
-        brand_img="/path/to/my/company.logo"
+      <Company.contact_details
+        company_name="My company"
+        company_img="/path/to/my/company.logo"
+        company_description="My company is awesome!"
         company_postal_address="1 industry street, 1234 Companyland"
         company_email_address="company@email.address"
         company_phone_number="+123456789"
       />
   """
-  attr :brand_img, :string, default: nil, doc: "The company logo to be displayed"
-  attr :brand_name, :string, default: "", doc: "The company name"
+  attr :company_img, :string, default: nil, doc: "The company logo to be displayed"
+  attr :company_name, :string, default: "", doc: "The company name"
+
+  attr :company_description, :string, default: nil
 
   attr :company_email_address, :string,
     default: nil,
@@ -137,9 +131,11 @@ defmodule FrixelDesignSystem.Components.Company do
     default: nil,
     doc: "the company physical address to be shown."
 
-  def contact_infos_mini(assigns) do
+  def contact_details(assigns) do
     ~H"""
     <img :if={@brand_img} src={@brand_img} alt={"#{@brand_name} logo"} class="w-48 mx-auto px-1" />
+
+    <p :if={@company_description} class="text-base">{@company_description}</p>
 
     <ul class="text-base px-4">
       <li :if={@company_email_address}>

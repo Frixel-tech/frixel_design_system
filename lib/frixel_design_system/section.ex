@@ -22,23 +22,15 @@ defmodule FrixelDesignSystem.Section do
   attr :company_longitude, :string, required: true
   attr :booking_appointment_url, :string, default: nil
 
+  slot :contact_infos
+
   def contact_section(assigns) do
     ~H"""
     <section
       id="contact-us"
       class="flex flex-col md:flex-row justify-evenly gap-x-4 lg:gap-x-8 xl:gap-x-16 pt-20"
     >
-      <Company.contact_informations
-        company_description={Helper.format_text(@company_description)}
-        company_name={@company_name}
-        company_postal_address={@company_postal_address}
-        company_email_address={@company_email_address}
-        company_phone_number={@company_phone_number}
-        company_social_media_links={@company_social_media_links}
-        marker_icon_url={@marker_icon_url}
-        company_lattitude={@company_lattitude}
-        company_longitude={@company_longitude}
-      />
+      {render_slot(@contact_infos)}
 
       <Form.contact_form
         client_needs={@client_needs}
