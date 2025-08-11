@@ -136,7 +136,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   def contact_details(assigns) do
     ~H"""
-    <img :if={@brand_img} src={@brand_img} alt={"#{@brand_name} logo"} class="w-48 mx-auto px-1" />
+    <img :if={@company_img} src={@company_img} alt={"#{@company_name} logo"} class="w-48 mx-auto px-1" />
 
     <p :if={@company_description} class="text-base">{@company_description}</p>
 
