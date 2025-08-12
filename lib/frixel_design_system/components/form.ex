@@ -88,25 +88,40 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
         <div class="flex gap-4">
-          <div class="w-1/2">
             <.form_input
               id="sender_name"
-              class="w-full"
+              class="w-1/2"
               name="sender_name"
               placeholder={gettext("Name")}
               required
             />
-          </div>
-          <div class="w-1/2">
+
             <.form_input
               id="sender_email_address"
-              class="w-full"
+              class="w-1/2"
               name="sender_email_address"
               placeholder={gettext("E-mail")}
               type="email"
+              required
             />
-          </div>
         </div>
+
+        <div>
+          <.form_input
+            id="sender_company"
+            name="sender_company"
+            placeholder={gettext("Company (optional)")}
+            class="w-1/2"
+          />
+
+          <.form_input
+            id="sender_phone_number"
+            name="sender_phone_number"
+            placeholder={gettext("Phone (optional)")}
+            class="w-1/2"
+          />
+        </div>
+
         <div>
           <textarea
             id="body"
@@ -117,15 +132,7 @@ defmodule FrixelDesignSystem.Components.Form do
             required
           ></textarea>
         </div>
-        <div>
-          <.form_input
-            id="sender_company"
-            name="sender_company"
-            placeholder={gettext("Company")}
-            class="w-full"
-            required={false}
-          />
-        </div>
+
         <.form_checkbox_or_radio_group
           :if={@client_needs}
           input_name="project_types[]"
