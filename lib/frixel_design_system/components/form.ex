@@ -72,7 +72,7 @@ defmodule FrixelDesignSystem.Components.Form do
         input_color_class="input-secondary"
         input_error_class="input-red-400"
         client_needs={["website", "design", "e-commerce", "mobile app"]}
-        client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]},
+        client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]}
         booking_appointment_url="http://calendly.com/contact-me"
         phx-submit="submit_contact_form" />
   """

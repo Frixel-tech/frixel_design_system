@@ -33,7 +33,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   ## Example:
 
-      <.contact_informations title="Find us" title_color_class="text-emerald-400" />
+      <.contact_informations title="Find us" title_color_class="text-emerald-400">
         <:contact_details>
           <Company.contact_details
             text-color-class="text-blue-500"
@@ -52,7 +52,7 @@ defmodule FrixelDesignSystem.Components.Company do
         <:map>
           <Company.find_us_map
             company_lattitude="2.2345"
-            company_longitude="4.12345678
+            company_longitude="4.12345678"
             marker_icon_url="/path/to/my/company/icon.mini"
           />
         </:map>
@@ -134,7 +134,6 @@ defmodule FrixelDesignSystem.Components.Company do
   attr :text_color_class, :string, default: "text-black"
   attr :company_img, :string, default: nil, doc: "The company logo to be displayed"
   attr :company_name, :string, default: "", doc: "The company name"
-
   attr :company_description, :string, default: nil
 
   attr :company_email_address, :string,

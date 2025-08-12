@@ -11,7 +11,7 @@ defmodule FrixelDesignSystem.Section do
 
         <Section.contact_section>
           <:contact_infos>
-            <Company.contact_informations title="Find us" />
+            <Company.contact_informations title="Find us">
               <:contact_details>
                 <Company.contact_details
                   company_name="My Company"
@@ -40,9 +40,10 @@ defmodule FrixelDesignSystem.Section do
             <Form.contact_form
               title="My form"
               client_needs={["website", "design", "e-commerce", "mobile app"]}
-              client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]},
+              client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]}
               booking_appointment_url="http://calendly.com/contact-me"
               phx-submit="submit_contact_form"
+            />
           </:contact_form>
         </Section.contact_section>
   """
