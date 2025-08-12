@@ -83,6 +83,17 @@ defmodule FrixelDesignSystem.Components.Company do
     """
   end
 
+  @doc """
+  Renders a Leaflet map centered on a specific location and with a customizable pin marker.
+
+  ## Example:
+
+      <.find_us_map
+        company_lattitude="2.1234"
+        company_longitude="43.5678"
+        marker_icon_url="path/to/your/company/icon.png"
+      />
+  """
   attr :marker_icon_url, :string,
     default:
       "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
