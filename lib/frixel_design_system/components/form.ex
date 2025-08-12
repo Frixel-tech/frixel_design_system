@@ -108,7 +108,7 @@ defmodule FrixelDesignSystem.Components.Form do
               name="sender_name"
               value=""
               type="text"
-              class={"input #{@input_color_class} w-1/2"}
+              class={"input #{@input_color_class}"}
               error_class={@input_error_class}
               placeholder={gettext("Name")}
               required
@@ -119,7 +119,7 @@ defmodule FrixelDesignSystem.Components.Form do
               name="sender_email_address"
               value=""
               type="email"
-              class={"input #{@input_color_class} w-1/2"}
+              class={"input #{@input_color_class}"}
               error_class={@input_error_class}
               placeholder={gettext("E-mail")}
               required
@@ -132,7 +132,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_company"
             value=""
             type="text"
-            class={"input #{@input_color_class} w-1/2"}
+            class={"input #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Company (optional)")}
           />
@@ -142,7 +142,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_phone_number"
             value=""
             type="tel"
-            class={"input #{@input_color_class} w-1/2"}
+            class={"input #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Phone (optional)")}
           />
@@ -154,7 +154,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="body"
             value=""
             type="textarea"
-            class={"textarea #{@input_color_class} w-full"}
+            class={"textarea #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Write your message here...")}
             rows="4"
