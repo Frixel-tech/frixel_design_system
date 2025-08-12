@@ -11,7 +11,7 @@ defmodule FrixelDesignSystem.Section do
 
         <Section.contact_section>
           <:contact_infos>
-            <.contact_informations title="Find us" />
+            <Company.contact_informations title="Find us" />
               <:contact_details>
                 <Company.contact_details
                   company_name="My Company"
@@ -33,7 +33,7 @@ defmodule FrixelDesignSystem.Section do
                   marker_icon_url="/path/to/my/company/icon.mini"
                 />
               </:map>
-            </.contact_informations>
+            </Company.contact_informations>
           </:contact_infos>
 
           <:contact_form>

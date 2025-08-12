@@ -33,9 +33,10 @@ defmodule FrixelDesignSystem.Components.Company do
 
   ## Example:
 
-      <.contact_informations title="Find us" />
+      <.contact_informations title="Find us" title_color_class="text-emerald-400" />
         <:contact_details>
           <Company.contact_details
+            text-color-class="text-blue-500"
             company_name="My Company"
             company_description="We are awesome"
             company_postal_address="1 Industry street, Business City"
@@ -59,6 +60,7 @@ defmodule FrixelDesignSystem.Components.Company do
   """
 
   attr :title, :string, default: "Find us"
+  attr :title_color_class, :string, default: "text-black"
   slot :contact_details
   slot :socials
   slot :map
@@ -67,7 +69,7 @@ defmodule FrixelDesignSystem.Components.Company do
     ~H"""
     <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-base-content text-base xl:text-xl font-bold font-slogan tracking-widest uppercase">
+        <h2 class={"#{@title_color_class} text-base xl:text-xl font-bold font-slogan tracking-widest uppercase"}>
           {@title}
         </h2>
       </div>
@@ -120,6 +122,7 @@ defmodule FrixelDesignSystem.Components.Company do
   ## Example:
 
       <Company.contact_details
+        text-color-class="text-blue-500"
         company_name="My company"
         company_img="/path/to/my/company.logo"
         company_description="My company is awesome!"
@@ -128,6 +131,7 @@ defmodule FrixelDesignSystem.Components.Company do
         company_phone_number="+123456789"
       />
   """
+  attr :text_color_class, :string, default: "text-black"
   attr :company_img, :string, default: nil, doc: "The company logo to be displayed"
   attr :company_name, :string, default: "", doc: "The company name"
 
@@ -149,9 +153,9 @@ defmodule FrixelDesignSystem.Components.Company do
     ~H"""
     <img :if={@company_img} src={@company_img} alt={"#{@company_name} logo"} class="w-48 mx-auto px-1" />
 
-    <p :if={@company_description} class="text-base">{@company_description}</p>
+    <p :if={@company_description} class={"#{@text_color_class} text-base"}>{@company_description}</p>
 
-    <ul class="text-base">
+    <ul class={"#{@text_color_class} text-base"}>
       <li :if={@company_email_address}>
         <a
           class="link link-hover"
