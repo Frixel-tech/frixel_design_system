@@ -1,11 +1,12 @@
 defmodule FrixelDesignSystem.Components.CompanyTest do
-  alias FrixelDesignSystem.Components.Company
+  alias FrixelDesignSystem.Components.{Company, Menu}
   use ComponentCase
 
   test "contact_informations" do
     # Given
     company_description = "Some description of the company"
     company_name = "Company name"
+    company_img = "/path/to/my/company/logo.png"
     company_postal_address = "11 boulevard de l'ours, 30899, Mort-Sur-Sang"
     company_email_address = "email@adress.com"
     company_phone_number = "+3378767543456"
@@ -31,6 +32,7 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
     assigns = %{
       company_description: company_description,
       company_name: company_name,
+      company_img: company_img,
       company_postal_address: company_postal_address,
       company_email_address: company_email_address,
       company_phone_number: company_phone_number,
@@ -42,21 +44,41 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
     # When
     html =
       "#{rendered_to_string(~H"""
-      <Company.contact_informations
-        company_description={@company_description}
-        company_name={@company_name}
-        company_postal_address={@company_postal_address}
-        company_email_address={@company_email_address}
-        company_phone_number={@company_phone_number}
-        company_social_media_links={@company_social_media_links}
-        company_lattitude={@company_lattitude}
-        company_longitude={@company_longitude}
-      />
+      <Company.contact_informations title="Find us" title_color_class="text-emerald-400">
+        <:contact_details>
+          <Company.contact_details
+            text-color-class="text-blue-500"
+            company_name={@company_name}
+            company_img={@company_img}
+            company_description={@company_description}
+            company_postal_address={@company_postal_address}
+            company_email_address={@company_email_address}
+            company_phone_number={@company_phone_number}
+          />
+        </:contact_details>
+
+        <:socials>
+          <Menu.socials_list
+            socials={@company_social_media_links}
+            is_icon_rounded?={false}
+            class="py-4"
+          />
+        </:socials>
+
+        <:map>
+          <Company.find_us_map
+            company_lattitude={@company_lattitude}
+            company_longitude={@company_longitude}
+            marker_icon_url="/path/to/my/company/icon.mini"
+          />
+        </:map>
+      </Company.contact_informations>
       """)}"
 
     # Then
-    assert html =~
-             "<div id=\"find-us\" class=\"mx-auto py-6 px-8 md:max-w-1/2\">\n  <div class=\"flex items-center justify-between mb-8\">\n    <h2 class=\"text-base-content text-base xl:text-xl font-bold font-slogan tracking-widest uppercase\">\n      Find us\n    </h2>\n  </div>\n\n  <div class=\"flex flex-col gap-4\">\n    <p class=\"text-base\">Some description of the company</p>\n\n    <div>\n      <ul class=\"text-base\">\n        <li>11 boulevard de l&#39;ours, 30899, Mort-Sur-Sang</li>\n\n        <li>\n          email@adress.com\n        </li>\n\n        <li>\n          <a class=\"link link-accent hover:font-bold transition-[font-weight] \" aria-label=\"Call us\" href=\"tel:+3378767543456\" target=\"_blank\">\n            +3378767543456\n          </a>\n        </li>\n      </ul>\n\n      <ul class=\"flex items-center gap-4 py-4\">\n  <li>\n    <a href=\"https://www.linkedin.com/company/frixel-tech\" target=\"_blank\">\n      <img src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png\" alt=\"Logo for https://www.linkedin.com/company/frixel-tech\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"https://github.com/Frixel-tech\" target=\"_blank\">\n      <img src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png\" alt=\"Logo for https://github.com/Frixel-tech\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n\n      <div id=\"leaflet-map\" phx-hook=\"LeafletHook\" data-lattitude=\"14.24676\" data-longitude=\"32.68465\" class=\"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0\"></div>\n    </div>\n  </div>\n</div>"
+    assert html =~ "Some description of the company"
+    assert html =~ "https://github.com/Frixel-tech"
+    assert html =~ "/path/to/my/company/icon.mini"
   end
 
   test "branding" do
