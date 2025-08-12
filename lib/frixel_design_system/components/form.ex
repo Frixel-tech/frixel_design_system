@@ -106,6 +106,7 @@ defmodule FrixelDesignSystem.Components.Form do
             <CoreComponents.input
               id="sender_name"
               name="sender_name"
+              value=""
               type="text"
               class={"input #{@input_color_class} w-1/2"}
               error_class={@input_error_class}
@@ -116,6 +117,7 @@ defmodule FrixelDesignSystem.Components.Form do
             <CoreComponents.input
               id="sender_email_address"
               name="sender_email_address"
+              value=""
               type="email"
               class={"input #{@input_color_class} w-1/2"}
               error_class={@input_error_class}
@@ -128,6 +130,7 @@ defmodule FrixelDesignSystem.Components.Form do
           <CoreComponents.input
             id="sender_company"
             name="sender_company"
+            value=""
             type="text"
             class={"input #{@input_color_class} w-1/2"}
             error_class={@input_error_class}
@@ -137,6 +140,7 @@ defmodule FrixelDesignSystem.Components.Form do
           <CoreComponents.input
             id="sender_phone_number"
             name="sender_phone_number"
+            value=""
             type="tel"
             class={"input #{@input_color_class} w-1/2"}
             error_class={@input_error_class}
@@ -148,6 +152,7 @@ defmodule FrixelDesignSystem.Components.Form do
           <CoreComponents.input
             id="body"
             name="body"
+            value=""
             type="textarea"
             class={"textarea #{@input_color_class} w-full"}
             error_class={@input_error_class}
