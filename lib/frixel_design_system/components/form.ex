@@ -88,7 +88,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
   def contact_form(assigns) do
     ~H"""
-    <div class={"card #{@card_class} shadow-xl py-6 px-8"}>
+    <div class={"card #{@card_class} shadow-xl justify-center py-6 px-8"}>
       <div class="flex items-center justify-between mb-8">
         <h2 class={"#{@title_color_class} text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase"}>
           {@title}
@@ -103,27 +103,27 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
         <div class="flex justify-between">
-            <CoreComponents.input
-              id="sender_name"
-              name="sender_name"
-              value=""
-              type="text"
-              class={"input #{@input_color_class}"}
-              error_class={@input_error_class}
-              placeholder={gettext("Name")}
-              required
-            />
+          <CoreComponents.input
+            id="sender_name"
+            name="sender_name"
+            value=""
+            type="text"
+            class={"input #{@input_color_class}"}
+            error_class={@input_error_class}
+            placeholder={gettext("Name")}
+            required
+          />
 
-            <CoreComponents.input
-              id="sender_email_address"
-              name="sender_email_address"
-              value=""
-              type="email"
-              class={"input #{@input_color_class}"}
-              error_class={@input_error_class}
-              placeholder={gettext("E-mail")}
-              required
-            />
+          <CoreComponents.input
+            id="sender_email_address"
+            name="sender_email_address"
+            value=""
+            type="email"
+            class={"input #{@input_color_class}"}
+            error_class={@input_error_class}
+            placeholder={gettext("E-mail")}
+            required
+          />
         </div>
 
         <div class="flex justify-between">

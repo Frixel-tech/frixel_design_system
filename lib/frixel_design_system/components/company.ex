@@ -151,7 +151,12 @@ defmodule FrixelDesignSystem.Components.Company do
 
   def contact_details(assigns) do
     ~H"""
-    <img :if={@company_img} src={@company_img} alt={"#{@company_name} logo"} class="w-48 mx-auto px-1" />
+    <img
+      :if={@company_img}
+      src={@company_img}
+      alt={"#{@company_name} logo"}
+      class="w-48 mx-auto px-1"
+    />
 
     <p :if={@company_description} class={"#{@text_color_class} text-base"}>{@company_description}</p>
 
