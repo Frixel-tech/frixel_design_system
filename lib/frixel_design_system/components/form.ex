@@ -64,8 +64,14 @@ defmodule FrixelDesignSystem.Components.Form do
 
   ## Example:
 
-      <.contact_form phx-submit="submit_contact_form" />
+      <.contact_form
+        title="My form"
+        client_needs={["website", "design", "e-commerce", "mobile app"]}
+        client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]},
+        booking_appointment_url="http://calendly.com/contact-me"
+        phx-submit="submit_contact_form" />
   """
+  attr :title, :string, default: "Contact us"
   attr :client_needs, :list, default: nil
   attr :client_budgets, :list, default: nil
   attr :booking_appointment_url, :string, default: nil
@@ -76,7 +82,7 @@ defmodule FrixelDesignSystem.Components.Form do
     <div class="card bg-base-200 shadow-xl py-6 px-8">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase">
-          {gettext("Or contact us")}
+          {@title}
         </h2>
 
         <div class="flex gap-4">
