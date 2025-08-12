@@ -389,17 +389,15 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   def socials_list(assigns) do
     ~H"""
-    <ul class={"flex items-center gap-4 #{@class}"}>
-      <li :for={social <- @socials}>
-        <a href={social.social_media_url} target="_blank">
-          <img
-            src={social.icon_url}
-            alt={"Logo for #{social.social_media_url}"}
-            class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
-          />
-        </a>
-      </li>
-    </ul>
+    <nav class={"flex items-center gap-4 #{@class}"}>
+      <a :for={social <- @socials} href={social.social_media_url} target="_blank">
+        <img
+          src={social.icon_url}
+          alt={"Logo for #{social.social_media_url}"}
+          class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+        />
+      </a>
+    </nav>
     """
   end
 
