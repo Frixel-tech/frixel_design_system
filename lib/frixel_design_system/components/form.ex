@@ -112,7 +112,7 @@ defmodule FrixelDesignSystem.Components.Form do
             />
         </div>
 
-        <div>
+        <div class="flex gap-4">
           <.form_input
             id="sender_company"
             name="sender_company"
