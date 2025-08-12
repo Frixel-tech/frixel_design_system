@@ -102,7 +102,7 @@ defmodule FrixelDesignSystem.Components.Form do
       </div>
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
-        <div class="flex gap-4">
+        <div class="flex justify-between">
             <CoreComponents.input
               id="sender_name"
               name="sender_name"
@@ -126,7 +126,7 @@ defmodule FrixelDesignSystem.Components.Form do
             />
         </div>
 
-        <div class="flex gap-4">
+        <div class="flex justify-between">
           <CoreComponents.input
             id="sender_company"
             name="sender_company"
@@ -154,7 +154,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="body"
             value=""
             type="textarea"
-            class={"textarea #{@input_color_class}"}
+            class={"textarea #{@input_color_class} w-full"}
             error_class={@input_error_class}
             placeholder={gettext("Write your message here...")}
             rows="4"
