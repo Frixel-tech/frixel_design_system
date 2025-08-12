@@ -66,12 +66,20 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <.contact_form
         title="My form"
+        title_color_class="text-emerald-400"
+        card_class="bg-gray border border-red-400"
+        input_color_class="input-secondary"
+        input_error_class="input-red-400"
         client_needs={["website", "design", "e-commerce", "mobile app"]}
         client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]},
         booking_appointment_url="http://calendly.com/contact-me"
         phx-submit="submit_contact_form" />
   """
   attr :title, :string, default: "Contact us"
+  attr :title_color_class, :string, default: "text-black"
+  attr :card_class, :string, "bg-white border border-black"
+  attr :input_color_class, :string, default: "input-neutral"
+  attr :input_error_class, :string, default: "input-error"
   attr :client_needs, :list, default: nil
   attr :client_budgets, :list, default: nil
   attr :booking_appointment_url, :string, default: nil
@@ -79,9 +87,9 @@ defmodule FrixelDesignSystem.Components.Form do
 
   def contact_form(assigns) do
     ~H"""
-    <div class="card bg-base-200 shadow-xl py-6 px-8">
+    <div class={"card #{card_class} shadow-xl py-6 px-8"}>
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase">
+        <h2 class={"#{title_color_class} text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase"}>
           {@title}
         </h2>
 
@@ -94,49 +102,58 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
         <div class="flex gap-4">
-            <.form_input
+            <.input
               id="sender_name"
-              class="w-1/2"
               name="sender_name"
+              type="text"
+              class={"input #{@input_color_class} w-1/2"}
+              error_class={@input_error_class}
               placeholder={gettext("Name")}
               required
             />
 
-            <.form_input
+            <.input
               id="sender_email_address"
-              class="w-1/2"
               name="sender_email_address"
-              placeholder={gettext("E-mail")}
               type="email"
+              class={"input #{@input_color_class} w-1/2"}
+              error_class={@input_error_class}
+              placeholder={gettext("E-mail")}
               required
             />
         </div>
 
         <div class="flex gap-4">
-          <.form_input
+          <.input
             id="sender_company"
             name="sender_company"
+            type="text"
+            class={"input #{@input_color_class} w-1/2"}
+            error_class={@input_error_class}
             placeholder={gettext("Company (optional)")}
-            class="w-1/2"
           />
 
-          <.form_input
+          <.input
             id="sender_phone_number"
             name="sender_phone_number"
+            type="tel"
+            class={"input #{@input_color_class} w-1/2"}
+            error_class={@input_error_class}
             placeholder={gettext("Phone (optional)")}
-            class="w-1/2"
           />
         </div>
 
         <div>
-          <textarea
+          <.input
             id="body"
             name="body"
+            type="textarea"
+            class={"textarea #{@input_color_class} w-full"}
+            error_class={@input_error_class}
             placeholder={gettext("Write your message here...")}
-            class="textarea textarea-bordered w-full input-secondary"
             rows="4"
             required
-          ></textarea>
+          />
         </div>
 
         <.form_checkbox_or_radio_group
