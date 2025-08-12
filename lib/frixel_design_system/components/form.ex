@@ -169,6 +169,7 @@ defmodule FrixelDesignSystem.Components.Form do
           options={@client_needs}
           title={gettext("SERVICES (multiple selection)")}
         />
+
         <.form_checkbox_or_radio_group
           :if={@client_budgets}
           input_name="project_budget"
@@ -177,7 +178,8 @@ defmodule FrixelDesignSystem.Components.Form do
           group_type="radio"
           other_input_type="number"
         />
-        <button class={"btn #{@submit_color_class}"} type="submit" />
+
+        <input class={"btn #{@submit_color_class}"} type="submit" value="Send" />
       </form>
     </div>
     """
