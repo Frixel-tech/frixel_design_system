@@ -140,7 +140,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
     <p :if={@company_description} class="text-base">{@company_description}</p>
 
-    <ul class="text-base px-4">
+    <ul class="text-base">
       <li :if={@company_email_address}>
         <a
           class="link link-hover"
