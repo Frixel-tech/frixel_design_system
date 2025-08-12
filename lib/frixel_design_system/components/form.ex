@@ -81,6 +81,7 @@ defmodule FrixelDesignSystem.Components.Form do
   attr :card_class, :string, default: "border border-black"
   attr :input_color_class, :string, default: "input-neutral"
   attr :input_error_class, :string, default: "input-error"
+  attr :submit_color_class, :string, default: "btn-neutral"
   attr :client_needs, :list, default: nil
   attr :client_budgets, :list, default: nil
   attr :booking_appointment_url, :string, default: nil
@@ -176,7 +177,7 @@ defmodule FrixelDesignSystem.Components.Form do
           group_type="radio"
           other_input_type="number"
         />
-        <Button.primary_button text={gettext("Send")} class="mt-4" type="submit" />
+        <button class={"btn #{@submit_color_class}"} type="submit" />
       </form>
     </div>
     """
