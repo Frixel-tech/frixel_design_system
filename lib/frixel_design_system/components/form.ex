@@ -2,6 +2,7 @@ defmodule FrixelDesignSystem.Components.Form do
   use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
   alias FrixelDesignSystem.Components.Button
+  alias FrixelDesignSystemWeb.CoreComponents
 
   @doc """
   Renders the form for client submissions.
@@ -77,7 +78,7 @@ defmodule FrixelDesignSystem.Components.Form do
   """
   attr :title, :string, default: "Contact us"
   attr :title_color_class, :string, default: "text-black"
-  attr :card_class, :string, "bg-white border border-black"
+  attr :card_class, :string, default: "border border-black"
   attr :input_color_class, :string, default: "input-neutral"
   attr :input_error_class, :string, default: "input-error"
   attr :client_needs, :list, default: nil
@@ -89,7 +90,7 @@ defmodule FrixelDesignSystem.Components.Form do
     ~H"""
     <div class={"card #{@card_class} shadow-xl py-6 px-8"}>
       <div class="flex items-center justify-between mb-8">
-        <h2 class={"#{title_color_class} text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase"}>
+        <h2 class={"#{@title_color_class} text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase"}>
           {@title}
         </h2>
 
@@ -102,7 +103,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
         <div class="flex gap-4">
-            <.input
+            <CoreComponents.input
               id="sender_name"
               name="sender_name"
               type="text"
@@ -112,7 +113,7 @@ defmodule FrixelDesignSystem.Components.Form do
               required
             />
 
-            <.input
+            <CoreComponents.input
               id="sender_email_address"
               name="sender_email_address"
               type="email"
@@ -124,7 +125,7 @@ defmodule FrixelDesignSystem.Components.Form do
         </div>
 
         <div class="flex gap-4">
-          <.input
+          <CoreComponents.input
             id="sender_company"
             name="sender_company"
             type="text"
@@ -133,7 +134,7 @@ defmodule FrixelDesignSystem.Components.Form do
             placeholder={gettext("Company (optional)")}
           />
 
-          <.input
+          <CoreComponents.input
             id="sender_phone_number"
             name="sender_phone_number"
             type="tel"
@@ -144,7 +145,7 @@ defmodule FrixelDesignSystem.Components.Form do
         </div>
 
         <div>
-          <.input
+          <CoreComponents.input
             id="body"
             name="body"
             type="textarea"
