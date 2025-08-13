@@ -140,9 +140,13 @@ defmodule FrixelDesignSystem.Components.Product do
     default: true,
     doc: "A switch to enable or disable the 'add to cart' button"
 
+  attr :bg_color_class, :string,
+    default: "bg-white",
+    doc: "A background color class used for the product details lateral panel"
+
   def product_details(assigns) do
     ~H"""
-    <div class="sm:grid sm:grid-cols-2">
+    <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
       <%!-- TODO: should be a carousel here --%>
       <div class="sm:col-start-2">
         <figure>
@@ -154,7 +158,7 @@ defmodule FrixelDesignSystem.Components.Product do
         </div>
       </div>
 
-      <div class="card card-xs fixed bottom-0 sm:col-start-1 w-full border-t border-base-300 rounded-none p-8">
+      <div class={"#{@bg_color_class} card card-xs sticky bottom-0 sm:relative sm:col-start-1 w-full border-t border-base-300 rounded-none p-8"}>
         <div class="card-body flex-row justify-between">
           <div>
             <h2 class="card-title flex-col">{@product[:name]}</h2>
