@@ -142,9 +142,9 @@ defmodule FrixelDesignSystem.Components.Product do
 
   def product_details(assigns) do
     ~H"""
-    <div class="py-4 sm:grid sm:grid-cols-2">
+    <div class="sm:grid sm:grid-cols-2">
       <%!-- TODO: should be a carousel here --%>
-      <div class="sm:overflow-y-auto">
+      <div>
         <figure>
           <img src={@product[:illustration_url]} class="w-screen" />
         </figure>
@@ -154,7 +154,7 @@ defmodule FrixelDesignSystem.Components.Product do
         </div>
       </div>
 
-      <div class="card card-xs fixed bottom-0 sm:static w-full border-t border-base-300 rounded-none p-8">
+      <div class="card card-xs fixed bottom-0 sm:order-1 w-full border-t border-base-300 rounded-none p-8">
         <div class="card-body flex-row justify-between">
           <div>
             <h2 class="card-title flex-col">{@product[:name]}</h2>
