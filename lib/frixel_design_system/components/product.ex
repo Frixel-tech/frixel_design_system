@@ -136,16 +136,22 @@ defmodule FrixelDesignSystem.Components.Product do
     doc:
       "A map representing a product. It should at least have `name`, `price` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'Awesome golden watch', price: '1000.00', illustration_url: 'http://url.to/img', description: 'Description for this awesome golden watch.'}"
 
+  attr :is_cart_active?,
+    default: true,
+    doc: "A switch to enable or disable the 'add to cart' button"
+
   def product_details(assigns) do
     ~H"""
     <div class="py-4">
       <%!-- TODO: should be a carousel here --%>
-      <figure>
-        <img src={@product[:illustration_url]} class="w-screen" />
-      </figure>
+      <div class="sm:grid sm:grid-cols-2">
+        <figure>
+          <img src={@product[:illustration_url]} class="w-screen" />
+        </figure>
 
-      <div class="p-8">
-        <p class="text-sm">{@product[:description]}</p>
+        <div class="p-8">
+          <p class="text-sm">{@product[:description]}</p>
+        </div>
       </div>
 
       <div class="card card-xs fixed bottom-0 w-full border-t border-base-300 rounded-none p-8">
@@ -155,7 +161,7 @@ defmodule FrixelDesignSystem.Components.Product do
             <p class="text-sm">{@product[:price]}€</p>
           </div>
 
-          <div class="card-actions">
+          <div class="card-actions" :if={@is_cart_active?}>
             <button class="btn">Add to cart</button>
           </div>
         </div>
