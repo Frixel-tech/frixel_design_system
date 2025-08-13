@@ -2,9 +2,20 @@ defmodule FrixelDesignSystem.Components.Product do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
 
+  @doc """
+  A dropdown component to apply a filter on the products request.
+
+  ## Example:
+
+      <Product.sorting_filter sorting="price ascending" event_name="sort-by" />
+  """
   attr :sorting, :string,
     default: "new products",
     values: ["new products", "price ascending", "price descending"]
+
+  attr :event_name, :string,
+    required: true,
+    doc: "The name of the event to trigger from the parent live view"
 
   def sorting_filter(assigns) do
     ~H"""
@@ -14,7 +25,7 @@ defmodule FrixelDesignSystem.Components.Product do
         <li>
           <a
             phx-click={
-              JS.push("sort-by", value: %{sort_by: "price descending"})
+              JS.push(@event_name, value: %{sort_by: "price descending"})
               |> JS.remove_attribute("open", to: "#sorting-dropdown")
             }
             class={@sorting == "price descending" && "menu-active"}
@@ -25,7 +36,7 @@ defmodule FrixelDesignSystem.Components.Product do
         <li>
           <a
             phx-click={
-              JS.push("sort-by", value: %{sort_by: "price ascending"})
+              JS.push(@event_name, value: %{sort_by: "price ascending"})
               |> JS.remove_attribute("open", to: "#sorting-dropdown")
             }
             class={@sorting == "price ascending" && "menu-active"}
@@ -36,7 +47,7 @@ defmodule FrixelDesignSystem.Components.Product do
         <li>
           <a
             phx-click={
-              JS.push("sort-by", value: %{sort_by: "new products"})
+              JS.push(@event_name, value: %{sort_by: "new products"})
               |> JS.remove_attribute("open", to: "#sorting-dropdown")
             }
             class={@sorting == "new products" && "menu-active"}
@@ -49,22 +60,22 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
-  attr :subcategory_path, :string,
+  attr :category_path, :string,
     required: true,
-    doc: "The subcategories static path, ex: '/subcategory"
+    doc: "The categories (or subcategories) static path, ex: '/category"
 
-  attr :subcategories, :list,
+  attr :categories, :list,
     default: [],
     doc:
-      "A list of maps representing subcategories. It should at least have `name` and `illustration_url` keys ; ex: [%{name: 'watches', illustration_url: 'http://url.to/img'}, ...]"
+      "A list of maps representing categories (or subcategories). It should at least have `name` and `illustration_url` keys ; ex: [%{name: 'watches', illustration_url: 'http://url.to/img'}, ...]"
 
-  def subcategory_carousel(assigns) do
+  def category_carousel(assigns) do
     ~H"""
     <div class="carousel carousel-center gap-4 m-auto">
-      <.link :for={subcategory <- @subcategories} patch={"#{@subcategory_path}/#{subcategory[:name]}"}>
+      <.link :for={category <- @categories} patch={"#{@category_path}/#{category[:name]}"}>
         <figure class="carousel-item flex-col">
-          <img src={subcategory[:illustration_url]} />
-          <figcaption class="text-center p-2">{subcategory[:name]}</figcaption>
+          <img src={category[:illustration_url]} />
+          <figcaption class="text-center p-2">{category[:name]}</figcaption>
         </figure>
       </.link>
     </div>
