@@ -142,9 +142,9 @@ defmodule FrixelDesignSystem.Components.Product do
 
   def product_details(assigns) do
     ~H"""
-    <div class="py-4">
+    <div class="py-4 sm:grid sm:grid-cols-2">
       <%!-- TODO: should be a carousel here --%>
-      <div class="sm:grid sm:grid-cols-2">
+      <div>
         <figure>
           <img src={@product[:illustration_url]} class="w-screen" />
         </figure>
@@ -161,7 +161,7 @@ defmodule FrixelDesignSystem.Components.Product do
             <p class="text-sm">{@product[:price]}€</p>
           </div>
 
-          <div class="card-actions" :if={@is_cart_active?}>
+          <div :if={@is_cart_active?} class="card-actions">
             <button class="btn">Add to cart</button>
           </div>
         </div>
