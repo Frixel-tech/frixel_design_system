@@ -154,7 +154,7 @@ defmodule FrixelDesignSystem.Components.Product do
         </div>
       </div>
 
-      <div class="card card-xs fixed bottom-0 w-full border-t border-base-300 rounded-none p-8">
+      <div class="card card-xs fixed bottom-0 sm:static w-full border-t border-base-300 rounded-none p-8">
         <div class="card-body flex-row justify-between">
           <div>
             <h2 class="card-title flex-col">{@product[:name]}</h2>
