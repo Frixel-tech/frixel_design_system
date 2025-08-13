@@ -144,7 +144,7 @@ defmodule FrixelDesignSystem.Components.Product do
     ~H"""
     <div class="py-4 sm:grid sm:grid-cols-2">
       <%!-- TODO: should be a carousel here --%>
-      <div>
+      <div class="sm:overflow-y-auto">
         <figure>
           <img src={@product[:illustration_url]} class="w-screen" />
         </figure>
