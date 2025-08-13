@@ -136,7 +136,7 @@ defmodule FrixelDesignSystem.Components.Product do
     doc:
       "A map representing a product. It should at least have `name`, `price` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'Awesome golden watch', price: '1000.00', illustration_url: 'http://url.to/img', description: 'Description for this awesome golden watch.'}"
 
-  attr :is_cart_active?,
+  attr :is_cart_active?, :boolean
     default: true,
     doc: "A switch to enable or disable the 'add to cart' button"
 
