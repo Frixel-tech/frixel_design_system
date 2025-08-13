@@ -391,11 +391,17 @@ defmodule FrixelDesignSystem.Components.Menu do
     ~H"""
     <nav class={"flex items-center gap-4 #{@class}"}>
       <a :for={social <- @socials} href={social.social_media_url} target="_blank">
-        <img
-          src={social.icon_url}
-          alt={"Logo for #{social.social_media_url}"}
-          class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
-        />
+        <%= cond do %>
+          <% is_atom(social.icon_url) -> %>
+            <.social_icon name={social.icon_url} class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"} />
+
+          <% is_binary(social.icon_url) -> %>
+            <img
+              src={social.icon_url}
+              alt={"Logo for #{social.social_media_url}"}
+              class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+            />
+        <% end %>
       </a>
     </nav>
     """
@@ -420,10 +426,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
