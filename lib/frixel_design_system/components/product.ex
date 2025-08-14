@@ -148,7 +148,7 @@ defmodule FrixelDesignSystem.Components.Product do
     ~H"""
     <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
       <%!-- TODO: should be a carousel here --%>
-      <div class="sm:col-start-2">
+      <div class="sm:order-2">
         <figure>
           <img src={@product[:illustration_url]} class="w-screen" />
         </figure>
@@ -158,7 +158,7 @@ defmodule FrixelDesignSystem.Components.Product do
         </div>
       </div>
 
-      <div class={"#{@bg_color_class} card card-xs items-center sticky bottom-0 sm:bottom-[initial] sm:top-0 sm:col-start-1 w-full border-t border-base-300 rounded-none p-8"}>
+      <div class={"#{@bg_color_class} card card-xs items-center sticky bottom-0 sm:bottom-[initial] sm:top-0 sm:order-1 w-full border-t border-base-300 rounded-none p-8"}>
         <div class="card-body flex-row justify-between">
           <div>
             <h2 class="card-title flex-col">{@product[:name]}</h2>
