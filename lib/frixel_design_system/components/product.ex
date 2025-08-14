@@ -158,8 +158,8 @@ defmodule FrixelDesignSystem.Components.Product do
         </div>
       </div>
 
-      <div class={"#{@bg_color_class} card card-xs items-center sticky bottom-0 sm:bottom-[initial] sm:top-0 sm:order-1 w-full border-t border-base-300 rounded-none p-8"}>
-        <div class="card-body flex-row justify-between">
+      <div class={"#{@bg_color_class} card card-xs items-center sticky bottom-0 sm:top-1/2 sm:order-1 w-full border-t border-base-300 rounded-none p-8"}>
+        <div class="card-body flex-row justify-between items-center">
           <div>
             <h2 class="card-title flex-col">{@product[:name]}</h2>
             <p class="text-sm">{@product[:price]}€</p>
