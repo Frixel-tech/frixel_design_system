@@ -3,19 +3,52 @@ defmodule FrixelDesignSystem.Section do
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   alias FrixelDesignSystem.Components.{Button, Company, Form, Header, Menu, Project}
-  alias FrixelDesignSystem.Helper
 
-  attr :client_needs, :list, required: true
-  attr :client_budgets, :list, required: true
-  attr :company_description, :string, required: true
-  attr :company_name, :string, required: true
-  attr :company_postal_address, :string, required: true
-  attr :company_email_address, :string, required: true
-  attr :company_phone_number, :string, required: true
-  attr :company_social_media_links, :list, required: true
-  attr :company_lattitude, :string, required: true
-  attr :company_longitude, :string, required: true
-  attr :booking_appointment_url, :string, required: true
+  @doc """
+  Section to contain contact informations and contact form components.
+
+  ## Example:
+
+        <Section.contact_section>
+          <:contact_infos>
+            <Company.contact_informations title="Find us">
+              <:contact_details>
+                <Company.contact_details
+                  company_name="My Company"
+                  company_description="We are awesome"
+                  company_postal_address="1 Industry street, Business City"
+                  company_email_address="contact@company.com"
+                  company_phone_number="+1234567890"
+                />
+              </:contact_details>
+
+              <:socials>
+                <Menu.socials_list socials={@social_links_list} is_icon_rounded?={false} class="py-4" />
+              </:socials>
+
+              <:map>
+                <Company.find_us_map
+                  company_lattitude="2.2345"
+                  company_longitude="4.12345678
+                  marker_icon_url="/path/to/my/company/icon.mini"
+                />
+              </:map>
+            </Company.contact_informations>
+          </:contact_infos>
+
+          <:contact_form>
+            <Form.contact_form
+              title="My form"
+              client_needs={["website", "design", "e-commerce", "mobile app"]}
+              client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]}
+              booking_appointment_url="http://calendly.com/contact-me"
+              phx-submit="submit_contact_form"
+            />
+          </:contact_form>
+        </Section.contact_section>
+  """
+  slot :contact_infos
+  slot :contact_form
 
   def contact_section(assigns) do
     ~H"""
@@ -23,22 +56,9 @@ defmodule FrixelDesignSystem.Section do
       id="contact-us"
       class="flex flex-col md:flex-row justify-evenly gap-x-4 lg:gap-x-8 xl:gap-x-16 pt-20"
     >
-      <Form.contact_informations
-        company_description={Helper.format_text(@company_description)}
-        company_name={@company_name}
-        company_postal_address={@company_postal_address}
-        company_email_address={@company_email_address}
-        company_phone_number={@company_phone_number}
-        company_social_media_links={@company_social_media_links}
-        company_lattitude={@company_lattitude}
-        company_longitude={@company_longitude}
-      />
+      {render_slot(@contact_infos)}
 
-      <Form.contact_form
-        client_needs={@client_needs}
-        client_budgets={@client_budgets}
-        booking_appointment_url={@booking_appointment_url}
-      />
+      {render_slot(@contact_form)}
     </section>
     """
   end

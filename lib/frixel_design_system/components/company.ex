@@ -1,6 +1,6 @@
 defmodule FrixelDesignSystem.Components.Company do
   use Phoenix.Component
-
+  use Gettext, backend: FrixelDesignSystemWeb.Gettext
   alias FrixelDesignSystem.Components.{Button, Header, Menu}
 
   @doc """
@@ -29,20 +29,112 @@ defmodule FrixelDesignSystem.Components.Company do
   end
 
   @doc """
+  Renders contact details to be used inside a contact section alonside the contact form
+
+  ## Example:
+
+      <.contact_informations title="Find us" title_color_class="text-emerald-400">
+        <:contact_details>
+          <Company.contact_details
+            text-color-class="text-blue-500"
+            company_name="My Company"
+            company_description="We are awesome"
+            company_postal_address="1 Industry street, Business City"
+            company_email_address="contact@company.com"
+            company_phone_number="+1234567890"
+          />
+        </:contact_details>
+
+        <:socials>
+          <Menu.socials_list socials={@social_links_list} is_icon_rounded?={false} class="py-4" />
+        </:socials>
+
+        <:map>
+          <Company.find_us_map
+            company_lattitude="2.2345"
+            company_longitude="4.12345678"
+            marker_icon_url="/path/to/my/company/icon.mini"
+          />
+        </:map>
+      </.contact_informations>
+  """
+
+  attr :title, :string, default: "Find us"
+  attr :title_color_class, :string, default: "text-black"
+  slot :contact_details
+  slot :socials
+  slot :map
+
+  def contact_informations(assigns) do
+    ~H"""
+    <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class={"#{@title_color_class} text-base xl:text-xl font-bold font-slogan tracking-widest uppercase"}>
+          {@title}
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        {render_slot(@contact_details)}
+
+        {render_slot(@socials)}
+
+        {render_slot(@map)}
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a Leaflet map centered on a specific location and with a customizable pin marker.
+
+  ## Example:
+
+      <.find_us_map
+        company_lattitude="2.1234"
+        company_longitude="43.5678"
+        marker_icon_url="path/to/your/company/icon.png"
+      />
+  """
+  attr :marker_icon_url, :string,
+    default:
+      "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
+
+  attr :company_lattitude, :string, required: true
+  attr :company_longitude, :string, required: true
+
+  def find_us_map(assigns) do
+    ~H"""
+    <div
+      id="leaflet-map"
+      phx-hook="LeafletHook"
+      data-marker-icon-url={@marker_icon_url}
+      data-lattitude={@company_lattitude}
+      data-longitude={@company_longitude}
+      class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
+    />
+    """
+  end
+
+  @doc """
   A small contact information component used to be displayed  inside a small section (i.e.: a footer for example).
 
   ## Example:
 
-      <Company.contact_infos_mini
-        brand_name="My company"
-        brand_img="/path/to/my/company.logo"
+      <Company.contact_details
+        text-color-class="text-blue-500"
+        company_name="My company"
+        company_img="/path/to/my/company.logo"
+        company_description="My company is awesome!"
         company_postal_address="1 industry street, 1234 Companyland"
         company_email_address="company@email.address"
         company_phone_number="+123456789"
       />
   """
-  attr :brand_img, :string, default: nil, doc: "The company logo to be displayed"
-  attr :brand_name, :string, default: "", doc: "The company name"
+  attr :text_color_class, :string, default: "text-black"
+  attr :company_img, :string, default: nil, doc: "The company logo to be displayed"
+  attr :company_name, :string, default: "", doc: "The company name"
+  attr :company_description, :string, default: nil
 
   attr :company_email_address, :string,
     default: nil,
@@ -56,11 +148,18 @@ defmodule FrixelDesignSystem.Components.Company do
     default: nil,
     doc: "the company physical address to be shown."
 
-  def contact_infos_mini(assigns) do
+  def contact_details(assigns) do
     ~H"""
-    <img :if={@brand_img} src={@brand_img} alt={"#{@brand_name} logo"} class="w-48 mx-auto px-1" />
+    <img
+      :if={@company_img}
+      src={@company_img}
+      alt={"#{@company_name} logo"}
+      class="w-48 mx-auto px-1"
+    />
 
-    <ul class="text-base px-4">
+    <p :if={@company_description} class={"#{@text_color_class} text-base"}>{@company_description}</p>
+
+    <ul class={"#{@text_color_class} text-base"}>
       <li :if={@company_email_address}>
         <a
           class="link link-hover"

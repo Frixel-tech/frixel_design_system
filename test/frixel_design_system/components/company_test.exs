@@ -1,6 +1,85 @@
 defmodule FrixelDesignSystem.Components.CompanyTest do
-  alias FrixelDesignSystem.Components.Company
+  alias FrixelDesignSystem.Components.{Company, Menu}
   use ComponentCase
+
+  test "contact_informations" do
+    # Given
+    company_description = "Some description of the company"
+    company_name = "Company name"
+    company_img = "/path/to/my/company/logo.png"
+    company_postal_address = "11 boulevard de l'ours, 30899, Mort-Sur-Sang"
+    company_email_address = "email@adress.com"
+    company_phone_number = "+3378767543456"
+
+    company_social_media_links = [
+      %{
+        name: "Linkedin",
+        social_media_url: "https://www.linkedin.com/company/frixel-tech",
+        icon_url:
+          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
+      },
+      %{
+        name: "Github",
+        social_media_url: "https://github.com/Frixel-tech",
+        icon_url:
+          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
+      }
+    ]
+
+    company_lattitude = "14.24676"
+    company_longitude = "32.68465"
+
+    assigns = %{
+      company_description: company_description,
+      company_name: company_name,
+      company_img: company_img,
+      company_postal_address: company_postal_address,
+      company_email_address: company_email_address,
+      company_phone_number: company_phone_number,
+      company_social_media_links: company_social_media_links,
+      company_lattitude: company_lattitude,
+      company_longitude: company_longitude
+    }
+
+    # When
+    html =
+      "#{rendered_to_string(~H"""
+      <Company.contact_informations title="Find us" title_color_class="text-emerald-400">
+        <:contact_details>
+          <Company.contact_details
+            text-color-class="text-blue-500"
+            company_name={@company_name}
+            company_img={@company_img}
+            company_description={@company_description}
+            company_postal_address={@company_postal_address}
+            company_email_address={@company_email_address}
+            company_phone_number={@company_phone_number}
+          />
+        </:contact_details>
+
+        <:socials>
+          <Menu.socials_list
+            socials={@company_social_media_links}
+            is_icon_rounded?={false}
+            class="py-4"
+          />
+        </:socials>
+
+        <:map>
+          <Company.find_us_map
+            company_lattitude={@company_lattitude}
+            company_longitude={@company_longitude}
+            marker_icon_url="/path/to/my/company/icon.mini"
+          />
+        </:map>
+      </Company.contact_informations>
+      """)}"
+
+    # Then
+    assert html =~ "Some description of the company"
+    assert html =~ "https://github.com/Frixel-tech"
+    assert html =~ "/path/to/my/company/icon.mini"
+  end
 
   test "branding" do
     # Given

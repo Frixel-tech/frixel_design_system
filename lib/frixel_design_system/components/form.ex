@@ -1,7 +1,8 @@
 defmodule FrixelDesignSystem.Components.Form do
   use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
-  alias FrixelDesignSystem.Components.{Button, Menu}
+  alias FrixelDesignSystem.Components.Button
+  alias FrixelDesignSystemWeb.CoreComponents
 
   @doc """
   Renders the form for client submissions.
@@ -64,154 +65,122 @@ defmodule FrixelDesignSystem.Components.Form do
 
   ## Example:
 
-      <.contact_form phx-submit="submit_contact_form" />
+      <.contact_form
+        title="My form"
+        title_color_class="text-emerald-400"
+        card_class="bg-gray border border-red-400"
+        input_color_class="input-secondary"
+        input_error_class="input-red-400"
+        client_needs={["website", "design", "e-commerce", "mobile app"]}
+        client_budgets={["<5.000", "<10.000", "<20.000", "<50.000"]}
+        booking_appointment_url="http://calendly.com/contact-me"
+        phx-submit="submit_contact_form" />
   """
-  attr :client_needs, :list, required: true
-  attr :client_budgets, :list, required: true
-  attr :booking_appointment_url, :string, required: true
+  attr :title, :string, default: "Contact us"
+  attr :title_color_class, :string, default: "text-black"
+  attr :card_class, :string, default: "border border-black"
+  attr :input_color_class, :string, default: "input-neutral"
+  attr :input_error_class, :string, default: "input-error"
+  attr :submit_color_class, :string, default: "btn-neutral"
+  attr :client_needs, :list, default: nil
+  attr :client_budgets, :list, default: nil
+  attr :booking_appointment_url, :string, default: nil
   attr :rest, :global
 
   def contact_form(assigns) do
     ~H"""
-    <div class="card bg-base-200 shadow-xl py-6 px-8">
+    <div class={"card #{@card_class} shadow-xl justify-center py-6 px-8"}>
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase">
-          {gettext("Or contact us")}
+        <h2 class={"#{@title_color_class} text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase"}>
+          {@title}
         </h2>
 
         <div class="flex gap-4">
-          <.link href={@booking_appointment_url} target="_blank">
+          <.link :if={@booking_appointment_url} href={@booking_appointment_url} target="_blank">
             <Button.secondary_button text={gettext("Book a call")} />
           </.link>
         </div>
       </div>
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
-        <div class="flex gap-4">
-          <div class="w-1/2">
-            <.form_input
-              id="sender_name"
-              class="w-full"
-              name="sender_name"
-              placeholder={gettext("Name")}
-              required
-            />
-          </div>
-          <div class="w-1/2">
-            <.form_input
-              id="sender_email_address"
-              class="w-full"
-              name="sender_email_address"
-              placeholder={gettext("E-mail")}
-              type="email"
-            />
-          </div>
-        </div>
-        <div>
-          <textarea
-            id="body"
-            name="body"
-            placeholder={gettext("Write your message here...")}
-            class="textarea textarea-bordered w-full input-secondary"
-            rows="4"
+        <div class="flex justify-between">
+          <CoreComponents.input
+            id="sender_name"
+            name="sender_name"
+            value=""
+            type="text"
+            class={"input #{@input_color_class}"}
+            error_class={@input_error_class}
+            placeholder={gettext("Name")}
             required
-          ></textarea>
-        </div>
-        <div>
-          <.form_input
-            id="sender_company"
-            name="sender_company"
-            placeholder={gettext("Company")}
-            class="w-full"
-            required={false}
+          />
+
+          <CoreComponents.input
+            id="sender_email_address"
+            name="sender_email_address"
+            value=""
+            type="email"
+            class={"input #{@input_color_class}"}
+            error_class={@input_error_class}
+            placeholder={gettext("E-mail")}
+            required
           />
         </div>
+
+        <div class="flex justify-between">
+          <CoreComponents.input
+            id="sender_company"
+            name="sender_company"
+            value=""
+            type="text"
+            class={"input #{@input_color_class}"}
+            error_class={@input_error_class}
+            placeholder={gettext("Company (optional)")}
+          />
+
+          <CoreComponents.input
+            id="sender_phone_number"
+            name="sender_phone_number"
+            value=""
+            type="tel"
+            class={"input #{@input_color_class}"}
+            error_class={@input_error_class}
+            placeholder={gettext("Phone (optional)")}
+          />
+        </div>
+
+        <div>
+          <CoreComponents.input
+            id="body"
+            name="body"
+            value=""
+            type="textarea"
+            class={"textarea #{@input_color_class} w-full"}
+            error_class={@input_error_class}
+            placeholder={gettext("Write your message here...")}
+            rows="4"
+            required
+          />
+        </div>
+
         <.form_checkbox_or_radio_group
+          :if={@client_needs}
           input_name="project_types[]"
           options={@client_needs}
           title={gettext("SERVICES (multiple selection)")}
         />
+
         <.form_checkbox_or_radio_group
+          :if={@client_budgets}
           input_name="project_budget"
           options={@client_budgets}
           title={gettext("PROJECT BUDGET")}
           group_type="radio"
           other_input_type="number"
         />
-        <Button.primary_button text={gettext("Send")} class="mt-4" type="submit" />
+
+        <input class={"btn #{@submit_color_class}"} type="submit" value="Send" />
       </form>
-    </div>
-    """
-  end
-
-  @doc """
-  Renders contact details to be used inside a contact section alonside the contact form
-
-  ## Example:
-
-      <.contact_informations
-        company_description="Some company description paragraph"
-        company_name="Your company name"
-        company_postal_address="Postal code"
-        company_email_address="contact@company.com"
-        company_phone_number="+1 234 567 890"
-        company_social_media_links={@company_social_media_links_map_list} // cf. `Menu.socials_list/1`
-        company_lattitude="2.3723602"
-        company_longitude="48.8329333"
-      />
-  """
-  attr :company_description, :string, required: true
-  attr :company_name, :string, required: true
-  attr :company_postal_address, :string, required: true
-  attr :company_email_address, :string, required: true
-  attr :company_phone_number, :string, required: true
-  attr :company_social_media_links, :list, required: true
-  attr :company_lattitude, :string, required: true
-  attr :company_longitude, :string, required: true
-
-  def contact_informations(assigns) do
-    ~H"""
-    <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="text-base-content text-base xl:text-xl font-bold font-slogan tracking-widest uppercase">
-          {gettext("Find us")}
-        </h2>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <p class="text-base">{@company_description}</p>
-
-        <div>
-          <ul class="text-base">
-            <li>{@company_postal_address}</li>
-
-            <li>
-              {@company_email_address}
-            </li>
-
-            <li>
-              <a
-                class="link link-accent hover:font-bold transition-[font-weight] "
-                aria-label="Call us"
-                href={"tel:#{@company_phone_number}"}
-                target="_blank"
-              >
-                {@company_phone_number}
-              </a>
-            </li>
-          </ul>
-
-          <Menu.socials_list class="py-4" socials={@company_social_media_links} />
-
-          <div
-            id="leaflet-map"
-            phx-hook="LeafletHook"
-            data-lattitude={@company_lattitude}
-            data-longitude={@company_longitude}
-            class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
-          />
-        </div>
-      </div>
     </div>
     """
   end

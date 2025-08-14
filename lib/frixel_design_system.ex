@@ -19,7 +19,7 @@ defmodule FrixelDesignSystem do
         Project
       }
 
-      alias FrixelDesignSystem.{CloudinaryApi, Section}
+      alias FrixelDesignSystem.{CloudinaryApi, Helper, Section}
     end
   end
 end
