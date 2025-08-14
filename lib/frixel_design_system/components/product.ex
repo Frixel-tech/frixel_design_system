@@ -148,7 +148,7 @@ defmodule FrixelDesignSystem.Components.Product do
     ~H"""
     <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
       <%!-- TODO: should be a carousel here --%>
-      <div class="sm:order-2">
+      <div class="sm:order-2 h-[calc(100vh-56px)] overflow-y-auto">
         <figure>
           <img src={@product[:illustration_url]} class="w-screen" />
         </figure>
