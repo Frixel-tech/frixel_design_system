@@ -67,15 +67,23 @@ defmodule FrixelDesignSystem.Components.Product do
   attr :categories, :list,
     default: [],
     doc:
-      "A list of maps representing categories (or subcategories). It should at least have `name` and `illustration_url` keys ; ex: [%{name: 'watches', illustration_url: 'http://url.to/img'}, ...]"
+      "A list of maps or structs representing categories (or subcategories). It should at least have `name` and `illustration_url` keys ; ex: [%{name: 'watches', illustration_url: 'http://url.to/img'}, ...]"
+
+  attr :name_key, :atom,
+    required: true,
+    doc: "The struct or map key under which name we can access the category name"
+
+  attr :illustration_url_key, :atom,
+    required: true,
+    doc: "The struct or map key under which name we can access the category illustration url"
 
   def category_carousel(assigns) do
     ~H"""
     <div class="carousel carousel-center gap-4 m-auto">
-      <.link :for={category <- @categories} patch={"#{@category_path}/#{category[:name]}"}>
+      <.link :for={category <- @categories} patch={"#{@category_path}/#{get_in(category, [Access.key(@name_key)])}"}>
         <figure class="carousel-item flex-col">
-          <img src={category[:illustration_url]} />
-          <figcaption class="text-center p-2">{category[:name]}</figcaption>
+          <img src={get_in(category, [Access.key(@illustration_url_key)])} />
+          <figcaption class="text-center p-2">{get_in(category, [Access.key(@name_key)])}</figcaption>
         </figure>
       </.link>
     </div>
@@ -109,31 +117,47 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
-  attr :product, :map,
-    required: true,
-    doc:
-      "A map representing a product. It should at least have `name`, `price` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'Awesome golden watch', price: '1000.00', illustration_url: 'http://url.to/img', description: 'Description for this awesome golden watch.'}"
+  attr :product_illustration_url, :string,
+    default: nil,
+    doc: "An image to illustrate your product"
+
+  attr :product_name, :string, required: true, doc: "The name of your product"
+
+  attr :product_short_description, :string,
+    default: nil,
+    doc: "A quick description to make your customer click on the product (marketing, needs)"
+
+  attr :product_price, :string, required: true, doc: "The price of your product"
 
   def product_card(assigns) do
     ~H"""
     <div class="card card-xl">
       <%!-- TODO : should change illustration on hover --%>
-      <figure>
-        <img src={@product[:illustration_url]} />
+      <figure :if={@product_illustration_url}>
+        <img src={@product_illustration_url} />
       </figure>
 
       <div class="card-body text-center p-4">
-        <h3 class="card-title flex-col">{@product[:name]}</h3>
-        <p class="text-sm">{@product[:price]}€</p>
+        <h3 class="card-title flex-col">{@product_name}</h3>
+        <p :if={@product_short_description} class="text-sm">{@product_short_description}</p>
+        <p class="text-sm">{@product_price}€</p>
       </div>
     </div>
     """
   end
 
-  attr :product, :map,
-    required: true,
+  attr :product_illustration_url, :string,
+    default: nil,
+    doc: "An image to illustrate your product"
+
+  attr :product_name, :string, required: true, doc: "The name of your product"
+
+  attr :product_description, :string,
+    default: nil,
     doc:
-      "A map representing a product. It should at least have `name`, `price` and `illustration_url` keys, but adding a `description` key is great too ; ex: %{name: 'Awesome golden watch', price: '1000.00', illustration_url: 'http://url.to/img', description: 'Description for this awesome golden watch.'}"
+      "An exhaustive description of your product to inform your customer on the product (technical details, etc)"
+
+  attr :product_price, :string, required: true, doc: "The price of your product"
 
   attr :is_cart_active?, :boolean,
     default: true,
@@ -148,20 +172,20 @@ defmodule FrixelDesignSystem.Components.Product do
     <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
       <%!-- TODO: should be a carousel here --%>
       <div class="sm:order-2 h-[calc(100vh-56px)] overflow-y-auto">
-        <figure>
-          <img src={@product[:illustration_url]} class="w-screen" />
+        <figure :if={@product_illustration_url}>
+          <img src={@product_illustration_url} class="w-screen" />
         </figure>
 
-        <div class="p-8">
-          <p class="text-sm">{@product[:description]}</p>
+        <div :if={@product_description} class="p-8">
+          <p class="text-sm">{@product_description}</p>
         </div>
       </div>
 
       <div class={"#{@bg_color_class} card card-xs items-center sticky bottom-0 sm:top-1/2 sm:order-1 w-full border-t border-base-300 rounded-none p-8"}>
         <div class="card-body flex-row justify-between items-center">
           <div>
-            <h2 class="card-title flex-col">{@product[:name]}</h2>
-            <p class="text-sm">{@product[:price]}€</p>
+            <h2 class="card-title flex-col">{@product_name}</h2>
+            <p class="text-sm">{@product_price}€</p>
           </div>
 
           <div :if={@is_cart_active?} class="card-actions">
