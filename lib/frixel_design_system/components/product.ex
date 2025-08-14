@@ -124,7 +124,6 @@ defmodule FrixelDesignSystem.Components.Product do
 
       <div class="card-body text-center p-4">
         <h3 class="card-title flex-col">{@product[:name]}</h3>
-        <p class="text-sm">{@product[:description]}</p>
         <p class="text-sm">{@product[:price]}€</p>
       </div>
     </div>
