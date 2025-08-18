@@ -92,7 +92,9 @@ defmodule FrixelDesignSystem.Components.Product do
       >
         <figure class="flex-col">
           <img src={get_in(category, [Access.key(@illustration_url_key)])} />
-          <figcaption class="text-center pt-2">{get_in(category, [Access.key(@name_key)])}</figcaption>
+          <figcaption class="text-center pt-2">
+            {get_in(category, [Access.key(@name_key)])}
+          </figcaption>
         </figure>
       </.link>
     </div>
@@ -198,9 +200,13 @@ defmodule FrixelDesignSystem.Components.Product do
     doc: "How many of this product do you have in your stock ?"
 
   attr :product_availability_color_class, :string,
-    required: true,
+    default: nil,
     doc:
       "A background color class used to paint a small colored disc to show product availability or unavailability, ex: \"bg-emerald-400\" when available or \"bg-red-500\" when not available"
+
+  attr :product_availability_comment, :string,
+    default: nil,
+    doc: "A short sentence to adds details about availability, ex: \"Available soon !\""
 
   attr :is_cart_active?, :boolean,
     default: true,
@@ -215,7 +221,7 @@ defmodule FrixelDesignSystem.Components.Product do
           <img src={@product_illustration_url} class="w-screen" />
         </figure>
 
-        <p>{gettext("Scroll down to see more")} ↓</p>
+        <p>{gettext("More details below")} ↓</p>
 
         <div :if={@product_description} class="p-8">
           <p class="text-sm">{@product_description}</p>
@@ -226,8 +232,17 @@ defmodule FrixelDesignSystem.Components.Product do
         <div class="card-body flex-row justify-between items-center">
           <div>
             <h2 class="card-title flex-col">{@product_name}</h2>
+
             <p class="text-sm">{@product_price}€ / {@product_unit_type}</p>
-            <p :if={@product_stock}><span class={"size-2 rounded-full inline-block #{@product_availability_color_class}"} /> Stock: {@product_stock}</p>
+
+            <p :if={@product_stock}>{gettext("Stock")}: {@product_stock}</p>
+
+            <p :if={@product_availability_comment}>
+              <span
+                :if={@product_availability_color_class}
+                class={"size-2 rounded-full inline-block #{@product_availability_color_class}"}
+              /> {@product_availability_comment}
+            </p>
           </div>
 
           <div :if={@is_cart_active?} class="card-actions">
