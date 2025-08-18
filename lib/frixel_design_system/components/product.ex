@@ -9,7 +9,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
       <Product.sorting_filter sorting="price ascending" event_name="sort-by" class="text-center" />
   """
-  attr :class, :string
+  attr :class, :string, default: ""
 
   attr :sorting, :string,
     default: "new products",
