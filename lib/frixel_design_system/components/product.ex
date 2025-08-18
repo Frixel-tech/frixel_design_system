@@ -221,7 +221,7 @@ defmodule FrixelDesignSystem.Components.Product do
           <img src={@product_illustration_url} class="w-screen" />
         </figure>
 
-        <p>{gettext("More details below")} ↓</p>
+        <p class="text-center">{gettext("More details below")} ↓</p>
 
         <div :if={@product_description} class="p-8">
           <p class="text-sm">{@product_description}</p>
