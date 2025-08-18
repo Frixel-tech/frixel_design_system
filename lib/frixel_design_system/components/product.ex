@@ -7,8 +7,10 @@ defmodule FrixelDesignSystem.Components.Product do
 
   ## Example:
 
-      <Product.sorting_filter sorting="price ascending" event_name="sort-by" />
+      <Product.sorting_filter sorting="price ascending" event_name="sort-by" class="text-center" />
   """
+  attr :class, :string
+
   attr :sorting, :string,
     default: "new products",
     values: ["new products", "price ascending", "price descending"]
@@ -19,7 +21,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
   def sorting_filter(assigns) do
     ~H"""
-    <details id="sorting-dropdown" class="dropdown">
+    <details id="sorting-dropdown" class={"dropdown #{@class}"}>
       <summary class="btn m-1">Sort by : {@sorting}</summary>
       <ul class="menu dropdown-content bg-base-200 rounded-box z-1 w-52 p-2 shadow-sm">
         <li>
