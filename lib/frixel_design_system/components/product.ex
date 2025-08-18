@@ -82,7 +82,7 @@ defmodule FrixelDesignSystem.Components.Product do
     <div class="carousel carousel-center gap-4 m-auto">
       <.link
         :for={category <- @categories}
-        class="carousel-item w-1/2"
+        class="carousel-item h-1/2"
         patch={"#{@category_path}/#{get_in(category, [Access.key(@name_key)])}"}
       >
         <figure class="flex-col w-1/2">
