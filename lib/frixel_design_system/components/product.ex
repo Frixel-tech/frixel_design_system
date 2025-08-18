@@ -154,6 +154,27 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
+  @doc """
+  A component to render all product informations
+
+  ## Example:
+
+      <Product.product_details
+        product_name="Big watch"
+        product_illustration_url="/path/to/big/watch/img.webp"
+        product_description="This is a really big watch to show off"
+        product_price="1 000 000 000,00"
+        product_unit_type="item"
+        product_stock={2}
+        product_availability_color_class="bg-green-500"
+        is_cart_active?={true}
+        bg_color_class="bg-white"
+      />
+  """
+  attr :bg_color_class, :string,
+    default: "bg-white",
+    doc: "A background color class used for the product details lateral panel"
+
   attr :product_illustration_url, :string,
     default: nil,
     doc: "An image to illustrate your product"
@@ -167,13 +188,22 @@ defmodule FrixelDesignSystem.Components.Product do
 
   attr :product_price, :string, required: true, doc: "The price of your product"
 
+  attr :product_unit_type, :string,
+    required: true,
+    doc: "The selling unit type (eg: item, m², L, Kg) "
+
+  attr :product_stock, :integer,
+    default: nil,
+    doc: "How many of this product do you have in your stock ?"
+
+  attr :product_availability_color_class, :string,
+    required: true,
+    doc:
+      "A background color class used to paint a small colored disc to show product availability or unavailability, ex: \"bg-emerald-400\" when available or \"bg-red-500\" when not available"
+
   attr :is_cart_active?, :boolean,
     default: true,
     doc: "A switch to enable or disable the 'add to cart' button"
-
-  attr :bg_color_class, :string,
-    default: "bg-white",
-    doc: "A background color class used for the product details lateral panel"
 
   def product_details(assigns) do
     ~H"""
@@ -193,7 +223,8 @@ defmodule FrixelDesignSystem.Components.Product do
         <div class="card-body flex-row justify-between items-center">
           <div>
             <h2 class="card-title flex-col">{@product_name}</h2>
-            <p class="text-sm">{@product_price}€</p>
+            <p class="text-sm">{@product_price}€ / {@product_unit_type}</p>
+            <p :if={@product_stock}><small><span class={"size-2 rounded-full #{@product_availability_color_class}"} /> Stock: {@product_stock}</small></p>
           </div>
 
           <div :if={@is_cart_active?} class="card-actions">
