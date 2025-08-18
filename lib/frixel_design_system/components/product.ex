@@ -81,7 +81,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
   def category_carousel(assigns) do
     ~H"""
-    <div class={"carousel carousel-center gap-1 px-2 m-auto #{@class}"}>
+    <div class={"carousel carousel-center gap-1 sm:gap-2 md:gap-3 lg:gap:4 m-auto #{@class}"}>
       <.link
         :for={category <- @categories}
         class="carousel-item w-2/5 sm:w-2/7 md:w-2/9 lg:w-2/11"
