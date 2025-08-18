@@ -60,6 +60,8 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
+  attr :class, :string, default: ""
+
   attr :category_path, :string,
     required: true,
     doc: "The categories (or subcategories) static path, ex: '/category"
@@ -79,7 +81,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
   def category_carousel(assigns) do
     ~H"""
-    <div class="carousel carousel-center gap-1 px-2 m-auto">
+    <div class={"carousel carousel-center gap-1 px-2 m-auto #{@class}"}>
       <.link
         :for={category <- @categories}
         class="carousel-item w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
