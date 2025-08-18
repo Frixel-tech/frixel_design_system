@@ -79,7 +79,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
   def category_carousel(assigns) do
     ~H"""
-    <div class="carousel carousel-center gap-4 m-auto">
+    <div class="carousel carousel-center gap-1 px-2 m-auto">
       <.link
         :for={category <- @categories}
         class="carousel-item w-1/2 sm:w-1/5"
@@ -87,7 +87,7 @@ defmodule FrixelDesignSystem.Components.Product do
       >
         <figure class="flex-col">
           <img src={get_in(category, [Access.key(@illustration_url_key)])} />
-          <figcaption class="text-center p-2">{get_in(category, [Access.key(@name_key)])}</figcaption>
+          <figcaption class="text-center pt-2">{get_in(category, [Access.key(@name_key)])}</figcaption>
         </figure>
       </.link>
     </div>
