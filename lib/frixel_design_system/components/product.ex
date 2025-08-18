@@ -1,5 +1,6 @@
 defmodule FrixelDesignSystem.Components.Product do
   use Phoenix.Component
+  use Gettext, backend: FrixelDesignSystemWeb.Gettext
   alias Phoenix.LiveView.JS
 
   @doc """
@@ -32,7 +33,7 @@ defmodule FrixelDesignSystem.Components.Product do
             }
             class={@sorting == "price descending" && "menu-active"}
           >
-            Descending price
+            {gettext("Descending price")}
           </a>
         </li>
         <li>
@@ -43,7 +44,7 @@ defmodule FrixelDesignSystem.Components.Product do
             }
             class={@sorting == "price ascending" && "menu-active"}
           >
-            Ascending price
+            {gettext("Ascending price")}
           </a>
         </li>
         <li>
@@ -54,7 +55,7 @@ defmodule FrixelDesignSystem.Components.Product do
             }
             class={@sorting == "new products" && "menu-active"}
           >
-            New products
+            {gettext("New products")}
           </a>
         </li>
       </ul>
@@ -112,7 +113,7 @@ defmodule FrixelDesignSystem.Components.Product do
     <div class="card lg:card-side my-4 !items-center relative bg-base-200 shadow-sm rounded-none">
       <div class="card-body items-center">
         <.link :if={@subcategory} patch={@return_to} class="lg:absolute lg:top-4 lg:self-start">
-          &lt;- Back to parent category
+          ← {gettext("Back to parent category")}
         </.link>
         <h2 class="card-title">{@subcategory[:name]}</h2>
         <p>{@subcategory[:description]}</p>
@@ -214,6 +215,8 @@ defmodule FrixelDesignSystem.Components.Product do
           <img src={@product_illustration_url} class="w-screen" />
         </figure>
 
+        <p>{gettext("Scroll down to see more")} ↓</p>
+
         <div :if={@product_description} class="p-8">
           <p class="text-sm">{@product_description}</p>
         </div>
@@ -228,7 +231,7 @@ defmodule FrixelDesignSystem.Components.Product do
           </div>
 
           <div :if={@is_cart_active?} class="card-actions">
-            <button class="btn">Add to cart</button>
+            <button class="btn">{gettext("Add to cart")}</button>
           </div>
         </div>
       </div>
