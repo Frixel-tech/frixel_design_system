@@ -224,7 +224,7 @@ defmodule FrixelDesignSystem.Components.Product do
           <div>
             <h2 class="card-title flex-col">{@product_name}</h2>
             <p class="text-sm">{@product_price}€ / {@product_unit_type}</p>
-            <p :if={@product_stock}><small><span class={"size-2 rounded-full #{@product_availability_color_class}"} /> Stock: {@product_stock}</small></p>
+            <p :if={@product_stock}><span class={"size-2 rounded-full inline-block #{@product_availability_color_class}"} /> Stock: {@product_stock}</p>
           </div>
 
           <div :if={@is_cart_active?} class="card-actions">
