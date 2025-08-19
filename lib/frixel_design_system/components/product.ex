@@ -140,6 +140,15 @@ defmodule FrixelDesignSystem.Components.Product do
 
   attr :product_price, :string, required: true, doc: "The price of your product"
 
+  attr :product_availability_color_class, :string,
+    default: nil,
+    doc:
+      "A background color class used to paint a small colored disc to show product availability or unavailability, ex: \"bg-emerald-400\" when available or \"bg-red-500\" when not available"
+
+  attr :product_availability_comment, :string,
+    default: nil,
+    doc: "A short sentence to adds details about availability, ex: \"Available soon !\""
+
   def product_card(assigns) do
     ~H"""
     <div class="card card-xl">
@@ -150,8 +159,17 @@ defmodule FrixelDesignSystem.Components.Product do
 
       <div class="card-body text-center p-4">
         <h3 class="card-title flex-col">{@product_name}</h3>
+
         <p :if={@product_short_description} class="text-sm">{@product_short_description}</p>
+
         <p class="text-sm">{@product_price}€</p>
+
+        <p :if={@product_availability_comment}>
+          <span
+            :if={@product_availability_color_class}
+            class={"size-2 rounded-full inline-block #{@product_availability_color_class}"}
+          /> {@product_availability_comment}
+        </p>
       </div>
     </div>
     """
