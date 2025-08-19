@@ -7,30 +7,31 @@ defmodule FrixelDesignSystem.Components.ProductTest do
 
     html =
       "#{rendered_to_string(~H"""
-      <Product.sorting_filter sorting={@sorting} />
+      <Product.sorting_filter sorting={@sorting} event_name="sort-by" class="text-center" />
       """)}"
 
-    assert html =~ "<details id=\"sorting-dropdown\" class=\"dropdown\">"
+    assert html =~ "<details id=\"sorting-dropdown\" class=\"dropdown text-center\">"
     assert html =~ "Sort by : price ascending"
     assert html =~ "class=\"menu-active\">\n        Ascending price"
+    assert html =~ "sort-by"
   end
 
-  describe "subcategory_carousel" do
+  describe "category_carousel" do
     assigns = %{
-      subcategory_path: "/subcategories",
-      subcategories: [
+      category_path: "/categories",
+      categories: [
         %{
-          name: "Test subcategory",
+          name: "Test category",
           illustration_url:
             "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
         },
         %{
-          name: "Test subcategory 2",
+          name: "Test category 2",
           illustration_url:
             "https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
         },
         %{
-          name: "Test subcategory 3",
+          name: "Test category 3",
           illustration_url:
             "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
         }
@@ -39,18 +40,22 @@ defmodule FrixelDesignSystem.Components.ProductTest do
 
     html =
       "#{rendered_to_string(~H"""
-      <Product.subcategory_carousel subcategory_path={@subcategory_path} subcategories={@subcategories} />
+      <Product.category_carousel
+        category_path={@category_path}
+        categories={@categories}
+        name_key={:name}
+        illustration_url_key={:illustration_url}
+      />
       """)}"
 
     assert html =~ "<div class=\"carousel"
 
-    assert html =~
-             "<a href=\"/subcategories/Test subcategory 2\" data-phx-link=\"patch\" data-phx-link-state=\"push\""
+    assert html =~ "href=\"/categories/Test category 2\""
 
     assert html =~
              "<img src=\"https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp\">"
 
-    assert html =~ "Test subcategory 3</figcaption>"
+    assert html =~ "Test category 3"
   end
 
   describe "subcategory_banner" do
@@ -98,7 +103,14 @@ defmodule FrixelDesignSystem.Components.ProductTest do
 
     html =
       "#{rendered_to_string(~H"""
-      <Product.product_card product={@product} />
+      <Product.product_card
+        product_illustration_url={@product.illustration_url}
+        product_name={@product.name}
+        product_short_description={@product.description}
+        product_price={@product.price}
+        product_availability_color_class="bg-emerald-400"
+        product_availability_comment="Available"
+      />
       """)}"
 
     assert html =~ "<div class=\"card card-xl\">"
@@ -109,6 +121,8 @@ defmodule FrixelDesignSystem.Components.ProductTest do
     assert html =~ "Product test</h3>"
     assert html =~ "This is a test product description.</p>"
     assert html =~ "1000.00€</p>"
+    assert html =~ "bg-emerald-400"
+    assert html =~ "Available"
   end
 
   describe "product_details" do
@@ -120,23 +134,48 @@ defmodule FrixelDesignSystem.Components.ProductTest do
         name: "Product test",
         description: "This is a test product description.",
         price: "1000.00",
+        stock: 2,
+        unit: "item",
         illustration_url:
           "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+      },
+      company: %{
+        email_address: "contact@test.com"
       }
     }
 
     html =
       "#{rendered_to_string(~H"""
-      <Product.product_details product={@product} />
+      <Product.product_details
+        product_name={@product.name}
+        product_illustration_url={@product.illustration_url}
+        product_description={@product.description}
+        product_price={@product.price}
+        product_unit_type={@product.unit}
+        product_stock={@product.stock}
+        bg_color_class="bg-white"
+        product_availability_comment="Available"
+        product_availability_color_class="bg-green-500"
+      >
+        <:actions>
+          <button class="btn" phx-click="add-to-cart">Add to cart</button>
+          <a href={"mailto:#{@company.email_address}"}>Contact us</a>
+        </:actions>
+      </Product.product_details>
       """)}"
 
     assert html =~
              "<img src=\"https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp\""
 
-    assert html =~ "This is a test product description.</p>"
-    assert html =~ "Product test</h2>"
-
-    assert html =~ "1000.00€</p>"
-    assert html =~ "<button class=\"btn\">Add to cart</button>"
+    assert html =~ "This is a test product description."
+    assert html =~ "Product test"
+    assert html =~ "1000.00€"
+    assert html =~ "item"
+    assert html =~ "2"
+    assert html =~ "bg-green-500"
+    assert html =~ "Available"
+    assert html =~ "bg-white"
+    assert html =~ "<button class=\"btn\" phx-click=\"add-to-cart\">Add to cart</button>"
+    assert html =~ "<a href=\"mailto:contact@test.com\">Contact us</a>"
   end
 end
