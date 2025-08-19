@@ -164,7 +164,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
         <p class="text-sm">{@product_price}€</p>
 
-        <p :if={@product_availability_comment}>
+        <p :if={@product_availability_comment} class="flex items-center justify-center gap-2">
           <span
             :if={@product_availability_color_class}
             class={"size-2 rounded-full inline-block #{@product_availability_color_class}"}
