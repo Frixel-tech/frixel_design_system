@@ -188,9 +188,13 @@ defmodule FrixelDesignSystem.Components.Product do
         product_unit_type="item"
         product_stock={2}
         product_availability_color_class="bg-green-500"
-        is_cart_active?={true}
         bg_color_class="bg-white"
-      />
+      >
+        <:actions>
+            <button class="btn" phx-click="add-to-cart">{gettext("Add to cart")}</button>
+            <a href="mailto:contact@test.com">Contact us</a>
+        </:actions>
+      </Product.product_details>
   """
   attr :bg_color_class, :string,
     default: "bg-white",
@@ -226,9 +230,7 @@ defmodule FrixelDesignSystem.Components.Product do
     default: nil,
     doc: "A short sentence to adds details about availability, ex: \"Available soon !\""
 
-  attr :is_cart_active?, :boolean,
-    default: true,
-    doc: "A switch to enable or disable the 'add to cart' button"
+  slot :actions, doc: "A slot to put call to actions inside ex: cart button, contact links"
 
   def product_details(assigns) do
     ~H"""
@@ -263,8 +265,8 @@ defmodule FrixelDesignSystem.Components.Product do
             </p>
           </div>
 
-          <div :if={@is_cart_active?} class="card-actions">
-            <button class="btn">{gettext("Add to cart")}</button>
+          <div class="card-actions flex flex-row">
+            {render_slot(@actions)}
           </div>
         </div>
       </div>
