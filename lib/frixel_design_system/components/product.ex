@@ -265,7 +265,7 @@ defmodule FrixelDesignSystem.Components.Product do
             </p>
           </div>
 
-          <div class="card-actions flex flex-row">
+          <div class="card-actions flex flex-row items-center">
             {render_slot(@actions)}
           </div>
         </div>
