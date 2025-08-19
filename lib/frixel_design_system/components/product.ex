@@ -63,6 +63,19 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
+  @doc """
+  Renders a carousel componant to show categories or subcategories with an horizontal scrolling gallery.
+
+  ## Example:
+
+    <Product.category_carousel
+      category_path="/catalog/category"
+      categories={@categories_list}
+      name_key={:name}
+      illustration_url_key={:illustration_url}
+      class="bg-red-500"
+    />
+  """
   attr :class, :string, default: ""
 
   attr :category_path, :string,
@@ -128,6 +141,20 @@ defmodule FrixelDesignSystem.Components.Product do
     """
   end
 
+  @doc """
+  Renders some product informations inside a card.
+
+  ## Example:
+
+    <Product.product_card
+      product_illustration_url="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+      product_name="Product test"
+      product_short_description="This is a test product description."
+      product_price="1000,00"
+      product_availability_color_class="bg-emerald-400"
+      product_availability_comment="Available"
+    />
+  """
   attr :product_illustration_url, :string,
     default: nil,
     doc: "An image to illustrate your product"
@@ -188,6 +215,7 @@ defmodule FrixelDesignSystem.Components.Product do
         product_unit_type="item"
         product_stock={2}
         product_availability_color_class="bg-green-500"
+        product_availability_comment="Available"
         bg_color_class="bg-white"
       >
         <:actions>
