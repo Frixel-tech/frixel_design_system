@@ -16,7 +16,8 @@ defmodule FrixelDesignSystem do
         Header,
         Menu,
         Product,
-        Project
+        Project,
+        SocialIcons
       }
 
       alias FrixelDesignSystem.{CloudinaryApi, Helper, Section}
