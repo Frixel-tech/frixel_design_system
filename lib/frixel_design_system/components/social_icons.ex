@@ -10,10 +10,7 @@ defmodule FrixelDesignSystem.Components.SocialIcons do
       width: "24",
       height: "24",
       viewBox: "0 0 24 24",
-      stroke: "currentColor",
-      "stroke-width": "2",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
+      stroke: "currentColor"
     },
     include:
       ~w(aria-hidden width height viewBox fill stroke stroke-width stroke-linecap stroke-linejoin)
