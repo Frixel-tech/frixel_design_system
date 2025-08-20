@@ -396,7 +396,7 @@ defmodule FrixelDesignSystem.Components.Menu do
           <% is_atom(social.icon) -> %>
             <.social_icon
               name={social.icon}
-              class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+              class={"#{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
             />
           <% is_binary(social.icon) -> %>
             <img
