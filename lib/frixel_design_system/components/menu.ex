@@ -377,8 +377,8 @@ defmodule FrixelDesignSystem.Components.Menu do
   ## Examples
 
       <.socials_list class="size-4" is_icon_rounded?={true} socials={[
-        %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
-        %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
+        %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+        %{social_media_url: "https://linkedin.com", icon: :linkedin}
       ]} />
   """
   attr :socials, :list,
@@ -393,14 +393,14 @@ defmodule FrixelDesignSystem.Components.Menu do
     <nav class={"flex items-center gap-4 #{@class}"}>
       <a :for={social <- @socials} href={social.social_media_url} target="_blank">
         <%= cond do %>
-          <% is_atom(social.icon_url) -> %>
+          <% is_atom(social.icon) -> %>
             <.social_icon
-              name={social.icon_url}
+              name={social.icon}
               class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
             />
-          <% is_binary(social.icon_url) -> %>
+          <% is_binary(social.icon) -> %>
             <img
-              src={social.icon_url}
+              src={social.icon}
               alt={"Logo for #{social.social_media_url}"}
               class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
             />
@@ -429,10 +429,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
