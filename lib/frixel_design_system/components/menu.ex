@@ -3,6 +3,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   import FrixelDesignSystemWeb.CoreComponents
+  import FrixelDesignSystem.Components.SocialIcons, only: [social_icon: 1]
 
   alias FrixelDesignSystem.Components.Button
   alias Phoenix.LiveView.JS
@@ -393,8 +394,10 @@ defmodule FrixelDesignSystem.Components.Menu do
       <a :for={social <- @socials} href={social.social_media_url} target="_blank">
         <%= cond do %>
           <% is_atom(social.icon_url) -> %>
-            <.social_icon name={social.icon_url} class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"} />
-
+            <.social_icon
+              name={social.icon_url}
+              class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+            />
           <% is_binary(social.icon_url) -> %>
             <img
               src={social.icon_url}
@@ -426,10 +429,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-
+      
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-
+      
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
