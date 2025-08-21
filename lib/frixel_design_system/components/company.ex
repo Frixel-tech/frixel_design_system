@@ -63,7 +63,6 @@ defmodule FrixelDesignSystem.Components.Company do
   attr :title_color_class, :string, default: "text-black"
   slot :contact_details
   slot :socials
-  slot :map
 
   def contact_informations(assigns) do
     ~H"""
@@ -78,8 +77,6 @@ defmodule FrixelDesignSystem.Components.Company do
         {render_slot(@contact_details)}
 
         {render_slot(@socials)}
-
-        {render_slot(@map)}
       </div>
     </div>
     """

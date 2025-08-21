@@ -49,6 +49,7 @@ defmodule FrixelDesignSystem.Section do
   """
   slot :contact_infos
   slot :contact_form
+  slot :map
 
   def contact_section(assigns) do
     ~H"""
@@ -59,6 +60,8 @@ defmodule FrixelDesignSystem.Section do
       {render_slot(@contact_infos)}
 
       {render_slot(@contact_form)}
+
+      {render_slot(@map)}
     </section>
     """
   end
