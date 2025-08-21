@@ -55,7 +55,7 @@ defmodule FrixelDesignSystem.Section do
     ~H"""
     <section
       id="contact-us"
-      class="grid grid-cols-5 md:grid-cols-1 gap-x-4 lg:gap-x-8 xl:gap-x-16 pt-20"
+      class="grid grid-cols-1 md:grid-cols-3 gap-x-4 lg:gap-x-8 xl:gap-x-16 pt-20"
     >
       {render_slot(@contact_infos)}
 
