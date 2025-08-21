@@ -15,13 +15,13 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
       %{
         name: "Linkedin",
         social_media_url: "https://www.linkedin.com/company/frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
+        icon: :linkedin,
+        icon_class: "fill-blue-500"
       },
       %{
         name: "Github",
         social_media_url: "https://github.com/Frixel-tech",
-        icon_url:
+        icon:
           "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
       }
     ]
@@ -64,21 +64,16 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
             class="py-4"
           />
         </:socials>
-
-        <:map>
-          <Company.find_us_map
-            company_lattitude={@company_lattitude}
-            company_longitude={@company_longitude}
-            marker_icon_url="/path/to/my/company/icon.mini"
-          />
-        </:map>
       </Company.contact_informations>
       """)}"
 
     # Then
     assert html =~ "Some description of the company"
+    assert html =~ "<img "
     assert html =~ "https://github.com/Frixel-tech"
-    assert html =~ "/path/to/my/company/icon.mini"
+    assert html =~ "<svg "
+    assert html =~ "fill-blue-500"
+    assert html =~ "https://www.linkedin.com/company/frixel-tech"
   end
 
   test "branding" do

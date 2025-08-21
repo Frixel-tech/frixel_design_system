@@ -29,18 +29,8 @@ defmodule FrixelDesignSystem.SectionTest do
     company_longitude = "3.865"
 
     company_social_media_links = [
-      %{
-        name: "Linkedin",
-        social_media_url: "https://www.linkedin.com/company/frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
-      },
-      %{
-        name: "Github",
-        social_media_url: "https://github.com/Frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
-      }
+      %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+      %{social_media_url: "https://linkedin.com", icon: :linkedin, icon_class: "fill-red-500"}
     ]
 
     assigns = %{
@@ -80,14 +70,6 @@ defmodule FrixelDesignSystem.SectionTest do
                 class="py-4"
               />
             </:socials>
-
-            <:map>
-              <Company.find_us_map
-                company_lattitude={@company_lattitude}
-                company_longitude={@company_longitude}
-                marker_icon_url="/path/to/my/company/icon.mini"
-              />
-            </:map>
           </Company.contact_informations>
         </:contact_infos>
 
@@ -100,12 +82,24 @@ defmodule FrixelDesignSystem.SectionTest do
             phx-submit="submit_contact_form"
           />
         </:contact_form>
+
+        <:map>
+          <Company.find_us_map
+            company_lattitude={@company_lattitude}
+            company_longitude={@company_longitude}
+            marker_icon_url="/path/to/my/company/icon.mini"
+          />
+        </:map>
       </Section.contact_section>
       """)}"
 
     # Then
     assert html =~ "This is a description with \n end of line"
-    assert html =~ "https://github.com/Frixel-tech"
+    assert html =~ "<img "
+    assert html =~ "https://github.com"
+    assert html =~ "<svg "
+    assert html =~ "fill-red-500"
+    assert html =~ "https://linkedin.com"
     assert html =~ "/path/to/my/company/icon.mini"
     assert html =~ "My form"
     assert html =~ "https://www.booking-appointement-url.com"
@@ -429,18 +423,8 @@ defmodule FrixelDesignSystem.SectionTest do
     ]
 
     social_medias = [
-      %{
-        name: "Linkedin",
-        social_media_url: "https://www.linkedin.com/company/frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
-      },
-      %{
-        name: "Github",
-        social_media_url: "https://github.com/Frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
-      }
+      %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+      %{social_media_url: "https://linkedin.com", icon: :linkedin, icon_class: "fill-red-500"}
     ]
 
     assigns = %{
@@ -490,8 +474,11 @@ defmodule FrixelDesignSystem.SectionTest do
     assert html =~ "Retrouvez-nous-sur les réseaux:"
     assert html =~ "legal-information"
     assert html =~ "cgu"
-    assert html =~ "href=\"https://www.linkedin.com/company/frixel-tech\""
-    assert html =~ "href=\"https://github.com/Frixel-tech\""
+    assert html =~ "<img "
+    assert html =~ "https://github.com"
+    assert html =~ "<svg "
+    assert html =~ "fill-red-500"
+    assert html =~ "https://linkedin.com"
   end
 
   test "landing_section" do
