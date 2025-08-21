@@ -15,13 +15,13 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
       %{
         name: "Linkedin",
         social_media_url: "https://www.linkedin.com/company/frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
+        icon: :linkedin,
+        icon_class: "fill-blue-500"
       },
       %{
         name: "Github",
         social_media_url: "https://github.com/Frixel-tech",
-        icon_url:
+        icon:
           "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
       }
     ]
@@ -64,21 +64,16 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
             class="py-4"
           />
         </:socials>
-
-        <:map>
-          <Company.find_us_map
-            company_lattitude={@company_lattitude}
-            company_longitude={@company_longitude}
-            marker_icon_url="/path/to/my/company/icon.mini"
-          />
-        </:map>
       </Company.contact_informations>
       """)}"
 
     # Then
     assert html =~ "Some description of the company"
+    assert html =~ "<img "
     assert html =~ "https://github.com/Frixel-tech"
-    assert html =~ "/path/to/my/company/icon.mini"
+    assert html =~ "<svg "
+    assert html =~ "fill-blue-500"
+    assert html =~ "https://www.linkedin.com/company/frixel-tech"
   end
 
   test "branding" do
@@ -209,8 +204,8 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
       """)}"
 
     # Then
-    assert html =~
-             "<div class=\"flex flex-wrap justify-center gap-6\">\n  \n    <div class=\"card bg-base-200 w-64 shadow-sm\">\n  <figure class=\"px-10 pt-10\">\n    <img class=\"w-42 h-42 rounded-xl\" src=\"/path/to/image.png\" alt=\"John Doe\">\n  </figure>\n  <div class=\"card-body items-center text-center\">\n    <p class=\"card-title text-base-content\">John Doe</p>\n    <p class=\"text-sm text-base-content\">President</p>\n    <div class=\"card-actions\">\n      <ul class=\"flex items-center gap-4 \">\n  <li>\n    <a href=\"www.first_path_to_link.fr\" target=\"_blank\">\n      <img src=\"/images/linkedin_logo.png\" alt=\"Logo for www.first_path_to_link.fr\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"www.first_gt_path_to_link.fr\" target=\"_blank\">\n      <img src=\"/images/github_logo.png\" alt=\"Logo for www.first_gt_path_to_link.fr\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n    </div>\n  </div>\n</div>\n  \n    <div class=\"card bg-base-200 w-64 shadow-sm\">\n  <figure class=\"px-10 pt-10\">\n    <img class=\"w-42 h-42 rounded-xl\" src=\"/path/to/image.png\" alt=\"Jacques Tour\">\n  </figure>\n  <div class=\"card-body items-center text-center\">\n    <p class=\"card-title text-base-content\">Jacques Tour</p>\n    <p class=\"text-sm text-base-content\">Employee</p>\n    <div class=\"card-actions\">\n      <ul class=\"flex items-center gap-4 \">\n  <li>\n    <a href=\"www.second_path_to_link.fr\" target=\"_blank\">\n      <img src=\"/images/linkedin_logo.png\" alt=\"Logo for www.second_path_to_link.fr\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"www.second_gt_path_to_link.fr\" target=\"_blank\">\n      <img src=\"/images/github_logo.png\" alt=\"Logo for www.second_gt_path_to_link.fr\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n    </div>\n  </div>\n</div>\n  \n</div>"
+    assert html =~ "John Doe"
+    assert html =~ "Jacques Tour"
   end
 
   test "team_member_card" do
@@ -236,8 +231,8 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
       """)}"
 
     # Then
-    assert html =~
-             "<div class=\"card bg-base-200 w-64 shadow-sm\">\n  <figure class=\"px-10 pt-10\">\n    <img class=\"w-42 h-42 rounded-xl\" src=\"/path/to/image.png\" alt=\"John Doe\">\n  </figure>\n  <div class=\"card-body items-center text-center\">\n    <p class=\"card-title text-base-content\">John Doe</p>\n    <p class=\"text-sm text-base-content\">President</p>\n    <div class=\"card-actions\">\n      <ul class=\"flex items-center gap-4 \">\n  <li>\n    <a href=\"www.first_path_to_link.fr\" target=\"_blank\">\n      <img src=\"/images/linkedin_logo.png\" alt=\"Logo for www.first_path_to_link.fr\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"www.first_gt_path_to_link.fr\" target=\"_blank\">\n      <img src=\"/images/github_logo.png\" alt=\"Logo for www.first_gt_path_to_link.fr\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n    </div>\n  </div>\n</div>"
+    assert html =~ "John Doe"
+    assert html =~ "President"
   end
 
   test "review_card" do

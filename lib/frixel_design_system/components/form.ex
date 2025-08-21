@@ -89,7 +89,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
   def contact_form(assigns) do
     ~H"""
-    <div class={"card #{@card_class} shadow-xl justify-center py-6 px-8"}>
+    <div class={"card #{@card_class} block shadow-xl justify-center py-6 px-8"}>
       <div class="flex items-center justify-between mb-8">
         <h2 class={"#{@title_color_class} text-base xl:text-2xl font-normal font-slogan tracking-widest uppercase"}>
           {@title}

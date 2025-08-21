@@ -29,18 +29,8 @@ defmodule FrixelDesignSystem.SectionTest do
     company_longitude = "3.865"
 
     company_social_media_links = [
-      %{
-        name: "Linkedin",
-        social_media_url: "https://www.linkedin.com/company/frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
-      },
-      %{
-        name: "Github",
-        social_media_url: "https://github.com/Frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
-      }
+      %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+      %{social_media_url: "https://linkedin.com", icon: :linkedin, icon_class: "fill-red-500"}
     ]
 
     assigns = %{
@@ -80,14 +70,6 @@ defmodule FrixelDesignSystem.SectionTest do
                 class="py-4"
               />
             </:socials>
-
-            <:map>
-              <Company.find_us_map
-                company_lattitude={@company_lattitude}
-                company_longitude={@company_longitude}
-                marker_icon_url="/path/to/my/company/icon.mini"
-              />
-            </:map>
           </Company.contact_informations>
         </:contact_infos>
 
@@ -100,12 +82,24 @@ defmodule FrixelDesignSystem.SectionTest do
             phx-submit="submit_contact_form"
           />
         </:contact_form>
+
+        <:map>
+          <Company.find_us_map
+            company_lattitude={@company_lattitude}
+            company_longitude={@company_longitude}
+            marker_icon_url="/path/to/my/company/icon.mini"
+          />
+        </:map>
       </Section.contact_section>
       """)}"
 
     # Then
     assert html =~ "This is a description with \n end of line"
-    assert html =~ "https://github.com/Frixel-tech"
+    assert html =~ "<img "
+    assert html =~ "https://github.com"
+    assert html =~ "<svg "
+    assert html =~ "fill-red-500"
+    assert html =~ "https://linkedin.com"
     assert html =~ "/path/to/my/company/icon.mini"
     assert html =~ "My form"
     assert html =~ "https://www.booking-appointement-url.com"
@@ -429,18 +423,8 @@ defmodule FrixelDesignSystem.SectionTest do
     ]
 
     social_medias = [
-      %{
-        name: "Linkedin",
-        social_media_url: "https://www.linkedin.com/company/frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/linkedin_logo_yg8wim.png"
-      },
-      %{
-        name: "Github",
-        social_media_url: "https://github.com/Frixel-tech",
-        icon_url:
-          "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/github_logo_bwefsq.png"
-      }
+      %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+      %{social_media_url: "https://linkedin.com", icon: :linkedin, icon_class: "fill-red-500"}
     ]
 
     assigns = %{
@@ -490,8 +474,11 @@ defmodule FrixelDesignSystem.SectionTest do
     assert html =~ "Retrouvez-nous-sur les réseaux:"
     assert html =~ "legal-information"
     assert html =~ "cgu"
-    assert html =~ "href=\"https://www.linkedin.com/company/frixel-tech\""
-    assert html =~ "href=\"https://github.com/Frixel-tech\""
+    assert html =~ "<img "
+    assert html =~ "https://github.com"
+    assert html =~ "<svg "
+    assert html =~ "fill-red-500"
+    assert html =~ "https://linkedin.com"
   end
 
   test "landing_section" do
@@ -723,8 +710,8 @@ defmodule FrixelDesignSystem.SectionTest do
       """)}"
 
     # Then
-    assert html =~
-             "<section class=\"mt-20\">\n  <div>\n    <h2 class=\"text-base-content text-center text-4xl font-slogan font-bold mt-6 mb-6 tracking-widest \">\n  Story section\n</h2>\n\n    <p class=\"font-common text-base mt-2 xl:px-60\">\n      Here a single description of the section\n    </p>\n  </div>\n\n  <div class=\"mt-26 flex flex-col xl:flex-row items-center justify-center mx-5\">\n    <div class=\"flex flex-wrap justify-center gap-6\">\n  \n    <div class=\"card bg-base-200 w-64 shadow-sm\">\n  <figure class=\"px-10 pt-10\">\n    <img class=\"w-42 h-42 rounded-xl\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745939833/pp_2_spxojb.png\" alt=\"Johanne-Franck NGBOKOLI\">\n  </figure>\n  <div class=\"card-body items-center text-center\">\n    <p class=\"card-title text-base-content\">Johanne-Franck NGBOKOLI</p>\n    <p class=\"text-sm text-base-content\">Développeur Senior Fullstack</p>\n    <div class=\"card-actions\">\n      <ul class=\"flex items-center gap-4 \">\n  <li>\n    <a href=\"https://www.linkedin.com/in/johanne-franck-ngbokoli/\" target=\"_blank\">\n      <img src=\"/images/linkedin_logo.png\" alt=\"Logo for https://www.linkedin.com/in/johanne-franck-ngbokoli/\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"https://github.com/FranckNGB\" target=\"_blank\">\n      <img src=\"/images/github_logo.png\" alt=\"Logo for https://github.com/FranckNGB\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n    </div>\n  </div>\n</div>\n  \n    <div class=\"card bg-base-200 w-64 shadow-sm\">\n  <figure class=\"px-10 pt-10\">\n    <img class=\"w-42 h-42 rounded-xl\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745939834/pp_3_ry9k37.png\" alt=\"Simon TIRANT\">\n  </figure>\n  <div class=\"card-body items-center text-center\">\n    <p class=\"card-title text-base-content\">Simon TIRANT</p>\n    <p class=\"text-sm text-base-content\">Développeur Senior Fullstack</p>\n    <div class=\"card-actions\">\n      <ul class=\"flex items-center gap-4 \">\n  <li>\n    <a href=\"https://www.linkedin.com/in/simontirant/\" target=\"_blank\">\n      <img src=\"/images/linkedin_logo.png\" alt=\"Logo for https://www.linkedin.com/in/simontirant/\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"https://github.com/Sancxo\" target=\"_blank\">\n      <img src=\"/images/github_logo.png\" alt=\"Logo for https://github.com/Sancxo\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>\n    </div>\n  </div>\n</div>\n  \n</div>\n  </div>\n</section>"
+    assert html =~ "Story section"
+    assert html =~ "Here a single description of the section"
   end
 
   test "projects_section" do

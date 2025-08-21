@@ -63,11 +63,10 @@ defmodule FrixelDesignSystem.Components.Company do
   attr :title_color_class, :string, default: "text-black"
   slot :contact_details
   slot :socials
-  slot :map
 
   def contact_informations(assigns) do
     ~H"""
-    <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
+    <div id="find-us" class="mx-auto py-6 px-8">
       <div class="flex items-center justify-between mb-8">
         <h2 class={"#{@title_color_class} text-base xl:text-xl font-bold font-slogan tracking-widest uppercase"}>
           {@title}
@@ -78,8 +77,6 @@ defmodule FrixelDesignSystem.Components.Company do
         {render_slot(@contact_details)}
 
         {render_slot(@socials)}
-
-        {render_slot(@map)}
       </div>
     </div>
     """
@@ -102,6 +99,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
+  attr :class, :string, default: ""
 
   def find_us_map(assigns) do
     ~H"""
@@ -111,7 +109,7 @@ defmodule FrixelDesignSystem.Components.Company do
       data-marker-icon-url={@marker_icon_url}
       data-lattitude={@company_lattitude}
       data-longitude={@company_longitude}
-      class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
+      class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
     />
     """
   end
@@ -407,8 +405,8 @@ defmodule FrixelDesignSystem.Components.Company do
         <p class="text-sm text-base-content">{@position}</p>
         <div class="card-actions">
           <Menu.socials_list socials={[
-            %{social_media_url: @linkedin_url, icon_url: "/images/linkedin_logo.png"},
-            %{social_media_url: @github_url, icon_url: "/images/github_logo.png"}
+            %{social_media_url: @linkedin_url, icon: :linkedin, icon_class: "fill-blue-700 stroke-none"},
+            %{social_media_url: @github_url, icon: :github, icon_class: "fill-black stroke-none"}
           ]} />
         </div>
       </div>

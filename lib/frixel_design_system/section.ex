@@ -49,16 +49,19 @@ defmodule FrixelDesignSystem.Section do
   """
   slot :contact_infos
   slot :contact_form
+  slot :map
 
   def contact_section(assigns) do
     ~H"""
     <section
       id="contact-us"
-      class="flex flex-col md:flex-row justify-evenly gap-x-4 lg:gap-x-8 xl:gap-x-16 pt-20"
+      class="md:grid md:grid-cols-2 md:gap-4 lg:gap-8 xl:gap-16 pt-20"
     >
       {render_slot(@contact_infos)}
 
       {render_slot(@contact_form)}
+
+      {render_slot(@map)}
     </section>
     """
   end

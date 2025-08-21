@@ -3,6 +3,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
   import FrixelDesignSystemWeb.CoreComponents
+  import FrixelDesignSystem.Components.SocialIcons, only: [social_icon: 1]
 
   alias FrixelDesignSystem.Components.Button
   alias Phoenix.LiveView.JS
@@ -376,8 +377,8 @@ defmodule FrixelDesignSystem.Components.Menu do
   ## Examples
 
       <.socials_list class="size-4" is_icon_rounded?={true} socials={[
-        %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
-        %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
+        %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+        %{social_media_url: "https://linkedin.com", icon: :linkedin}
       ]} />
   """
   attr :socials, :list,
@@ -389,17 +390,23 @@ defmodule FrixelDesignSystem.Components.Menu do
 
   def socials_list(assigns) do
     ~H"""
-    <ul class={"flex items-center gap-4 #{@class}"}>
-      <li :for={social <- @socials}>
-        <a href={social.social_media_url} target="_blank">
-          <img
-            src={social.icon_url}
-            alt={"Logo for #{social.social_media_url}"}
-            class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
-          />
-        </a>
-      </li>
-    </ul>
+    <nav class={"flex items-center gap-4 #{@class}"}>
+      <a :for={social <- @socials} href={social.social_media_url} target="_blank">
+        <%= cond do %>
+          <% is_atom(social.icon) -> %>
+            <.social_icon
+              name={social.icon}
+              class={"#{@is_icon_rounded? && "rounded-full"} #{get_in(social, [:icon_class])} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+            />
+          <% is_binary(social.icon) -> %>
+            <img
+              src={social.icon}
+              alt={"Logo for #{social.social_media_url}"}
+              class={"size-10 #{@is_icon_rounded? && "rounded-full"} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+            />
+        <% end %>
+      </a>
+    </nav>
     """
   end
 

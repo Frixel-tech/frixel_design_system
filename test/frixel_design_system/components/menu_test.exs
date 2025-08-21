@@ -82,8 +82,11 @@ defmodule FrixelDesignSystem.Components.MenuTest do
   test "socials_list" do
     # Given
     socials_links_list = [
-      %{social_media_url: "https://github.com", icon_url: "/images/github_logo.png"},
-      %{social_media_url: "https://linkedin.com", icon_url: "/images/linkedin_logo.png"}
+      %{social_media_url: "https://github.com", icon: "/images/github_logo.png"},
+      %{social_media_url: "https://github.com", icon: :github},
+      %{social_media_url: "https://linkedin.com", icon: :linkedin, icon_class: "fill-red-500"},
+      %{social_media_url: "https://whatsapp.com", icon: :whatsapp},
+      %{social_media_url: "https://instagram.com", icon: :instagram}
     ]
 
     assigns = %{socials: socials_links_list, class: "p-36 w-32"}
@@ -95,8 +98,13 @@ defmodule FrixelDesignSystem.Components.MenuTest do
       """)}"
 
     # Then
-    assert html =~
-             "<ul class=\"flex items-center gap-4 p-36 w-32\">\n  <li>\n    <a href=\"https://github.com\" target=\"_blank\">\n      <img src=\"/images/github_logo.png\" alt=\"Logo for https://github.com\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li><li>\n    <a href=\"https://linkedin.com\" target=\"_blank\">\n      <img src=\"/images/linkedin_logo.png\" alt=\"Logo for https://linkedin.com\" class=\"size-10 rounded-full hover:shadow-md transition-transform duration-300 hover:scale-110\">\n    </a>\n  </li>\n</ul>"
+    assert html =~ "<img "
+    assert html =~ "https://github.com"
+    assert html =~ "<svg "
+    assert html =~ "fill-red-500"
+    assert html =~ "https://linkedin.com"
+    assert html =~ "https://whatsapp.com"
+    assert html =~ "https://instagram.com"
   end
 
   test "theme_switcher" do
