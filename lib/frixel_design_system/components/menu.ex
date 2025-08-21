@@ -396,7 +396,7 @@ defmodule FrixelDesignSystem.Components.Menu do
           <% is_atom(social.icon) -> %>
             <.social_icon
               name={social.icon}
-              class={"#{@is_icon_rounded? && "rounded-full"} #{social.icon_class || ""} hover:shadow-md transition-transform duration-300 hover:scale-110"}
+              class={"#{@is_icon_rounded? && "rounded-full"} #{get_in(social, :icon_class) |> IO.inspect()} hover:shadow-md transition-transform duration-300 hover:scale-110"}
             />
           <% is_binary(social.icon) -> %>
             <img
@@ -429,10 +429,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
