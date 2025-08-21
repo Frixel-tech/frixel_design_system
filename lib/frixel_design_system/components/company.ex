@@ -66,7 +66,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   def contact_informations(assigns) do
     ~H"""
-    <div id="find-us" class="mx-auto py-6 px-8 md:max-w-1/2">
+    <div id="find-us" class="mx-auto py-6 px-8">
       <div class="flex items-center justify-between mb-8">
         <h2 class={"#{@title_color_class} text-base xl:text-xl font-bold font-slogan tracking-widest uppercase"}>
           {@title}
@@ -99,6 +99,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
+  attr :class, :string, default: ""
 
   def find_us_map(assigns) do
     ~H"""
@@ -108,7 +109,7 @@ defmodule FrixelDesignSystem.Components.Company do
       data-marker-icon-url={@marker_icon_url}
       data-lattitude={@company_lattitude}
       data-longitude={@company_longitude}
-      class="h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0"
+      class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
     />
     """
   end
