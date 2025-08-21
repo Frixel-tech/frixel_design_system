@@ -405,8 +405,8 @@ defmodule FrixelDesignSystem.Components.Company do
         <p class="text-sm text-base-content">{@position}</p>
         <div class="card-actions">
           <Menu.socials_list socials={[
-            %{social_media_url: @linkedin_url, icon: :linkedin, icon_class: ""},
-            %{social_media_url: @github_url, icon: :github, icon_class: ""}
+            %{social_media_url: @linkedin_url, icon: :linkedin},
+            %{social_media_url: @github_url, icon: :github}
           ]} />
         </div>
       </div>
