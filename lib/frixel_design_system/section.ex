@@ -348,7 +348,12 @@ defmodule FrixelDesignSystem.Section do
     <section id="about" class="pt-20" {@rest}>
       <Header.section_title :if={@section_title} title={@section_title} />
 
-      <Company.introduction_card title={@card_title} text={@text} img_src={@img_src} class={@card_class} />
+      <Company.introduction_card
+        title={@card_title}
+        text={@text}
+        img_src={@img_src}
+        class={@card_class}
+      />
     </section>
     """
   end

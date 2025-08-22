@@ -208,7 +208,11 @@ defmodule FrixelDesignSystem.Components.Company do
     ~H"""
     <div class={"card lg:card-side shadow-lg mb-12 p-8 gap-8 #{@class}"}>
       <div class="card-body order-2 lg:order-1 m-auto items-center shrink-2">
-        <Header.card_title :if={@title} title={@title} class="card-title tracking-widest text-center lg:text-left" />
+        <Header.card_title
+          :if={@title}
+          title={@title}
+          class="card-title tracking-widest text-center lg:text-left"
+        />
 
         <p :if={@text} class="text-base mt-2">{@text}</p>
       </div>
@@ -409,7 +413,11 @@ defmodule FrixelDesignSystem.Components.Company do
         <p class="text-sm text-base-content">{@position}</p>
         <div class="card-actions">
           <Menu.socials_list socials={[
-            %{social_media_url: @linkedin_url, icon: :linkedin, icon_class: "fill-blue-700 stroke-none"},
+            %{
+              social_media_url: @linkedin_url,
+              icon: :linkedin,
+              icon_class: "fill-blue-700 stroke-none"
+            },
             %{social_media_url: @github_url, icon: :github, icon_class: "fill-black stroke-none"}
           ]} />
         </div>
