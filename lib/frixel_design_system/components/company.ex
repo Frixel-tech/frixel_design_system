@@ -206,7 +206,7 @@ defmodule FrixelDesignSystem.Components.Company do
 
   def introduction_card(assigns) do
     ~H"""
-    <div class={"card lg:card-side shadow-lg mb-12 p-8 gap-8 #{@class}"}>
+    <div class={"card lg:card-side shadow-lg mb-12 mx-4 lg:m-auto p-8 gap-8 #{@class}"}>
       <div class="card-body order-2 lg:order-1 m-auto items-center shrink-2">
         <Header.card_title
           :if={@title}
