@@ -364,6 +364,10 @@ defmodule FrixelDesignSystem.Section do
     required: true,
     doc: "A list of values to display in the values cards"
 
+  attr :card_class, :string,
+    default: "",
+    doc: "The CSS classes to put style into your introduction card"
+
   def values_section(assigns) do
     ~H"""
     <section id="values">
@@ -371,7 +375,11 @@ defmodule FrixelDesignSystem.Section do
 
       <div class="flex items-center justify-center flex-wrap gap-14">
         <%= for company_value <- @company_values do %>
-          <Company.company_values_card title={company_value.name} text={company_value.description} />
+          <Company.company_values_card
+            title={company_value.name}
+            text={company_value.description}
+            class={card_class}
+          />
         <% end %>
       </div>
     </section>
