@@ -206,19 +206,19 @@ defmodule FrixelDesignSystem.Components.Company do
 
   def introduction_card(assigns) do
     ~H"""
-    <div class={"card card-side items-center shadow-lg mb-12 lg:mx-12 #{@class}"}>
+    <div class={"card xl:card-side items-center shadow-lg mb-12 lg:mx-12 p-8 #{@class}"}>
       <div class="card-body items-center lg:pl-16">
         <Header.card_title :if={@title} title={@title} class="card-title tracking-widest" />
 
         <p :if={@text} class="text-base mt-2">{@text}</p>
       </div>
 
-      <figure :if={@img_src} class="hidden xl:block px-6 rounded-lg mr-8">
+      <figure :if={@img_src} class="object-none size-75 px-6 rounded-lg mr-8">
         <img
           src={@img_src}
-          height="80"
-          width="200"
-          class="w-200 ml-8 mr-6 mt-6 mb-6 rounded-lg shadow-xl"
+          height="300"
+          width="300"
+          class="size-75 rounded-lg shadow-xl"
           alt="Introduction illtustration"
         />
       </figure>
