@@ -240,14 +240,19 @@ defmodule FrixelDesignSystem.Components.Company do
         title="Value name"
         text="Some lines describing why it matters" />
   """
-  attr(:title, :string, required: true, doc: "The title of the value")
-  attr(:text, :string, required: true, doc: "The description of the value")
+  attr :title, :string, required: true, doc: "The title of the value"
+  attr :text, :string, required: true, doc: "The description of the value"
+
+  attr :class, :string,
+    default: "",
+    doc: "The CSS classes to put style into your card"
 
   def company_values_card(assigns) do
     ~H"""
-    <div class="card bg-base-200 w-104 h-54 shadow-sm my-6">
+    <div class={"card w-104 h-54 shadow-sm my-6 #{@class}"}>
       <div class="card-body items-center flex-none m-auto gap-4">
         <Header.card_title :if={@title} title={@title} class="card-title tracking-widest" />
+
         <p :if={@text} class="text-base text-center">{format_text(@text)}</p>
       </div>
     </div>
