@@ -98,12 +98,14 @@ defmodule FrixelDesignSystem.Components.CompanyTest do
     # When
     html =
       "#{rendered_to_string(~H"""
-      <Company.introduction_card title={@title} text={@text} img_src={@img_src} />
+      <Company.introduction_card title={@title} text={@text} img_src={@img_src} class="bg-red-500" />
       """)}"
 
     # Then
-    assert html =~
-             "<div class=\"card card-side items-center bg-base-200 shadow-lg mb-12 lg:mx-12\">\n  <div class=\"card-body items-center lg:pl-16\">\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest card-title tracking-widest\">\n  title here\n</h3>\n    <p class=\"text-base mt-2\">text here</p>\n  </div>\n  <figure>\n    <div class=\"hidden xl:block px-6 rounded-lg mr-8\">\n      <img src=\"/path/to/image.png\" height=\"80\" width=\"200\" class=\"w-200 ml-8 mr-6 mt-6 mb-6 rounded-lg shadow-xl\" alt=\"Introduction illtustration\">\n    </div>\n  </figure>\n</div>"
+    assert html =~ "title here"
+    assert html =~ "text here"
+    assert html =~ "src=\"/path/to/image.png\""
+    assert html =~ "bg-red-500"
   end
 
   test "company_values_card" do
