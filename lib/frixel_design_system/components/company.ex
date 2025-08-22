@@ -196,27 +196,31 @@ defmodule FrixelDesignSystem.Components.Company do
         img_src="path/to/your/team/or/organisation/photo.jpg" />
   """
 
-  attr(:title, :string, default: nil, doc: "The optional subtitle to display")
-  attr(:text, :string, default: nil, doc: "The optional text to display")
-  attr(:img_src, :string, default: nil, doc: "The optional image source to display")
+  attr :title, :string, default: nil, doc: "The optional title to display on top of the card"
+  attr :text, :string, default: nil, doc: "The optional text to display"
+  attr :img_src, :string, default: nil, doc: "The optional image source to display"
+
+  attr :class, :string,
+    default: "",
+    doc: "The CSS classes to put style into your card"
 
   def introduction_card(assigns) do
     ~H"""
-    <div class="card card-side items-center bg-base-200 shadow-lg mb-12 lg:mx-12">
+    <div class={"card card-side items-center shadow-lg mb-12 lg:mx-12 #{@class}"}>
       <div class="card-body items-center lg:pl-16">
-        <Header.card_title title={@title} class="card-title tracking-widest" />
-        <p class="text-base mt-2">{@text}</p>
+        <Header.card_title :if={@title} title={@title} class="card-title tracking-widest" />
+
+        <p :if={@text} class="text-base mt-2">{@text}</p>
       </div>
-      <figure>
-        <div class="hidden xl:block px-6 rounded-lg mr-8">
-          <img
-            src={@img_src}
-            height="80"
-            width="200"
-            class="w-200 ml-8 mr-6 mt-6 mb-6 rounded-lg shadow-xl"
-            alt="Introduction illtustration"
-          />
-        </div>
+
+      <figure :if={@img_src} class="hidden xl:block px-6 rounded-lg mr-8">
+        <img
+          src={@img_src}
+          height="80"
+          width="200"
+          class="w-200 ml-8 mr-6 mt-6 mb-6 rounded-lg shadow-xl"
+          alt="Introduction illtustration"
+        />
       </figure>
     </div>
     """

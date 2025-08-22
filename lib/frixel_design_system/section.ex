@@ -332,18 +332,23 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  attr :title, :string, default: nil, doc: "The title to display"
-  attr :subtitle, :string, required: true, doc: "The subtitle to display"
-  attr :text, :string, required: true, doc: "The text to display"
-  attr :img_src, :string, required: true, doc: "The image source to display"
+  attr :section_title, :string, default: nil, doc: "The section title to display"
+  attr :card_title, :string, default: nil, doc: "The card title to display"
+  attr :text, :string, default: nil, doc: "The text to display"
+  attr :img_src, :string, default: nil, doc: "The image source to display"
+
+  attr :card_class, :string,
+    default: "",
+    doc: "The CSS classes to put style into your introduction card"
+
   attr :rest, :global, doc: "Additional attributes for the section element"
 
   def introduction_section(assigns) do
     ~H"""
     <section id="about" class="pt-20" {@rest}>
-      <Header.section_title :if={@title} title={@title} />
+      <Header.section_title :if={@title} title={@section_title} />
 
-      <Company.introduction_card title={@subtitle} text={@text} img_src={@img_src} />
+      <Company.introduction_card title={@card_title} text={@text} img_src={@img_src} class={@card_class} />
     </section>
     """
   end
