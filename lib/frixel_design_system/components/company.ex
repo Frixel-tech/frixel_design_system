@@ -213,12 +213,12 @@ defmodule FrixelDesignSystem.Components.Company do
         <p :if={@text} class="text-base mt-2">{@text}</p>
       </div>
 
-      <figure :if={@img_src} class="object-none size-75 px-6 rounded-lg mr-8">
+      <figure :if={@img_src} class="size-75 px-6 rounded-lg mr-8">
         <img
           src={@img_src}
           height="300"
           width="300"
-          class="size-75 rounded-lg shadow-xl"
+          class="object-none size-75 rounded-lg shadow-xl"
           alt="Introduction illtustration"
         />
       </figure>
