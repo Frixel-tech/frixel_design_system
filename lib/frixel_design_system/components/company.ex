@@ -250,10 +250,10 @@ defmodule FrixelDesignSystem.Components.Company do
   def company_values_card(assigns) do
     ~H"""
     <div class={"card w-104 shadow-sm my-6 #{@class}"}>
-      <div class="card-body items-center flex-none m-auto gap-4 text-base">
+      <div class="card-body items-center flex-none gap-4 text-base">
         <Header.card_title :if={@title} title={@title} class="card-title tracking-widest" />
 
-        <p :if={@text} class="text-center">{format_text(@text)}</p>
+        <p :if={@text}>{format_text(@text)}</p>
       </div>
     </div>
     """
