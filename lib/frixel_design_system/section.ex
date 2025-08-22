@@ -332,23 +332,43 @@ defmodule FrixelDesignSystem.Section do
     """
   end
 
-  attr :title, :string, required: true, doc: "The title to display"
-  attr :subtitle, :string, required: true, doc: "The subtitle to display"
-  attr :text, :string, required: true, doc: "The text to display"
-  attr :img_src, :string, required: true, doc: "The image source to display"
+  attr :section_title, :string, default: nil, doc: "The section title to display"
+  attr :card_title, :string, default: nil, doc: "The card title to display"
+  attr :text, :string, default: nil, doc: "The text to display"
+  attr :img_src, :string, default: nil, doc: "The image source to display"
 
-  attr :company_values, :list,
-    required: true,
-    doc: "A list of values to display in the values cards"
+  attr :card_class, :string,
+    default: "",
+    doc: "The CSS classes to put style into your introduction card"
 
   attr :rest, :global, doc: "Additional attributes for the section element"
 
   def introduction_section(assigns) do
     ~H"""
     <section id="about" class="pt-20" {@rest}>
-      <Header.section_title title={@title} />
-      <Company.introduction_card title={@subtitle} text={@text} img_src={@img_src} />
-      <Header.section_title title={gettext("Our values in AAA")} />
+      <Header.section_title :if={@section_title} title={@section_title} />
+
+      <Company.introduction_card
+        title={@card_title}
+        text={@text}
+        img_src={@img_src}
+        class={@card_class}
+      />
+    </section>
+    """
+  end
+
+  attr :title, :string, default: nil, doc: "The title to display"
+
+  attr :company_values, :list,
+    required: true,
+    doc: "A list of values to display in the values cards"
+
+  def values_section(assigns) do
+    ~H"""
+    <section id="values">
+      <Header.section_title :if={@title} title={@title} />
+
       <div class="flex items-center justify-center flex-wrap gap-14">
         <%= for company_value <- @company_values do %>
           <Company.company_values_card title={company_value.name} text={company_value.description} />

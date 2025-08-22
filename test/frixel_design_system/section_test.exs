@@ -581,46 +581,53 @@ defmodule FrixelDesignSystem.SectionTest do
 
   test "introduction_section" do
     # Given
-    company_values = [
-      %{
-        name: "A single value",
-        description: "A single description of value"
-      },
-      %{
-        name: "A single value #2",
-        description: "A single description of value #2"
-      },
-      %{
-        name: "A single value #3",
-        description: "A single description of value #3"
-      }
-    ]
-
     assigns = %{
-      title: "Title",
-      subtitle: "Subtitle",
+      section_title: "Section title",
+      card_title: "Card ttitle",
       text: "Text",
-      img_src: "/path/to/img_src.png",
-      company_values: company_values,
-      rest: %{}
+      img_src: "/path/to/img_src.png"
     }
 
     # When
     html =
       "#{rendered_to_string(~H"""
       <Section.introduction_section
-        title={@title}
-        subtitle={@subtitle}
+        section_title={@section_title}
+        card_title={@card_title}
         text={@text}
         img_src={@img_src}
-        company_values={@company_values}
-        rest={@rest}
+        card_class="bg-emerald-400"
       />
       """)}"
 
     # Then
-    assert html =~
-             "<section id=\"about\" class=\"pt-20\">\n  <h2 class=\"text-base-content text-center text-4xl font-slogan font-bold mt-6 mb-6 tracking-widest \">\n  Title\n</h2>\n  <div class=\"card card-side items-center bg-base-200 shadow-lg mb-12 lg:mx-12\">\n  <div class=\"card-body items-center lg:pl-16\">\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest card-title tracking-widest\">\n  Subtitle\n</h3>\n    <p class=\"text-base mt-2\">Text</p>\n  </div>\n  <figure>\n    <div class=\"hidden xl:block px-6 rounded-lg mr-8\">\n      <img src=\"/path/to/img_src.png\" height=\"80\" width=\"200\" class=\"w-200 ml-8 mr-6 mt-6 mb-6 rounded-lg shadow-xl\" alt=\"Introduction illtustration\">\n    </div>\n  </figure>\n</div>\n  <h2 class=\"text-base-content text-center text-4xl font-slogan font-bold mt-6 mb-6 tracking-widest \">\n  Our values in AAA\n</h2>\n  <div class=\"flex items-center justify-center flex-wrap gap-14\">\n    \n      <div class=\"card bg-base-200 w-104 h-54 shadow-sm my-6\">\n  <div class=\"card-body items-center flex-none m-auto gap-4\">\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest card-title tracking-widest\">\n  A single value\n</h3>\n    <p class=\"text-base text-center\">A single description of value</p>\n  </div>\n</div>\n    \n      <div class=\"card bg-base-200 w-104 h-54 shadow-sm my-6\">\n  <div class=\"card-body items-center flex-none m-auto gap-4\">\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest card-title tracking-widest\">\n  A single value #2\n</h3>\n    <p class=\"text-base text-center\">A single description of value #2</p>\n  </div>\n</div>\n    \n      <div class=\"card bg-base-200 w-104 h-54 shadow-sm my-6\">\n  <div class=\"card-body items-center flex-none m-auto gap-4\">\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest card-title tracking-widest\">\n  A single value #3\n</h3>\n    <p class=\"text-base text-center\">A single description of value #3</p>\n  </div>\n</div>\n    \n  </div>\n</section>"
+    assert html =~ "Section title"
+    assert html =~ "Card ttitle"
+    assert html =~ "Text"
+    assert html =~ "src=\"/path/to/img_src.png\""
+  end
+
+  test "values section" do
+    company_values = [
+      %{
+        name: "A single value",
+        description: "A single description of value"
+      }
+    ]
+
+    assigns = %{
+      title: "Section title",
+      company_values: company_values
+    }
+
+    html =
+      "#{rendered_to_string(~H"""
+      <Section.values_section title={@title} company_values={@company_values} />
+      """)}"
+
+    assert html =~ "Section title"
+    assert html =~ "A single value"
+    assert html =~ "A single description of value"
   end
 
   test "review_section" do
