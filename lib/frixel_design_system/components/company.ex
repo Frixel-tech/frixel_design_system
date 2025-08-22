@@ -1,6 +1,7 @@
 defmodule FrixelDesignSystem.Components.Company do
-  use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
+  use Phoenix.Component
+  import FrixelDesignSystem.Helper, only: [format_text: 1]
   alias FrixelDesignSystem.Components.{Button, Header, Menu}
 
   @doc """
@@ -214,7 +215,7 @@ defmodule FrixelDesignSystem.Components.Company do
           class="card-title tracking-widest text-center lg:text-left"
         />
 
-        <p :if={@text} class="text-base mt-2">{@text}</p>
+        <p :if={@text} class="text-base mt-2">{format_text(@text)}</p>
       </div>
 
       <figure :if={@img_src} class="!rounded-none order-1 lg:order-2">
@@ -246,8 +247,8 @@ defmodule FrixelDesignSystem.Components.Company do
     ~H"""
     <div class="card bg-base-200 w-104 h-54 shadow-sm my-6">
       <div class="card-body items-center flex-none m-auto gap-4">
-        <Header.card_title title={@title} class="card-title tracking-widest" />
-        <p class="text-base text-center">{@text}</p>
+        <Header.card_title :if={@title} title={@title} class="card-title tracking-widest" />
+        <p :if={@text} class="text-base text-center">{format_text(@text)}</p>
       </div>
     </div>
     """
