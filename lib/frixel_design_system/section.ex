@@ -373,7 +373,7 @@ defmodule FrixelDesignSystem.Section do
     <section id="values">
       <Header.section_title :if={@title} title={@title} />
 
-      <div class="flex items-center justify-center flex-wrap gap-14">
+      <div class="flex items-stretch justify-center flex-wrap gap-14">
         <%= for company_value <- @company_values do %>
           <Company.company_values_card
             title={company_value.name}
