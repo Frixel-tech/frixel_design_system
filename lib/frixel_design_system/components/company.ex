@@ -208,7 +208,7 @@ defmodule FrixelDesignSystem.Components.Company do
     ~H"""
     <div class={"card lg:card-side shadow-lg mb-12 p-8 gap-8 #{@class}"}>
       <div class="card-body order-2 lg:order-1 m-auto items-center shrink-2">
-        <Header.card_title :if={@title} title={@title} class="card-title tracking-widest" />
+        <Header.card_title :if={@title} title={@title} class="card-title tracking-widest text-center lg:text-left" />
 
         <p :if={@text} class="text-base mt-2">{@text}</p>
       </div>
