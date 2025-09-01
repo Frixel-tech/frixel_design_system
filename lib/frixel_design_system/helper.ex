@@ -1,4 +1,32 @@
 defmodule FrixelDesignSystem.Helper do
+  @moduledoc """
+  This module holds different helper functions used by your application.
+  """
+
+  @typedoc """
+  An application environment state defined by an atom such as `:dev`, `:test` or `:prod`
+  """
+  @type app_env() :: :dev | :test | :prod
+
+  @doc """
+  Gets the environnement built
+
+  ## Examples
+
+      iex> get_config_env(:my_app)
+      :dev
+
+      iex> get_config_env(:my_app)
+      :test
+
+      iex> get_config_env(:my_app)
+      :prod
+  """
+  @spec get_config_env(atom()) :: app_env()
+  def get_config_env(app_name) do
+    Application.get_env(app_name, :env)
+  end
+
   @doc """
     Takes a string and replace some value by HTML balises , then prints the HTML value by using the function row()
 
