@@ -167,6 +167,10 @@ defmodule FrixelDesignSystem.Components.Product do
 
   attr :product_price, :string, required: true, doc: "The price of your product"
 
+  attr :product_unit, :string,
+    default: nil,
+    doc: "The selling unit type (eg: 'piece', 'm2', 'kg')"
+
   attr :product_availability_color_class, :string,
     default: nil,
     doc:
@@ -189,7 +193,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
         <p :if={@product_short_description} class="text-sm">{@product_short_description}</p>
 
-        <p class="text-sm">{@product_price}€</p>
+        <p class="text-sm">{@product_price}€<span :if={@product_unit}> / {@product_unit}</span></p>
 
         <p :if={@product_availability_comment} class="text-sm flex items-center justify-center gap-2">
           <span
