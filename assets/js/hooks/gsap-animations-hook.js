@@ -83,6 +83,7 @@ const FadeInAnimationHook = {
 const LateralSlideFromBothSideHook = {
   mounted() {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
+      console.log(animatedElement)
       gsap.from(animatedElement, {
         ScrollTrigger: {
           markers: true,
