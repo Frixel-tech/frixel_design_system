@@ -378,7 +378,7 @@ defmodule FrixelDesignSystem.Section do
           <Company.company_values_card
             title={company_value.name}
             text={company_value.description}
-            class={["invisible", @card_class]}
+            class={"invisible #{@card_class}"}
           />
         <% end %>
       </div>
