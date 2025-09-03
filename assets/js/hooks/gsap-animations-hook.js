@@ -85,6 +85,7 @@ const LateralSlideFromBothSideHook = {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       gsap.from(animatedElement, {
         ScrollTrigger: {
+          markers: true,
           trigger: this.el,
           start: "5% 75%",
           end: "center center"
