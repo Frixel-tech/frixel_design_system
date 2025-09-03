@@ -90,11 +90,18 @@ const LateralSlideFromBothSideHook = {
           end: "center center"
         },
         autoAlpha: 0,
-        xPercent: index == 0 ? '-50vw' : '50vw',
+        x: index == 0 ? '-50vw' : '50vw',
         duration: 1,
         ease: CustomEase.create("cubic-bezier", ".3,0,0,1"),
       })
     })
+  },
+
+  updated() {
+    gsap.from(this.el, {
+      autoAlpha: 0,
+      duration: 0
+    });
   }
 }
 
