@@ -135,6 +135,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-gsap.registerPlugin(CustomEase, ScrollTrigger);
-
 export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideHook, ParallaxAnimationHook };
