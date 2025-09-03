@@ -87,7 +87,8 @@ const LateralSlideFromBothSideAnimationHook = {
         scrollTrigger: {
           trigger: this.el,
           start: "5% 75%",
-          end: "center center"
+          end: "center center",
+          scrub: true
         },
         autoAlpha: 0,
         x: index == 0 ? '-50vw' : '50vw',
