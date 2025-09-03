@@ -1,5 +1,8 @@
 import { gsap } from "../../vendor/gsap/gsap.min.js";
 import { CustomEase } from "../../vendor/gsap/CustomEase.min.js";
+import { ScrollTrigger } from "../../vendor/gsap/ScrollTrigger.min.js";
+
+gsap.registerPlugin(CustomEase, ScrollTrigger);
 
 const CardStackingAnimationHook = {
   mounted() {
