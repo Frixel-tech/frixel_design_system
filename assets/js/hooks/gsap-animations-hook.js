@@ -2,6 +2,8 @@ import { gsap } from "../../vendor/gsap/gsap.min.js";
 import { CustomEase } from "../../vendor/gsap/CustomEase.min.js";
 import { ScrollTrigger } from "../../vendor/gsap/ScrollTrigger.min.js";
 
+gsap.registerPlugin(CustomEase, ScrollTrigger);
+
 const CardStackingAnimationHook = {
   mounted() {
     gsap.utils.toArray(":scope > *", this.el).forEach((card, cardIndex, cardList) => {
@@ -28,6 +30,7 @@ const DelayedFadeInAnimationHook = {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       gsap.from(animatedElement, {
         scrollTrigger: {
+          markers: true,
           trigger: this.el,
           start: "5% 75%",
           end: "center center"
@@ -80,8 +83,6 @@ const FadeInAnimationHook = {
 // Entering animation where two elements are coming from both side of the screen 
 const LateralSlideFromBothSideHook = {
   mounted() {
-    gsap.registerPlugin(CustomEase, ScrollTrigger);
-
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       console.log(animatedElement)
       gsap.from(animatedElement, {
