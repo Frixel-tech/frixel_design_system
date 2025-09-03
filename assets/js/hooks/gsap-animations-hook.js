@@ -98,10 +98,16 @@ const LateralSlideFromBothSideHook = {
   },
 
   updated() {
-    gsap.from(this.el, {
-      autoAlpha: 0,
-      duration: 0
-    });
+    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement) => {
+      gsap.from(animatedElement, {
+        ScrollTrigger: {
+          trigger: this.el
+        },
+        autoAlpha: 0,
+        duration: 0,
+      })
+    })
+
   }
 }
 
