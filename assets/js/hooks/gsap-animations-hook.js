@@ -55,24 +55,6 @@ const DelayedFadeInAnimationHook = {
   }
 }
 
-const LateralSlideFromBothSideHook = {
-  mounted() {
-    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
-      gsap.from(animatedElement, {
-        ScrollTrigger: {
-          trigger: this.el,
-          start: "5% 75%",
-          end: "center center"
-        },
-        autoAlpha: 0,
-        xPercent: index == 0 ? '-50vw' : '50vw',
-        duration: 1,
-        ease: CustomEase.create("cubic-bezier", ".3,0,0,1"),
-      })
-    })
-  }
-}
-
 const FadeInAnimationHook = {
   mounted() {
     // Animation jouée uniquement lors de l'insertion initiale
@@ -96,6 +78,25 @@ const FadeInAnimationHook = {
     });
   }
 };
+
+// Entering animation where two elements are coming from both side of the screen 
+const LateralSlideFromBothSideHook = {
+  mounted() {
+    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
+      gsap.from(animatedElement, {
+        ScrollTrigger: {
+          trigger: this.el,
+          start: "5% 75%",
+          end: "center center"
+        },
+        autoAlpha: 0,
+        xPercent: index == 0 ? '-50vw' : '50vw',
+        duration: 1,
+        ease: CustomEase.create("cubic-bezier", ".3,0,0,1"),
+      })
+    })
+  }
+}
 
 // TODO: maybe try GSAP plugin Inertia to do better parallax (because it is free now)
 const ParallaxAnimationHook = {
@@ -121,4 +122,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, ParallaxAnimationHook };
+export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideHook, ParallaxAnimationHook };
