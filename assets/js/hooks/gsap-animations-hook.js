@@ -30,7 +30,6 @@ const DelayedFadeInAnimationHook = {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       gsap.from(animatedElement, {
         scrollTrigger: {
-          markers: true,
           trigger: this.el,
           start: "5% 75%",
           end: "center center"
@@ -86,7 +85,6 @@ const LateralSlideFromBothSideHook = {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       gsap.from(animatedElement, {
         scrollTrigger: {
-          markers: true,
           trigger: this.el,
           start: "5% 75%",
           end: "center center"
