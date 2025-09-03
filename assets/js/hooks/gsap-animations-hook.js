@@ -2,8 +2,6 @@ import { gsap } from "../../vendor/gsap/gsap.min.js";
 import { CustomEase } from "../../vendor/gsap/CustomEase.min.js";
 import { ScrollTrigger } from "../../vendor/gsap/ScrollTrigger.min.js";
 
-gsap.registerPlugin(CustomEase, ScrollTrigger);
-
 const CardStackingAnimationHook = {
   mounted() {
     gsap.utils.toArray(":scope > *", this.el).forEach((card, cardIndex, cardList) => {
@@ -136,5 +134,7 @@ const ParallaxAnimationHook = {
     })
   }
 }
+
+gsap.registerPlugin(CustomEase, ScrollTrigger);
 
 export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideHook, ParallaxAnimationHook };
