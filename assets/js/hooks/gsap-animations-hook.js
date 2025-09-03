@@ -80,7 +80,7 @@ const FadeInAnimationHook = {
 };
 
 // Entering animation where two elements are coming from both side of the screen 
-const LateralSlideFromBothSideHook = {
+const LateralSlideFromBothSideAnimationHook = {
   mounted() {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       gsap.from(animatedElement, {
@@ -135,4 +135,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideHook, ParallaxAnimationHook };
+export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
