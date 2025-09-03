@@ -80,6 +80,8 @@ const FadeInAnimationHook = {
 // Entering animation where two elements are coming from both side of the screen 
 const LateralSlideFromBothSideHook = {
   mounted() {
+    gsap.registerPlugin(CustomEase, ScrollTrigger);
+
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
       console.log(animatedElement)
       gsap.from(animatedElement, {
