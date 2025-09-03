@@ -1,5 +1,6 @@
+import { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook } from "./gsap-animations-hook";
 import GetAndStoreThemeHook from "./get-and-store-theme-hook";
 import LeafletHook from "./leaflet.-hook";
 import ScrollToTopHook from "./scroll-to-top-hook";
 
-export default { GetAndStoreThemeHook, LeafletHook, ScrollToTopHook };
+export default { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook, GetAndStoreThemeHook, LeafletHook, ScrollToTopHook };
