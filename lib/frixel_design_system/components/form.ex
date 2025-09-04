@@ -97,7 +97,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
         <div class="flex gap-4">
           <.link :if={@booking_appointment_url} href={@booking_appointment_url} target="_blank">
-            <Button.secondary_button text={gettext("Book a call")} />
+            <Button.secondary_button text={gettext("Prendre rendez-vous")} />
           </.link>
         </div>
       </div>
@@ -111,7 +111,7 @@ defmodule FrixelDesignSystem.Components.Form do
             type="text"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Name")}
+            placeholder={gettext("Nom")}
             required
           />
 
@@ -135,7 +135,7 @@ defmodule FrixelDesignSystem.Components.Form do
             type="text"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Company (optional)")}
+            placeholder={gettext("Entreprise (optionnel)")}
           />
 
           <CoreComponents.input
@@ -145,7 +145,7 @@ defmodule FrixelDesignSystem.Components.Form do
             type="tel"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Phone (optional)")}
+            placeholder={gettext("Téléphone (optionnel)")}
           />
         </div>
 
@@ -157,7 +157,7 @@ defmodule FrixelDesignSystem.Components.Form do
             type="textarea"
             class={"textarea #{@input_color_class} w-full"}
             error_class={@input_error_class}
-            placeholder={gettext("Write your message here...")}
+            placeholder={gettext("Écrivez votre message ici...")}
             rows="4"
             required
           />
@@ -167,19 +167,19 @@ defmodule FrixelDesignSystem.Components.Form do
           :if={@client_needs}
           input_name="project_types[]"
           options={@client_needs}
-          title={gettext("SERVICES (multiple selection)")}
+          title={gettext("SERVICES (sélection multiple)")}
         />
 
         <.form_checkbox_or_radio_group
           :if={@client_budgets}
           input_name="project_budget"
           options={@client_budgets}
-          title={gettext("PROJECT BUDGET")}
+          title={gettext("BUDGET DU PROJET")}
           group_type="radio"
           other_input_type="number"
         />
 
-        <input class={"btn #{@submit_color_class}"} type="submit" value="Send" />
+        <input class={"btn #{@submit_color_class}"} type="submit" value={gettext("Envoyer")} />
       </form>
     </div>
     """
