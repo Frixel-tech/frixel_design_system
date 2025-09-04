@@ -97,11 +97,14 @@ defmodule FrixelDesignSystem.Components.Button do
     doc: "The unique identifier for the modal related to the button"
   )
 
+  attr(:rest, :global)
+
   def close_button(assigns) do
     ~H"""
     <label
       for={@for}
       class="btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10"
+      {@rest}
     >
       <.icon name="hero-x-mark-solid" class="size-6" />
     </label>
