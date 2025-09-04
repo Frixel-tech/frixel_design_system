@@ -174,7 +174,7 @@ defmodule FrixelDesignSystem.Components.Form do
           :if={@client_budgets}
           input_name="project_budget"
           options={@client_budgets}
-          title={gettext("BUDGET DU PROJET")}
+          title={gettext("Budget du projet")}
           group_type="radio"
           other_input_type="number"
         />
