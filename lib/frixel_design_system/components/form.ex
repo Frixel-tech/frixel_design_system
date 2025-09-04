@@ -167,7 +167,7 @@ defmodule FrixelDesignSystem.Components.Form do
           :if={@client_needs}
           input_name="project_types[]"
           options={@client_needs}
-          title={gettext("SERVICES (sélection multiple)")}
+          title={gettext("Services (sélection multiple)")}
         />
 
         <.form_checkbox_or_radio_group
