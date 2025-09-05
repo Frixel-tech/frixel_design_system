@@ -32,6 +32,13 @@ const CardSlideInHook = {
       return;
     }
 
+    gsap.set(this.el, {
+      autoAlpha: 0,
+      x: -30,
+      y: 20,
+      scale: 0.95
+    });
+
     gsap.from(this.el, {
       scrollTrigger: {
         trigger: this.el,
