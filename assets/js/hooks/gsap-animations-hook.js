@@ -31,8 +31,8 @@ const DelayedFadeInAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
-          start: "top 90%", // Changed from "5% 5%" to trigger when element is 90% down the viewport
-          end: "bottom top"
+          start: "top 90%",
+          end: "top bottom"
         },
         autoAlpha: 0,
         y: 50,
