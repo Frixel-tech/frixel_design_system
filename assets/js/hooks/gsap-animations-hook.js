@@ -34,8 +34,8 @@ const CardSlideInHook = {
 
     gsap.set(this.el, {
       autoAlpha: 0,
-      x: -30,
-      y: 20,
+      x: 0,
+      y: 0,
       scale: 0.95
     });
 
