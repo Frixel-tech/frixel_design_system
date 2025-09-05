@@ -25,6 +25,39 @@ const CardStackingAnimationHook = {
   }
 }
 
+const CardSlideInHook = {
+  mounted() {
+    if (typeof gsap === 'undefined') {
+      console.warn('GSAP not loaded for CardSlideInHook');
+      return;
+    }
+
+    // Animate the entire card as one unit
+    gsap.from(this.el, {
+      scrollTrigger: {
+        trigger: this.el,
+        start: "top 90%",
+        end: "bottom top"
+      },
+      autoAlpha: 0,
+      y: 200,
+      duration: 1,
+      ease: CustomEase.create("cubic-bezier", ".3,0,0,1")
+    });
+  },
+
+  updated() {
+    // Reset animation for updated card
+    gsap.from(this.el, {
+      scrollTrigger: {
+        trigger: this.el,
+      },
+      autoAlpha: 0,
+      duration: 0
+    });
+  }
+};
+
 const DelayedFadeInAnimationHook = {
   mounted() {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
@@ -135,4 +168,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
+export { CardStackingAnimationHook, CardSlideInHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
