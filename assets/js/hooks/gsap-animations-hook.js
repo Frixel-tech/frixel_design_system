@@ -32,7 +32,6 @@ const CardSlideInHook = {
       return;
     }
 
-    // Animate the entire card as one unit
     gsap.from(this.el, {
       scrollTrigger: {
         trigger: this.el,
@@ -47,7 +46,6 @@ const CardSlideInHook = {
   },
 
   updated() {
-    // Reset animation for updated card
     gsap.from(this.el, {
       scrollTrigger: {
         trigger: this.el,
