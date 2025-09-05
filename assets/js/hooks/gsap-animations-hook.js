@@ -42,7 +42,7 @@ const CardSlideInHook = {
       autoAlpha: 0,
       y: 200,
       duration: 0.5,
-      ease: CustomEase.create("cubic-bezier", ".3,0,0,1")
+      ease: CustomEase.create("cubic-bezier", ".2,2,2,1")
     });
   },
 
