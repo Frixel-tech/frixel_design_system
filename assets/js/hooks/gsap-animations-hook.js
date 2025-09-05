@@ -31,8 +31,8 @@ const DelayedFadeInAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
-          start: "5% 75%",
-          end: "center center"
+          start: "top 90%", // Changed from "5% 5%" to trigger when element is 90% down the viewport
+          end: "bottom top"
         },
         autoAlpha: 0,
         y: 50,
@@ -61,7 +61,7 @@ const FadeInAnimationHook = {
     gsap.from(this.el, {
       scrollTrigger: {
         trigger: this.el,
-        start: "5% 75%",
+        start: "top 90%", // Changed from "5% 75%" to trigger earlier
         end: "center center"
       },
       autoAlpha: 0,
@@ -86,7 +86,7 @@ const LateralSlideFromBothSideAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
-          start: "5% 75%",
+          start: "top 90%", // Changed from "5% 75%" to trigger earlier
           end: "center center",
           scrub: true
         },
@@ -108,7 +108,6 @@ const LateralSlideFromBothSideAnimationHook = {
         duration: 0,
       })
     })
-
   }
 }
 
