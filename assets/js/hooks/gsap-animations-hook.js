@@ -32,7 +32,7 @@ const DelayedFadeInAnimationHook = {
         scrollTrigger: {
           trigger: this.el,
           start: "top 90%",
-          end: "top bottom"
+          end: "bottom top"
         },
         autoAlpha: 0,
         y: 50,
