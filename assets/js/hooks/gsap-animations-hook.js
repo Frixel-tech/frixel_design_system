@@ -165,4 +165,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-export { CardStackingAnimationHook, CardSlideInHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
+export { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
