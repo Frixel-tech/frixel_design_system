@@ -25,37 +25,6 @@ const CardStackingAnimationHook = {
   }
 }
 
-const CardSlideInHook = {
-  mounted() {
-    if (typeof gsap === 'undefined') {
-      console.warn('GSAP not loaded for CardSlideInHook');
-      return;
-    }
-
-    gsap.from(this.el, {
-      scrollTrigger: {
-        trigger: this.el,
-        start: "top 90%",
-        end: "bottom top"
-      },
-      autoAlpha: 0,
-      y: 50,
-      duration: 0.8,
-      ease: CustomEase.create("cubic-bezier", ".3,0,0,1")
-    });
-  },
-
-  updated() {
-    gsap.from(this.el, {
-      scrollTrigger: {
-        trigger: this.el,
-      },
-      autoAlpha: 0,
-      duration: 0
-    });
-  }
-};
-
 const DelayedFadeInAnimationHook = {
   mounted() {
     gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
@@ -122,7 +91,7 @@ const FadeInAnimationHook = {
     gsap.from(this.el, {
       scrollTrigger: {
         trigger: this.el,
-        start: "top 90%", // Changed from "5% 75%" to trigger earlier
+        start: "5% 75%", // Changed from "5% 75%" to trigger earlier
         end: "center center"
       },
       autoAlpha: 0,
@@ -147,7 +116,7 @@ const LateralSlideFromBothSideAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
-          start: "top 90%", // Changed from "5% 75%" to trigger earlier
+          start: "5% 75%", // Changed from "5% 75%" to trigger earlier
           end: "center center",
           scrub: true
         },
