@@ -91,7 +91,7 @@ const FadeInAnimationHook = {
     gsap.from(this.el, {
       scrollTrigger: {
         trigger: this.el,
-        start: "5% 75%", // Changed from "5% 75%" to trigger earlier
+        start: "5% 75%",
         end: "center center"
       },
       autoAlpha: 0,
@@ -116,7 +116,7 @@ const LateralSlideFromBothSideAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
-          start: "5% 75%", // Changed from "5% 75%" to trigger earlier
+          start: "5% 75%",
           end: "center center",
           scrub: true
         },
