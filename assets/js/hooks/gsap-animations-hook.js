@@ -55,6 +55,36 @@ const DelayedFadeInAnimationHook = {
   }
 }
 
+const CatalogFadeInAnimationHook = {
+  mounted() {
+    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
+      gsap.from(animatedElement, {
+        scrollTrigger: {
+          trigger: this.el,
+          start: "top 90%",
+          end: "bottom top"
+        },
+        autoAlpha: 0,
+        y: 50,
+        duration: 1,
+        ease: CustomEase.create("cubic-bezier", ".3,0,0,1"),
+        delay: index * 0.2
+      })
+    })
+  },
+  updated() {
+    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
+      gsap.from(animatedElement, {
+        scrollTrigger: {
+          trigger: this.el,
+        },
+        autoAlpha: 0,
+        duration: 0
+      })
+    })
+  }
+}
+
 const FadeInAnimationHook = {
   mounted() {
     // Animation jouée uniquement lors de l'insertion initiale
@@ -108,7 +138,6 @@ const LateralSlideFromBothSideAnimationHook = {
         duration: 0,
       })
     })
-
   }
 }
 
@@ -136,4 +165,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-export { CardStackingAnimationHook, DelayedFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
+export { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
