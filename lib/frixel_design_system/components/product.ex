@@ -207,6 +207,280 @@ defmodule FrixelDesignSystem.Components.Product do
   end
 
   @doc """
+  A component to render product thumbnail gallery
+
+  ## Example:
+
+      <.product_thumbnail_gallery
+        product_pictures_urls_list={["/path/to/img1.webp", "/path/to/img2.webp"]}
+        product_name="Product Name"
+        gallery_id="desktop"
+      />
+  """
+  attr :product_pictures_urls_list, :list,
+    default: [],
+    doc: "List of all product image URLs for thumbnails"
+
+  attr :product_name, :string, required: true, doc: "Product name for alt text"
+
+  attr :gallery_id, :string,
+    default: "desktop",
+    doc: "Unique identifier for this gallery instance"
+
+  def product_thumbnail(assigns) do
+    ~H"""
+    <div :if={length(@product_pictures_urls_list) > 1} class="py-4">
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button
+          :for={{url, index} <- Enum.with_index(@product_pictures_urls_list)}
+          type="button"
+          class={[
+            "flex-shrink-0 relative overflow-hidden rounded-lg border-2 transition-all duration-200 border-gray-200 hover:border-mint-green/50",
+            if(index == 0, do: "thumbnail-active border-mint-green shadow-lg", else: "")
+          ]}
+          phx-click={
+            JS.set_attribute({"src", url}, to: "#main-product-image-#{@gallery_id}")
+            |> JS.remove_class("border-mint-green shadow-lg thumbnail-active", to: "button")
+            |> JS.add_class("border-gray-200", to: "button")
+            |> JS.add_class("border-mint-green shadow-lg thumbnail-active")
+          }
+        >
+          <img
+            src={url}
+            class="w-16 h-16 object-cover object-center hover:scale-110 transition-transform duration-200"
+            alt={"#{@product_name} - Image #{index + 1}"}
+          />
+          <div class="absolute inset-0 bg-mint-green/10 opacity-0 hover:opacity-100 transition-opacity duration-200">
+          </div>
+        </button>
+      </div>
+      <p class="text-xs text-gray-500 mt-2 text-center">Cliquez sur une image pour l'agrandir</p>
+    </div>
+    """
+  end
+
+  @doc """
+  A component to render product image gallery with thumbnails
+
+  ## Example:
+
+      <.product_image_gallery
+        product_illustration_url="/path/to/main/image.webp"
+        product_pictures_urls_list={["/path/to/img1.webp", "/path/to/img2.webp"]}
+        product_name="Product Name"
+      />
+  """
+  attr :product_illustration_url, :string,
+    default: nil,
+    doc: "Main product image URL"
+
+  attr :product_pictures_urls_list, :list,
+    default: [],
+    doc: "List of all product image URLs for thumbnails"
+
+  attr :product_name, :string, required: true, doc: "Product name for alt text"
+
+  attr :gallery_id, :string,
+    default: "desktop",
+    doc: "Unique identifier for this gallery instance"
+
+  def product_image_gallery(assigns) do
+    ~H"""
+    <div
+      class="relative flex flex-col items-center"
+      phx-hook="ResetImageGallery"
+      id={"gallery-#{@gallery_id}"}
+      data-original-src={@product_illustration_url}
+    >
+      <figure :if={@product_illustration_url} class="relative overflow-hidden group">
+        <img
+          id={"main-product-image-#{@gallery_id}"}
+          src={@product_illustration_url}
+          class="w-48 h-36 sm:w-56 sm:h-42 lg:w-74 lg:h-58 object-cover object-center rounded-lg shadow-lg transition-transform duration-700 group-hover:scale-105"
+          alt={@product_name}
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        </div>
+      </figure>
+
+      <div :if={!@product_illustration_url} class="flex justify-center">
+        <div class="w-48 h-36 sm:w-56 sm:h-42 lg:w-64 lg:h-48 bg-gradient-to-br from-mint-green/10 to-mint-green/5 flex items-center justify-center rounded-lg shadow-lg">
+          <div class="text-center text-mint-green/50">
+            <.icon name="hero-photo" class="size-8 mx-auto mb-2" />
+            <p class="text-sm font-medium">Image non disponible</p>
+          </div>
+        </div>
+      </div>
+
+      <.product_thumbnail
+        product_pictures_urls_list={@product_pictures_urls_list}
+        product_name={@product_name}
+        gallery_id={@gallery_id}
+      />
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a product status indicator showing availability with color and text
+
+  ## Examples
+
+      <.product_status
+        availability_color_class="bg-mint-green"
+        availability_comment="Disponible"
+        product_stock={10}
+      />
+
+      <.product_status
+        availability_color_class="bg-brick-orange"
+        availability_comment="Temporairement indisponible"
+        product_stock={0}
+        variant="detailed"
+      />
+  """
+  attr :availability_color_class, :string,
+    default: nil,
+    doc: "A background color class for the status indicator dot"
+
+  attr :availability_comment, :string,
+    default: nil,
+    doc: "The availability status text to display"
+
+  attr :variant, :string,
+    default: "simple",
+    values: ~w(simple detailed),
+    doc: "Display variant: 'simple' for compact display, 'detailed' for enhanced styling"
+
+  attr :product_stock, :integer,
+    default: nil,
+    doc: "How many of this product do you have in your stock ?"
+
+  def product_status(assigns) do
+    ~H"""
+    <div
+      :if={@availability_comment || @product_stock}
+      class={[
+        "flex flex-col gap-2",
+        if(@variant == "detailed", do: "p-4 bg-gray-50 rounded-xl border border-gray-200", else: "")
+      ]}
+    >
+      <div :if={@availability_comment} class="flex items-center gap-3">
+        <span
+          :if={@availability_color_class}
+          class={[
+            "rounded-full flex-shrink-0",
+            if(@variant == "detailed",
+              do: "size-3 ring-2 ring-white shadow-lg",
+              else: "size-2.5"
+            ),
+            @availability_color_class
+          ]}
+        />
+        <span class={[
+          "font-medium",
+          if(@variant == "detailed", do: "text-sm text-gray-700", else: "text-xs text-gray-600")
+        ]}>
+          {@availability_comment}
+        </span>
+      </div>
+
+      <div :if={@product_stock != nil} class="flex items-center gap-3">
+        <span class={[
+          "rounded-full flex-shrink-0 bg-blue-500",
+          if(@variant == "detailed",
+            do: "size-3 ring-2 ring-white shadow-lg",
+            else: "size-2.5"
+          )
+        ]}>
+        </span>
+        <span class={[
+          "font-medium",
+          if(@variant == "detailed", do: "text-sm text-gray-700", else: "text-xs text-gray-600")
+        ]}>
+          Stock : {@product_stock}
+        </span>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders basic product information including name, price and unit type.
+
+  ## Examples
+
+      <.product_infos
+        product_name="Big watch"
+        product_price="1,000.00"
+        product_unit_type="item"
+      />
+  """
+  attr :product_name, :string, required: true, doc: "The name of your product"
+  attr :product_price, :string, required: true, doc: "The price of your product"
+
+  attr :product_unit_type, :string,
+    required: true,
+    doc: "The selling unit type (eg: item, m², L, Kg)"
+
+  def product_infos(assigns) do
+    ~H"""
+    <div class="text-center sm:text-left space-y-4">
+      <h1 class="text-2xl sm:text-3xl font-bold leading-tight">
+        {@product_name}
+      </h1>
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div class="text-2xl sm:text-3xl font-extrabold text-mint-green">
+          {@product_price}€
+        </div>
+        <div class="text-lg text-gray-600 font-medium">
+          / {@product_unit_type}
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders product description with styled layout and fallback message.
+
+  ## Examples
+
+      <.product_description product_description="This is a detailed product description" />
+
+      <.product_description product_description={nil} />
+  """
+  attr :product_description, :string,
+    default: nil,
+    doc:
+      "An exhaustive description of your product to inform your customer on the product (technical details, etc)"
+
+  def product_description(assigns) do
+    ~H"""
+    <div class="p-4 space-y-4">
+      <div class="flex items-center gap-3 text-mint-green">
+        <.icon name="hero-information-circle" class="size-4 flex-shrink-0" />
+        <span class="text-xs font-medium">Description</span>
+      </div>
+
+      <div :if={@product_description} class="prose prose-xs max-w-none">
+        <div class="bg-gradient-to-r from-mint-green/5 to-transparent border-l-2 border-mint-green pl-3 py-2 rounded-r-lg">
+          <div class="text-sm leading-relaxed whitespace-pre-wrap break-words">
+            {@product_description}
+          </div>
+        </div>
+      </div>
+
+      <div :if={!@product_description} class="text-center py-8 text-gray-500">
+        <.icon name="hero-document-text" class="size-12 mx-auto mb-3 opacity-50" />
+        <p>Aucune description disponible pour ce produit</p>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
   A component to render all product informations
 
   ## Example:
