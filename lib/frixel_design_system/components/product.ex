@@ -211,7 +211,7 @@ defmodule FrixelDesignSystem.Components.Product do
 
   ## Example:
 
-      <Product.product_details
+      <.product_details
         product_name="Big watch"
         product_illustration_url="/path/to/big/watch/img.webp"
         product_description="This is a really big watch to show off"
@@ -223,10 +223,10 @@ defmodule FrixelDesignSystem.Components.Product do
         bg_color_class="bg-white"
       >
         <:actions>
-            <button class="btn" phx-click="add-to-cart">{gettext("Add to cart")}</button>
+            <button class="btn" phx-click="add-to-cart">Add to cart</button>
             <a href="mailto:contact@test.com">Contact us</a>
         </:actions>
-      </Product.product_details>
+      </.product_details>
   """
   attr :bg_color_class, :string,
     default: "bg-white",
@@ -235,6 +235,10 @@ defmodule FrixelDesignSystem.Components.Product do
   attr :product_illustration_url, :string,
     default: nil,
     doc: "An image to illustrate your product"
+
+  attr :product_pictures_urls_list, :list,
+    default: [],
+    doc: "A list of image URLs to show as thumbnails below the main image"
 
   attr :product_name, :string, required: true, doc: "The name of your product"
 
@@ -267,37 +271,50 @@ defmodule FrixelDesignSystem.Components.Product do
   def product_details(assigns) do
     ~H"""
     <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
-      <%!-- TODO: should be a carousel here --%>
-      <div class="sm:order-2 h-[calc(100vh-56px)] overflow-y-auto">
-        <figure :if={@product_illustration_url}>
-          <img src={@product_illustration_url} class="w-screen" />
-        </figure>
-
-        <p class="text-center mt-4">{gettext("More details below")} ↓</p>
-
-        <div :if={@product_description} class="p-8">
-          <p class="text-sm">{@product_description}</p>
+      <div class="sm:order-2 p-6 space-y-6">
+        <div class="hidden sm:block">
+          <.product_image_gallery
+            product_illustration_url={@product_illustration_url}
+            product_pictures_urls_list={@product_pictures_urls_list}
+            product_name={@product_name}
+            gallery_id="desktop"
+          />
+        </div>
+        <div class="hidden sm:block">
+          <.product_description product_description={@product_description} />
         </div>
       </div>
 
-      <div class={"#{@bg_color_class} card card-xs items-center sticky bottom-0 sm:top-1/2 sm:order-1 w-full border-t border-base-300 rounded-none p-8"}>
-        <div class="card-body justify-center items-center gap-4 sm:gap-8">
-          <div>
-            <h2 class="card-title flex-col">{@product_name}</h2>
+      <div class={"#{@bg_color_class} sm:order-1 p-6 sm:p-8 space-y-6"}>
+        <.product_infos
+          product_name={@product_name}
+          product_price={@product_price}
+          product_unit_type={@product_unit_type}
+        />
+        <div class="block sm:hidden">
+          <.product_image_gallery
+            product_illustration_url={@product_illustration_url}
+            product_pictures_urls_list={@product_pictures_urls_list}
+            product_name={@product_name}
+            gallery_id="mobile"
+          />
+        </div>
+        <.product_status
+          product_stock={@product_stock}
+          availability_color_class={@product_availability_color_class}
+          availability_comment={@product_availability_comment}
+          variant="detailed"
+        />
+        <div class="block sm:hidden">
+          <.product_description product_description={@product_description} />
+        </div>
 
-            <p class="text-sm">{@product_price}€ / {@product_unit_type}</p>
-
-            <p :if={@product_stock}>{gettext("Stock")}: {@product_stock}</p>
-
-            <p :if={@product_availability_comment}>
-              <span
-                :if={@product_availability_color_class}
-                class={"size-2 rounded-full inline-block #{@product_availability_color_class}"}
-              /> {@product_availability_comment}
-            </p>
+        <div class="space-y-4">
+          <div class="text-center sm:text-left">
+            <h3 class="text-lg font-semibold mb-4">Nous contacter</h3>
           </div>
 
-          <div class="card-actions flex flex-row items-center">
+          <div class="flex flex-col gap-3 items-center pt-4">
             {render_slot(@actions)}
           </div>
         </div>
