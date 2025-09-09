@@ -2,6 +2,7 @@ defmodule FrixelDesignSystem.Components.Product do
   use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
   alias Phoenix.LiveView.JS
+  import FrixelDesignSystemWeb.CoreComponents, only: [icon: 1]
 
   @doc """
   A dropdown component to apply a filter on the products request.
