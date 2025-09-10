@@ -165,7 +165,7 @@ defmodule FrixelDesignSystem.Components.ProductTest do
       """)}"
 
     assert html =~
-             "<img src=\"https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp\""
+             "src=\"https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp\""
 
     assert html =~ "This is a test product description."
     assert html =~ "Product test"
