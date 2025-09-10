@@ -178,4 +178,233 @@ defmodule FrixelDesignSystem.Components.ProductTest do
     assert html =~ "<button class=\"btn\" phx-click=\"add-to-cart\">Add to cart</button>"
     assert html =~ "<a href=\"mailto:contact@test.com\">Contact us</a>"
   end
+
+  describe "product_thumbnail" do
+    test "renders thumbnails when multiple images provided" do
+      assigns = %{
+        product_pictures_urls_list: [
+          "https://img.daisyui.com/images/stock/photo-1.webp",
+          "https://img.daisyui.com/images/stock/photo-2.webp",
+          "https://img.daisyui.com/images/stock/photo-3.webp"
+        ],
+        product_name: "Test Product",
+        gallery_id: "test-gallery"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_thumbnail
+          product_pictures_urls_list={@product_pictures_urls_list}
+          product_name={@product_name}
+          gallery_id={@gallery_id}
+        />
+        """)}"
+
+      assert html =~ "<div class=\"py-4\">"
+      assert html =~ "flex flex-wrap gap-3 justify-center"
+      assert html =~ "Cliquez sur une image pour l'agrandir"
+    end
+
+    test "does not render when only one or no images" do
+      assigns = %{
+        product_pictures_urls_list: ["https://img.daisyui.com/images/stock/photo-1.webp"],
+        product_name: "Test Product",
+        gallery_id: "test-gallery"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_thumbnail
+          product_pictures_urls_list={@product_pictures_urls_list}
+          product_name={@product_name}
+          gallery_id={@gallery_id}
+        />
+        """)}"
+
+      refute html =~ "<div class=\"py-4\">"
+    end
+  end
+
+  describe "product_image_gallery" do
+    test "renders gallery with main image and thumbnails" do
+      assigns = %{
+        product_illustration_url: "https://img.daisyui.com/images/stock/main-image.webp",
+        product_pictures_urls_list: [
+          "https://img.daisyui.com/images/stock/photo-1.webp",
+          "https://img.daisyui.com/images/stock/photo-2.webp"
+        ],
+        product_name: "Test Product",
+        gallery_id: "desktop"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_image_gallery
+          product_illustration_url={@product_illustration_url}
+          product_pictures_urls_list={@product_pictures_urls_list}
+          product_name={@product_name}
+          gallery_id={@gallery_id}
+        />
+        """)}"
+
+      assert html =~ "phx-hook=\"ResetImageGallery\""
+      assert html =~ "id=\"gallery-desktop\""
+      assert html =~ "data-original-src=\"https://img.daisyui.com/images/stock/main-image.webp\""
+      assert html =~ "alt=\"Test Product\""
+    end
+
+    test "renders placeholder when no main image" do
+      assigns = %{
+        product_illustration_url: nil,
+        product_pictures_urls_list: [],
+        product_name: "Test Product",
+        gallery_id: "desktop"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_image_gallery
+          product_illustration_url={@product_illustration_url}
+          product_pictures_urls_list={@product_pictures_urls_list}
+          product_name={@product_name}
+          gallery_id={@gallery_id}
+        />
+        """)}"
+
+      assert html =~ "bg-gradient-to-br from-mint-green/10 to-mint-green/5"
+      refute html =~ "<figure"
+    end
+  end
+
+  describe "product_status" do
+    test "renders availability status with simple variant" do
+      assigns = %{
+        availability_color_class: "bg-mint-green",
+        availability_comment: "Disponible",
+        product_stock: 10,
+        variant: "simple"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status
+          availability_color_class={@availability_color_class}
+          availability_comment={@availability_comment}
+          product_stock={@product_stock}
+          variant={@variant}
+        />
+        """)}"
+
+      assert html =~ "bg-mint-green"
+      assert html =~ "Disponible"
+      assert html =~ "Stock : 10"
+      assert html =~ "text-xs text-gray-600"
+      refute html =~ "p-4 bg-gray-50"
+    end
+
+    test "renders availability status with detailed variant" do
+      assigns = %{
+        availability_color_class: "bg-brick-orange",
+        availability_comment: "Temporairement indisponible",
+        product_stock: 0,
+        variant: "detailed"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status
+          availability_color_class={@availability_color_class}
+          availability_comment={@availability_comment}
+          product_stock={@product_stock}
+          variant={@variant}
+        />
+        """)}"
+
+      assert html =~ "bg-brick-orange"
+      assert html =~ "Temporairement indisponible"
+      assert html =~ "Stock : 0"
+      assert html =~ "p-4 bg-gray-50 rounded-xl border border-gray-200"
+      assert html =~ "text-sm text-gray-700"
+    end
+
+    test "does not render when no availability info or stock" do
+      assigns = %{
+        availability_color_class: nil,
+        availability_comment: nil,
+        product_stock: nil,
+        variant: "simple"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status
+          availability_color_class={@availability_color_class}
+          availability_comment={@availability_comment}
+          product_stock={@product_stock}
+          variant={@variant}
+        />
+        """)}"
+
+      assert html == ""
+    end
+  end
+
+  describe "product_infos" do
+    test "renders product name, price and unit type" do
+      assigns = %{
+        product_name: "Big watch",
+        product_price: "1,000.00",
+        product_unit_type: "item"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_infos
+          product_name={@product_name}
+          product_price={@product_price}
+          product_unit_type={@product_unit_type}
+        />
+        """)}"
+
+      assert html =~ "Big watch"
+      assert html =~ "1,000.00€"
+      assert html =~ "/ item"
+      assert html =~ "text-2xl sm:text-3xl font-bold"
+      assert html =~ "text-mint-green"
+    end
+  end
+
+  describe "product_description" do
+    test "renders description when provided" do
+      assigns = %{
+        product_description: "This is a detailed product description"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_description product_description={@product_description} />
+        """)}"
+
+      assert html =~ "This is a detailed product description"
+      assert html =~ "Description"
+      assert html =~ "hero-information-circle"
+      assert html =~ "bg-gradient-to-r from-mint-green/5"
+      refute html =~ "Aucune description disponible"
+    end
+
+    test "renders fallback message when no description" do
+      assigns = %{
+        product_description: nil
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_description product_description={@product_description} />
+        """)}"
+
+      assert html =~ "Aucune description disponible pour ce produit"
+      assert html =~ "hero-document-text"
+      refute html =~ "bg-gradient-to-r from-mint-green/5"
+    end
+  end
 end
