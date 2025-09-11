@@ -485,11 +485,11 @@ defmodule FrixelDesignSystem.Components.Menu do
         </li>
         <li :if={@settings_path}>
           <.link class={@current_path == @settings_path && "menu-active"} href={@settings_path}>
-            {gettext("Settings")}
+            {gettext("Paramètres")}
           </.link>
         </li>
         <li>
-          <.link href={@log_out_path} method="delete">Log out</.link>
+          <.link href={@log_out_path} method="delete">Se déconnecter</.link>
         </li>
       <% else %>
         <li :if={@registration_path}>
@@ -497,12 +497,12 @@ defmodule FrixelDesignSystem.Components.Menu do
             class={@current_path == @registration_path && "menu-active"}
             href={@registration_path}
           >
-            {gettext("Register")}
+            {gettext("Créer un compter")}
           </.link>
         </li>
         <li>
           <.link class={@current_path == @log_in_path && "menu-active"} href={@log_in_path}>
-            {gettext("Log in")}
+            {gettext("Se connecter")}
           </.link>
         </li>
       <% end %>
