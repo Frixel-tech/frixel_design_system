@@ -105,23 +105,49 @@ defmodule FrixelDesignSystem.SectionTest do
     assert html =~ "https://www.booking-appointement-url.com"
   end
 
+  test "brand_showcase_section renders correctly with brands" do
+    brands = [
+      %{name: "Brand 1", logo_url: "/images/brand1.png", alt_text: "Logo Brand 1"},
+      %{name: "Brand 2", logo_url: "/images/brand2.png", alt_text: "Logo Brand 2"},
+      %{name: "Brand 3", logo_url: "/images/brand3.png", alt_text: "Logo Brand 3"}
+    ]
+
+    assigns = %{
+      title: "Nos partenaires",
+      description: "Ils nous font confiance",
+      brands: brands
+    }
+
+    html =
+      "#{rendered_to_string(~H"""
+        <Section.brand_showcase_section
+          title={@title}
+          description={@description}
+          brands={@brands}
+        />
+      """)}"
+
+    assert html =~ "Nos partenaires"
+    assert html =~ "Ils nous font confiance"
+    assert html =~ "brand-showcase-grid"
+    assert html =~ "Brand 1"
+    assert html =~ "/images/brand1.png"
+    assert html =~ "Logo Brand 1"
+  end
+
   test "client_section" do
-    # Given
     assigns = %{}
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.client_section />
       """)}"
 
-    # Then
     assert html =~
              "<section class=\"my-16 max-w-xl mx-auto\">\n  <div class=\"card bg-base-200 shadow-xl py-6 px-8\">\n    <div class=\"flex items-center justify-between mb-8\">\n      <h3 class=\"text-xl font-slogan font-bold tracking-widest \">\n  Leave a review\n</h3>\n    </div>\n    <form class=\"flex flex-col gap-8 \">\n  <div class=\"flex gap-4\">\n    <div class=\"w-1/2\">\n      <input class=\"input input-secondary w-full\" name=\"author\" placeholder=\"Your name\" required id=\"author\" name=\"author\" required class=\"w-full\" placeholder=\"Your name\">\n    </div>\n    <div class=\"w-1/2\">\n      <input class=\"input input-secondary w-full\" name=\"role\" placeholder=\"Your role\" required id=\"role\" name=\"role\" required class=\"w-full\" placeholder=\"Your role\">\n    </div>\n  </div>\n  <div>\n    <input class=\"input input-secondary w-full\" name=\"company\" placeholder=\"Company name\" required id=\"company\" name=\"company\" required class=\"w-full\" placeholder=\"Company name\">\n  </div>\n  <div>\n    <textarea id=\"content\" name=\"content\" placeholder=\"Write your review here...\" class=\"textarea textarea-bordered w-full input-secondary\" rows=\"4\" required></textarea>\n  </div>\n  <button class=\"flex btn btn-secondary mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103 mt-4\" type=\"submit\">\n  Submit review\n  \n  \n</button>\n</form>\n  </div>\n</section>"
   end
 
   test "base_header" do
-    # Given
     branding_name = "Branding name"
     branding_logo_url = "https://www.booking-appointement-url.com"
     call_to_action_name = "call to action"
@@ -160,7 +186,6 @@ defmodule FrixelDesignSystem.SectionTest do
       enable_theme_switcher?: false
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.base_header class="bg-white text-marine-blue border-b border-brick-orange">
@@ -196,7 +221,6 @@ defmodule FrixelDesignSystem.SectionTest do
   end
 
   test "base_header_commerce" do
-    # Given
     branding_name = "Frixel"
     branding_logo_url = "/images/logo.svg"
     is_connected = false
@@ -384,7 +408,6 @@ defmodule FrixelDesignSystem.SectionTest do
       />
       """)}"
 
-    # Then
     assert html =~ "Pret-à-porter"
     assert html =~ "/pret-a-porter"
     assert html =~ "T-Shirt"
@@ -398,7 +421,6 @@ defmodule FrixelDesignSystem.SectionTest do
   end
 
   test "base_footer" do
-    # Given
     branding_name = "Branding name"
     branding_logo_url = "/path/to/branding/logo.png"
     company_postal_address = "1 test street, 1234 Testville"
@@ -437,7 +459,6 @@ defmodule FrixelDesignSystem.SectionTest do
       footer_links: footer_links
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.base_footer
@@ -468,7 +489,6 @@ defmodule FrixelDesignSystem.SectionTest do
       </Section.base_footer>
       """)}"
 
-    # Then
     assert html =~ "Branding name"
     assert html =~ "bg-sky-blue"
     assert html =~ "Retrouvez-nous-sur les réseaux:"
@@ -482,7 +502,6 @@ defmodule FrixelDesignSystem.SectionTest do
   end
 
   test "landing_section" do
-    # Given
     title = "Title"
     text = "A simple text"
     subtext = "A simple subtext"
@@ -519,7 +538,6 @@ defmodule FrixelDesignSystem.SectionTest do
       tools: tools
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.landing_section
@@ -535,13 +553,11 @@ defmodule FrixelDesignSystem.SectionTest do
       />
       """)}"
 
-    # Then
     assert html =~
              "<section id=\"landing-section\" phx-hook=\"LandingAnimationHook\" class=\"relative flex justify-center items-center max-w-2xl text-center mx-auto invisible\">\n  <div class=\"content relative z-1\">\n    <figure class=\"flex justify-center mb-6\">\n      <img src=\"/images/logo.png\" alt=\"Logo\" class=\"h-34 w-34 object-contain rounded-2xl shadow-xl\">\n    </figure>\n\n    <h2 class=\"max-w-sm sm:max-w-none text-5xl sm:text-6xl font-bold font-title mx-auto pt-10 pb-15 mb-6 text-shadow-lg\">\n      Title\n    </h2>\n\n    <p class=\"text-base font-common mb-12\">A simple text</p>\n\n    <p class=\"text-base font-common font-bold\">A simple subtext</p>\n\n    <div class=\"avatar rounded-xl flex-wrap my-8\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-12\">\n        <a href=\"https://elixir-lang.org/\" target=\"_blank\" title=\"Elixir\">\n          <img class=\"w-4 h-4\" src=\"/images/elixir_logo.png\" alt=\"Elixir\">\n        </a>\n      </div>\n    </div>\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-12\">\n        <a href=\"https://www.phoenixframework.org/\" target=\"_blank\" title=\"Phoenix\">\n          <img class=\"w-4 h-4\" src=\"/images/phoenix_logo.png\" alt=\"Phoenix\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n\n    <div class=\"flex flex-col lg:flex-row justify-center items-center gap-4 mb-4\">\n      <a href=\"https://wwww.call_to_action_name.fr\" data-phx-link=\"redirect\" data-phx-link-state=\"push\">\n        <button class=\"flex btn btn-accent mx-2 px-8 py-4 rounded-sm text-base-content font-common font-normal text-sm hover:shadow-lg transition-transform duration-300 hover:scale-103\">\n  call_to_action_name\n  <span class=\"hero-arrow-right-solid w-5 h-5\"></span>\n  \n</button>\n      </a>\n\n      <a href=\"https://wwww.link_path.fr\" data-phx-link=\"redirect\" data-phx-link-state=\"push\" class=\"underline text-xl font-slogan text-accent hover:text-primary\">\n        link_name\n      </a>\n    </div>\n  </div>\n</section>"
   end
 
   test "services_section" do
-    # Given
     services = [
       %{
         id: "1",
@@ -568,19 +584,16 @@ defmodule FrixelDesignSystem.SectionTest do
       services: services
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.services_section class={@class} services={@services} />
       """)}"
 
-    # Then
     assert html =~
              "<section id=\"services\" class=\"px-12 pt-20\">\n  <h2 class=\"text-base-content text-center text-4xl font-slogan font-bold mt-6 mb-6 tracking-widest pb-12\">\n  Our services\n</h2>\n  <div class=\"flex justify-center flex-wrap gap-16\">\n    \n      <label for=\"service_modal_1\" class=\"cursor-pointer block\">\n  <div class=\"bg-base-200 border-base-300 border w-64 h-60 flex flex-col items-center justify-center rounded-xl transform duration-300 hover:shadow-xl hover:scale-110\">\n    <div class=\"flex flex-col items-center justify-center flex-1 w-full\">\n      <figure class=\"flex justify-center\">\n        <img src=\"/path/to/logo.png\" alt=\"A single service illustration\" width=\"20\" height=\"20\" class=\"rounded-xl size-20\">\n      </figure>\n      <h3 class=\"text-xl font-slogan font-bold tracking-widest text-center text-base mt-6 px-4\">\n  A single service\n</h3>\n    </div>\n  </div>\n</label>\n<input type=\"checkbox\" id=\"service_modal_1\" class=\"modal-toggle\">\n<div class=\"modal z-1001\" role=\"dialog\">\n  <div class=\"modal-box w-full max-w-lg relative\">\n    <label for=\"service_modal_1\" class=\"btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10\">\n  <span class=\"hero-x-mark-solid size-6\"></span>\n</label>\n    <figure class=\"flex justify-center py-6\">\n      <img src=\"/path/to/logo.png\" alt=\"A single service\" class=\"rounded-xl size-24\">\n    </figure>\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest text-center text-2xl\">\n  A single service\n</h3>\n    <div class=\"text-base text-center py-4\">\n      <p>A single description of service #1</p>\n    </div>\n  </div>\n  <label class=\"modal-backdrop\" for=\"service_modal_1\">Close</label>\n</div>\n    \n      <label for=\"service_modal_2\" class=\"cursor-pointer block\">\n  <div class=\"bg-base-200 border-base-300 border w-64 h-60 flex flex-col items-center justify-center rounded-xl transform duration-300 hover:shadow-xl hover:scale-110\">\n    <div class=\"flex flex-col items-center justify-center flex-1 w-full\">\n      <figure class=\"flex justify-center\">\n        <img src=\"/path/to/logo_2.png #2\" alt=\"A single service #2 illustration\" width=\"20\" height=\"20\" class=\"rounded-xl size-20\">\n      </figure>\n      <h3 class=\"text-xl font-slogan font-bold tracking-widest text-center text-base mt-6 px-4\">\n  A single service #2\n</h3>\n    </div>\n  </div>\n</label>\n<input type=\"checkbox\" id=\"service_modal_2\" class=\"modal-toggle\">\n<div class=\"modal z-1001\" role=\"dialog\">\n  <div class=\"modal-box w-full max-w-lg relative\">\n    <label for=\"service_modal_2\" class=\"btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10\">\n  <span class=\"hero-x-mark-solid size-6\"></span>\n</label>\n    <figure class=\"flex justify-center py-6\">\n      <img src=\"/path/to/logo_2.png #2\" alt=\"A single service #2\" class=\"rounded-xl size-24\">\n    </figure>\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest text-center text-2xl\">\n  A single service #2\n</h3>\n    <div class=\"text-base text-center py-4\">\n      <p>A single description of service #2</p>\n    </div>\n  </div>\n  <label class=\"modal-backdrop\" for=\"service_modal_2\">Close</label>\n</div>\n    \n      <label for=\"service_modal_3\" class=\"cursor-pointer block\">\n  <div class=\"bg-base-200 border-base-300 border w-64 h-60 flex flex-col items-center justify-center rounded-xl transform duration-300 hover:shadow-xl hover:scale-110\">\n    <div class=\"flex flex-col items-center justify-center flex-1 w-full\">\n      <figure class=\"flex justify-center\">\n        <img src=\"/path/to/logo_3.png #3\" alt=\"A single service #3 illustration\" width=\"20\" height=\"20\" class=\"rounded-xl size-20\">\n      </figure>\n      <h3 class=\"text-xl font-slogan font-bold tracking-widest text-center text-base mt-6 px-4\">\n  A single service #3\n</h3>\n    </div>\n  </div>\n</label>\n<input type=\"checkbox\" id=\"service_modal_3\" class=\"modal-toggle\">\n<div class=\"modal z-1001\" role=\"dialog\">\n  <div class=\"modal-box w-full max-w-lg relative\">\n    <label for=\"service_modal_3\" class=\"btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10\">\n  <span class=\"hero-x-mark-solid size-6\"></span>\n</label>\n    <figure class=\"flex justify-center py-6\">\n      <img src=\"/path/to/logo_3.png #3\" alt=\"A single service #3\" class=\"rounded-xl size-24\">\n    </figure>\n    <h3 class=\"text-xl font-slogan font-bold tracking-widest text-center text-2xl\">\n  A single service #3\n</h3>\n    <div class=\"text-base text-center py-4\">\n      <p>A single description of service #3</p>\n    </div>\n  </div>\n  <label class=\"modal-backdrop\" for=\"service_modal_3\">Close</label>\n</div>\n    \n  </div>\n</section>"
   end
 
   test "introduction_section" do
-    # Given
     assigns = %{
       section_title: "Section title",
       card_title: "Card ttitle",
@@ -588,7 +601,6 @@ defmodule FrixelDesignSystem.SectionTest do
       img_src: "/path/to/img_src.png"
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.introduction_section
@@ -600,7 +612,6 @@ defmodule FrixelDesignSystem.SectionTest do
       />
       """)}"
 
-    # Then
     assert html =~ "Section title"
     assert html =~ "Card ttitle"
     assert html =~ "Text"
@@ -631,7 +642,6 @@ defmodule FrixelDesignSystem.SectionTest do
   end
 
   test "review_section" do
-    # Given
     reviews = [
       %{
         author_picture: "/path/to/your/client/toto.jpg",
@@ -649,19 +659,16 @@ defmodule FrixelDesignSystem.SectionTest do
 
     assigns = %{reviews: reviews}
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.review_section reviews={@reviews} />
       """)}"
 
-    # Then
     assert html =~
              "<section class=\"my-16\">\n  <h2 class=\"text-base-content text-center text-4xl font-slogan font-bold mt-6 mb-6 tracking-widest \">\n  What our clients say\n</h2>\n  <div class=\"flex items-center justify-center flex-wrap gap-14\">\n    \n      <div class=\"min-h-64 max-w-xl bg-base-100 shadow-lg rounded-lg p-6 flex items-center gap-4\">\n  <img src=\"/path/to/your/client/toto.jpg\" alt=\"Toto profile\" class=\"w-14 h-14 md:w-24 md:h-24 xl:w-34 xl:h-34 mx-4 lg:mx-8 rounded-full object-cover border-4 border-primary\">\n  <div>\n    <p class=\"text-md italic font-common mb-4 break-all\">\"Best company ever\"</p>\n    <div class=\"font-bold font-common text-base-content\">Toto</div>\n    <div class=\"text-sm font-common text-base-content/70 whitespace-nowrap\">\n      Head of Marketing of Simile Corp.\n    </div>\n  </div>\n</div>\n    \n      <div class=\"min-h-64 max-w-xl bg-base-100 shadow-lg rounded-lg p-6 flex items-center gap-4\">\n  <img src=\"/path/to/your/client/titi.jpg\" alt=\"Titi profile\" class=\"w-14 h-14 md:w-24 md:h-24 xl:w-34 xl:h-34 mx-4 lg:mx-8 rounded-full object-cover border-4 border-primary\">\n  <div>\n    <p class=\"text-md italic font-common mb-4 break-all\">\"The dream tem in flesh\"</p>\n    <div class=\"font-bold font-common text-base-content\">Titi</div>\n    <div class=\"text-sm font-common text-base-content/70 whitespace-nowrap\">\n      CEO of Simile Corp.\n    </div>\n  </div>\n</div>\n    \n  </div>\n</section>"
   end
 
   test "story_section" do
-    # Given
     team_members = [
       %{
         name: "Johanne-Franck NGBOKOLI",
@@ -705,7 +712,6 @@ defmodule FrixelDesignSystem.SectionTest do
       skills: skills
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.story_section
@@ -716,13 +722,11 @@ defmodule FrixelDesignSystem.SectionTest do
       />
       """)}"
 
-    # Then
     assert html =~ "Story section"
     assert html =~ "Here a single description of the section"
   end
 
   test "projects_section" do
-    # Given
     projects = [
       %{
         id: "1",
@@ -808,13 +812,11 @@ defmodule FrixelDesignSystem.SectionTest do
 
     assigns = %{projects: projects}
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.projects_section projects={@projects} />
       """)}"
 
-    # Then
     assert html =~
              "<section id=\"projects\" class=\"flex flex-col justify-center items-center gap-4 w-full items-stretch pt-20 relative\">\n  <h2 class=\"text-base-content text-center text-4xl font-slogan font-bold mt-6 mb-6 tracking-widest \">\n  Our projects\n</h2>\n\n  <div class=\"flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center\">\n    \n      <label for=\"modal_project-1\" class=\"card relative sm:min-w-80 w-fit sm:w-1/2 lg:w-1/3 2xl:w-1/4 m-8 bg-base-200 shadow-lg transition-transform duration-300 hover:shadow-xl hover:scale-110 cursor-pointer h-160\">\n  <figure>\n    <div class=\"carousel w-full\">\n  \n    <div id=\"/projectproject-1/slide1\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image.png\" alt=\"Project image 1\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-1/slide3\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-1/slide2\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n    <div id=\"/projectproject-1/slide2\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image_2.png\" alt=\"Project image 2\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-1/slide1\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-1/slide3\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n    <div id=\"/projectproject-1/slide3\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image_3.png\" alt=\"Project image 3\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-1/slide2\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-1/slide1\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n</div>\n  </figure>\n\n  <ul class=\"flex flex-wrap gap-2 pl-4 pt-6\">\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      cms personnalisé\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      drag n drop\n    </li>\n  \n</ul>\n\n  <div class=\"avatar flex-wrap rounded-xl space-x-2 ml-6 mt-3\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-8\">\n        <a href=\"https://www.linkedin.com/company/tit\" target=\"_blank\" title=\"Inter Gestion\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1748247801/favicon.svg\" alt=\"Inter Gestion\">\n        </a>\n      </div>\n    </div>\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-8\">\n        <a href=\"https://www.linkedin.com/company/frixel-tech\" target=\"_blank\" title=\"Frixel\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg\" alt=\"Frixel\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n\n  <div class=\"card-body pb-12\">\n    <a href=\"https://www.inter-gestion.com\" aria-label=\"card presenting a project\" class=\"card-title text-xl font-bold font-common py-3 inline-block\">\n  Simple website\n  <span class=\"hero-arrow-top-right-on-square size-4 pt-5 transition-transform duration-300 hover:scale-150\"></span>\n</a>\n\n    <p class=\"text-base font-common\">\n      Lorem Ipsum is simply dummy text of the printing and typesetting industry\n    </p>\n  </div>\n</label>\n\n<input type=\"checkbox\" id=\"project-1\" class=\"modal-toggle\">\n<div class=\"modal z-5\" role=\"dialog\">\n  <div class=\"modal-box w-full max-w-5xl relative\">\n    <label for=\"project-1\" class=\"btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10\">\n  <span class=\"hero-x-mark-solid size-6\"></span>\n</label>\n    <figure>\n      <div class=\"carousel w-full\">\n  \n    <div id=\"/projectproject-1/slide1\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image.png\" alt=\"Project image 1\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-1/slide3\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-1/slide2\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n    <div id=\"/projectproject-1/slide2\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image_2.png\" alt=\"Project image 2\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-1/slide1\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-1/slide3\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n    <div id=\"/projectproject-1/slide3\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image_3.png\" alt=\"Project image 3\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-1/slide2\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-1/slide1\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n</div>\n    </figure>\n    <ul class=\"flex flex-wrap gap-2 pl-4 pt-6\">\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      cms personnalisé\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      drag n drop\n    </li>\n  \n</ul>\n    <div class=\"avatar flex-wrap rounded-xl space-x-2 ml-6 mt-3\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-8\">\n        <a href=\"https://www.linkedin.com/company/tit\" target=\"_blank\" title=\"Inter Gestion\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1748247801/favicon.svg\" alt=\"Inter Gestion\">\n        </a>\n      </div>\n    </div>\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-8\">\n        <a href=\"https://www.linkedin.com/company/frixel-tech\" target=\"_blank\" title=\"Frixel\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg\" alt=\"Frixel\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n    <div class=\"card-body pb-12\">\n      <a href=\"https://www.inter-gestion.com\" aria-label=\"modal presenting a project\" class=\"card-title text-2xl font-bold font-common py-7 inline-block\">\n  Simple website\n  <span class=\"hero-arrow-top-right-on-square size-4 pt-5 transition-transform duration-300 hover:scale-150\"></span>\n</a>\n      <p class=\"text-base font-common\">\n        <span class=\"font-bold font-common\"> Inter Gestion REIM </span> est une société de gestion de portefeuille spécialisée dans la création, la gestion et la commercialisation de SCPI (Sociétés Civiles de Placement Immobilier). Elle propose à ses clients, particuliers comme professionnels, des solutions d’investissement immobilier diversifiées et accessibles, avec une expertise reconnue dans la structuration de portefeuilles et la gestion d’actifs immobiliers.<br /><br />         Dans le contexte de la refonte de son site internet corporate, nous avons réalisé un site web sur-mesure. L’objectif principal était de fournir à Inter Gestion une plateforme digitale moderne, performante et complètement autonome en matière de gestion de contenu. Nous avons donc développé un éditeur de pages personnalisé, offrant une expérience de type <span class=\"font-bold font-common\"> site builder </span>, directement intégrée à un panel administrateur :<br />         <ul class=\"list-disc\"><br />          <li class=\"font-common\"> <span class=\"font-bold font-common\"> Édition en glisser-déposer </span> (drag & drop) afin de ré-organiser facilement les sections et blocs présents sur les pages du site web </li><li class=\"font-common\"> <span class=\"font-bold font-common\"> Duplication, suppression et ajout de blocs/sections </span> pour faciliter la mise en page et la gestion du contenu. </li><li class=\"font-common\"> <span class=\"font-bold font-common\"> Édition des textes, images, liens et composants </span> avec un rendu en temps réel </li><li class=\"font-common\"> <span class=\"font-bold font-common\"> Création de pages dynamiques </span> via un module personnalisable </li><br />         </ul><p class=\"font-common\"> D'un point de vue technique, ce projet a été conçu avec une architecture robuste, résiliente et évolutive avec une séparation complète entre la gestion de la donnée et sa présentation.<br /><br />         Avec cet outil, Inter Gestion peut gérer le contenu de son site corporate en toute autonomie. La mise à jour des pages (sections, blocs, images, et autres) se fait sans l'intervention des développeurs. Avec cette approche, Inter Gestion peut s'assurer d'avoir une présentation <span class=\"font-bold font-common\"> claire, moderne et plus détaillée </span> de ses produits SCPI. </p><br />        \n      </p>\n      <h3 class=\"text-xl font-slogan font-bold tracking-widest mt-5 text-left\">\n  Technologies used\n</h3>\n      <div class=\"avatar rounded-xl flex-wrap space-x-2 my-2 gap-2\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-12\">\n        <a href=\"https://elixir-lang.org/\" target=\"_blank\" title=\"Elixir\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1748272994/1466749648elixir-logo_pdrxy6.png\" alt=\"Elixir\">\n        </a>\n      </div>\n    </div>\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-12\">\n        <a href=\"https://www.phoenixframework.org/\" target=\"_blank\" title=\"Phoenix\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1746781053/phoenix_logo_zyugm8.png\" alt=\"Phoenix\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n    </div>\n  </div>\n  <label class=\"modal-backdrop\" for=\"project-1\">Close</label>\n</div>\n    \n      <label for=\"modal_project-2\" class=\"card relative sm:min-w-80 w-fit sm:w-1/2 lg:w-1/3 2xl:w-1/4 m-8 bg-base-200 shadow-lg transition-transform duration-300 hover:shadow-xl hover:scale-110 cursor-pointer h-160\">\n  <figure>\n    <div class=\"carousel w-full\">\n  \n    <div id=\"/projectproject-2/slide1\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image.png\" alt=\"Project image 1\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-2/slide2\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-2/slide2\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n    <div id=\"/projectproject-2/slide2\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image_3.png\" alt=\"Project image 2\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-2/slide1\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-2/slide1\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n</div>\n  </figure>\n\n  <ul class=\"flex flex-wrap gap-2 pl-4 pt-6\">\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag#2\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag#3\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag#4\n    </li>\n  \n</ul>\n\n  <div class=\"avatar flex-wrap rounded-xl space-x-2 ml-6 mt-3\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-8\">\n        <a href=\"https://www.linkedin.com/company/frixel-tech\" target=\"_blank\" title=\"Frixel\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg\" alt=\"Frixel\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n\n  <div class=\"card-body pb-12\">\n    <a href=\"https://www.inter-gestion.com\" aria-label=\"card presenting a project\" class=\"card-title text-xl font-bold font-common py-3 inline-block\">\n  Simple website\n  <span class=\"hero-arrow-top-right-on-square size-4 pt-5 transition-transform duration-300 hover:scale-150\"></span>\n</a>\n\n    <p class=\"text-base font-common\">\n      Lorem Ipsum is simply dummy text of the printing and typesetting industry\n    </p>\n  </div>\n</label>\n\n<input type=\"checkbox\" id=\"project-2\" class=\"modal-toggle\">\n<div class=\"modal z-5\" role=\"dialog\">\n  <div class=\"modal-box w-full max-w-5xl relative\">\n    <label for=\"project-2\" class=\"btn btn-sm rounded-full mt-2 mr-2 mr-1 btn-circle absolute top-2 right-2 transition-transform duration-300 hover:scale-110 z-10\">\n  <span class=\"hero-x-mark-solid size-6\"></span>\n</label>\n    <figure>\n      <div class=\"carousel w-full\">\n  \n    <div id=\"/projectproject-2/slide1\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image.png\" alt=\"Project image 1\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-2/slide2\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-2/slide2\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n    <div id=\"/projectproject-2/slide2\" class=\"carousel-item relative w-full\">\n      <img src=\"https://res.cloudinary.com/dekpcimmmaa/image/upload/v17459375131/image_3.png\" alt=\"Project image 2\" height=\"80\" width=\"100\" class=\"mx-auto object-contain w-full sm:w-auto w-100 h-80 xl:h-full object-cover\">\n\n      <div class=\"absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between\">\n        <a href=\"#/projectproject-2/slide1\" class=\"btn btn-circle\">\n          ❮\n        </a>\n\n        <a href=\"#/projectproject-2/slide1\" class=\"btn btn-circle\">\n          ❯\n        </a>\n      </div>\n    </div>\n  \n</div>\n    </figure>\n    <ul class=\"flex flex-wrap gap-2 pl-4 pt-6\">\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag#2\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag#3\n    </li>\n  \n    <li class=\"badge badge-outline badge-primary badge-xl font-slogan text-base-content px-2 py-1 rounded transition-transform duration-300 hover:scale-103\">\n      tag#4\n    </li>\n  \n</ul>\n    <div class=\"avatar flex-wrap rounded-xl space-x-2 ml-6 mt-3\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-8\">\n        <a href=\"https://www.linkedin.com/company/frixel-tech\" target=\"_blank\" title=\"Frixel\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg\" alt=\"Frixel\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n    <div class=\"card-body pb-12\">\n      <a href=\"https://www.inter-gestion.com\" aria-label=\"modal presenting a project\" class=\"card-title text-2xl font-bold font-common py-7 inline-block\">\n  Simple website\n  <span class=\"hero-arrow-top-right-on-square size-4 pt-5 transition-transform duration-300 hover:scale-150\"></span>\n</a>\n      <p class=\"text-base font-common\">\n        Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br /> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum\n      </p>\n      <h3 class=\"text-xl font-slogan font-bold tracking-widest mt-5 text-left\">\n  Technologies used\n</h3>\n      <div class=\"avatar rounded-xl flex-wrap space-x-2 my-2 gap-2\">\n  \n    <div class=\"avatar rounded-xl hover:shadow-xl transition-transform duration-300 hover:scale-120\">\n      <div class=\"w-12\">\n        <a href=\"https://www.phoenixframework.org/\" target=\"_blank\" title=\"Phoenix\">\n          <img class=\"w-4 h-4\" src=\"https://res.cloudinary.com/dekpcimmm/image/upload/v1746781053/phoenix_logo_zyugm8.png\" alt=\"Phoenix\">\n        </a>\n      </div>\n    </div>\n  \n</div>\n    </div>\n  </div>\n  <label class=\"modal-backdrop\" for=\"project-2\">Close</label>\n</div>\n    \n  </div>\n</section>"
   end
