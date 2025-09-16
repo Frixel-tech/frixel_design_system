@@ -4,7 +4,6 @@ defmodule FrixelDesignSystem.SectionTest do
   use ComponentCase
 
   test "contact_section" do
-    # Given
     client_needs = [
       %{
         value: "A single service",
@@ -47,7 +46,6 @@ defmodule FrixelDesignSystem.SectionTest do
       booking_appointment_url: booking_appointment_url
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <Section.contact_section>
@@ -93,7 +91,6 @@ defmodule FrixelDesignSystem.SectionTest do
       </Section.contact_section>
       """)}"
 
-    # Then
     assert html =~ "This is a description with \n end of line"
     assert html =~ "<img "
     assert html =~ "https://github.com"
@@ -120,11 +117,11 @@ defmodule FrixelDesignSystem.SectionTest do
 
     html =
       "#{rendered_to_string(~H"""
-        <Section.brand_showcase_section
-          title={@title}
-          description={@description}
-          brands={@brands}
-        />
+      <Section.brand_showcase_section
+        title={@title}
+        description={@description}
+        brands={@brands}
+      />
       """)}"
 
     assert html =~ "Nos partenaires"
@@ -207,7 +204,6 @@ defmodule FrixelDesignSystem.SectionTest do
       </Section.base_header>
       """)}"
 
-    # Then
     assert html =~ "Services"
     assert html =~ "/#services"
     assert html =~ "Projets"
@@ -394,7 +390,6 @@ defmodule FrixelDesignSystem.SectionTest do
       header_links: header_links
     }
 
-    # When
     html =
       "#{rendered_to_string(~H"""
       <FrixelDesignSystem.Section.base_header_commerce
