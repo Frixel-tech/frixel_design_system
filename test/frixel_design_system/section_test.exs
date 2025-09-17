@@ -132,6 +132,55 @@ defmodule FrixelDesignSystem.SectionTest do
     assert html =~ "Logo Brand 1"
   end
 
+  test "brand_showcase_section renders correctly with more than 4 brands (carousel mode)" do
+    brands = [
+      %{name: "Brand 1", logo_url: "/images/brand1.png", alt_text: "Logo Brand 1"},
+      %{name: "Brand 2", logo_url: "/images/brand2.png", alt_text: "Logo Brand 2"},
+      %{name: "Brand 3", logo_url: "/images/brand3.png", alt_text: "Logo Brand 3"},
+      %{name: "Brand 4", logo_url: "/images/brand4.png", alt_text: "Logo Brand 4"},
+      %{name: "Brand 5", logo_url: "/images/brand5.png", alt_text: "Logo Brand 5"},
+      %{name: "Brand 6", logo_url: "/images/brand6.png", alt_text: "Logo Brand 6"}
+    ]
+
+    assigns = %{
+      title: "Nos partenaires de confiance",
+      description: "Plus de 6 marques nous font confiance",
+      brands: brands
+    }
+
+    html =
+      "#{rendered_to_string(~H"""
+      <Section.brand_showcase_section
+        title={@title}
+        description={@description}
+        brands={@brands}
+      />
+      """)}"
+
+    assert html =~ "Nos partenaires de confiance"
+    assert html =~ "Plus de 6 marques nous font confiance"
+
+    assert html =~ "brand-showcase-carousel"
+    refute html =~ "brand-showcase-grid"
+
+    assert html =~ "phx-hook=\"BrandShowcaseAutoScroll\""
+
+    assert html =~ "overflow-x-auto overflow-y-hidden scrollbar-hide"
+    assert html =~ "animate-scroll"
+
+    assert html =~ "Brand 1"
+    assert html =~ "/images/brand1.png"
+    assert html =~ "Logo Brand 1"
+    assert html =~ "Brand 5"
+    assert html =~ "/images/brand5.png"
+    assert html =~ "Logo Brand 5"
+    assert html =~ "Brand 6"
+    assert html =~ "/images/brand6.png"
+    assert html =~ "Logo Brand 6"
+
+    assert html =~ "flex-shrink-0"
+  end
+
   test "client_section" do
     assigns = %{}
 
