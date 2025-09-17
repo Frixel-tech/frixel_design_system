@@ -176,6 +176,7 @@ defmodule FrixelDesignSystem.Components.Form do
           ]}
           title={gettext("Moyen de communication préféré")}
           group_type="radio"
+          required
         />
 
         <.form_checkbox_or_radio_group
