@@ -11,27 +11,17 @@ const ConditionalPhoneRequiredHook = {
         const phoneInput = this.el;
         const form = phoneInput.closest('form');
 
-        if (!form) {
-            console.warn('ConditionalPhoneRequiredHook: Phone input is not inside a form');
-            return;
-        }
-
-        // Cache DOM elements
         this.phoneInput = phoneInput;
         this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
-        // Store original placeholder for restoration
         this.originalPlaceholder = phoneInput.getAttribute('placeholder') || '';
 
-        // Bind event handlers
         this.handleContactMethodChange = this.handleContactMethodChange.bind(this);
 
-        // Attach event listeners
         this.contactMethodRadios.forEach(radio => {
             radio.addEventListener('change', this.handleContactMethodChange);
         });
 
-        // Initialize state based on current selection
         this.updatePhoneRequirement();
     },
 
@@ -71,7 +61,6 @@ const ConditionalPhoneRequiredHook = {
     },
 
     destroyed() {
-        // Cleanup event listeners
         if (this.contactMethodRadios) {
             this.contactMethodRadios.forEach(radio => {
                 radio.removeEventListener('change', this.handleContactMethodChange);
