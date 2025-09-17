@@ -170,6 +170,7 @@ defmodule FrixelDesignSystem.Components.Form do
         <.form_checkbox_or_radio_group
           input_name="preferred_contact_method"
           options={[
+            %{value: "pas de préférence", label: gettext("Pas de préférence"), shows_text_input_when_checked: false},
             %{value: "email", label: gettext("E-mail"), shows_text_input_when_checked: false},
             %{value: "phone", label: gettext("Téléphone"), shows_text_input_when_checked: false}
           ]}
