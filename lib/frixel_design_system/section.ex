@@ -2,7 +2,7 @@ defmodule FrixelDesignSystem.Section do
   use Phoenix.Component
   use Gettext, backend: FrixelDesignSystemWeb.Gettext
 
-  alias FrixelDesignSystem.Components.{Button, Company, Form, Header, Menu, Project}
+  alias FrixelDesignSystem.Components.{Button, Company, Form, Header, Menu, Partner, Project}
 
   @doc """
   Section to contain contact informations and contact form components.
@@ -456,6 +456,83 @@ defmodule FrixelDesignSystem.Section do
             tools={project.tools}
           />
         <% end %>
+      </div>
+    </section>
+    """
+  end
+
+  @doc """
+  Renders a section showcasing brand logos in a grid or carousel layout.
+
+  ## Examples
+
+      <.brand_showcase_section
+        title="Ils nous ont fait confiance"
+        description="Des partenaires de confiance qui nous accompagnent dans notre mission."
+        brands={@trusted_companies}
+      />
+  """
+  attr :title, :string, required: true
+  attr :description, :string, default: nil
+  attr :brands, :list, required: true
+  attr :class, :string, default: ""
+
+  def brand_showcase_section(assigns) do
+    is_carousel = length(assigns.brands) > 4
+
+    assigns = assign(assigns, :is_carousel, is_carousel)
+
+    ~H"""
+    <section class={["py-20 relative overflow-hidden", @class]}>
+      <div class="relative max-w-7xl mx-auto">
+        <Partner.brand_showcase_title
+          title={@title}
+          description={@description}
+        />
+
+        <div
+          id={if @is_carousel, do: "brand-showcase-carousel", else: "brand-showcase-grid"}
+          class={
+            if @is_carousel,
+              do: "overflow-x-auto overflow-y-hidden scrollbar-hide pb-4",
+              else: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8"
+          }
+          phx-hook={if @is_carousel, do: "BrandShowcaseAutoScroll"}
+        >
+          <%= if @is_carousel do %>
+            <div
+              id="brand-showcase-carousel-inner"
+              class="invisible flex gap-6 lg:gap-8 animate-scroll"
+              phx-hook="FadeInAnimationHook"
+              data-animation-delay="200"
+            >
+              <%= for _ <- 1..2 do %>
+                <Partner.brand_showcase_card
+                  :for={brand <- @brands}
+                  brand_name={brand.name}
+                  logo_url={brand.logo_url}
+                  alt_text={brand.alt_text}
+                  class="flex-shrink-0 w-48 lg:w-56"
+                />
+              <% end %>
+            </div>
+          <% else %>
+            <Partner.brand_showcase_card
+              :for={brand <- @brands}
+              brand_name={brand.name}
+              logo_url={brand.logo_url}
+              alt_text={brand.alt_text}
+            />
+          <% end %>
+        </div>
+
+        <div class="mt-16 flex justify-center">
+          <div class="flex items-center space-x-4">
+            <div class="w-12 h-px bg-gradient-to-r from-transparent to-mint-green"></div>
+            <div class="w-3 h-3 rounded-full bg-mint-green"></div>
+            <div class="w-12 h-px bg-gradient-to-l from-transparent to-mint-green"></div>
+          </div>
+        </div>
       </div>
     </section>
     """
