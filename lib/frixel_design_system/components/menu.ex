@@ -63,7 +63,7 @@ defmodule FrixelDesignSystem.Components.Menu do
       <.link navigate={@call_to_action_path}>
         <Button.primary_button
           text={@call_to_action_name}
-          class="flex items-center gap-2"
+          class={"flex items-center gap-2 #{@call_to_action_class}"}
           icon_button="hero-arrow-right-solid"
         />
       </.link>
@@ -435,10 +435,10 @@ defmodule FrixelDesignSystem.Components.Menu do
         phx-click={JS.dispatch("set-theme-locally")}
         aria-label={gettext("Toggle theme")}
       />
-      
+
     <!-- sun icon -->
       <.icon id="sun-icon" class="size-6 text-amber-200" name="hero-sun-solid" />
-      
+
     <!-- moon icon -->
       <.icon id="moon-icon" class="size-6 text-indigo-900" name="hero-moon-solid" />
     </label>
