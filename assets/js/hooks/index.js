@@ -3,36 +3,97 @@ import GetAndStoreThemeHook from "./get-and-store-theme-hook";
 import LeafletHook from "./leaflet.-hook";
 import ScrollToTopHook from "./scroll-to-top-hook";
 
-const ConditionalRequiredPhoneHook = {
+/**
+ * Hook to conditionally make phone input required based on preferred contact method selection
+ * Attached to the phone input field, it listens for changes in contact method radio buttons
+ */
+const ConditionalPhoneRequiredHook = {
     mounted() {
+        this.initializePhoneValidation();
+    },
+
+    initializePhoneValidation() {
         const phoneInput = this.el;
         const form = phoneInput.closest('form');
 
-        if (!form) return;
+        if (!form) {
+            console.warn('ConditionalPhoneRequiredHook: Phone input is not inside a form');
+            return;
+        }
 
-        // Fonction pour mettre à jour le statut requis du champ téléphone
-        const updatePhoneRequired = () => {
-            const phoneRadio = form.querySelector('input[name="preferred_contact_method"][value="phone"]');
-            const emailRadio = form.querySelector('input[name="preferred_contact_method"][value="email"]');
+        // Cache DOM elements
+        this.phoneInput = phoneInput;
+        this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
-            if (phoneRadio && phoneRadio.checked) {
-                phoneInput.setAttribute('required', 'required');
-                phoneInput.setAttribute('placeholder', phoneInput.getAttribute('placeholder').replace('(optionnel)', '(obligatoire)'));
-            } else if (emailRadio && emailRadio.checked) {
-                phoneInput.removeAttribute('required');
-                phoneInput.setAttribute('placeholder', phoneInput.getAttribute('placeholder').replace('(obligatoire)', '(optionnel)'));
-            }
-        };
+        // Store original placeholder for restoration
+        this.originalPlaceholder = phoneInput.getAttribute('placeholder') || '';
 
-        // Écouter les changements sur les boutons radio
-        const contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
-        contactMethodRadios.forEach(radio => {
-            radio.addEventListener('change', updatePhoneRequired);
+        // Bind event handlers
+        this.handleContactMethodChange = this.handleContactMethodChange.bind(this);
+
+        // Attach event listeners
+        this.contactMethodRadios.forEach(radio => {
+            radio.addEventListener('change', this.handleContactMethodChange);
         });
 
-        // Initialiser l'état au chargement
-        updatePhoneRequired();
+        // Initialize state based on current selection
+        this.updatePhoneRequirement();
+    },
+
+    handleContactMethodChange(event) {
+        this.updatePhoneRequirement();
+    },
+
+    updatePhoneRequirement() {
+        const isPhoneSelected = this.isContactMethodSelected('phone');
+
+        if (isPhoneSelected) {
+            this.makePhoneRequired();
+        } else {
+            this.makePhoneOptional();
+        }
+    },
+
+    isContactMethodSelected(method) {
+        return Array.from(this.contactMethodRadios)
+            .some(radio => radio.value === method && radio.checked);
+    },
+
+    makePhoneRequired() {
+        this.phoneInput.setAttribute('required', 'required');
+        this.updatePlaceholder('(obligatoire)');
+    },
+
+    makePhoneOptional() {
+        this.phoneInput.removeAttribute('required');
+        this.updatePlaceholder('(optionnel)');
+    },
+
+    updatePlaceholder(status) {
+        const basePlaceholder = this.originalPlaceholder.replace(/\s*\((?:obligatoire|optionnel)\)/, '');
+        const newPlaceholder = `${basePlaceholder} ${status}`;
+        this.phoneInput.setAttribute('placeholder', newPlaceholder);
+    },
+
+    destroyed() {
+        // Cleanup event listeners
+        if (this.contactMethodRadios) {
+            this.contactMethodRadios.forEach(radio => {
+                radio.removeEventListener('change', this.handleContactMethodChange);
+            });
+        }
     }
 };
 
-export default { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook, GetAndStoreThemeHook, LeafletHook, ScrollToTopHook, ConditionalRequiredPhoneHook };
+export default {
+    CardStackingAnimationHook,
+    DelayedFadeInAnimationHook,
+    CatalogFadeInAnimationHook,
+    FadeInAnimationHook,
+    LateralSlideFromBothSideAnimationHook,
+    ParallaxAnimationHook,
+    GetAndStoreThemeHook,
+    LeafletHook,
+    ScrollToTopHook,
+    ConditionalPhoneRequiredHook
+};

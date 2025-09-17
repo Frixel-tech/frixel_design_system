@@ -149,8 +149,7 @@ defmodule FrixelDesignSystem.Components.Form do
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Téléphone (optionnel)")}
-            phx-hook="ConditionalRequiredPhone"
-            required
+            phx-hook="ConditionalPhoneRequired"
           />
         </div>
 
