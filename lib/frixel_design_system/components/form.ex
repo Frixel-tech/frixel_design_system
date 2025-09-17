@@ -150,6 +150,7 @@ defmodule FrixelDesignSystem.Components.Form do
             error_class={@input_error_class}
             placeholder={gettext("Téléphone (optionnel)")}
             phx-hook="ConditionalRequiredPhone"
+            required
           />
         </div>
 
