@@ -44,6 +44,10 @@ defmodule FrixelDesignSystem.Components.Menu do
     default: "",
     doc: "the name displayed inside the call to action button"
 
+  attr :call_to_action_class, :string,
+    default: "",
+    doc: "Additional classes for the call to action button"
+
   def navbar(assigns) do
     ~H"""
     <div class="hidden xl:flex">
@@ -59,7 +63,7 @@ defmodule FrixelDesignSystem.Components.Menu do
       <.link navigate={@call_to_action_path}>
         <Button.primary_button
           text={@call_to_action_name}
-          class="flex items-center gap-2"
+          class={"flex items-center gap-2 #{@call_to_action_class}"}
           icon_button="hero-arrow-right-solid"
         />
       </.link>
@@ -75,6 +79,7 @@ defmodule FrixelDesignSystem.Components.Menu do
         links={@links}
         call_to_action_name={@call_to_action_name}
         call_to_action_path={@call_to_action_path}
+        call_to_action_class={@call_to_action_class}
       />
     </div>
     """
@@ -135,6 +140,7 @@ defmodule FrixelDesignSystem.Components.Menu do
   attr :links, :list, default: []
   attr :call_to_action_name, :string, default: ""
   attr :call_to_action_path, :string, default: nil
+  attr :call_to_action_class, :string, default: ""
 
   def dropdown(assigns) do
     ~H"""
@@ -169,7 +175,7 @@ defmodule FrixelDesignSystem.Components.Menu do
           <.link navigate={@call_to_action_path}>
             <Button.primary_button
               text={@call_to_action_name}
-              class="flex items-center gap-2"
+              class={"flex items-center gap-2 #{@call_to_action_class}"}
               icon_button="hero-arrow-right-solid"
             />
           </.link>
