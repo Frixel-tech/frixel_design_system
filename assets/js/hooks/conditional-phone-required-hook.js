@@ -14,7 +14,6 @@ const ConditionalPhoneRequiredHook = {
 
         this.originalPlaceholder = this.phoneInput.getAttribute('placeholder') || '';
 
-        // Liaison directe
         this.updatePhoneRequirement = this.updatePhoneRequirement.bind(this);
 
         this.contactMethodRadios.forEach(radio => {
