@@ -17,7 +17,7 @@ const ConditionalPhoneRequiredHook = {
         this.handleContactMethodChange = this.handleContactMethodChange.bind(this);
 
         this.contactMethodRadios.forEach(radio => {
-            radio.addEventListener('change', this.updatePhoneRequirement.bind(this));
+            radio.addEventListener('change', this.updatePhoneRequirement.bind());
         });
 
         this.updatePhoneRequirement();
