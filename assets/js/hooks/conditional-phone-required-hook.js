@@ -10,21 +10,21 @@ const ConditionalPhoneRequiredHook = {
     initializePhoneValidation() {
         this.phoneInput = this.el;
         const form = this.phoneInput.closest('form');
-        this.phoneRadio = form.querySelector('input[name="preferred_contact_method"][value="phone"]');
+        this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
         this.originalPlaceholder = this.phoneInput.getAttribute('placeholder') || '';
 
         this.updatePhoneRequirement = this.updatePhoneRequirement.bind(this);
 
-        if (this.phoneRadio) {
-            this.phoneRadio.addEventListener('change', this.updatePhoneRequirement);
-        }
+        this.contactMethodRadios.forEach(radio => {
+            radio.addEventListener('change', this.updatePhoneRequirement);
+        });
 
         this.updatePhoneRequirement();
     },
 
     updatePhoneRequirement() {
-        const isPhoneSelected = this.isPhoneRadioChecked();
+        const isPhoneSelected = this.isContactMethodSelected('phone');
 
         if (isPhoneSelected) {
             this.makePhoneRequired();
@@ -33,8 +33,9 @@ const ConditionalPhoneRequiredHook = {
         }
     },
 
-    isPhoneRadioChecked() {
-        return this.phoneRadio && this.phoneRadio.checked;
+    isContactMethodSelected(method) {
+        return Array.from(this.contactMethodRadios)
+            .some(radio => radio.value === method && radio.checked);
     },
 
     makePhoneRequired() {
@@ -54,8 +55,10 @@ const ConditionalPhoneRequiredHook = {
     },
 
     destroyed() {
-        if (this.phoneRadio) {
-            this.phoneRadio.removeEventListener('change', this.updatePhoneRequirement);
+        if (this.contactMethodRadios) {
+            this.contactMethodRadios.forEach(radio => {
+                radio.removeEventListener('change', this.handleContactMethodChange);
+            });
         }
     }
 };
