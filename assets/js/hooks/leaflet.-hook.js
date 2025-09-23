@@ -9,7 +9,7 @@ const LeafletHook = {
     renderMap() {
         const pointerUrl = this.getIconUrl();
         const coordinates = [this.getLattitude(), this.getLongitude()];
-        let map = L.map(this.el.id).setView(coordinates, 5);
+        let map = L.map(this.el.id).setView(coordinates, 13);
 
         let frixelIcon = L.icon({
             iconUrl: pointerUrl, iconSize: [30, 30]
