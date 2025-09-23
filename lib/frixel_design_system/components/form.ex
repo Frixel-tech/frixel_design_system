@@ -108,7 +108,7 @@ defmodule FrixelDesignSystem.Components.Form do
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
         <div class="flex justify-between">
           <CoreComponents.input
-            label="Name"
+            label="Nom"
             id="sender_name"
             name="sender_name"
             value=""
@@ -134,7 +134,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
         <div class="flex justify-between">
           <CoreComponents.input
-            label="Company"
+            label="Société"
             id="sender_company"
             name="sender_company"
             value=""
@@ -145,14 +145,14 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
-            label="Phone"
+            label="Téléphone"
             id="sender_phone_number"
             name="sender_phone_number"
             value=""
             type="tel"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Téléphone (optionnel)")}
+            placeholder={gettext("Téléphone")}
             phx-hook="ConditionalPhoneRequiredHook"
           />
         </div>
