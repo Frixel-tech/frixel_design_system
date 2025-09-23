@@ -108,6 +108,7 @@ defmodule FrixelDesignSystem.Components.Form do
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
         <div class="flex justify-between">
           <CoreComponents.input
+            label="Name"
             id="sender_name"
             name="sender_name"
             value=""
@@ -119,6 +120,7 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
+            label="E-mail"
             id="sender_email_address"
             name="sender_email_address"
             value=""
@@ -132,6 +134,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
         <div class="flex justify-between">
           <CoreComponents.input
+            label="Company"
             id="sender_company"
             name="sender_company"
             value=""
@@ -142,6 +145,7 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
+            label="Phone"
             id="sender_phone_number"
             name="sender_phone_number"
             value=""
@@ -155,6 +159,7 @@ defmodule FrixelDesignSystem.Components.Form do
 
         <div>
           <CoreComponents.input
+            label="Message"
             id="body"
             name="body"
             value=""
