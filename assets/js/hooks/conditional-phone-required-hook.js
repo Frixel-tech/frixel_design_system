@@ -13,14 +13,8 @@ const ConditionalPhoneRequiredHook = {
         this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
         // Récupérer le label existant - CoreComponents.input wraps input in label
-        // La structure est: <label><span class="label mb-1">Texte</span><input>...</label>
-        const labelElement = this.phoneInput.closest('label');
-        if (labelElement) {
-            this.phoneLabel = labelElement.querySelector('span.label');
-            if (this.phoneLabel) {
-                this.originalLabelText = this.phoneLabel.textContent;
-            }
-        }
+        this.phoneLabel = this.phoneInput.closest('label')?.querySelector('span.label');
+        this.originalLabelText = this.phoneLabel?.textContent;
 
         this.updatePhoneRequirement = this.updatePhoneRequirement.bind(this);
 
