@@ -8,10 +8,8 @@ const ConditionalPhoneRequiredHook = {
     },
 
     initializePhoneValidation() {
-        const phoneInput = this.el;
-        const form = phoneInput.closest('form');
-
-        this.phoneInput = phoneInput;
+        this.phoneInput = this.el;
+        const form = this.phoneInput.closest('form');
         this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
         this.originalPlaceholder = phoneInput.getAttribute('placeholder') || '';
