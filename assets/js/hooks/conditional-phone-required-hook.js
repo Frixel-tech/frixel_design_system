@@ -12,7 +12,7 @@ const ConditionalPhoneRequiredHook = {
         const form = this.phoneInput.closest('form');
         this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
-        this.originalPlaceholder = phoneInput.getAttribute('placeholder') || '';
+        this.originalPlaceholder = this.phoneInput.getAttribute('placeholder') || '';
 
         this.handleContactMethodChange = this.handleContactMethodChange.bind(this);
 
