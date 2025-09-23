@@ -12,7 +12,11 @@ const ConditionalPhoneRequiredHook = {
         const form = this.phoneInput.closest('form');
         this.contactMethodRadios = form.querySelectorAll('input[name="preferred_contact_method"]');
 
-        this.originalPlaceholder = this.phoneInput.getAttribute('placeholder') || '';
+        // Récupérer le label existant associé au champ
+        this.phoneLabel = document.querySelector(`label[for="${this.phoneInput.id}"]`);
+        if (this.phoneLabel) {
+            this.originalLabelText = this.phoneLabel.textContent;
+        }
 
         this.updatePhoneRequirement = this.updatePhoneRequirement.bind(this);
 
@@ -40,24 +44,26 @@ const ConditionalPhoneRequiredHook = {
 
     makePhoneRequired() {
         this.phoneInput.setAttribute('required', 'required');
-        this.updatePlaceholder('(obligatoire)');
+        this.updateLabel('(obligatoire)');
     },
 
     makePhoneOptional() {
         this.phoneInput.removeAttribute('required');
-        this.updatePlaceholder('(optionnel)');
+        this.updateLabel('(optionnel)');
     },
 
-    updatePlaceholder(status) {
-        const basePlaceholder = this.originalPlaceholder.replace(/\s*\((?:obligatoire|optionnel)\)/, '');
-        const newPlaceholder = `${basePlaceholder} ${status}`;
-        this.phoneInput.setAttribute('placeholder', newPlaceholder);
+    updateLabel(status) {
+        if (this.phoneLabel) {
+            const baseLabelText = this.originalLabelText.replace(/\s*\((?:obligatoire|optionnel)\)/, '');
+            const newLabelText = `${baseLabelText} ${status}`;
+            this.phoneLabel.textContent = newLabelText;
+        }
     },
 
     destroyed() {
         if (this.contactMethodRadios) {
             this.contactMethodRadios.forEach(radio => {
-                radio.removeEventListener('change', this.handleContactMethodChange);
+                radio.removeEventListener('change', this.updatePhoneRequirement);
             });
         }
     }
