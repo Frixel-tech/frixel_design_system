@@ -14,16 +14,13 @@ const ConditionalPhoneRequiredHook = {
 
         this.originalPlaceholder = this.phoneInput.getAttribute('placeholder') || '';
 
-        this.handleContactMethodChange = this.handleContactMethodChange.bind(this);
+        // Liaison directe
+        this.updatePhoneRequirement = this.updatePhoneRequirement.bind(this);
 
         this.contactMethodRadios.forEach(radio => {
-            radio.addEventListener('change', this.handleContactMethodChange);
+            radio.addEventListener('change', this.updatePhoneRequirement);
         });
 
-        this.updatePhoneRequirement();
-    },
-
-    handleContactMethodChange(event) {
         this.updatePhoneRequirement();
     },
 
