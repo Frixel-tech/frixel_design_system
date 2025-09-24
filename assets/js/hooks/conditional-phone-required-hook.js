@@ -25,6 +25,7 @@ const ConditionalPhoneRequiredHook = {
     },
 
     updatePhoneRequirement() {
+        console.log(this.phoneRadio.checked)
         const isPhoneSelected = this.phoneRadio && this.phoneRadio.checked;
 
         if (isPhoneSelected) {
