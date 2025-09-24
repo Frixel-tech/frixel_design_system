@@ -145,14 +145,14 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
-            label="Téléphone"
+            label="Tél"
             id="sender_phone_number"
             name="sender_phone_number"
             value=""
             type="tel"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Téléphone")}
+            placeholder={gettext("Tél")}
             phx-hook="ConditionalPhoneRequiredHook"
           />
         </div>
