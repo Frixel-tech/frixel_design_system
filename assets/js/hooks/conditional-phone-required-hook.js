@@ -18,7 +18,7 @@ const ConditionalPhoneRequiredHook = {
         this.updatePhoneRequirement = this.updatePhoneRequirement.bind(this);
 
         if (this.phoneRadio) {
-            this.phoneRadio.addEventListener('change', this.updatePhoneRequirement);
+            this.phoneRadio.addEventListener('input', this.updatePhoneRequirement);
         }
 
         this.updatePhoneRequirement();
