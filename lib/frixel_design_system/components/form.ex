@@ -132,7 +132,7 @@ defmodule FrixelDesignSystem.Components.Form do
           />
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-4">
           <CoreComponents.input
             label="Société"
             id="sender_company"
