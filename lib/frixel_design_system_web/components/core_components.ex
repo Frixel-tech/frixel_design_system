@@ -231,8 +231,8 @@ defmodule FrixelDesignSystemWeb.CoreComponents do
 
   def input(%{type: "textarea"} = assigns) do
     ~H"""
-    <div class="fieldset mb-2 w-full">
-      <label class="w-full">
+    <div class="fieldset mb-2">
+      <label>
         <span :if={@label} class="label mb-1">{@label}</span>
         <textarea
           id={@id}

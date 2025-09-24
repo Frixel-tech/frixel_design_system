@@ -113,7 +113,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_name"
             value=""
             type="text"
-            class={"w-full input flex-1 #{@input_color_class}"}
+            class={"input #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Nom")}
             required
@@ -125,7 +125,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_email_address"
             value=""
             type="email"
-            class={"w-full input flex-1 #{@input_color_class}"}
+            class={"input #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("E-mail")}
             required
@@ -139,20 +139,20 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_company"
             value=""
             type="text"
-            class={"w-full input flex-1 #{@input_color_class}"}
+            class={"input #{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Entreprise (optionnel)")}
           />
 
           <CoreComponents.input
-            label="Tél"
+            label="Télephone"
             id="sender_phone_number"
             name="sender_phone_number"
             value=""
             type="tel"
-            class={"w-full input flex-1 #{@input_color_class}"}
+            class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Tél")}
+            placeholder={gettext("Télephone")}
             phx-hook="ConditionalPhoneRequiredHook"
           />
         </div>
