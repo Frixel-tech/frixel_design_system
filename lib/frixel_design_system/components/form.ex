@@ -145,14 +145,14 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
-            label="Télephone"
+            label="Téléphone"
             id="sender_phone_number"
             name="sender_phone_number"
             value=""
             type="tel"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Télephone")}
+            placeholder={gettext("Téléphone")}
             phx-hook="ConditionalPhoneRequiredHook"
           />
         </div>
@@ -175,7 +175,11 @@ defmodule FrixelDesignSystem.Components.Form do
         <.form_checkbox_or_radio_group
           input_name="preferred_contact_method"
           options={[
-            %{value: "pas de préférence", label: gettext("Pas de préférence"), shows_text_input_when_checked: false},
+            %{
+              value: "pas de préférence",
+              label: gettext("Pas de préférence"),
+              shows_text_input_when_checked: false
+            },
             %{value: "email", label: gettext("E-mail"), shows_text_input_when_checked: false},
             %{value: "phone", label: gettext("Téléphone"), shows_text_input_when_checked: false}
           ]}
