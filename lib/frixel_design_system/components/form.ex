@@ -106,14 +106,14 @@ defmodule FrixelDesignSystem.Components.Form do
       </div>
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-4">
           <CoreComponents.input
             label="Nom"
             id="sender_name"
             name="sender_name"
             value=""
             type="text"
-            class={"input #{@input_color_class}"}
+            class={"input w-54#{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Nom")}
             required
@@ -125,7 +125,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_email_address"
             value=""
             type="email"
-            class={"input #{@input_color_class}"}
+            class={"input w-54#{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("E-mail")}
             required
@@ -139,7 +139,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_company"
             value=""
             type="text"
-            class={"input #{@input_color_class}"}
+            class={"input w-54#{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Entreprise (optionnel)")}
           />
@@ -150,7 +150,7 @@ defmodule FrixelDesignSystem.Components.Form do
             name="sender_phone_number"
             value=""
             type="tel"
-            class={"input #{@input_color_class}"}
+            class={"input w-54#{@input_color_class}"}
             error_class={@input_error_class}
             placeholder={gettext("Tél")}
             phx-hook="ConditionalPhoneRequiredHook"
