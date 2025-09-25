@@ -2,5 +2,17 @@ import { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAni
 import GetAndStoreThemeHook from "./get-and-store-theme-hook";
 import LeafletHook from "./leaflet.-hook";
 import ScrollToTopHook from "./scroll-to-top-hook";
+import ConditionalPhoneRequiredHook from "./conditional-phone-required-hook";
 
-export default { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook, GetAndStoreThemeHook, LeafletHook, ScrollToTopHook };
+export default {
+    CardStackingAnimationHook,
+    DelayedFadeInAnimationHook,
+    CatalogFadeInAnimationHook,
+    FadeInAnimationHook,
+    LateralSlideFromBothSideAnimationHook,
+    ParallaxAnimationHook,
+    GetAndStoreThemeHook,
+    LeafletHook,
+    ScrollToTopHook,
+    ConditionalPhoneRequiredHook
+};

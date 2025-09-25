@@ -63,6 +63,9 @@ defmodule FrixelDesignSystem.Components.Form do
   @doc """
   Renders a contact form for client interaction.
 
+  The form includes a "Preferred contact method" field with radio buttons for "E-mail" and "Phone".
+  When "Phone" is selected, the phone number field becomes required automatically.
+
   ## Example:
 
       <.contact_form
@@ -103,8 +106,9 @@ defmodule FrixelDesignSystem.Components.Form do
       </div>
 
       <form class={"flex flex-col gap-11 #{@rest[:class]}"} {@rest}>
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-4">
           <CoreComponents.input
+            label="Nom"
             id="sender_name"
             name="sender_name"
             value=""
@@ -116,6 +120,7 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
+            label="E-mail"
             id="sender_email_address"
             name="sender_email_address"
             value=""
@@ -127,8 +132,9 @@ defmodule FrixelDesignSystem.Components.Form do
           />
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-4">
           <CoreComponents.input
+            label="Société"
             id="sender_company"
             name="sender_company"
             value=""
@@ -139,18 +145,21 @@ defmodule FrixelDesignSystem.Components.Form do
           />
 
           <CoreComponents.input
+            label="Téléphone"
             id="sender_phone_number"
             name="sender_phone_number"
             value=""
             type="tel"
             class={"input #{@input_color_class}"}
             error_class={@input_error_class}
-            placeholder={gettext("Téléphone (optionnel)")}
+            placeholder={gettext("Téléphone")}
+            phx-hook="ConditionalPhoneRequiredHook"
           />
         </div>
 
         <div>
           <CoreComponents.input
+            label="Message"
             id="body"
             name="body"
             value=""
@@ -162,6 +171,21 @@ defmodule FrixelDesignSystem.Components.Form do
             required
           />
         </div>
+
+        <.form_checkbox_or_radio_group
+          input_name="preferred_contact_method"
+          options={[
+            %{
+              value: "pas de préférence",
+              label: gettext("Pas de préférence"),
+              shows_text_input_when_checked: false
+            },
+            %{value: "email", label: gettext("E-mail"), shows_text_input_when_checked: false},
+            %{value: "phone", label: gettext("Téléphone"), shows_text_input_when_checked: false}
+          ]}
+          title={gettext("Moyen de communication préféré")}
+          group_type="radio"
+        />
 
         <.form_checkbox_or_radio_group
           :if={@client_needs}
