@@ -17,7 +17,6 @@ const LeafletHook = {
         })
 
         let marker = L.marker(coordinates, { icon: frixelIcon }).addTo(map);
-        console.log(marker.getLatLgn())
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
