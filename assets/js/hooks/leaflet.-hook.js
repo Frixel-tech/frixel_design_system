@@ -12,8 +12,14 @@ const LeafletHook = {
         const coordinates = [this.getLattitude(), this.getLongitude()];
         let map = L.map(this.el.id).setView(coordinates, 15);
 
+        const iconSize = this.getIconSize();
+        const parsedIconSize = Array.isArray(iconSize) ? iconSize : [iconSize, iconSize];
+
         let frixelIcon = L.icon({
-            iconUrl: pointerUrl, iconSize: this.getIconSize()
+            iconUrl: pointerUrl,
+            iconSize: parsedIconSize,
+            iconAnchor: [parsedIconSize[0] / 2, parsedIconSize[1]], // Center horizontally, bottom vertically
+            popupAnchor: [0, -parsedIconSize[1]] // Popup appears above the icon
         })
 
         let marker = L.marker(coordinates, { icon: frixelIcon }).addTo(map);
