@@ -19,7 +19,6 @@ const LeafletHook = {
             iconUrl: pointerUrl,
             iconSize: parsedIconSize,
             iconAnchor: [parsedIconSize[0] / 2, parsedIconSize[1] / 2], // Center horizontally, center vertically
-            popupAnchor: [0, -parsedIconSize[1] / 2] // Popup appears above the center of the icon
         })
 
         let marker = L.marker(coordinates, { icon: frixelIcon }).addTo(map);
