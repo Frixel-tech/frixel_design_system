@@ -1,7 +1,7 @@
 import * as L from "../../vendor/leaflet";
 
 const LeafletHook = {
-    mounted() { this.renderMap(); console.log(this.getLattitude()) },
+    mounted() { this.renderMap(); console.log(this.getLattitude()); console.log(this.getLongitude()) },
     updated() { this.renderMap(); console.log(this.getLattitude()); console.log(this.getLongitude()) },
     getIconUrl() { return this.el.dataset.markerIconUrl },
     getIconSize() { return this.el.dataset.markerIconSize },
@@ -16,7 +16,8 @@ const LeafletHook = {
             iconUrl: pointerUrl, iconSize: this.getIconSize()
         })
 
-        L.marker(coordinates, { icon: frixelIcon }).addTo(map);
+        let marker = L.marker(coordinates, { icon: frixelIcon }).addTo(map);
+        console.log(marker.getLatLgn())
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
