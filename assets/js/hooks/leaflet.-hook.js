@@ -4,17 +4,9 @@ const LeafletHook = {
     mounted() { this.renderMap() },
     updated() { this.renderMap() },
     getIconUrl() { return this.el.dataset.markerIconUrl },
+    getIconSize() { return this.el.dataset.markerIconSize },
     getLattitude() { return this.el.dataset.lattitude },
     getLongitude() { return this.el.dataset.longitude },
-    getIconSize() {
-        const size = this.el.dataset.markerIconSize;
-        if (!size) return [30, 30]; // valeur par défaut
-        try {
-            return [size, size]; // ex: '[40, 40]' dans le dataset
-        } catch {
-            return [30, 30];
-        }
-    },
     renderMap() {
         const pointerUrl = this.getIconUrl();
         const coordinates = [this.getLattitude(), this.getLongitude()];

@@ -98,6 +98,8 @@ defmodule FrixelDesignSystem.Components.Company do
     default:
       "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
 
+  attr :marker_icon_size, :integer, default: 30
+
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
   attr :class, :string, default: ""
