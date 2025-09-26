@@ -98,6 +98,8 @@ defmodule FrixelDesignSystem.Components.Company do
     default:
       "https://res.cloudinary.com/dekpcimmm/image/upload/v1745940105/frixel_logo_hfa7gn.svg"
 
+  attr :marker_icon_size, :integer, default: 30
+
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
   attr :class, :string, default: ""
@@ -108,6 +110,7 @@ defmodule FrixelDesignSystem.Components.Company do
       id="leaflet-map"
       phx-hook="LeafletHook"
       data-marker-icon-url={@marker_icon_url}
+      data-marker-icon-size={@marker_icon_size}
       data-lattitude={@company_lattitude}
       data-longitude={@company_longitude}
       class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
