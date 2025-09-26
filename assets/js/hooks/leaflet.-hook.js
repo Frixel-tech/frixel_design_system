@@ -1,7 +1,7 @@
 import * as L from "../../vendor/leaflet";
 
 const LeafletHook = {
-    mounted() { this.renderMap() },
+    mounted() { this.renderMap(); console.log(this.getLattitude()) },
     updated() { this.renderMap(); console.log(this.getLattitude()); console.log(this.getLongitude()) },
     getIconUrl() { return this.el.dataset.markerIconUrl },
     getIconSize() { return this.el.dataset.markerIconSize },
