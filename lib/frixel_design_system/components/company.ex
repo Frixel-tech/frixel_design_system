@@ -86,6 +86,8 @@ defmodule FrixelDesignSystem.Components.Company do
   @doc """
   Renders a Leaflet map centered on a specific location and with a customizable pin marker.
 
+  The marker anchor is set to the center of the image.
+  
   ## Example:
 
       <.find_us_map
