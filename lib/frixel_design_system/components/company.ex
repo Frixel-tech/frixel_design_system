@@ -108,6 +108,7 @@ defmodule FrixelDesignSystem.Components.Company do
       id="leaflet-map"
       phx-hook="LeafletHook"
       data-marker-icon-url={@marker_icon_url}
+      data-marker-icon-size={@marker_icon_size}
       data-lattitude={@company_lattitude}
       data-longitude={@company_longitude}
       class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
