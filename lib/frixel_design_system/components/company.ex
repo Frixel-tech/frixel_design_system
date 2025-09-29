@@ -104,12 +104,12 @@ defmodule FrixelDesignSystem.Components.Company do
   attr :company_longitude, :string, required: true
 
   attr :map_lattitude, :string,
-    default: @company_lattitude,
+    default: nil,
     doc:
       "La lattitude du point central d'affichage de la carte. Si ce n'est pas précisé, la carte sera centrée verticalement sur l'icône"
 
   attr :map_longitude, :string,
-    default: @company_longitude,
+    default: nil,
     doc:
       "La longitude du point central d'affichage de la carte. Si ce n'est pas précisé, la carte sera centrée horizontalement sur l'icône"
 
@@ -125,8 +125,8 @@ defmodule FrixelDesignSystem.Components.Company do
       data-marker-icon-size={@marker_icon_size}
       data-marker-icon-lattitude={@company_lattitude}
       data-marker-icon-longitude={@company_longitude}
-      data-map-lattitude={@map_lattitude}
-      data-map-longitude={@map_longitude}
+      data-map-lattitude={@map_lattitude || @company_lattitude}
+      data-map-longitude={@map_longitude || @company_longitude}
       data-map-zoom={@map_zoom}
       class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
     />
