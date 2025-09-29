@@ -15,7 +15,7 @@ const LeafletHook = {
         const pointerUrl = this.getIconUrl();
         const iconCoordinates = [this.getIconLattitude(), this.getIconLongitude()];
         const mapCoordinates = [this.getMapLattitude(), this.getMapLongitude()]
-        let map = L.map(this.el.id).setView(mapCoordinates, this.getMapZoom());
+        let map = L.map(this.el.id).setView(iconCoordinates, this.getMapZoom());
 
         const iconSize = this.getIconSize();
         const parsedIconSize = Array.isArray(iconSize) ? iconSize : [iconSize, iconSize];
