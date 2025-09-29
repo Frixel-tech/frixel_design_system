@@ -127,6 +127,7 @@ defmodule FrixelDesignSystem.Components.Company do
       data-marker-icon-longitude={@company_longitude}
       data-map-lattitude={@map_lattitude || @company_lattitude}
       data-map-longitude={@map_longitude || @company_longitude}
+      data-map-zoom={@map_zoom}
       class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
     />
     """
