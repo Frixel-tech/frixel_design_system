@@ -102,6 +102,18 @@ defmodule FrixelDesignSystem.Components.Company do
 
   attr :company_lattitude, :string, required: true
   attr :company_longitude, :string, required: true
+
+  attr :map_lattitude, :string,
+    default: nil,
+    doc:
+      "La lattitude du point central d'affichage de la carte. Si ce n'est pas précisé, la carte sera centrée verticalement sur l'icône"
+
+  attr :map_longitude, :string,
+    default: nil,
+    doc:
+      "La longitude du point central d'affichage de la carte. Si ce n'est pas précisé, la carte sera centrée horizontalement sur l'icône"
+
+  attr :map_zoom, :integer, default: 12
   attr :class, :string, default: ""
 
   def find_us_map(assigns) do
@@ -111,8 +123,11 @@ defmodule FrixelDesignSystem.Components.Company do
       phx-hook="LeafletHook"
       data-marker-icon-url={@marker_icon_url}
       data-marker-icon-size={@marker_icon_size}
-      data-lattitude={@company_lattitude}
-      data-longitude={@company_longitude}
+      data-marker-icon-lattitude={@company_lattitude}
+      data-marker-icon-longitude={@company_longitude}
+      data-map-lattitude={@map_lattitude || @company_lattitude}
+      data-map-longitude={@map_longitude || @company_longitude}
+      data-map-zoom={@map_zoom}
       class={"h-100 my-2 shadow-xl rounded-lg transition-transform duration-300 hover:scale-103 z-0 #{@class}"}
     />
     """
