@@ -104,10 +104,12 @@ defmodule FrixelDesignSystem.Components.Company do
   attr :company_longitude, :string, required: true
 
   attr :map_lattitude, :string,
+    default: nil,
     doc:
       "La lattitude du point central d'affichage de la carte. Si ce n'est pas précisé, la carte sera centrée verticalement sur l'icône"
 
   attr :map_longitude, :string,
+    default: nil,
     doc:
       "La longitude du point central d'affichage de la carte. Si ce n'est pas précisé, la carte sera centrée horizontalement sur l'icône"
 
