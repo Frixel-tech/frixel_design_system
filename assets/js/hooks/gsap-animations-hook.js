@@ -117,7 +117,7 @@ const LateralSlideFromBothSideAnimationHook = {
         scrollTrigger: {
           trigger: this.el,
           start: "10% 85%",
-          end: "30% 65%",
+          end: "20% 45%",
           scrub: true
         },
         autoAlpha: 0,
