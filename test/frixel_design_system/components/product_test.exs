@@ -453,12 +453,14 @@ defmodule FrixelDesignSystem.Components.ProductTest do
         />
         """)}"
 
-      assert html =~ "Pas en vente"
-      assert html =~ "Pas en location"
-      assert html =~ "bg-gray-100 text-gray-600"
-      assert html =~ "bg-gray-400"
+      # No badges should be displayed when both are false
+      refute html =~ "Pas en vente"
+      refute html =~ "Pas en location"
+      refute html =~ "Disponible à la vente"
+      refute html =~ "Disponible en location"
       refute html =~ "bg-green-100"
       refute html =~ "bg-blue-100"
+      refute html =~ "bg-gray-100"
     end
 
     test "renders only sale badge as available when to_sell is true and to_rent is false" do
@@ -480,11 +482,12 @@ defmodule FrixelDesignSystem.Components.ProductTest do
         """)}"
 
       assert html =~ "Disponible à la vente"
-      assert html =~ "Pas en location"
+      refute html =~ "Pas en location"
+      refute html =~ "Disponible en location"
       assert html =~ "bg-green-100 text-green-800"
       assert html =~ "bg-green-500"
-      assert html =~ "bg-gray-100 text-gray-600"
-      assert html =~ "bg-gray-400"
+      refute html =~ "bg-gray-100 text-gray-600"
+      refute html =~ "bg-blue-100"
     end
 
     test "renders only rental badge as available when to_sell is false and to_rent is true" do
@@ -505,12 +508,13 @@ defmodule FrixelDesignSystem.Components.ProductTest do
         />
         """)}"
 
-      assert html =~ "Pas en vente"
+      refute html =~ "Pas en vente"
+      refute html =~ "Disponible à la vente"
       assert html =~ "Disponible en location"
       assert html =~ "bg-blue-100 text-blue-800"
       assert html =~ "bg-blue-500"
-      assert html =~ "bg-gray-100 text-gray-600"
-      assert html =~ "bg-gray-400"
+      refute html =~ "bg-gray-100 text-gray-600"
+      refute html =~ "bg-green-100"
     end
 
     test "renders compact version when compact is true" do
@@ -559,10 +563,11 @@ defmodule FrixelDesignSystem.Components.ProductTest do
         />
         """)}"
 
-      assert html =~ "Pas vente"
-      assert html =~ "Pas location"
-      assert html =~ "text-xs"
-      assert html =~ "px-2 py-1"
+      # No badges should be displayed when both are false
+      refute html =~ "Pas vente"
+      refute html =~ "Pas location"
+      refute html =~ "Vente"
+      refute html =~ "Location"
       refute html =~ "Pas en vente"
       refute html =~ "Pas en location"
     end
