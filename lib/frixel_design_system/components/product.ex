@@ -568,9 +568,6 @@ defmodule FrixelDesignSystem.Components.Product do
         <div class="hidden sm:block">
           <.product_description product_description={@product_description} />
         </div>
-        <div class="hidden sm:block">
-          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
-        </div>
       </div>
 
       <div class={"#{@bg_color_class} sm:order-1 p-6 sm:p-8 space-y-6"}>
