@@ -116,6 +116,38 @@ const LateralSlideFromBothSideAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
+          start: "5% 75%",
+          end: "center center",
+          scrub: true
+        },
+        autoAlpha: 0,
+        x: index == 0 ? '-50vw' : '50vw',
+        duration: 1,
+        ease: CustomEase.create("cubic-bezier", ".3,0,0,1"),
+      })
+    })
+  },
+
+  updated() {
+    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement) => {
+      gsap.from(animatedElement, {
+        ScrollTrigger: {
+          trigger: this.el
+        },
+        autoAlpha: 0,
+        duration: 0,
+      })
+    })
+  }
+}
+
+// Entering animation where two elements are coming from both side of the screen 
+const LeaderLateralSlideFromBothSideAnimationHook = {
+  mounted() {
+    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
+      gsap.from(animatedElement, {
+        scrollTrigger: {
+          trigger: this.el,
           start: "top 95%",
           end: "top 80%",
           scrub: true
