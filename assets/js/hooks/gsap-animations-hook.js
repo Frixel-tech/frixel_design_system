@@ -116,8 +116,8 @@ const LateralSlideFromBothSideAnimationHook = {
       gsap.from(animatedElement, {
         scrollTrigger: {
           trigger: this.el,
-          start: "10% 85%",
-          end: "11% 20%",
+          start: "top 95%",
+          end: "top 80%",
           scrub: true
         },
         autoAlpha: 0,
