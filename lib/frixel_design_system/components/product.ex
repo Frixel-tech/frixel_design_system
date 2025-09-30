@@ -593,11 +593,10 @@ defmodule FrixelDesignSystem.Components.Product do
           availability_comment={@product_availability_comment}
           variant="detailed"
         />
+        <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
+
         <div class="block sm:hidden">
           <.product_description product_description={@product_description} />
-        </div>
-        <div class="block sm:hidden">
-          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
         </div>
 
         <div class="space-y-4">
