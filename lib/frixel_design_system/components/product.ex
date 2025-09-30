@@ -495,6 +495,8 @@ defmodule FrixelDesignSystem.Components.Product do
         product_stock={2}
         product_availability_color_class="bg-green-500"
         product_availability_comment="Available"
+        to_sell={true}
+        to_rent={false}
         bg_color_class="bg-white"
       >
         <:actions>
@@ -541,7 +543,77 @@ defmodule FrixelDesignSystem.Components.Product do
     default: nil,
     doc: "A short sentence to adds details about availability, ex: \"Available soon !\""
 
+  attr :to_sell, :boolean,
+    default: false,
+    doc: "Whether the product is available for sale"
+
+  attr :to_rent, :boolean,
+    default: false,
+    doc: "Whether the product is available for rent"
+
   slot :actions, doc: "A slot to put call to actions inside ex: cart button, contact links"
+
+  @doc """
+  Renders product sale and rental status badges.
+
+  ## Examples
+
+      <.product_status_badges to_sell={true} to_rent={false} />
+      <.product_status_badges to_sell={@product.to_sell} to_rent={@product.to_rent} />
+      <.product_status_badges to_sell={true} to_rent={true} class="gap-4" />
+      <.product_status_badges to_sell={true} to_rent={true} compact />
+  """
+  attr :to_sell, :boolean, required: true, doc: "Whether the product is available for sale"
+  attr :to_rent, :boolean, required: true, doc: "Whether the product is available for rent"
+
+  attr :compact, :boolean,
+    default: false,
+    doc: "Whether to use compact styling for smaller spaces"
+
+  attr :class, :string, default: "", doc: "Additional CSS classes for the container"
+
+  def product_status_badges(assigns) do
+    ~H"""
+    <div class={["flex flex-col", (@compact && "gap-1") || "gap-2", @class]}>
+      <.single_status_badge
+        available={@to_sell}
+        compact={@compact}
+        color="green"
+        text_on={(@compact && "Vente") || "Disponible à la vente"}
+        text_off={(@compact && "Pas vente") || "Pas en vente"}
+      />
+      <.single_status_badge
+        available={@to_rent}
+        compact={@compact}
+        color="blue"
+        text_on={(@compact && "Location") || "Disponible en location"}
+        text_off={(@compact && "Pas location") || "Pas en location"}
+      />
+    </div>
+    """
+  end
+
+  defp single_status_badge(assigns) do
+    ~H"""
+    <div class={[
+      "inline-flex items-center rounded-full font-medium",
+      (@compact && "gap-1 px-2 py-1 text-xs") || "gap-2 px-3 py-2 text-sm",
+      (@available && @color == "green" && "bg-green-100 text-green-800") ||
+        (@available && @color == "blue" && "bg-blue-100 text-blue-800") ||
+        "bg-gray-100 text-gray-600"
+    ]}>
+      <div class={[
+        "rounded-full",
+        (@compact && "w-1.5 h-1.5") || "w-2 h-2",
+        (@available && @color == "green" && "bg-green-500") ||
+          (@available && @color == "blue" && "bg-blue-500") ||
+          "bg-gray-400"
+      ]}>
+      </div>
+      {(@available && @text_on) || @text_off}
+    </div>
+    """
+  end
 
   def product_details(assigns) do
     ~H"""
@@ -557,6 +629,9 @@ defmodule FrixelDesignSystem.Components.Product do
         </div>
         <div class="hidden sm:block">
           <.product_description product_description={@product_description} />
+        </div>
+        <div class="hidden sm:block">
+          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
         </div>
       </div>
 
@@ -582,6 +657,9 @@ defmodule FrixelDesignSystem.Components.Product do
         />
         <div class="block sm:hidden">
           <.product_description product_description={@product_description} />
+        </div>
+        <div class="block sm:hidden">
+          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
         </div>
 
         <div class="space-y-4">
