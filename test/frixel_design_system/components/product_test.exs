@@ -407,4 +407,227 @@ defmodule FrixelDesignSystem.Components.ProductTest do
       refute html =~ "bg-gradient-to-r from-mint-green/5"
     end
   end
+
+  describe "product_status_badges" do
+    test "renders both sale and rental badges when both are true" do
+      assigns = %{
+        to_sell: true,
+        to_rent: true,
+        compact: false,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "Disponible à la vente"
+      assert html =~ "Disponible en location"
+      assert html =~ "bg-green-100 text-green-800"
+      assert html =~ "bg-blue-100 text-blue-800"
+      assert html =~ "bg-green-500"
+      assert html =~ "bg-blue-500"
+    end
+
+    test "renders unavailable badges when both are false" do
+      assigns = %{
+        to_sell: false,
+        to_rent: false,
+        compact: false,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "Pas en vente"
+      assert html =~ "Pas en location"
+      assert html =~ "bg-gray-100 text-gray-600"
+      assert html =~ "bg-gray-400"
+      refute html =~ "bg-green-100"
+      refute html =~ "bg-blue-100"
+    end
+
+    test "renders only sale badge as available when to_sell is true and to_rent is false" do
+      assigns = %{
+        to_sell: true,
+        to_rent: false,
+        compact: false,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "Disponible à la vente"
+      assert html =~ "Pas en location"
+      assert html =~ "bg-green-100 text-green-800"
+      assert html =~ "bg-green-500"
+      assert html =~ "bg-gray-100 text-gray-600"
+      assert html =~ "bg-gray-400"
+    end
+
+    test "renders only rental badge as available when to_sell is false and to_rent is true" do
+      assigns = %{
+        to_sell: false,
+        to_rent: true,
+        compact: false,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "Pas en vente"
+      assert html =~ "Disponible en location"
+      assert html =~ "bg-blue-100 text-blue-800"
+      assert html =~ "bg-blue-500"
+      assert html =~ "bg-gray-100 text-gray-600"
+      assert html =~ "bg-gray-400"
+    end
+
+    test "renders compact version when compact is true" do
+      assigns = %{
+        to_sell: true,
+        to_rent: true,
+        compact: true,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "Vente"
+      assert html =~ "Location"
+      assert html =~ "text-xs"
+      assert html =~ "px-2 py-1"
+      assert html =~ "gap-1"
+      assert html =~ "w-1.5 h-1.5"
+      refute html =~ "Disponible à la vente"
+      refute html =~ "Disponible en location"
+    end
+
+    test "renders compact unavailable version when compact is true and both are false" do
+      assigns = %{
+        to_sell: false,
+        to_rent: false,
+        compact: true,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "Pas vente"
+      assert html =~ "Pas location"
+      assert html =~ "text-xs"
+      assert html =~ "px-2 py-1"
+      refute html =~ "Pas en vente"
+      refute html =~ "Pas en location"
+    end
+
+    test "applies custom class to container" do
+      assigns = %{
+        to_sell: true,
+        to_rent: false,
+        compact: false,
+        class: "custom-spacing gap-4"
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "custom-spacing gap-4"
+    end
+
+    test "applies correct gap classes for compact and normal modes" do
+      # Test normal mode
+      assigns = %{
+        to_sell: true,
+        to_rent: true,
+        compact: false,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "gap-2"
+
+      # Test compact mode
+      assigns = %{
+        to_sell: true,
+        to_rent: true,
+        compact: true,
+        class: ""
+      }
+
+      html =
+        "#{rendered_to_string(~H"""
+        <Product.product_status_badges
+          to_sell={@to_sell}
+          to_rent={@to_rent}
+          compact={@compact}
+          class={@class}
+        />
+        """)}"
+
+      assert html =~ "gap-1"
+    end
+  end
 end
