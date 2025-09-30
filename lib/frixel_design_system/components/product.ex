@@ -633,6 +633,7 @@ defmodule FrixelDesignSystem.Components.Product do
     ~H"""
     <div class={["flex flex-col", (@compact && "gap-1") || "gap-2", @class]}>
       <.single_status_badge
+        :if={@to_sell}
         available={@to_sell}
         compact={@compact}
         color="green"
@@ -640,6 +641,7 @@ defmodule FrixelDesignSystem.Components.Product do
         text_off={(@compact && "Pas vente") || "Pas en vente"}
       />
       <.single_status_badge
+        :if={@to_rent}
         available={@to_rent}
         compact={@compact}
         color="blue"
