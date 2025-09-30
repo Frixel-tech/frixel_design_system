@@ -553,6 +553,67 @@ defmodule FrixelDesignSystem.Components.Product do
 
   slot :actions, doc: "A slot to put call to actions inside ex: cart button, contact links"
 
+  def product_details(assigns) do
+    ~H"""
+    <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
+      <div class="sm:order-2 p-6 space-y-6">
+        <div class="hidden sm:block">
+          <.product_image_gallery
+            product_illustration_url={@product_illustration_url}
+            product_pictures_urls_list={@product_pictures_urls_list}
+            product_name={@product_name}
+            gallery_id="desktop"
+          />
+        </div>
+        <div class="hidden sm:block">
+          <.product_description product_description={@product_description} />
+        </div>
+        <div class="hidden sm:block">
+          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
+        </div>
+      </div>
+
+      <div class={"#{@bg_color_class} sm:order-1 p-6 sm:p-8 space-y-6"}>
+        <.product_infos
+          product_name={@product_name}
+          product_price={@product_price}
+          product_unit_type={@product_unit_type}
+        />
+        <div class="block sm:hidden">
+          <.product_image_gallery
+            product_illustration_url={@product_illustration_url}
+            product_pictures_urls_list={@product_pictures_urls_list}
+            product_name={@product_name}
+            gallery_id="mobile"
+          />
+        </div>
+        <.product_status
+          product_stock={@product_stock}
+          availability_color_class={@product_availability_color_class}
+          availability_comment={@product_availability_comment}
+          variant="detailed"
+        />
+        <div class="block sm:hidden">
+          <.product_description product_description={@product_description} />
+        </div>
+        <div class="block sm:hidden">
+          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
+        </div>
+
+        <div class="space-y-4">
+          <div class="text-center sm:text-left">
+            <h3 class="text-lg font-semibold mb-4">Nous contacter</h3>
+          </div>
+
+          <div class="flex flex-col gap-3 items-center pt-4">
+            {render_slot(@actions)}
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
   @doc """
   Renders product sale and rental status badges.
 
@@ -611,67 +672,6 @@ defmodule FrixelDesignSystem.Components.Product do
       ]}>
       </div>
       {(@available && @text_on) || @text_off}
-    </div>
-    """
-  end
-
-  def product_details(assigns) do
-    ~H"""
-    <div class={"#{@bg_color_class} sm:grid sm:grid-cols-2"}>
-      <div class="sm:order-2 p-6 space-y-6">
-        <div class="hidden sm:block">
-          <.product_image_gallery
-            product_illustration_url={@product_illustration_url}
-            product_pictures_urls_list={@product_pictures_urls_list}
-            product_name={@product_name}
-            gallery_id="desktop"
-          />
-        </div>
-        <div class="hidden sm:block">
-          <.product_description product_description={@product_description} />
-        </div>
-        <div class="hidden sm:block">
-          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
-        </div>
-      </div>
-
-      <div class={"#{@bg_color_class} sm:order-1 p-6 sm:p-8 space-y-6"}>
-        <.product_infos
-          product_name={@product_name}
-          product_price={@product_price}
-          product_unit_type={@product_unit_type}
-        />
-        <div class="block sm:hidden">
-          <.product_image_gallery
-            product_illustration_url={@product_illustration_url}
-            product_pictures_urls_list={@product_pictures_urls_list}
-            product_name={@product_name}
-            gallery_id="mobile"
-          />
-        </div>
-        <.product_status
-          product_stock={@product_stock}
-          availability_color_class={@product_availability_color_class}
-          availability_comment={@product_availability_comment}
-          variant="detailed"
-        />
-        <div class="block sm:hidden">
-          <.product_description product_description={@product_description} />
-        </div>
-        <div class="block sm:hidden">
-          <.product_status_badges to_sell={@to_sell} to_rent={@to_rent} />
-        </div>
-
-        <div class="space-y-4">
-          <div class="text-center sm:text-left">
-            <h3 class="text-lg font-semibold mb-4">Nous contacter</h3>
-          </div>
-
-          <div class="flex flex-col gap-3 items-center pt-4">
-            {render_slot(@actions)}
-          </div>
-        </div>
-      </div>
     </div>
     """
   end
