@@ -141,38 +141,6 @@ const LateralSlideFromBothSideAnimationHook = {
   }
 }
 
-// Entering animation where two elements are coming from both side of the screen 
-const LeaderLateralSlideAnimationHook = {
-  mounted() {
-    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement, index) => {
-      gsap.from(animatedElement, {
-        scrollTrigger: {
-          trigger: this.el,
-          start: "top 95%",
-          end: "top 80%",
-          scrub: true
-        },
-        autoAlpha: 0,
-        x: index == 0 ? '-50vw' : '50vw',
-        duration: 1,
-        ease: CustomEase.create("cubic-bezier", ".3,0,0,1"),
-      })
-    })
-  },
-
-  updated() {
-    gsap.utils.toArray(":scope > *", this.el).forEach((animatedElement) => {
-      gsap.from(animatedElement, {
-        ScrollTrigger: {
-          trigger: this.el
-        },
-        autoAlpha: 0,
-        duration: 0,
-      })
-    })
-  }
-}
-
 // TODO: maybe try GSAP plugin Inertia to do better parallax (because it is free now)
 const ParallaxAnimationHook = {
   xPosition() { return this.el.dataset.xPosition },
@@ -197,4 +165,4 @@ const ParallaxAnimationHook = {
   }
 }
 
-export { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, LeaderLateralSlideAnimationHook, ParallaxAnimationHook };
+export { CardStackingAnimationHook, DelayedFadeInAnimationHook, CatalogFadeInAnimationHook, FadeInAnimationHook, LateralSlideFromBothSideAnimationHook, ParallaxAnimationHook };
