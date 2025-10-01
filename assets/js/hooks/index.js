@@ -10,6 +10,7 @@ export default {
   CatalogFadeInAnimationHook,
   FadeInAnimationHook,
   LateralSlideFromBothSideAnimationHook,
+  LeaderLateralSlideAnimationHook,
   ParallaxAnimationHook,
   GetAndStoreThemeHook,
   LeafletHook,
