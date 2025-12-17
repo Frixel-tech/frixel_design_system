@@ -186,7 +186,7 @@ defmodule FrixelDesignSystem.Components.Product do
     <div class="card card-xl">
       <%!-- TODO : should change illustration on hover --%>
       <figure :if={@product_illustration_url}>
-        <img src={@product_illustration_url} />
+        <img src={@product_illustration_url} class="w-full h-18 object-cover" />
       </figure>
 
       <div class="card-body text-center p-4">
